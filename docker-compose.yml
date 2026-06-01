@@ -7,7 +7,7 @@ services:
       redis:
         condition: service_healthy
     ports:
-      - "3000:3000"
+      - "${CHATWOOT_PORT:-3000}:3000"
     env_file: .env
     environment:
       - NODE_ENV=production
