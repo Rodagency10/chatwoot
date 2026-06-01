@@ -1,6 +1,6 @@
 services:
   rails:
-    image: ghcr.io/rodgency10/chatwoot:latest
+    image: ghcr.io/rodgency10/chatwoot:develop
     depends_on:
       postgres:
         condition: service_healthy
@@ -27,7 +27,7 @@ services:
       start_period: 60s
 
   sidekiq:
-    image: ghcr.io/rodgency10/chatwoot:latest
+    image: ghcr.io/rodgency10/chatwoot:develop
     depends_on:
       postgres:
         condition: service_healthy

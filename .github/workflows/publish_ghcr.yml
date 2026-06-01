@@ -38,10 +38,9 @@ jobs:
           platform=${{ matrix.platform }}
           echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
 
-      - name: Set Chatwoot edition (CE)
+      - name: Set Chatwoot edition (EE)
         run: |
-          rm -rf enterprise/ spec/enterprise/
-          echo -en '\nENV CW_EDITION="ce"' >> docker/Dockerfile
+          echo -en '\nENV CW_EDITION="ee"' >> docker/Dockerfile
 
       - name: Set Docker Tags
         run: |
