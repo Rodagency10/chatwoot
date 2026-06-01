@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  DOCKER_REPO: ghcr.io/rodgency10/chatwoot
+  DOCKER_REPO: ghcr.io/rodagency10/chatwoot
 
 permissions:
   contents: read
