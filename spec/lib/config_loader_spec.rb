@@ -5,6 +5,8 @@ describe ConfigLoader do
 
   describe 'execute' do
     context 'when called with default options' do
+      before { InstallationConfig.delete_all }
+
       it 'creates installation configs' do
         expect(InstallationConfig.count).to eq(0)
         subject
