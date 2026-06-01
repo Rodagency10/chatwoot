@@ -5,7 +5,7 @@ class Installation::OnboardingController < ApplicationController
 
   def create
     begin
-      user, account = AccountBuilder.new(
+      AccountBuilder.new(
         account_name: onboarding_params.dig(:user, :company),
         user_full_name: onboarding_params.dig(:user, :name),
         email: onboarding_params.dig(:user, :email),
@@ -16,7 +16,6 @@ class Installation::OnboardingController < ApplicationController
     rescue StandardError => e
       redirect_to '/', flash: { error: e.message } and return
     end
-    sign_in(:user, user)
     finish_onboarding
     redirect_to '/'
   end
