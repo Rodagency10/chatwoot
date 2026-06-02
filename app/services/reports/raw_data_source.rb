@@ -94,7 +94,7 @@ class Reports::RawDataSource < Reports::DataSource
       name: :conversation_bot_handoff,
       account_id: account.id,
       created_at: range
-    ).where.not(conversation_id: nil).select(:conversation_id)
+    ).where.not(conversation_id: nil).select(:conversation_id).distinct
   end
 
   def summary_scope

@@ -15,7 +15,7 @@ Rails.application.config.after_initialize do
       config.value = 999_999
       config.save! if config.changed?
     end
-  rescue ActiveRecord::NoDatabaseError, PG::ConnectionBad, PG::UndefinedTable, ActiveRecord::StatementInvalid
-    # DB not available yet (e.g. during db:create/db:schema:load in CI) — skip silently
+  rescue StandardError
+    # DB not available yet (CI, docker build, db:create, db:schema:load, etc.) — skip silently
   end
 end
