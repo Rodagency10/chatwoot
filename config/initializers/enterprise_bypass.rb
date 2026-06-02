@@ -15,6 +15,14 @@ Rails.application.config.after_initialize do
       config.value = 999_999
       config.save! if config.changed?
     end
+
+    # Force-enable all features on all existing accounts to unlock premium modules
+    all_feature_names = YAML.safe_load(Rails.root.join('config/features.yml').read).pluck('name')
+    Account.find_in_batches do |accounts|
+      accounts.each do |account|
+        account.enable_features!(*all_feature_names)
+      end
+    end
   rescue StandardError
     # DB not available yet (CI, docker build, db:create, db:schema:load, etc.) — skip silently
   end
