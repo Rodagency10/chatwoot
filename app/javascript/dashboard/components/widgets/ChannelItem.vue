@@ -29,7 +29,7 @@ const hasTiktokConfigured = computed(() => {
 
 const isActive = computed(() => {
   const { key } = props.channel;
-  if (Object.keys(props.enabledFeatures).length === 0) {
+  if (!props.enabledFeatures || Object.keys(props.enabledFeatures).length === 0) {
     return false;
   }
   if (key === 'website') {
@@ -75,6 +75,7 @@ const isActive = computed(() => {
     'instagram',
     'tiktok',
     'voice',
+    'wapi_whatsapp',
   ].includes(key);
 });
 
@@ -92,7 +93,7 @@ const isBeta = computed(() => {
 const hasVoiceBadge = computed(() => {
   return (
     ['voice', 'whatsapp_call'].includes(props.channel.key) &&
-    !!props.enabledFeatures.channel_voice
+    !!props.enabledFeatures?.channel_voice
   );
 });
 
