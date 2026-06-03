@@ -24,7 +24,11 @@ class Api::V1::Accounts::Whatsapp::WapiController < Api::V1::Accounts::BaseContr
   # GET /api/v1/accounts/:account_id/whatsapp/wapi/qr
   def qr
     result = device_service.get_qr(device_id)
-    render json: { success: true, qr: result['data'] }
+    render json: {
+      success: true,
+      qr: result.dig('results', 'qr_link'),
+      qr_duration: result.dig('results', 'qr_duration') || 30
+    }
   rescue ::WapiError => e
     render json: { success: false, error: e.message }, status: :unprocessable_entity
   end
@@ -35,7 +39,7 @@ class Api::V1::Accounts::Whatsapp::WapiController < Api::V1::Accounts::BaseContr
     render json: { success: false, error: 'Phone number is required' }, status: :unprocessable_entity and return if phone.blank?
 
     result = device_service.login_with_code(device_id, phone)
-    render json: { success: true, data: result['data'] }
+    render json: { success: true, data: { code: result.dig('results', 'pair_code') } }
   rescue ::WapiError => e
     render json: { success: false, error: e.message }, status: :unprocessable_entity
   end
@@ -43,7 +47,9 @@ class Api::V1::Accounts::Whatsapp::WapiController < Api::V1::Accounts::BaseContr
   # GET /api/v1/accounts/:account_id/whatsapp/wapi/status
   def status
     result = device_service.check_status(device_id)
-    render json: { success: true, status: result['data'] }
+    wapi_status = result.dig('results') || {}
+    connected = wapi_status['is_connected'] && wapi_status['is_logged_in']
+    render json: { success: true, status: connected ? 'connected' : 'disconnected' }
   rescue ::WapiError => e
     render json: { success: false, error: e.message }, status: :unprocessable_entity
   end

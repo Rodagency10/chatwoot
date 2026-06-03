@@ -36,10 +36,17 @@ const validationRules = {
 };
 const v$ = useVuelidate(validationRules, { inboxName });
 
+const qrRefreshTimer = ref(null);
+const qrDuration = ref(30);
+
 const stopPolling = () => {
   if (pollingInterval.value) {
     clearInterval(pollingInterval.value);
     pollingInterval.value = null;
+  }
+  if (qrRefreshTimer.value) {
+    clearInterval(qrRefreshTimer.value);
+    qrRefreshTimer.value = null;
   }
 };
 
@@ -48,10 +55,18 @@ const fetchQr = async () => {
     const response = await wapiChannel.getQr(inboxId.value);
     if (response.data.success) {
       qrCode.value = response.data.qr;
+      if (response.data.qr_duration) {
+        qrDuration.value = response.data.qr_duration;
+      }
     }
   } catch {
     // QR may not be available if already connected
   }
+};
+
+const startQrRefresh = () => {
+  if (qrRefreshTimer.value) return;
+  qrRefreshTimer.value = setInterval(fetchQr, qrDuration.value * 1000);
 };
 
 const fetchStatus = async () => {
@@ -62,7 +77,8 @@ const fetchStatus = async () => {
       status.value = newStatus;
 
       if (newStatus === 'qr' || newStatus === 'disconnected') {
-        await fetchQr();
+        if (!qrCode.value) await fetchQr();
+        startQrRefresh();
       } else if (newStatus === 'connected') {
         stopPolling();
         useAlert(
@@ -81,7 +97,7 @@ const fetchStatus = async () => {
 
 const startPolling = () => {
   fetchStatus();
-  pollingInterval.value = setInterval(fetchStatus, 3000);
+  pollingInterval.value = setInterval(fetchStatus, 5000);
 };
 
 const createDevice = async () => {
@@ -257,11 +273,16 @@ onUnmounted(() => {
   <template v-if="step === 'qr' && deviceCreated">
     <!-- Pair code mode -->
     <div v-if="showPairCode" class="flex flex-wrap flex-col mx-0">
-      <h2 class="text-lg font-medium mb-4 text-n-slate-12">
+      <h2 class="text-lg font-medium mb-2 text-n-slate-12">
         {{
           $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.PAIR_CODE_TITLE')
         }}
       </h2>
+      <p class="text-sm text-n-slate-11 mb-4">
+        {{
+          $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.PAIR_CODE_HELP')
+        }}
+      </p>
       <div class="flex-shrink-0 flex-grow-0">
         <label>
           {{
@@ -312,11 +333,16 @@ onUnmounted(() => {
 
     <!-- QR code mode -->
     <div v-else class="flex flex-wrap flex-col mx-0">
-      <h2 class="text-lg font-medium mb-4 text-n-slate-12">
+      <h2 class="text-lg font-medium mb-2 text-n-slate-12">
         {{
           $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.SCAN_QR_TITLE')
         }}
       </h2>
+      <p class="text-sm text-n-slate-11 mb-4">
+        {{
+          $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.SCAN_QR_HELP')
+        }}
+      </p>
       <div v-if="qrCode" class="mb-4 flex justify-center">
         <img
           :src="qrCode"
