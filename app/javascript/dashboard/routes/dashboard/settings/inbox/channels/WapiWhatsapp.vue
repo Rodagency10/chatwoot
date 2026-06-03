@@ -10,6 +10,8 @@ import { useStore } from 'vuex';
 import NextButton from 'dashboard/components-next/button/Button.vue';
 import wapiChannel from 'dashboard/api/channel/wapiChannel';
 
+const I18N = 'INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING';
+
 const { t } = useI18n();
 const router = useRouter();
 const store = useStore();
@@ -81,9 +83,7 @@ const fetchStatus = async () => {
         startQrRefresh();
       } else if (newStatus === 'connected') {
         stopPolling();
-        useAlert(
-          t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.CONNECTED_SUCCESS')
-        );
+        useAlert(t(`${I18N}.CONNECTED_SUCCESS`));
         router.replace({
           name: 'settings_inboxes_add_agents',
           params: { page: 'new', inbox_id: inboxId.value },
@@ -107,8 +107,7 @@ const createDevice = async () => {
     startPolling();
   } catch (error) {
     useAlert(
-      error.response?.data?.error ||
-        t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.ERROR_CREATE_DEVICE')
+      error.response?.data?.error || t(`${I18N}.ERROR_CREATE_DEVICE`)
     );
   } finally {
     isDeviceLoading.value = false;
@@ -136,8 +135,7 @@ const createInbox = async () => {
     await createDevice();
   } catch (error) {
     useAlert(
-      error.response?.data?.message ||
-        t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.ERROR_CREATE_INBOX')
+      error.response?.data?.message || t(`${I18N}.ERROR_CREATE_INBOX`)
     );
     isDeviceLoading.value = false;
   }
@@ -145,9 +143,7 @@ const createInbox = async () => {
 
 const requestPairCode = async () => {
   if (!phoneForCode.value) {
-    useAlert(
-      t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.PHONE_REQUIRED')
-    );
+    useAlert(t(`${I18N}.PHONE_REQUIRED`));
     return;
   }
   isDeviceLoading.value = true;
@@ -159,14 +155,11 @@ const requestPairCode = async () => {
     if (response.data.success && response.data.data?.code) {
       loginCode.value = response.data.data.code;
     } else {
-      useAlert(
-        t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.ERROR_PAIR_CODE_NO_CODE')
-      );
+      useAlert(t(`${I18N}.ERROR_PAIR_CODE_NO_CODE`));
     }
   } catch (error) {
     useAlert(
-      error.response?.data?.error ||
-        t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.ERROR_PAIR_CODE')
+      error.response?.data?.error || t(`${I18N}.ERROR_PAIR_CODE`)
     );
   } finally {
     isDeviceLoading.value = false;
@@ -175,22 +168,17 @@ const requestPairCode = async () => {
 
 const connectDevice = async () => {
   if (!apiToken.value) {
-    useAlert(
-      t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.API_TOKEN_REQUIRED')
-    );
+    useAlert(t(`${I18N}.API_TOKEN_REQUIRED`));
     return;
   }
   isConnecting.value = true;
   try {
     await wapiChannel.connectDevice(inboxId.value, apiToken.value);
-    useAlert(
-      t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.CONNECT_SUCCESS')
-    );
+    useAlert(t(`${I18N}.CONNECT_SUCCESS`));
     startPolling();
   } catch (error) {
     useAlert(
-      error.response?.data?.error ||
-        t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.ERROR_CONNECT')
+      error.response?.data?.error || t(`${I18N}.ERROR_CONNECT`)
     );
   } finally {
     isConnecting.value = false;
@@ -219,25 +207,15 @@ onUnmounted(() => {
   >
     <div class="flex-shrink-0 flex-grow-0">
       <label :class="{ error: v$.inboxName.$error }">
-        {{
-          $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.INBOX_NAME_LABEL')
-        }}
+        {{ $t(`${I18N}.INBOX_NAME_LABEL`) }}
         <input
           v-model="inboxName"
           type="text"
-          :placeholder="
-            $t(
-              'INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.INBOX_NAME_PLACEHOLDER'
-            )
-          "
+          :placeholder="$t(`${I18N}.INBOX_NAME_PLACEHOLDER`)"
           @blur="v$.inboxName.$touch"
         />
         <span v-if="v$.inboxName.$error" class="message">
-          {{
-            $t(
-              'INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.INBOX_NAME_REQUIRED'
-            )
-          }}
+          {{ $t(`${I18N}.INBOX_NAME_REQUIRED`) }}
         </span>
       </label>
     </div>
@@ -246,9 +224,7 @@ onUnmounted(() => {
         type="submit"
         solid
         blue
-        :label="
-          $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.CREATE_BUTTON')
-        "
+        :label="$t(`${I18N}.CREATE_BUTTON`)"
         :is-loading="uiFlags.isCreating"
       />
     </div>
@@ -260,12 +236,10 @@ onUnmounted(() => {
     class="text-center py-8"
   >
     <div class="text-lg font-medium mb-2 text-n-slate-12">
-      {{
-        $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.CREATING_DEVICE')
-      }}
+      {{ $t(`${I18N}.CREATING_DEVICE`) }}
     </div>
     <div class="text-sm text-n-slate-11">
-      {{ $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.PLEASE_WAIT') }}
+      {{ $t(`${I18N}.PLEASE_WAIT`) }}
     </div>
   </div>
 
@@ -274,28 +248,18 @@ onUnmounted(() => {
     <!-- Pair code mode -->
     <div v-if="showPairCode" class="flex flex-wrap flex-col mx-0">
       <h2 class="text-lg font-medium mb-2 text-n-slate-12">
-        {{
-          $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.PAIR_CODE_TITLE')
-        }}
+        {{ $t(`${I18N}.PAIR_CODE_TITLE`) }}
       </h2>
       <p class="text-sm text-n-slate-11 mb-4">
-        {{
-          $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.PAIR_CODE_HELP')
-        }}
+        {{ $t(`${I18N}.PAIR_CODE_HELP`) }}
       </p>
       <div class="flex-shrink-0 flex-grow-0">
         <label>
-          {{
-            $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.PHONE_LABEL')
-          }}
+          {{ $t(`${I18N}.PHONE_LABEL`) }}
           <input
             v-model="phoneForCode"
             type="text"
-            :placeholder="
-              $t(
-                'INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.PHONE_PLACEHOLDER'
-              )
-            "
+            :placeholder="$t(`${I18N}.PHONE_PLACEHOLDER`)"
           />
         </label>
       </div>
@@ -303,9 +267,7 @@ onUnmounted(() => {
         <NextButton
           solid
           blue
-          :label="
-            $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.GET_PAIR_CODE')
-          "
+          :label="$t(`${I18N}.GET_PAIR_CODE`)"
           :is-loading="isDeviceLoading"
           @click="requestPairCode"
         />
@@ -315,7 +277,7 @@ onUnmounted(() => {
         class="mt-4 p-4 rounded-xl border border-n-weak bg-n-alpha-2"
       >
         <div class="text-sm font-medium text-n-slate-11">
-          {{ $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.YOUR_CODE') }}
+          {{ $t(`${I18N}.YOUR_CODE`) }}
         </div>
         <div class="text-3xl font-mono font-bold mt-2 text-n-slate-12">
           {{ loginCode }}
@@ -325,63 +287,43 @@ onUnmounted(() => {
         class="mt-4 text-sm text-n-brand cursor-pointer"
         @click="togglePairCode"
       >
-        {{
-          $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.BACK_TO_QR')
-        }}
+        {{ $t(`${I18N}.BACK_TO_QR`) }}
       </button>
     </div>
 
     <!-- QR code mode -->
     <div v-else class="flex flex-wrap flex-col mx-0">
       <h2 class="text-lg font-medium mb-2 text-n-slate-12">
-        {{
-          $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.SCAN_QR_TITLE')
-        }}
+        {{ $t(`${I18N}.SCAN_QR_TITLE`) }}
       </h2>
       <p class="text-sm text-n-slate-11 mb-4">
-        {{
-          $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.SCAN_QR_HELP')
-        }}
+        {{ $t(`${I18N}.SCAN_QR_HELP`) }}
       </p>
       <div v-if="qrCode" class="mb-4 flex justify-center">
         <img
           :src="qrCode"
-          :alt="
-            $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.QR_ALT')
-          "
+          :alt="$t(`${I18N}.QR_ALT`)"
           class="border border-n-weak rounded-xl p-2"
         />
       </div>
       <div v-else class="mb-4 text-sm text-n-slate-11">
-        {{
-          $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.WAITING_FOR_QR')
-        }}
+        {{ $t(`${I18N}.WAITING_FOR_QR`) }}
       </div>
       <button
         class="text-sm text-n-brand mb-4 cursor-pointer text-left"
         @click="togglePairCode"
       >
-        {{
-          $t('INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.USE_PAIR_CODE')
-        }}
+        {{ $t(`${I18N}.USE_PAIR_CODE`) }}
       </button>
 
       <div class="mt-6 border-t border-n-weak pt-6">
         <h3 class="text-sm font-medium mb-2 text-n-slate-12">
-          {{
-            $t(
-              'INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.CONNECT_SECTION'
-            )
-          }}
+          {{ $t(`${I18N}.CONNECT_SECTION`) }}
         </h3>
         <NextButton
           solid
           blue
-          :label="
-            $t(
-              'INBOX_MGMT.ADD.WAPI_WHATSAPP.ONBOARDING.CONNECT_BUTTON'
-            )
-          "
+          :label="$t(`${I18N}.CONNECT_BUTTON`)"
           :is-loading="isConnecting"
           @click="connectDevice"
         />

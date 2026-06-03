@@ -148,9 +148,7 @@ const handleManualLinkClick = () => {
         />
 
         <!-- WAPI self-hosted -->
-        <WapiWhatsapp
-          v-else-if="selectedProvider === PROVIDER_TYPES.WAPI"
-        />
+        <WapiWhatsapp v-else-if="selectedProvider === PROVIDER_TYPES.WAPI" />
 
         <CloudWhatsapp v-else />
       </div>
