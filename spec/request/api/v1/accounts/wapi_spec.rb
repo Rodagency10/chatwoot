@@ -173,9 +173,8 @@ RSpec.describe 'WAPI Inbox API', type: :request do
 
       before do
         allow(Wapi::DeviceService).to receive(:new).and_return(device_service)
-        allow(device_service).to receive(:get_device)
-          .and_return({ 'code' => 'SUCCESS', 'results' => { 'id' => 'test-device-uuid', 'jid' => '22890000000@s.whatsapp.net' } })
-        allow(device_service).to receive(:save_chatwoot_config).and_return({ 'code' => 'SUCCESS' })
+        allow(device_service).to receive(:save_chatwoot_config)
+          .and_return({ 'code' => 'SUCCESS', 'results' => { 'device_id' => '22890000000@s.whatsapp.net' } })
 
         post "/api/v1/accounts/#{account.id}/wapi/connect",
              params: { inbox_id: inbox.id },
