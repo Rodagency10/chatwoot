@@ -29,7 +29,7 @@ class Channel::Whatsapp < ApplicationRecord
   before_validation :ensure_webhook_verify_token, unless: :wapi_provider?
 
   validates :provider, inclusion: { in: PROVIDERS }
-  validates :phone_number, presence: true, uniqueness: true
+  validates :phone_number, presence: true, uniqueness: true, unless: :wapi_provider?
   validate :validate_provider_config, unless: :wapi_provider?
 
   after_create :sync_templates
