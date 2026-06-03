@@ -1152,6 +1152,43 @@
         "DESCRIPTION": "Connect with Other Providers"
       }
     },
+    "WAPI_WHATSAPP": {
+      "TITLE": "WhatsApp (WAPI)",
+      "DESC": "Connectez-vous via WAPI auto-hébergé (whatsameow).",
+      "ONBOARDING": {
+        "CREATE_INBOX_TITLE": "Créer une boîte de réception WhatsApp",
+        "INBOX_NAME_LABEL": "Nom de la boîte de réception",
+        "INBOX_NAME_PLACEHOLDER": "ex: WhatsApp Support",
+        "INBOX_NAME_REQUIRED": "Le nom de la boîte de réception est requis",
+        "CREATE_BUTTON": "Créer la boîte de réception",
+        "ERROR_NO_INBOX": "Boîte de réception introuvable",
+        "ERROR_CREATE_INBOX": "Échec de la création de la boîte de réception WhatsApp",
+        "ERROR_CREATE_DEVICE": "Échec de la création du périphérique WAPI",
+        "CREATING_DEVICE": "Création du périphérique WAPI...",
+        "PLEASE_WAIT": "Veuillez patienter pendant que nous configurons votre connexion WhatsApp",
+        "SCAN_QR_TITLE": "Scanner le QR Code",
+        "QR_ALT": "QR Code WhatsApp",
+        "WAITING_FOR_QR": "En attente du QR code...",
+        "USE_PAIR_CODE": "Utiliser le code de jumelage à la place",
+        "PAIR_CODE_TITLE": "Jumeler avec le numéro de téléphone",
+        "PHONE_LABEL": "Numéro de téléphone (avec indicatif pays)",
+        "PHONE_PLACEHOLDER": "ex: 1234567890",
+        "GET_PAIR_CODE": "Obtenir le code de jumelage",
+        "ERROR_PAIR_CODE": "Échec de l'obtention du code de jumelage",
+        "ERROR_PAIR_CODE_NO_CODE": "Code de jumelage non disponible. Veuillez réessayer.",
+        "YOUR_CODE": "Votre code de jumelage :",
+        "BACK_TO_QR": "Retour au QR code",
+        "CONNECT_SECTION": "Connecter à Chatwoot",
+        "API_TOKEN_LABEL": "Votre token API Chatwoot",
+        "API_TOKEN_PLACEHOLDER": "Entrez votre token API de profil",
+        "CONNECT_BUTTON": "Connecter",
+        "CONNECT_SUCCESS": "Périphérique connecté avec succès ! En attente de WhatsApp...",
+        "ERROR_CONNECT": "Échec de la connexion du périphérique",
+        "CONNECTED_SUCCESS": "WhatsApp connecté ! Redirection vers la configuration de la boîte de réception...",
+        "PHONE_REQUIRED": "Le numéro de téléphone est requis",
+        "API_TOKEN_REQUIRED": "Le token API est requis"
+      }
+    },
     "CHANNELS": {
       "MESSENGER": "Messenger",
       "WEB_WIDGET": "Site internet",

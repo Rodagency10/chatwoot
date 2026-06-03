@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onUnmounted, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import { useAlert } from 'dashboard/composables';
@@ -11,6 +11,8 @@ const { t } = useI18n();
 const router = useRouter();
 const store = useStore();
 
+const step = ref('form');
+const inboxName = ref('');
 const inboxId = ref(null);
 const deviceCreated = ref(false);
 const qrCode = ref(null);
@@ -20,8 +22,10 @@ const showPairCode = ref(false);
 const status = ref(null);
 const isLoading = ref(false);
 const isConnecting = ref(false);
-const apiToken = ref('');
 const pollingInterval = ref(null);
+
+const currentUser = computed(() => store.getters['auth/getCurrentUser']);
+const apiToken = computed(() => currentUser.value?.access_token || '');
 
 const stopPolling = () => {
   if (pollingInterval.value) {
@@ -84,10 +88,15 @@ const createDevice = async () => {
 };
 
 const createInbox = async () => {
+  if (!inboxName.value.trim()) {
+    useAlert(t('WAPI.ONBOARDING.INBOX_NAME_REQUIRED'));
+    return;
+  }
+  
   isLoading.value = true;
   try {
     const inbox = await store.dispatch('inboxes/createChannel', {
-      name: 'WhatsApp (WAPI)',
+      name: inboxName.value.trim(),
       channel: {
         type: 'whatsapp',
         provider: 'wapi',
@@ -95,6 +104,7 @@ const createInbox = async () => {
       },
     });
     inboxId.value = inbox.id;
+    step.value = 'qr';
     await createDevice();
   } catch (error) {
     useAlert(
@@ -115,8 +125,10 @@ const requestPairCode = async () => {
       inboxId.value,
       phoneForCode.value
     );
-    if (response.data.success) {
+    if (response.data.success && response.data.data?.code) {
       loginCode.value = response.data.data.code;
+    } else {
+      useAlert(t('WAPI.ONBOARDING.ERROR_PAIR_CODE_NO_CODE'));
     }
   } catch (error) {
     useAlert(
@@ -152,10 +164,6 @@ const togglePairCode = () => {
   }
 };
 
-onMounted(async () => {
-  await createInbox();
-});
-
 onUnmounted(() => {
   stopPolling();
 });
@@ -163,7 +171,29 @@ onUnmounted(() => {
 
 <template>
   <div class="flex flex-col items-center justify-center p-8">
-    <div v-if="isLoading && !deviceCreated" class="text-center">
+    <div v-if="step === 'form'" class="w-full max-w-md">
+      <h2 class="text-xl font-semibold mb-4">
+        {{ $t('WAPI.ONBOARDING.CREATE_INBOX_TITLE') }}
+      </h2>
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1">
+          {{ $t('WAPI.ONBOARDING.INBOX_NAME_LABEL') }}
+        </label>
+        <input
+          v-model="inboxName"
+          type="text"
+          :placeholder="$t('WAPI.ONBOARDING.INBOX_NAME_PLACEHOLDER')"
+          class="w-full px-3 py-2 border rounded"
+        />
+      </div>
+      <NextButton
+        :label="$t('WAPI.ONBOARDING.CREATE_BUTTON')"
+        :is-loading="isLoading"
+        @click="createInbox"
+      />
+    </div>
+
+    <div v-if="step === 'qr' && isLoading && !deviceCreated" class="text-center">
       <div class="text-lg font-medium mb-2">
         {{ $t('WAPI.ONBOARDING.CREATING_DEVICE') }}
       </div>
@@ -172,7 +202,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <template v-if="deviceCreated">
+    <template v-if="step === 'qr' && deviceCreated">
       <div v-if="showPairCode" class="w-full max-w-md">
         <h2 class="text-xl font-semibold mb-4">
           {{ $t('WAPI.ONBOARDING.PAIR_CODE_TITLE') }}
@@ -226,17 +256,6 @@ onUnmounted(() => {
           <h3 class="text-sm font-medium mb-2">
             {{ $t('WAPI.ONBOARDING.CONNECT_SECTION') }}
           </h3>
-          <div class="mb-4">
-            <label class="block text-sm font-medium mb-1">
-              {{ $t('WAPI.ONBOARDING.API_TOKEN_LABEL') }}
-            </label>
-            <input
-              v-model="apiToken"
-              type="password"
-              :placeholder="$t('WAPI.ONBOARDING.API_TOKEN_PLACEHOLDER')"
-              class="w-full px-3 py-2 border rounded"
-            />
-          </div>
           <NextButton
             :label="$t('WAPI.ONBOARDING.CONNECT_BUTTON')"
             :is-loading="isConnecting"
