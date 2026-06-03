@@ -6,6 +6,7 @@ import SettingsToggleSection from 'dashboard/components-next/Settings/SettingsTo
 import SettingsAccordion from 'dashboard/components-next/Settings/SettingsAccordion.vue';
 import ImapSettings from '../ImapSettings.vue';
 import SmtpSettings from '../SmtpSettings.vue';
+import WapiSettings from '../channels/WapiSettings.vue';
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import NextButton from 'dashboard/components-next/button/Button.vue';
@@ -23,6 +24,7 @@ export default {
     NextButton,
     TextArea,
     WhatsappReauthorize,
+    WapiSettings,
   },
   mixins: [inboxMixin],
   props: {
@@ -329,6 +331,7 @@ export default {
         </label>
       </div>
     </SettingsFieldSection>
+    <WapiSettings :inbox="inbox" />
   </div>
   <div v-else-if="isAnEmailChannel">
     <div>

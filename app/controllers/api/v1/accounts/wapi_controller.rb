@@ -69,6 +69,40 @@ class Api::V1::Accounts::WapiController < Api::V1::Accounts::BaseController
     render json: { error: e.message }, status: :unprocessable_entity
   end
 
+  # GET /api/v1/accounts/:account_id/wapi/device_info
+  def device_info
+    status_result = device_service.check_status(device_id)
+    wapi_status = status_result['results'] || {}
+    connected = wapi_status['is_connected'] && wapi_status['is_logged_in']
+
+    render json: {
+      success: true,
+      device_id: device_id,
+      jid: @channel.additional_attributes['wapi_jid'],
+      phone_number: extract_phone_from_jid(@channel.additional_attributes['wapi_jid']),
+      is_connected: connected
+    }
+  rescue CustomExceptions::WapiError => e
+    render json: { error: e.message }, status: :unprocessable_entity
+  end
+
+  # POST /api/v1/accounts/:account_id/wapi/reconnect
+  def reconnect
+    device_service.reconnect(device_id)
+    render json: { success: true }
+  rescue CustomExceptions::WapiError => e
+    render json: { error: e.message }, status: :unprocessable_entity
+  end
+
+  # POST /api/v1/accounts/:account_id/wapi/logout
+  def logout
+    device_service.logout(device_id)
+    @channel.update!(additional_attributes: @channel.additional_attributes.except('wapi_jid'))
+    render json: { success: true }
+  rescue CustomExceptions::WapiError => e
+    render json: { error: e.message }, status: :unprocessable_entity
+  end
+
   private
 
   def fetch_inbox

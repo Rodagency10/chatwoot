@@ -30,6 +30,16 @@ class Wapi::DeviceService
     request(:get, '/app/status', nil, device_id: device_id)
   end
 
+  # GET /app/reconnect
+  def reconnect(device_id)
+    request(:get, '/app/reconnect', nil, device_id: device_id)
+  end
+
+  # GET /app/logout
+  def logout(device_id)
+    request(:get, '/app/logout', nil, device_id: device_id)
+  end
+
   # GET /devices/:device_id
   def get_device(device_id)
     request(:get, "/devices/#{CGI.escape(device_id)}")

@@ -34,6 +34,24 @@ class WapiChannel extends ApiClient {
       inbox_id: inboxId,
     });
   }
+
+  getDeviceInfo(inboxId) {
+    return axios.get(`${this.baseUrl()}/wapi/device_info`, {
+      params: { inbox_id: inboxId },
+    });
+  }
+
+  reconnect(inboxId) {
+    return axios.post(`${this.baseUrl()}/wapi/reconnect`, {
+      inbox_id: inboxId,
+    });
+  }
+
+  logout(inboxId) {
+    return axios.post(`${this.baseUrl()}/wapi/logout`, {
+      inbox_id: inboxId,
+    });
+  }
 }
 
 export default new WapiChannel();

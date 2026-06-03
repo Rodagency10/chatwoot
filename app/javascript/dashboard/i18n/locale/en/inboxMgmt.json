@@ -341,7 +341,7 @@
         "PAIR_CODE_TITLE": "Pair with Phone Number",
         "PAIR_CODE_HELP": "Open WhatsApp on your phone → Settings → Linked Devices → Link a Device → Link with phone number instead. Then enter the code shown below.",
         "PHONE_LABEL": "WhatsApp Phone Number",
-        "PHONE_PLACEHOLDER": "70111810",
+        "PHONE_PLACEHOLDER": "90000000",
         "PHONE_REQUIRED": "Phone number is required",
         "GET_PAIR_CODE": "Get Pairing Code",
         "ERROR_PAIR_CODE": "Failed to get pairing code",
@@ -1228,6 +1228,26 @@
       "INSTAGRAM": "Instagram",
       "TIKTOK": "TikTok",
       "VOICE": "Voice"
+    },
+    "WAPI_SETTINGS": {
+      "TITLE": "WhatsApp Device",
+      "DESC": "View and manage the WhatsApp device connected to this inbox.",
+      "CONNECTION_STATUS": "Status",
+      "STATUS_CONNECTED": "Connected",
+      "STATUS_DISCONNECTED": "Disconnected",
+      "STATUS_UNKNOWN": "Unknown",
+      "PHONE_NUMBER": "Phone Number",
+      "JID": "WhatsApp JID",
+      "DEVICE_ID": "Device ID",
+      "LOADING": "Loading device info...",
+      "ACTIONS_TITLE": "Device Actions",
+      "ACTIONS_DESC": "Reconnect or logout the WhatsApp device linked to this inbox.",
+      "RECONNECT_BUTTON": "Reconnect",
+      "LOGOUT_BUTTON": "Logout",
+      "RECONNECT_SUCCESS": "WhatsApp device reconnected successfully.",
+      "RECONNECT_ERROR": "Failed to reconnect device.",
+      "LOGOUT_SUCCESS": "WhatsApp device logged out successfully.",
+      "LOGOUT_ERROR": "Failed to logout device."
     }
   }
 }

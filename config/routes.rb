@@ -343,6 +343,9 @@ Rails.application.routes.draw do
           post 'wapi/login_with_code', to: 'wapi#login_with_code'
           get 'wapi/status', to: 'wapi#status'
           post 'wapi/connect', to: 'wapi#connect'
+          get 'wapi/device_info', to: 'wapi#device_info'
+          post 'wapi/reconnect', to: 'wapi#reconnect'
+          post 'wapi/logout', to: 'wapi#logout'
 
           resources :webhooks, only: [:index, :create, :update, :destroy]
           namespace :integrations do
