@@ -6,8 +6,6 @@ import SettingsFieldSection from 'dashboard/components-next/Settings/SettingsFie
 import NextButton from 'dashboard/components-next/button/Button.vue';
 import wapiChannel from 'dashboard/api/channel/wapiChannel';
 
-const I18N = 'INBOX_MGMT.WAPI_SETTINGS';
-
 const props = defineProps({
   inbox: {
     type: Object,
@@ -15,10 +13,11 @@ const props = defineProps({
   },
 });
 
+const I18N = 'INBOX_MGMT.WAPI_SETTINGS';
+
 const { t } = useI18n();
 
 const deviceInfo = ref(null);
-const isLoading = ref(false);
 const isReconnecting = ref(false);
 const isLoggingOut = ref(false);
 const pollingInterval = ref(null);
