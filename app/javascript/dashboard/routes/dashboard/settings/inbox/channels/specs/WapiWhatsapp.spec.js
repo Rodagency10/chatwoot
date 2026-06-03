@@ -1,3 +1,4 @@
+/* global jest */
 import { shallowMount } from '@vue/test-utils';
 import { createI18n } from 'vue-i18n';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -46,7 +47,10 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', name: 'settings_inboxes_add_agents' },
-    { path: '/settings/inboxes/new/wapi_whatsapp', name: 'settings_inboxes_page_channel' },
+    {
+      path: '/settings/inboxes/new/wapi_whatsapp',
+      name: 'settings_inboxes_page_channel',
+    },
   ],
 });
 
@@ -96,12 +100,18 @@ describe('WapiWhatsapp.vue', () => {
 
   it('creates inbox and device on mount', async () => {
     wapiChannel.createDevice.mockResolvedValue({ data: { success: true } });
-    wapiChannel.getStatus.mockResolvedValue({ data: { success: true, status: 'disconnected' } });
-    wapiChannel.getQr.mockResolvedValue({ data: { success: true, qr: 'qr-data' } });
+    wapiChannel.getStatus.mockResolvedValue({
+      data: { success: true, status: 'disconnected' },
+    });
+    wapiChannel.getQr.mockResolvedValue({
+      data: { success: true, qr: 'qr-data' },
+    });
 
     const wrapper = getWrapper();
     await wrapper.vm.$nextTick();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise(resolve => {
+      setTimeout(resolve, 0);
+    });
 
     expect(wrapper.vm.inboxId).toBe(1);
     expect(wapiChannel.createDevice).toHaveBeenCalledWith(1);
@@ -117,12 +127,18 @@ describe('WapiWhatsapp.vue', () => {
 
   it('shows QR section when device is created', async () => {
     wapiChannel.createDevice.mockResolvedValue({ data: { success: true } });
-    wapiChannel.getStatus.mockResolvedValue({ data: { success: true, status: 'disconnected' } });
-    wapiChannel.getQr.mockResolvedValue({ data: { success: true, qr: 'qr-data' } });
+    wapiChannel.getStatus.mockResolvedValue({
+      data: { success: true, status: 'disconnected' },
+    });
+    wapiChannel.getQr.mockResolvedValue({
+      data: { success: true, qr: 'qr-data' },
+    });
 
     const wrapper = getWrapper();
     await wrapper.vm.$nextTick();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise(resolve => {
+      setTimeout(resolve, 0);
+    });
 
     expect(wrapper.vm.deviceCreated).toBe(true);
     expect(wrapper.vm.showPairCode).toBe(false);
@@ -131,12 +147,18 @@ describe('WapiWhatsapp.vue', () => {
 
   it('toggles pair code view', async () => {
     wapiChannel.createDevice.mockResolvedValue({ data: { success: true } });
-    wapiChannel.getStatus.mockResolvedValue({ data: { success: true, status: 'disconnected' } });
-    wapiChannel.getQr.mockResolvedValue({ data: { success: true, qr: 'qr-data' } });
+    wapiChannel.getStatus.mockResolvedValue({
+      data: { success: true, status: 'disconnected' },
+    });
+    wapiChannel.getQr.mockResolvedValue({
+      data: { success: true, qr: 'qr-data' },
+    });
 
     const wrapper = getWrapper();
     await wrapper.vm.$nextTick();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise(resolve => {
+      setTimeout(resolve, 0);
+    });
 
     expect(wrapper.vm.showPairCode).toBe(false);
     wrapper.vm.togglePairCode();
@@ -145,11 +167,15 @@ describe('WapiWhatsapp.vue', () => {
 
   it('requests pairing code when phone is provided', async () => {
     wapiChannel.createDevice.mockResolvedValue({ data: { success: true } });
-    wapiChannel.loginWithCode.mockResolvedValue({ data: { success: true, data: { code: 'ABCD-1234' } } });
+    wapiChannel.loginWithCode.mockResolvedValue({
+      data: { success: true, data: { code: 'ABCD-1234' } },
+    });
 
     const wrapper = getWrapper();
     await wrapper.vm.$nextTick();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise(resolve => {
+      setTimeout(resolve, 0);
+    });
 
     wrapper.vm.phoneForCode = '1234567890';
     await wrapper.vm.requestPairCode();
@@ -163,7 +189,9 @@ describe('WapiWhatsapp.vue', () => {
 
     const wrapper = getWrapper();
     await wrapper.vm.$nextTick();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise(resolve => {
+      setTimeout(resolve, 0);
+    });
 
     wrapper.vm.phoneForCode = '';
     const alertSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
@@ -179,7 +207,9 @@ describe('WapiWhatsapp.vue', () => {
 
     const wrapper = getWrapper();
     await wrapper.vm.$nextTick();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise(resolve => {
+      setTimeout(resolve, 0);
+    });
 
     wrapper.vm.apiToken = 'test-token';
     await wrapper.vm.connectDevice();
@@ -189,23 +219,33 @@ describe('WapiWhatsapp.vue', () => {
 
   it('starts polling for status after device creation', async () => {
     wapiChannel.createDevice.mockResolvedValue({ data: { success: true } });
-    wapiChannel.getStatus.mockResolvedValue({ data: { success: true, status: 'disconnected' } });
-    wapiChannel.getQr.mockResolvedValue({ data: { success: true, qr: 'qr-data' } });
+    wapiChannel.getStatus.mockResolvedValue({
+      data: { success: true, status: 'disconnected' },
+    });
+    wapiChannel.getQr.mockResolvedValue({
+      data: { success: true, qr: 'qr-data' },
+    });
 
     const wrapper = getWrapper();
     await wrapper.vm.$nextTick();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise(resolve => {
+      setTimeout(resolve, 0);
+    });
 
     expect(wrapper.vm.pollingInterval).not.toBeNull();
   });
 
   it('stops polling when component is unmounted', async () => {
     wapiChannel.createDevice.mockResolvedValue({ data: { success: true } });
-    wapiChannel.getStatus.mockResolvedValue({ data: { success: true, status: 'disconnected' } });
+    wapiChannel.getStatus.mockResolvedValue({
+      data: { success: true, status: 'disconnected' },
+    });
 
     const wrapper = getWrapper();
     await wrapper.vm.$nextTick();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise(resolve => {
+      setTimeout(resolve, 0);
+    });
 
     wrapper.unmount();
     expect(wrapper.vm.pollingInterval).toBeNull();
@@ -213,13 +253,17 @@ describe('WapiWhatsapp.vue', () => {
 
   it('navigates to add agents when connected', async () => {
     wapiChannel.createDevice.mockResolvedValue({ data: { success: true } });
-    wapiChannel.getStatus.mockResolvedValue({ data: { success: true, status: 'connected' } });
+    wapiChannel.getStatus.mockResolvedValue({
+      data: { success: true, status: 'connected' },
+    });
 
     const routerPush = jest.spyOn(router, 'replace').mockResolvedValue();
 
     const wrapper = getWrapper();
     await wrapper.vm.$nextTick();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise(resolve => {
+      setTimeout(resolve, 0);
+    });
 
     expect(routerPush).toHaveBeenCalledWith({
       name: 'settings_inboxes_add_agents',

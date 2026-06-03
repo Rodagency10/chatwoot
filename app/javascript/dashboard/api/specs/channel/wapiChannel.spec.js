@@ -1,3 +1,4 @@
+/* global jest */
 import wapiChannel from '../../channel/wapiChannel';
 import ApiClient from '../../ApiClient';
 
@@ -13,7 +14,9 @@ describe('#wapiChannel', () => {
 
   describe('#createDevice', () => {
     it('calls correct endpoint', () => {
-      const spy = jest.spyOn(wapiChannel, 'createDevice').mockResolvedValue({ data: { success: true } });
+      const spy = jest
+        .spyOn(wapiChannel, 'createDevice')
+        .mockResolvedValue({ data: { success: true } });
       wapiChannel.createDevice(1);
       expect(spy).toHaveBeenCalledWith(1);
       spy.mockRestore();
@@ -22,7 +25,9 @@ describe('#wapiChannel', () => {
 
   describe('#getQr', () => {
     it('calls correct endpoint', () => {
-      const spy = jest.spyOn(wapiChannel, 'getQr').mockResolvedValue({ data: { success: true, qr: 'qr-data' } });
+      const spy = jest
+        .spyOn(wapiChannel, 'getQr')
+        .mockResolvedValue({ data: { success: true, qr: 'qr-data' } });
       wapiChannel.getQr(1);
       expect(spy).toHaveBeenCalledWith(1);
       spy.mockRestore();
@@ -31,7 +36,9 @@ describe('#wapiChannel', () => {
 
   describe('#loginWithCode', () => {
     it('calls correct endpoint with phone', () => {
-      const spy = jest.spyOn(wapiChannel, 'loginWithCode').mockResolvedValue({ data: { success: true } });
+      const spy = jest
+        .spyOn(wapiChannel, 'loginWithCode')
+        .mockResolvedValue({ data: { success: true } });
       wapiChannel.loginWithCode(1, '1234567890');
       expect(spy).toHaveBeenCalledWith(1, '1234567890');
       spy.mockRestore();
@@ -40,7 +47,9 @@ describe('#wapiChannel', () => {
 
   describe('#getStatus', () => {
     it('calls correct endpoint', () => {
-      const spy = jest.spyOn(wapiChannel, 'getStatus').mockResolvedValue({ data: { success: true, status: 'connected' } });
+      const spy = jest
+        .spyOn(wapiChannel, 'getStatus')
+        .mockResolvedValue({ data: { success: true, status: 'connected' } });
       wapiChannel.getStatus(1);
       expect(spy).toHaveBeenCalledWith(1);
       spy.mockRestore();
@@ -49,7 +58,9 @@ describe('#wapiChannel', () => {
 
   describe('#connectDevice', () => {
     it('calls correct endpoint with api token', () => {
-      const spy = jest.spyOn(wapiChannel, 'connectDevice').mockResolvedValue({ data: { success: true } });
+      const spy = jest
+        .spyOn(wapiChannel, 'connectDevice')
+        .mockResolvedValue({ data: { success: true } });
       wapiChannel.connectDevice(1, 'test-token');
       expect(spy).toHaveBeenCalledWith(1, 'test-token');
       spy.mockRestore();
