@@ -78,6 +78,7 @@ const isActive = computed(() => {
     'instagram',
     'tiktok',
     'voice',
+    'wapi',
   ].includes(key);
 });
 
