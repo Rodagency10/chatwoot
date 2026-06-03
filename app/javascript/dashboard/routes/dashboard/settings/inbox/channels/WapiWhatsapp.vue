@@ -92,7 +92,7 @@ const createInbox = async () => {
     useAlert(t('WAPI.ONBOARDING.INBOX_NAME_REQUIRED'));
     return;
   }
-  
+
   isLoading.value = true;
   try {
     const inbox = await store.dispatch('inboxes/createChannel', {
@@ -193,7 +193,10 @@ onUnmounted(() => {
       />
     </div>
 
-    <div v-if="step === 'qr' && isLoading && !deviceCreated" class="text-center">
+    <div
+      v-if="step === 'qr' && isLoading && !deviceCreated"
+      class="text-center"
+    >
       <div class="text-lg font-medium mb-2">
         {{ $t('WAPI.ONBOARDING.CREATING_DEVICE') }}
       </div>
