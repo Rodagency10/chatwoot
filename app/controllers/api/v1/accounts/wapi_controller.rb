@@ -104,10 +104,8 @@ class Api::V1::Accounts::WapiController < Api::V1::Accounts::BaseController
   end
 
   def fetch_device_jid
-    devices_result = device_service.list_devices
-    devices = devices_result['results'] || []
-    device = devices.find { |d| d['id'] == device_id }
-    device&.dig('jid')
+    result = device_service.get_device(device_id)
+    result.dig('results', 'jid')
   end
 
   def save_wapi_config
