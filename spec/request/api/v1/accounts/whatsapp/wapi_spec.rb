@@ -87,14 +87,15 @@ RSpec.describe 'WhatsApp WAPI API', type: :request do
       it 'returns QR code' do
         device_service = instance_double(Whatsapp::Wapi::DeviceService)
         allow(Whatsapp::Wapi::DeviceService).to receive(:new).and_return(device_service)
-        allow(device_service).to receive(:get_qr).and_return({ 'code' => 'SUCCESS', 'data' => 'qr-base64' })
+        allow(device_service).to receive(:get_qr)
+          .and_return({ 'code' => 'SUCCESS', 'results' => { 'qr_link' => 'https://wapi.example.com/qr.png', 'qr_duration' => 30 } })
 
         get "/api/v1/accounts/#{account.id}/whatsapp/wapi/qr",
             params: { inbox_id: inbox.id },
             headers: administrator.create_new_auth_token
 
         expect(response).to have_http_status(:success)
-        expect(response.parsed_body['qr']).to eq('qr-base64')
+        expect(response.parsed_body['qr']).to eq('https://wapi.example.com/qr.png')
       end
     end
   end
@@ -123,7 +124,7 @@ RSpec.describe 'WhatsApp WAPI API', type: :request do
         device_service = instance_double(Whatsapp::Wapi::DeviceService)
         allow(Whatsapp::Wapi::DeviceService).to receive(:new).and_return(device_service)
         allow(device_service).to receive(:login_with_code)
-          .and_return({ 'code' => 'SUCCESS', 'data' => { 'code' => 'ABCD-1234' } })
+          .and_return({ 'code' => 'SUCCESS', 'results' => { 'pair_code' => 'ABCD-1234' } })
 
         post "/api/v1/accounts/#{account.id}/whatsapp/wapi/login_with_code",
              params: { inbox_id: inbox.id, phone: '1234567890' },
@@ -147,7 +148,8 @@ RSpec.describe 'WhatsApp WAPI API', type: :request do
       it 'returns device status' do
         device_service = instance_double(Whatsapp::Wapi::DeviceService)
         allow(Whatsapp::Wapi::DeviceService).to receive(:new).and_return(device_service)
-        allow(device_service).to receive(:check_status).and_return({ 'code' => 'SUCCESS', 'data' => 'connected' })
+        allow(device_service).to receive(:check_status)
+          .and_return({ 'code' => 'SUCCESS', 'results' => { 'is_connected' => true, 'is_logged_in' => true } })
 
         get "/api/v1/accounts/#{account.id}/whatsapp/wapi/status",
             params: { inbox_id: inbox.id },
