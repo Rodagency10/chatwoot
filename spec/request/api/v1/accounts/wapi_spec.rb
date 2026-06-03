@@ -169,8 +169,9 @@ RSpec.describe 'WAPI Inbox API', type: :request do
     end
 
     context 'when authenticated' do
-      it 'saves chatwoot config, creates webhook, and returns success' do
-        device_service = instance_double(Wapi::DeviceService)
+      let(:device_service) { instance_double(Wapi::DeviceService) }
+
+      before do
         allow(Wapi::DeviceService).to receive(:new).and_return(device_service)
         allow(device_service).to receive(:list_devices)
           .and_return({ 'code' => 'SUCCESS', 'results' => [{ 'id' => 'test-device-uuid', 'jid' => '22870111810@s.whatsapp.net' }] })
@@ -180,18 +181,20 @@ RSpec.describe 'WAPI Inbox API', type: :request do
              params: { inbox_id: inbox.id },
              headers: administrator.create_new_auth_token,
              as: :json
+      end
 
+      it 'returns success with phone number and jid' do
         expect(response).to have_http_status(:success)
         json = response.parsed_body
         expect(json['success']).to be true
         expect(json['phone_number']).to eq('+22870111810')
         expect(json['jid']).to eq('22870111810@s.whatsapp.net')
+      end
 
-        # Verify JID stored in channel
+      it 'stores JID and creates account webhook' do
         api_channel.reload
         expect(api_channel.additional_attributes['wapi_jid']).to eq('22870111810@s.whatsapp.net')
 
-        # Verify account webhook created with message_created only
         webhook = account.webhooks.find_by(url: 'https://wapi.example.com/chatwoot/webhook')
         expect(webhook).to be_present
         expect(webhook.subscriptions).to eq(['message_created'])

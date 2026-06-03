@@ -10,7 +10,7 @@ class Api::V1::Accounts::WapiController < Api::V1::Accounts::BaseController
     render json: { error: 'Inbox name is required' }, status: :unprocessable_entity and return if inbox_name.blank?
 
     ActiveRecord::Base.transaction do
-      channel = Current.account.channel_api.create!(webhook_url: '')
+      channel = Current.account.api_channels.create!(webhook_url: '')
       @inbox = Current.account.inboxes.create!(name: inbox_name.strip, channel: channel)
       device_id = "cw-inbox-#{@inbox.id}"
 

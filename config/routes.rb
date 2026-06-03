@@ -338,13 +338,11 @@ Rails.application.routes.draw do
             resource :authorization, only: [:create]
           end
 
-          scope 'wapi' do
-            post 'create_inbox', to: 'wapi#create_inbox'
-            get 'qr', to: 'wapi#qr'
-            post 'login_with_code', to: 'wapi#login_with_code'
-            get 'status', to: 'wapi#status'
-            post 'connect', to: 'wapi#connect'
-          end
+          post 'wapi/create_inbox', to: 'wapi#create_inbox'
+          get 'wapi/qr', to: 'wapi#qr'
+          post 'wapi/login_with_code', to: 'wapi#login_with_code'
+          get 'wapi/status', to: 'wapi#status'
+          post 'wapi/connect', to: 'wapi#connect'
 
           resources :webhooks, only: [:index, :create, :update, :destroy]
           namespace :integrations do
