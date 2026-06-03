@@ -325,6 +325,36 @@
           "ERROR_MESSAGE": "We were not able to save the WhatsApp channel"
         }
       },
+      "WAPI_WHATSAPP": {
+        "TITLE": "WhatsApp (WAPI)",
+        "DESC": "Connect via self-hosted WAPI (whatsameow).",
+        "ONBOARDING": {
+          "ERROR_NO_INBOX": "Inbox not found",
+          "ERROR_CREATE_INBOX": "Failed to create WhatsApp inbox",
+          "ERROR_CREATE_DEVICE": "Failed to create WAPI device",
+          "CREATING_DEVICE": "Creating WAPI device...",
+          "PLEASE_WAIT": "Please wait while we set up your WhatsApp connection",
+          "SCAN_QR_TITLE": "Scan QR Code",
+          "QR_ALT": "WhatsApp QR Code",
+          "WAITING_FOR_QR": "Waiting for QR code...",
+          "USE_PAIR_CODE": "Use pairing code instead",
+          "PAIR_CODE_TITLE": "Pair with Phone Number",
+          "PHONE_LABEL": "Phone Number (with country code)",
+          "PHONE_PLACEHOLDER": "e.g. 1234567890",
+          "GET_PAIR_CODE": "Get Pairing Code",
+          "ERROR_PAIR_CODE": "Failed to get pairing code",
+          "YOUR_CODE": "Your pairing code:",
+          "BACK_TO_QR": "Back to QR code",
+          "CONNECT_SECTION": "Connect to Chatwoot",
+          "API_TOKEN_LABEL": "Your Chatwoot API Token",
+          "API_TOKEN_PLACEHOLDER": "Enter your profile API token",
+          "CONNECT_BUTTON": "Connect",
+          "CONNECT_SUCCESS": "Device connected successfully! Waiting for WhatsApp...",
+          "ERROR_CONNECT": "Failed to connect device",
+          "CONNECTED_SUCCESS": "WhatsApp connected! Redirecting to inbox setup...",
+          "PHONE_REQUIRED": "Phone number is required"
+        }
+      },
       "VOICE": {
         "TITLE": "Voice Channel",
         "DESC": "Integrate Twilio Voice and start supporting your customers via phone calls.",
@@ -466,6 +496,10 @@
           "WHATSAPP": {
             "TITLE": "WhatsApp",
             "DESCRIPTION": "Support your customers on WhatsApp"
+          },
+          "WAPI_WHATSAPP": {
+            "TITLE": "WhatsApp (WAPI)",
+            "DESCRIPTION": "Connect via self-hosted WAPI (whatsameow)"
           },
           "WHATSAPP_CALL": {
             "TITLE": "WhatsApp Call",

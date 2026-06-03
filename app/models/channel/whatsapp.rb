@@ -25,15 +25,16 @@ class Channel::Whatsapp < ApplicationRecord
   EDITABLE_ATTRS = [:phone_number, :provider, { provider_config: {} }].freeze
 
   # default at the moment is 360dialog lets change later.
-  PROVIDERS = %w[default whatsapp_cloud].freeze
-  before_validation :ensure_webhook_verify_token
+  PROVIDERS = %w[default whatsapp_cloud wapi].freeze
+  before_validation :ensure_webhook_verify_token, unless: :wapi_provider?
 
   validates :provider, inclusion: { in: PROVIDERS }
   validates :phone_number, presence: true, uniqueness: true
-  validate :validate_provider_config
+  validate :validate_provider_config, unless: :wapi_provider?
 
   after_create :sync_templates
   before_destroy :teardown_webhooks
+  before_destroy :cleanup_wapi_device, if: :wapi_provider?
   after_commit :setup_webhooks, on: :create, if: :should_auto_setup_webhooks?
 
   def name
@@ -57,8 +58,11 @@ class Channel::Whatsapp < ApplicationRecord
   end
 
   def provider_service
-    if provider == 'whatsapp_cloud'
+    case provider
+    when 'whatsapp_cloud'
       Whatsapp::Providers::WhatsappCloudService.new(whatsapp_channel: self)
+    when 'wapi'
+      Whatsapp::Providers::WapiService.new(whatsapp_channel: self)
     else
       Whatsapp::Providers::Whatsapp360DialogService.new(whatsapp_channel: self)
     end
@@ -138,5 +142,29 @@ class Channel::Whatsapp < ApplicationRecord
     # Only auto-setup webhooks for whatsapp_cloud provider with manual setup
     # Embedded signup calls setup_webhooks explicitly in EmbeddedSignupService
     provider == 'whatsapp_cloud' && provider_config['source'] != 'embedded_signup'
+  end
+
+  def wapi_provider?
+    provider == 'wapi'
+  end
+
+  def cleanup_wapi_device
+    device_id = provider_config['device_id']
+    return if device_id.blank?
+
+    Whatsapp::Wapi::DeviceService.new(
+      wapi_url: wapi_base_url,
+      basic_auth: wapi_basic_auth
+    ).cleanup(device_id)
+  rescue StandardError => e
+    Rails.logger.error "[WAPI] Failed to cleanup device #{device_id}: #{e.message}"
+  end
+
+  def wapi_base_url
+    provider_config['wapi_url'].presence || ENV.fetch('WAPI_BASE_URL', nil)
+  end
+
+  def wapi_basic_auth
+    provider_config['wapi_basic_auth'].presence || ENV.fetch('WAPI_BASIC_AUTH', nil)
   end
 end
