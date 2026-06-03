@@ -120,7 +120,7 @@ const createInbox = async () => {
 
 const formatPhoneForWapi = () => {
   // Format: dial code (without +/00) + local number
-  // e.g. +228 70111810 → 22870111810
+  // e.g. +228 90000000 → 22890000000
   const code = dialCode.value.replace(/^\+|^00/, '');
   const number = phoneForCode.value.replace(/[\s-]/g, '');
   return `${code}${number}`;

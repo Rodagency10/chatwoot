@@ -174,7 +174,7 @@ RSpec.describe 'WAPI Inbox API', type: :request do
       before do
         allow(Wapi::DeviceService).to receive(:new).and_return(device_service)
         allow(device_service).to receive(:get_device)
-          .and_return({ 'code' => 'SUCCESS', 'results' => { 'id' => 'test-device-uuid', 'jid' => '22870111810@s.whatsapp.net' } })
+          .and_return({ 'code' => 'SUCCESS', 'results' => { 'id' => 'test-device-uuid', 'jid' => '22890000000@s.whatsapp.net' } })
         allow(device_service).to receive(:save_chatwoot_config).and_return({ 'code' => 'SUCCESS' })
 
         post "/api/v1/accounts/#{account.id}/wapi/connect",
@@ -187,13 +187,13 @@ RSpec.describe 'WAPI Inbox API', type: :request do
         expect(response).to have_http_status(:success)
         json = response.parsed_body
         expect(json['success']).to be true
-        expect(json['phone_number']).to eq('+22870111810')
-        expect(json['jid']).to eq('22870111810@s.whatsapp.net')
+        expect(json['phone_number']).to eq('+22890000000')
+        expect(json['jid']).to eq('22890000000@s.whatsapp.net')
       end
 
       it 'stores JID and creates account webhook' do
         api_channel.reload
-        expect(api_channel.additional_attributes['wapi_jid']).to eq('22870111810@s.whatsapp.net')
+        expect(api_channel.additional_attributes['wapi_jid']).to eq('22890000000@s.whatsapp.net')
 
         webhook = account.webhooks.find_by(url: 'https://wapi.example.com/chatwoot/webhook')
         expect(webhook).to be_present

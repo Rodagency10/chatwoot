@@ -153,7 +153,7 @@ class Api::V1::Accounts::WapiController < Api::V1::Accounts::BaseController
   end
 
   def extract_phone_from_jid(jid)
-    # JID format: 22870111810@s.whatsapp.net → +22870111810
+    # JID format: 22890000000@s.whatsapp.net → +22890000000
     phone = jid.split('@').first
     "+#{phone}" if phone.present?
   end
