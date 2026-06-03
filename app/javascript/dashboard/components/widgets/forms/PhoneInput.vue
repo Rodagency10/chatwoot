@@ -215,7 +215,7 @@ export default {
       ref="dropdown"
       v-on-clickaway="onOutsideClick"
       tabindex="0"
-      class="z-10 absolute h-60 w-[12.5rem] shadow-md overflow-y-auto top-10 rounded-lg px-0 pt-0 pb-1 bg-n-alpha-3 backdrop-blur-[100px]"
+      class="z-10 absolute h-60 w-[15rem] shadow-md overflow-y-auto top-10 rounded-lg px-1 pt-0 pb-1 bg-n-alpha-3 backdrop-blur-[100px]"
       @keydown.prevent.up="moveUp"
       @keydown.prevent.down="moveDown"
       @keydown.prevent.enter="
@@ -238,7 +238,7 @@ export default {
         v-for="(country, index) in filteredCountriesBySearch"
         ref="dropdownItem"
         :key="index"
-        class="flex items-center px-1 py-0 cursor-pointer h-7 hover:bg-n-alpha-1 dark:hover:bg-n-alpha-2"
+        class="flex items-center px-2 py-1.5 cursor-pointer rounded-md hover:bg-n-alpha-1 dark:hover:bg-n-alpha-2"
         :class="{
           'bg-n-alpha-1 dark:bg-n-alpha-2': country.id === activeCountryCode,
           'bg-n-alpha-1 dark:bg-n-alpha-2': index === selectedIndex,
@@ -248,7 +248,7 @@ export default {
         <span class="mr-1 text-base">{{ country.emoji }}</span>
 
         <span
-          class="max-w-[7.5rem] overflow-hidden text-ellipsis whitespace-nowrap"
+          class="max-w-[9rem] overflow-hidden text-ellipsis whitespace-nowrap"
         >
           {{ country.name }}
         </span>
