@@ -54,7 +54,7 @@ RSpec.describe 'WhatsApp WAPI API', type: :request do
         device_service = instance_double(Whatsapp::Wapi::DeviceService)
         allow(Whatsapp::Wapi::DeviceService).to receive(:new).and_return(device_service)
         allow(device_service).to receive(:create_device)
-          .and_raise(WapiError, 'Device creation failed')
+          .and_raise(CustomExceptions::WapiError, 'Device creation failed')
 
         post "/api/v1/accounts/#{account.id}/whatsapp/wapi/create_device",
              params: { inbox_id: inbox.id },

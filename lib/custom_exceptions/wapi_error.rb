@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-class WapiError < StandardError; end
+class CustomExceptions::WapiError < StandardError; end
