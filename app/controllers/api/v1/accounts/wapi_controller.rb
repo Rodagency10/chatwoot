@@ -59,32 +59,11 @@ class Api::V1::Accounts::WapiController < Api::V1::Accounts::BaseController
 
   # POST /api/v1/accounts/:account_id/wapi/connect
   def connect
-    chatwoot_url = ENV.fetch('FRONTEND_URL', request.base_url)
-    api_token = current_user.access_token
+    jid = fetch_device_jid
+    save_wapi_config
+    finalize_connection(jid)
 
-    # 1. Fetch JID from WAPI
-    devices_result = device_service.list_devices
-    devices = devices_result['results'] || []
-    device = devices.find { |d| d['id'] == device_id }
-    jid = device&.dig('jid')
-
-    # 2. Save Chatwoot config on WAPI
-    device_service.save_chatwoot_config(
-      device_id,
-      chatwoot_url: chatwoot_url,
-      api_token: api_token,
-      account_id: Current.account.id,
-      inbox_id: @inbox.id
-    )
-
-    # 3. Update Channel::Api with webhook URL and JID
-    wapi_webhook_url = "#{wapi_base_url}/chatwoot/webhook"
-    attrs = @channel.additional_attributes.merge('wapi_jid' => jid)
-    @channel.update!(webhook_url: wapi_webhook_url, additional_attributes: attrs)
-
-    # 4. Extract phone number from JID and store as contact identifier
     phone_number = extract_phone_from_jid(jid) if jid.present?
-
     render json: { success: true, phone_number: phone_number, jid: jid }
   rescue CustomExceptions::WapiError => e
     render json: { error: e.message }, status: :unprocessable_entity
@@ -124,9 +103,44 @@ class Api::V1::Accounts::WapiController < Api::V1::Accounts::BaseController
     ENV.fetch('WAPI_BASIC_AUTH', nil)
   end
 
+  def fetch_device_jid
+    devices_result = device_service.list_devices
+    devices = devices_result['results'] || []
+    device = devices.find { |d| d['id'] == device_id }
+    device&.dig('jid')
+  end
+
+  def save_wapi_config
+    device_service.save_chatwoot_config(
+      device_id,
+      chatwoot_url: ENV.fetch('FRONTEND_URL', request.base_url),
+      api_token: current_user.access_token,
+      account_id: Current.account.id,
+      inbox_id: @inbox.id
+    )
+  end
+
+  def finalize_connection(jid)
+    create_wapi_webhook("#{wapi_base_url}/chatwoot/webhook")
+    @channel.update!(additional_attributes: @channel.additional_attributes.merge('wapi_jid' => jid))
+  end
+
   def extract_phone_from_jid(jid)
     # JID format: 22870111810@s.whatsapp.net → +22870111810
     phone = jid.split('@').first
     "+#{phone}" if phone.present?
+  end
+
+  def create_wapi_webhook(webhook_url)
+    # Create an account webhook with only message_created subscription
+    # This matches the manual WAPI setup: Settings > Integrations > Webhooks
+    # Note: must be account_type because deliver_account_webhooks only dispatches account_type
+    existing = Current.account.webhooks.find_by(url: webhook_url)
+    return existing if existing.present?
+
+    Current.account.webhooks.create!(
+      url: webhook_url,
+      subscriptions: ['message_created']
+    )
   end
 end
