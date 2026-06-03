@@ -7,6 +7,7 @@ import { required } from '@vuelidate/validators';
 import { useAlert } from 'dashboard/composables';
 import NextButton from 'dashboard/components-next/button/Button.vue';
 import PageHeader from '../../SettingsSubPageHeader.vue';
+import PhoneInput from 'dashboard/components/widgets/forms/PhoneInput.vue';
 import wapiChannel from 'dashboard/api/channel/wapiChannel';
 
 const I18N = 'INBOX_MGMT.ADD.WAPI_INBOX';
@@ -21,6 +22,7 @@ const deviceCreated = ref(false);
 const qrCode = ref(null);
 const loginCode = ref(null);
 const phoneForCode = ref('');
+const dialCode = ref('');
 const showPairCode = ref(false);
 const isLoading = ref(false);
 const isConnecting = ref(false);
@@ -85,9 +87,9 @@ const fetchStatus = async () => {
       await connectDevice();
       return;
     }
-    // If disconnected, ensure QR is refreshing
-    if (!qrCode.value) await fetchQr();
-    startQrRefresh();
+    // If disconnected and in QR mode, ensure QR is refreshing
+    if (!showPairCode.value && !qrCode.value) await fetchQr();
+    if (!showPairCode.value) startQrRefresh();
   } catch {
     // Ignore polling errors
   }
@@ -116,19 +118,35 @@ const createInbox = async () => {
   }
 };
 
+const formatPhoneForWapi = () => {
+  // Format: dial code (without +/00) + local number
+  // e.g. +228 70111810 → 22870111810
+  const code = dialCode.value.replace(/^\+|^00/, '');
+  const number = phoneForCode.value.replace(/[\s-]/g, '');
+  return `${code}${number}`;
+};
+
+const onSetDialCode = code => {
+  dialCode.value = code;
+};
+
 const requestPairCode = async () => {
-  if (!phoneForCode.value) {
+  if (!phoneForCode.value || !dialCode.value) {
     useAlert(t(`${I18N}.PHONE_REQUIRED`));
     return;
   }
   isLoading.value = true;
   try {
+    const formattedPhone = formatPhoneForWapi();
     const response = await wapiChannel.loginWithCode(
       inboxId.value,
-      phoneForCode.value
+      formattedPhone
     );
     if (response.data.success && response.data.pair_code) {
       loginCode.value = response.data.pair_code;
+      // Start polling status to auto-connect once paired
+      stopPolling();
+      startPolling();
     } else {
       useAlert(t(`${I18N}.ERROR_PAIR_CODE_NO_CODE`));
     }
@@ -141,6 +159,7 @@ const requestPairCode = async () => {
 
 const togglePairCode = () => {
   showPairCode.value = !showPairCode.value;
+  loginCode.value = null;
   stopPolling();
   if (!showPairCode.value) startPolling();
 };
@@ -201,12 +220,12 @@ onUnmounted(() => {
         <div class="flex-shrink-0 flex-grow-0">
           <label>
             {{ $t(`${I18N}.PHONE_LABEL`) }}
-            <input
-              v-model="phoneForCode"
-              type="text"
-              :placeholder="$t(`${I18N}.PHONE_PLACEHOLDER`)"
-            />
           </label>
+          <PhoneInput
+            v-model="phoneForCode"
+            :placeholder="$t(`${I18N}.PHONE_PLACEHOLDER`)"
+            @set-code="onSetDialCode"
+          />
         </div>
         <div class="w-full mt-4">
           <NextButton
@@ -227,6 +246,9 @@ onUnmounted(() => {
           <div class="text-3xl font-mono font-bold mt-2 text-n-slate-12">
             {{ loginCode }}
           </div>
+          <p class="text-xs text-n-slate-10 mt-2">
+            {{ $t(`${I18N}.PAIR_CODE_POLLING`) }}
+          </p>
         </div>
         <button
           class="mt-4 text-sm text-n-brand cursor-pointer"
