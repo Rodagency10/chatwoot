@@ -47,7 +47,7 @@ class Api::V1::Accounts::Whatsapp::WapiController < Api::V1::Accounts::BaseContr
   # GET /api/v1/accounts/:account_id/whatsapp/wapi/status
   def status
     result = device_service.check_status(device_id)
-    wapi_status = result.dig('results') || {}
+    wapi_status = result['results'] || {}
     connected = wapi_status['is_connected'] && wapi_status['is_logged_in']
     render json: { success: true, status: connected ? 'connected' : 'disconnected' }
   rescue ::WapiError => e
