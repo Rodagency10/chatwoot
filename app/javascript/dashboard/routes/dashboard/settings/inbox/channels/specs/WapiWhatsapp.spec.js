@@ -23,6 +23,11 @@ const i18n = createI18n({
     en: {
       WAPI: {
         ONBOARDING: {
+          CREATE_INBOX_TITLE: 'Create WhatsApp Inbox',
+          INBOX_NAME_LABEL: 'Inbox Name',
+          INBOX_NAME_PLACEHOLDER: 'e.g. Support WhatsApp',
+          INBOX_NAME_REQUIRED: 'Inbox name is required',
+          CREATE_BUTTON: 'Create Inbox',
           CREATING_DEVICE: 'Creating device...',
           PLEASE_WAIT: 'Please wait',
           SCAN_QR_TITLE: 'Scan QR Code',
@@ -44,6 +49,7 @@ const i18n = createI18n({
           ERROR_CREATE_INBOX: 'Failed to create inbox',
           ERROR_CREATE_DEVICE: 'Failed to create device',
           ERROR_PAIR_CODE: 'Failed to get pairing code',
+          ERROR_PAIR_CODE_NO_CODE: 'Pairing code not available',
           ERROR_CONNECT: 'Failed to connect device',
           PHONE_REQUIRED: 'Phone number is required',
           API_TOKEN_REQUIRED: 'API token is required',
@@ -66,8 +72,11 @@ const router = createRouter({
 
 function getStore() {
   return createStore({
+    getters: {
+      'auth/getCurrentUser': () => ({ id: 1, access_token: 'test-token' }),
+    },
     actions: {
-      'inboxes/createChannel': async () => ({ id: 1, name: 'WhatsApp (WAPI)' }),
+      'inboxes/createChannel': async () => ({ id: 1, name: 'Test WhatsApp' }),
     },
   });
 }
@@ -90,12 +99,27 @@ function getWrapper(options = {}) {
   });
 }
 
+async function createInboxAndWait(wrapper) {
+  wrapper.vm.inboxName = 'Test WhatsApp';
+  await wrapper.vm.createInbox();
+  await wrapper.vm.$nextTick();
+  await new Promise(resolve => {
+    setTimeout(resolve, 0);
+  });
+}
+
 describe('WapiWhatsapp.vue', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('creates inbox and device on mount', async () => {
+  it('shows form step initially', () => {
+    const wrapper = getWrapper();
+    expect(wrapper.vm.step).toBe('form');
+    expect(wrapper.vm.inboxId).toBeNull();
+  });
+
+  it('creates inbox and device when createInbox is called', async () => {
     wapiChannel.createDevice.mockResolvedValue({ data: { success: true } });
     wapiChannel.getStatus.mockResolvedValue({
       data: { success: true, status: 'disconnected' },
@@ -105,21 +129,11 @@ describe('WapiWhatsapp.vue', () => {
     });
 
     const wrapper = getWrapper();
-    await wrapper.vm.$nextTick();
-    await new Promise(resolve => {
-      setTimeout(resolve, 0);
-    });
+    await createInboxAndWait(wrapper);
 
     expect(wrapper.vm.inboxId).toBe(1);
+    expect(wrapper.vm.step).toBe('qr');
     expect(wapiChannel.createDevice).toHaveBeenCalledWith(1);
-  });
-
-  it('shows loading state while creating device', () => {
-    wapiChannel.createDevice.mockReturnValue(new Promise(() => {}));
-
-    const wrapper = getWrapper();
-    expect(wrapper.vm.isLoading).toBe(true);
-    expect(wrapper.vm.deviceCreated).toBe(false);
   });
 
   it('shows QR section when device is created', async () => {
@@ -132,10 +146,7 @@ describe('WapiWhatsapp.vue', () => {
     });
 
     const wrapper = getWrapper();
-    await wrapper.vm.$nextTick();
-    await new Promise(resolve => {
-      setTimeout(resolve, 0);
-    });
+    await createInboxAndWait(wrapper);
 
     expect(wrapper.vm.deviceCreated).toBe(true);
     expect(wrapper.vm.showPairCode).toBe(false);
@@ -152,10 +163,7 @@ describe('WapiWhatsapp.vue', () => {
     });
 
     const wrapper = getWrapper();
-    await wrapper.vm.$nextTick();
-    await new Promise(resolve => {
-      setTimeout(resolve, 0);
-    });
+    await createInboxAndWait(wrapper);
 
     expect(wrapper.vm.showPairCode).toBe(false);
     wrapper.vm.togglePairCode();
@@ -169,10 +177,7 @@ describe('WapiWhatsapp.vue', () => {
     });
 
     const wrapper = getWrapper();
-    await wrapper.vm.$nextTick();
-    await new Promise(resolve => {
-      setTimeout(resolve, 0);
-    });
+    await createInboxAndWait(wrapper);
 
     wrapper.vm.phoneForCode = '1234567890';
     await wrapper.vm.requestPairCode();
@@ -185,10 +190,7 @@ describe('WapiWhatsapp.vue', () => {
     wapiChannel.createDevice.mockResolvedValue({ data: { success: true } });
 
     const wrapper = getWrapper();
-    await wrapper.vm.$nextTick();
-    await new Promise(resolve => {
-      setTimeout(resolve, 0);
-    });
+    await createInboxAndWait(wrapper);
 
     wrapper.vm.phoneForCode = '';
     await wrapper.vm.requestPairCode();
@@ -196,17 +198,13 @@ describe('WapiWhatsapp.vue', () => {
     expect(wapiChannel.loginWithCode).not.toHaveBeenCalled();
   });
 
-  it('connects device when API token is provided', async () => {
+  it('connects device using current user access token', async () => {
     wapiChannel.createDevice.mockResolvedValue({ data: { success: true } });
     wapiChannel.connectDevice.mockResolvedValue({ data: { success: true } });
 
     const wrapper = getWrapper();
-    await wrapper.vm.$nextTick();
-    await new Promise(resolve => {
-      setTimeout(resolve, 0);
-    });
+    await createInboxAndWait(wrapper);
 
-    wrapper.vm.apiToken = 'test-token';
     await wrapper.vm.connectDevice();
 
     expect(wapiChannel.connectDevice).toHaveBeenCalledWith(1, 'test-token');
@@ -222,10 +220,7 @@ describe('WapiWhatsapp.vue', () => {
     });
 
     const wrapper = getWrapper();
-    await wrapper.vm.$nextTick();
-    await new Promise(resolve => {
-      setTimeout(resolve, 0);
-    });
+    await createInboxAndWait(wrapper);
 
     expect(wrapper.vm.pollingInterval).not.toBeNull();
   });
@@ -237,10 +232,7 @@ describe('WapiWhatsapp.vue', () => {
     });
 
     const wrapper = getWrapper();
-    await wrapper.vm.$nextTick();
-    await new Promise(resolve => {
-      setTimeout(resolve, 0);
-    });
+    await createInboxAndWait(wrapper);
 
     wrapper.unmount();
     expect(wrapper.vm.pollingInterval).toBeNull();
@@ -255,10 +247,7 @@ describe('WapiWhatsapp.vue', () => {
     const routerPush = vi.spyOn(router, 'replace').mockResolvedValue();
 
     const wrapper = getWrapper();
-    await wrapper.vm.$nextTick();
-    await new Promise(resolve => {
-      setTimeout(resolve, 0);
-    });
+    await createInboxAndWait(wrapper);
 
     expect(routerPush).toHaveBeenCalledWith({
       name: 'settings_inboxes_add_agents',
