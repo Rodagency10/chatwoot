@@ -1,10 +1,20 @@
-/* global jest */
+import { vi } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
 import { createI18n } from 'vue-i18n';
 import { createRouter, createWebHistory } from 'vue-router';
 import { createStore } from 'vuex';
 import WapiWhatsapp from '../WapiWhatsapp.vue';
 import wapiChannel from 'dashboard/api/channel/wapiChannel';
+
+vi.mock('dashboard/api/channel/wapiChannel', () => ({
+  default: {
+    createDevice: vi.fn(),
+    getQr: vi.fn(),
+    loginWithCode: vi.fn(),
+    getStatus: vi.fn(),
+    connectDevice: vi.fn(),
+  },
+}));
 
 const i18n = createI18n({
   legacy: false,
@@ -80,22 +90,14 @@ function getWrapper(options = {}) {
   });
 }
 
-jest.mock('dashboard/api/channel/wapiChannel', () => ({
-  createDevice: jest.fn(),
-  getQr: jest.fn(),
-  loginWithCode: jest.fn(),
-  getStatus: jest.fn(),
-  connectDevice: jest.fn(),
-}));
-
 describe('WapiWhatsapp.vue', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-    jest.useFakeTimers();
+    vi.clearAllMocks();
+    vi.useFakeTimers();
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it('creates inbox and device on mount', async () => {
@@ -194,7 +196,7 @@ describe('WapiWhatsapp.vue', () => {
     });
 
     wrapper.vm.phoneForCode = '';
-    const alertSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+    const alertSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     await wrapper.vm.requestPairCode();
 
     expect(wapiChannel.loginWithCode).not.toHaveBeenCalled();
@@ -257,7 +259,7 @@ describe('WapiWhatsapp.vue', () => {
       data: { success: true, status: 'connected' },
     });
 
-    const routerPush = jest.spyOn(router, 'replace').mockResolvedValue();
+    const routerPush = vi.spyOn(router, 'replace').mockResolvedValue();
 
     const wrapper = getWrapper();
     await wrapper.vm.$nextTick();

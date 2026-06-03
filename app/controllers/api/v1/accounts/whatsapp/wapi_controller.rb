@@ -7,7 +7,7 @@ class Api::V1::Accounts::Whatsapp::WapiController < Api::V1::Accounts::BaseContr
   # POST /api/v1/accounts/:account_id/whatsapp/wapi/create_device
   def create_device
     device_id = SecureRandom.uuid
-    result = device_service.create_device(device_id)
+    device_service.create_device(device_id)
     @whatsapp_channel.update!(
       provider: 'wapi',
       provider_config: @whatsapp_channel.provider_config.merge(

@@ -390,6 +390,9 @@ RSpec.describe Channel::Whatsapp do
     end
 
     it 'requires phone_number for non-wapi providers' do
+      stub_request(:post, 'https://waba.360dialog.io/v1/configs/webhook')
+        .to_return(status: 200, body: '{}')
+
       channel = build(:channel_whatsapp,
                       account: account,
                       provider: 'default',

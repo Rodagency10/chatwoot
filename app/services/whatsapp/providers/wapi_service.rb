@@ -4,15 +4,15 @@
 # Outgoing messages are handled by the native Chatwoot webhook → WAPI,
 # so this service only needs to return success to prevent retry loops.
 class Whatsapp::Providers::WapiService < Whatsapp::Providers::BaseService
-  def send_message(phone_number, message)
+  def send_message(*)
     # Outgoing messages are routed via the Chatwoot webhook → WAPI.
     # Return a fake success so Chatwoot marks the message as sent.
     { success: true, messages: [{ id: "wapi-webhook-#{SecureRandom.hex(8)}" }] }
   end
 
-  def send_template(_phone_number, _template_info, _message)
+  def send_template(*)
     # WAPI doesn't support Meta templates. Fallback to session message.
-    send_message(_phone_number, _message)
+    send_message
   end
 
   def sync_templates

@@ -109,6 +109,10 @@ class Channel::Whatsapp < ApplicationRecord
   delegate :media_url, to: :provider_service
   delegate :api_headers, to: :provider_service
 
+  def wapi_provider?
+    provider == 'wapi'
+  end
+
   def setup_webhooks
     perform_webhook_setup
   rescue StandardError => e
@@ -142,10 +146,6 @@ class Channel::Whatsapp < ApplicationRecord
     # Only auto-setup webhooks for whatsapp_cloud provider with manual setup
     # Embedded signup calls setup_webhooks explicitly in EmbeddedSignupService
     provider == 'whatsapp_cloud' && provider_config['source'] != 'embedded_signup'
-  end
-
-  def wapi_provider?
-    provider == 'wapi'
   end
 
   def cleanup_wapi_device
