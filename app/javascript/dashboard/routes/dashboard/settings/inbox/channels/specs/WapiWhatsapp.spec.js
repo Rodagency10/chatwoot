@@ -93,11 +93,6 @@ function getWrapper(options = {}) {
 describe('WapiWhatsapp.vue', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.useFakeTimers();
-  });
-
-  afterEach(() => {
-    vi.useRealTimers();
   });
 
   it('creates inbox and device on mount', async () => {
@@ -196,11 +191,9 @@ describe('WapiWhatsapp.vue', () => {
     });
 
     wrapper.vm.phoneForCode = '';
-    const alertSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     await wrapper.vm.requestPairCode();
 
     expect(wapiChannel.loginWithCode).not.toHaveBeenCalled();
-    alertSpy.mockRestore();
   });
 
   it('connects device when API token is provided', async () => {
