@@ -17,7 +17,7 @@ class Api::V1::Accounts::Whatsapp::WapiController < Api::V1::Accounts::BaseContr
       )
     )
     render json: { success: true, device_id: device_id }
-  rescue Whatsapp::Wapi::DeviceService::WapiError => e
+  rescue ::WapiError => e
     render json: { success: false, error: e.message }, status: :unprocessable_entity
   end
 
@@ -25,7 +25,7 @@ class Api::V1::Accounts::Whatsapp::WapiController < Api::V1::Accounts::BaseContr
   def qr
     result = device_service.get_qr(device_id)
     render json: { success: true, qr: result['data'] }
-  rescue Whatsapp::Wapi::DeviceService::WapiError => e
+  rescue ::WapiError => e
     render json: { success: false, error: e.message }, status: :unprocessable_entity
   end
 
@@ -36,7 +36,7 @@ class Api::V1::Accounts::Whatsapp::WapiController < Api::V1::Accounts::BaseContr
 
     result = device_service.login_with_code(device_id, phone)
     render json: { success: true, data: result['data'] }
-  rescue Whatsapp::Wapi::DeviceService::WapiError => e
+  rescue ::WapiError => e
     render json: { success: false, error: e.message }, status: :unprocessable_entity
   end
 
@@ -44,7 +44,7 @@ class Api::V1::Accounts::Whatsapp::WapiController < Api::V1::Accounts::BaseContr
   def status
     result = device_service.check_status(device_id)
     render json: { success: true, status: result['data'] }
-  rescue Whatsapp::Wapi::DeviceService::WapiError => e
+  rescue ::WapiError => e
     render json: { success: false, error: e.message }, status: :unprocessable_entity
   end
 
@@ -62,7 +62,7 @@ class Api::V1::Accounts::Whatsapp::WapiController < Api::V1::Accounts::BaseContr
       inbox_id: @whatsapp_channel.inbox.id
     )
     render json: { success: true, message: 'Device connected successfully' }
-  rescue Whatsapp::Wapi::DeviceService::WapiError => e
+  rescue ::WapiError => e
     render json: { success: false, error: e.message }, status: :unprocessable_entity
   end
 

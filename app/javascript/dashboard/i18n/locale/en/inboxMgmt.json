@@ -247,6 +247,8 @@
           "WHATSAPP_CLOUD": "WhatsApp Cloud",
           "WHATSAPP_CLOUD_DESC": "Quick setup through Meta",
           "TWILIO_DESC": "Connect via Twilio credentials",
+          "WAPI": "WAPI (Self-hosted)",
+          "WAPI_DESC": "Connect via self-hosted whatsameow",
           "360_DIALOG": "360Dialog"
         },
         "SELECT_PROVIDER": {
@@ -358,7 +360,8 @@
           "CONNECT_SUCCESS": "Device connected successfully! Waiting for WhatsApp...",
           "ERROR_CONNECT": "Failed to connect device",
           "CONNECTED_SUCCESS": "WhatsApp connected! Redirecting to inbox setup...",
-          "PHONE_REQUIRED": "Phone number is required"
+          "PHONE_REQUIRED": "Phone number is required",
+          "API_TOKEN_REQUIRED": "API token is required"
         }
       },
       "VOICE": {

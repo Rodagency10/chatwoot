@@ -135,10 +135,8 @@ class Whatsapp::Wapi::DeviceService
     data = JSON.parse(body)
     return data if data['code'] == 'SUCCESS'
 
-    raise WapiError, data['message'] || "WAPI request failed (HTTP #{response.code})"
+    raise ::WapiError, data['message'] || "WAPI request failed (HTTP #{response.code})"
   rescue JSON::ParserError
-    raise WapiError, "Invalid JSON response from WAPI (HTTP #{response.code})"
+    raise ::WapiError, "Invalid JSON response from WAPI (HTTP #{response.code})"
   end
-
-  class WapiError < StandardError; end
 end

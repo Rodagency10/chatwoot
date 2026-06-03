@@ -24,7 +24,7 @@ RSpec.describe Whatsapp::Wapi::DeviceService do
       stub_request(:post, "#{wapi_url}/devices")
         .to_return(status: 400, body: { code: 'ERROR', message: 'Device already exists' }.to_json)
 
-      expect { service.create_device(device_id) }.to raise_error(Whatsapp::Wapi::DeviceService::WapiError, 'Device already exists')
+      expect { service.create_device(device_id) }.to raise_error(::WapiError, 'Device already exists')
     end
   end
 
@@ -151,7 +151,7 @@ RSpec.describe Whatsapp::Wapi::DeviceService do
 
   describe 'WapiError' do
     it 'is a StandardError subclass' do
-      expect(Whatsapp::Wapi::DeviceService::WapiError.ancestors).to include(StandardError)
+      expect(::WapiError.ancestors).to include(StandardError)
     end
   end
 end

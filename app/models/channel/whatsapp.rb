@@ -5,7 +5,7 @@
 #  id                             :bigint           not null, primary key
 #  message_templates              :jsonb
 #  message_templates_last_updated :datetime
-#  phone_number                   :string           not null
+#  phone_number                   :string
 #  provider                       :string           default("default")
 #  provider_config                :jsonb
 #  created_at                     :datetime         not null
