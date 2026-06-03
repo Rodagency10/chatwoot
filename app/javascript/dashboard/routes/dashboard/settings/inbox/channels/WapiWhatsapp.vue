@@ -106,9 +106,7 @@ const createDevice = async () => {
     deviceCreated.value = true;
     startPolling();
   } catch (error) {
-    useAlert(
-      error.response?.data?.error || t(`${I18N}.ERROR_CREATE_DEVICE`)
-    );
+    useAlert(error.response?.data?.error || t(`${I18N}.ERROR_CREATE_DEVICE`));
   } finally {
     isDeviceLoading.value = false;
   }
@@ -134,9 +132,7 @@ const createInbox = async () => {
     step.value = 'qr';
     await createDevice();
   } catch (error) {
-    useAlert(
-      error.response?.data?.message || t(`${I18N}.ERROR_CREATE_INBOX`)
-    );
+    useAlert(error.response?.data?.message || t(`${I18N}.ERROR_CREATE_INBOX`));
     isDeviceLoading.value = false;
   }
 };
@@ -158,9 +154,7 @@ const requestPairCode = async () => {
       useAlert(t(`${I18N}.ERROR_PAIR_CODE_NO_CODE`));
     }
   } catch (error) {
-    useAlert(
-      error.response?.data?.error || t(`${I18N}.ERROR_PAIR_CODE`)
-    );
+    useAlert(error.response?.data?.error || t(`${I18N}.ERROR_PAIR_CODE`));
   } finally {
     isDeviceLoading.value = false;
   }
@@ -177,9 +171,7 @@ const connectDevice = async () => {
     useAlert(t(`${I18N}.CONNECT_SUCCESS`));
     startPolling();
   } catch (error) {
-    useAlert(
-      error.response?.data?.error || t(`${I18N}.ERROR_CONNECT`)
-    );
+    useAlert(error.response?.data?.error || t(`${I18N}.ERROR_CONNECT`));
   } finally {
     isConnecting.value = false;
   }
