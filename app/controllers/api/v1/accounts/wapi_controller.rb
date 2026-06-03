@@ -59,8 +59,8 @@ class Api::V1::Accounts::WapiController < Api::V1::Accounts::BaseController
 
   # POST /api/v1/accounts/:account_id/wapi/connect
   def connect
-    jid = fetch_device_jid
-    save_wapi_config
+    config_result = save_wapi_config
+    jid = config_result.dig('results', 'device_id')
     finalize_connection(jid)
 
     phone_number = extract_phone_from_jid(jid) if jid.present?
@@ -135,11 +135,6 @@ class Api::V1::Accounts::WapiController < Api::V1::Accounts::BaseController
 
   def wapi_basic_auth
     ENV.fetch('WAPI_BASIC_AUTH', nil)
-  end
-
-  def fetch_device_jid
-    result = device_service.get_device(device_id)
-    result.dig('results', 'jid')
   end
 
   def save_wapi_config
