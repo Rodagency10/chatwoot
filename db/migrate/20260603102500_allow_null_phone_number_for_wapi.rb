@@ -4,7 +4,7 @@ class AllowNullPhoneNumberForWapi < ActiveRecord::Migration[7.1]
     change_column_null :channel_whatsapp, :phone_number, true
 
     # Add check constraint: non-wapi providers must have a phone_number
-    execute <<~SQL
+    execute <<~SQL.squish
       ALTER TABLE channel_whatsapp
       ADD CONSTRAINT phone_number_required_for_non_wapi
       CHECK (provider = 'wapi' OR phone_number IS NOT NULL)
@@ -12,12 +12,12 @@ class AllowNullPhoneNumberForWapi < ActiveRecord::Migration[7.1]
   end
 
   def down
-    execute <<~SQL
+    execute <<~SQL.squish
       ALTER TABLE channel_whatsapp
       DROP CONSTRAINT IF EXISTS phone_number_required_for_non_wapi
     SQL
 
-    execute "DELETE FROM channel_whatsapp WHERE phone_number IS NULL"
+    execute 'DELETE FROM channel_whatsapp WHERE phone_number IS NULL'
     change_column_null :channel_whatsapp, :phone_number, false
   end
 end
