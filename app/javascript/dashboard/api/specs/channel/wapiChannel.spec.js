@@ -5,20 +5,20 @@ import ApiClient from '../../ApiClient';
 describe('#wapiChannel', () => {
   it('creates correct instance', () => {
     expect(wapiChannel).toBeInstanceOf(ApiClient);
-    expect(wapiChannel).toHaveProperty('createDevice');
+    expect(wapiChannel).toHaveProperty('createInbox');
     expect(wapiChannel).toHaveProperty('getQr');
     expect(wapiChannel).toHaveProperty('loginWithCode');
     expect(wapiChannel).toHaveProperty('getStatus');
-    expect(wapiChannel).toHaveProperty('connectDevice');
+    expect(wapiChannel).toHaveProperty('connect');
   });
 
-  describe('#createDevice', () => {
+  describe('#createInbox', () => {
     it('calls correct endpoint', () => {
       const spy = vi
-        .spyOn(wapiChannel, 'createDevice')
+        .spyOn(wapiChannel, 'createInbox')
         .mockResolvedValue({ data: { success: true } });
-      wapiChannel.createDevice(1);
-      expect(spy).toHaveBeenCalledWith(1);
+      wapiChannel.createInbox('Support');
+      expect(spy).toHaveBeenCalledWith('Support');
       spy.mockRestore();
     });
   });
@@ -56,13 +56,13 @@ describe('#wapiChannel', () => {
     });
   });
 
-  describe('#connectDevice', () => {
-    it('calls correct endpoint with api token', () => {
+  describe('#connect', () => {
+    it('calls correct endpoint', () => {
       const spy = vi
-        .spyOn(wapiChannel, 'connectDevice')
+        .spyOn(wapiChannel, 'connect')
         .mockResolvedValue({ data: { success: true } });
-      wapiChannel.connectDevice(1, 'test-token');
-      expect(spy).toHaveBeenCalledWith(1, 'test-token');
+      wapiChannel.connect(1);
+      expect(spy).toHaveBeenCalledWith(1);
       spy.mockRestore();
     });
   });

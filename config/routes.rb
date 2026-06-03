@@ -336,11 +336,14 @@ Rails.application.routes.draw do
 
           namespace :whatsapp do
             resource :authorization, only: [:create]
-            post 'wapi/create_device', to: 'wapi#create_device'
-            get 'wapi/qr', to: 'wapi#qr'
-            post 'wapi/login_with_code', to: 'wapi#login_with_code'
-            get 'wapi/status', to: 'wapi#status'
-            post 'wapi/connect', to: 'wapi#connect'
+          end
+
+          scope 'wapi', controller: 'wapi' do
+            post 'create_inbox'
+            get 'qr'
+            post 'login_with_code'
+            get 'status'
+            post 'connect'
           end
 
           resources :webhooks, only: [:index, :create, :update, :destroy]

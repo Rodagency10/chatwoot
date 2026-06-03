@@ -3,38 +3,35 @@ import ApiClient from '../ApiClient';
 
 class WapiChannel extends ApiClient {
   constructor() {
-    super('whatsapp/wapi', { accountScoped: true });
+    super('wapi', { accountScoped: true });
   }
 
-  createDevice(inboxId) {
-    return axios.post(`${this.baseUrl()}/whatsapp/wapi/create_device`, {
-      inbox_id: inboxId,
-    });
+  createInbox(name) {
+    return axios.post(`${this.baseUrl()}/wapi/create_inbox`, { name });
   }
 
   getQr(inboxId) {
-    return axios.get(`${this.baseUrl()}/whatsapp/wapi/qr`, {
+    return axios.get(`${this.baseUrl()}/wapi/qr`, {
       params: { inbox_id: inboxId },
     });
   }
 
   loginWithCode(inboxId, phone) {
-    return axios.post(`${this.baseUrl()}/whatsapp/wapi/login_with_code`, {
+    return axios.post(`${this.baseUrl()}/wapi/login_with_code`, {
       inbox_id: inboxId,
       phone,
     });
   }
 
   getStatus(inboxId) {
-    return axios.get(`${this.baseUrl()}/whatsapp/wapi/status`, {
+    return axios.get(`${this.baseUrl()}/wapi/status`, {
       params: { inbox_id: inboxId },
     });
   }
 
-  connectDevice(inboxId, apiToken) {
-    return axios.post(`${this.baseUrl()}/whatsapp/wapi/connect`, {
+  connect(inboxId) {
+    return axios.post(`${this.baseUrl()}/wapi/connect`, {
       inbox_id: inboxId,
-      api_token: apiToken,
     });
   }
 }

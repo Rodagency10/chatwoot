@@ -252,12 +252,6 @@ RSpec.describe Channel::Whatsapp do
   describe '#provider_service' do
     let(:account) { create(:account) }
 
-    it 'returns WapiService for wapi provider' do
-      channel = create(:channel_whatsapp, account: account, provider: 'wapi',
-                                          validate_provider_config: false, sync_templates: false)
-      expect(channel.provider_service).to be_a(Whatsapp::Providers::WapiService)
-    end
-
     it 'returns WhatsappCloudService for whatsapp_cloud provider' do
       channel = create(:channel_whatsapp, account: account, provider: 'whatsapp_cloud',
                                           validate_provider_config: false, sync_templates: false)
@@ -271,136 +265,13 @@ RSpec.describe Channel::Whatsapp do
     end
   end
 
-  describe '#wapi_provider?' do
-    let(:account) { create(:account) }
-
-    it 'returns true for wapi provider' do
-      channel = create(:channel_whatsapp, account: account, provider: 'wapi',
-                                          validate_provider_config: false, sync_templates: false)
-      expect(channel.wapi_provider?).to be true
-    end
-
-    it 'returns false for other providers' do
-      channel = create(:channel_whatsapp, account: account, provider: 'whatsapp_cloud',
-                                          validate_provider_config: false, sync_templates: false)
-      expect(channel.wapi_provider?).to be false
-    end
-  end
-
-  describe '#cleanup_wapi_device' do
-    let(:account) { create(:account) }
-
-    it 'calls DeviceService cleanup on destroy for wapi provider' do
-      setup_service = instance_double(Whatsapp::WebhookSetupService)
-      allow(Whatsapp::WebhookSetupService).to receive(:new).and_return(setup_service)
-      allow(setup_service).to receive(:perform)
-
-      device_service = instance_double(Whatsapp::Wapi::DeviceService)
-      allow(Whatsapp::Wapi::DeviceService).to receive(:new).and_return(device_service)
-      allow(device_service).to receive(:cleanup)
-
-      channel = create(:channel_whatsapp,
-                       account: account,
-                       provider: 'wapi',
-                       provider_config: { 'device_id' => 'test-device-uuid' },
-                       validate_provider_config: false,
-                       sync_templates: false)
-
-      channel.destroy
-
-      expect(Whatsapp::Wapi::DeviceService).to have_received(:new)
-      expect(device_service).to have_received(:cleanup).with('test-device-uuid')
-    end
-
-    it 'does not call cleanup for non-wapi providers' do
-      setup_service = instance_double(Whatsapp::WebhookSetupService)
-      allow(Whatsapp::WebhookSetupService).to receive(:new).and_return(setup_service)
-      allow(setup_service).to receive(:perform)
-
-      teardown_service = instance_double(Whatsapp::WebhookTeardownService)
-      allow(Whatsapp::WebhookTeardownService).to receive(:new).and_return(teardown_service)
-      allow(teardown_service).to receive(:perform)
-
-      allow(Whatsapp::Wapi::DeviceService).to receive(:new)
-
-      channel = create(:channel_whatsapp,
-                       account: account,
-                       provider: 'whatsapp_cloud',
-                       validate_provider_config: false,
-                       sync_templates: false)
-
-      channel.destroy
-
-      expect(Whatsapp::Wapi::DeviceService).not_to have_received(:new)
-    end
-
-    it 'logs error but does not raise when cleanup fails' do
-      setup_service = instance_double(Whatsapp::WebhookSetupService)
-      allow(Whatsapp::WebhookSetupService).to receive(:new).and_return(setup_service)
-      allow(setup_service).to receive(:perform)
-
-      device_service = instance_double(Whatsapp::Wapi::DeviceService)
-      allow(Whatsapp::Wapi::DeviceService).to receive(:new).and_return(device_service)
-      allow(device_service).to receive(:cleanup).and_raise(StandardError, 'Cleanup failed')
-
-      expect(Rails.logger).to receive(:error).with(/Failed to cleanup device/)
-
-      channel = create(:channel_whatsapp,
-                       account: account,
-                       provider: 'wapi',
-                       provider_config: { 'device_id' => 'test-device-uuid' },
-                       validate_provider_config: false,
-                       sync_templates: false)
-
-      expect { channel.destroy }.not_to raise_error
-    end
-  end
-
   describe 'PROVIDERS constant' do
-    it 'includes wapi provider' do
-      expect(Channel::Whatsapp::PROVIDERS).to include('wapi')
-    end
-
     it 'includes default providers' do
       expect(Channel::Whatsapp::PROVIDERS).to include('default', 'whatsapp_cloud')
     end
-  end
 
-  describe 'wapi provider validation' do
-    let(:account) { create(:account) }
-
-    it 'allows creation without phone_number' do
-      channel = build(:channel_whatsapp,
-                      account: account,
-                      provider: 'wapi',
-                      phone_number: nil,
-                      validate_provider_config: false,
-                      sync_templates: false)
-      expect(channel).to be_valid
-    end
-
-    it 'allows creation with empty phone_number' do
-      channel = build(:channel_whatsapp,
-                      account: account,
-                      provider: 'wapi',
-                      phone_number: '',
-                      validate_provider_config: false,
-                      sync_templates: false)
-      expect(channel).to be_valid
-    end
-
-    it 'requires phone_number for non-wapi providers' do
-      stub_request(:post, 'https://waba.360dialog.io/v1/configs/webhook')
-        .to_return(status: 200, body: '{}')
-
-      channel = build(:channel_whatsapp,
-                      account: account,
-                      provider: 'default',
-                      phone_number: nil,
-                      validate_provider_config: false,
-                      sync_templates: false)
-      expect(channel).not_to be_valid
-      expect(channel.errors[:phone_number]).to be_present
+    it 'does not include wapi' do
+      expect(Channel::Whatsapp::PROVIDERS).not_to include('wapi')
     end
   end
 end

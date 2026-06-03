@@ -2,7 +2,7 @@
 
 # Service for managing WAPI (whatsameow) devices.
 # Handles device creation, QR retrieval, status polling, config save, and cleanup.
-class Whatsapp::Wapi::DeviceService
+class Wapi::DeviceService
   attr_reader :wapi_url, :basic_auth
 
   def initialize(wapi_url:, basic_auth:)
