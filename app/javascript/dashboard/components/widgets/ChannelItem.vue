@@ -29,7 +29,10 @@ const hasTiktokConfigured = computed(() => {
 
 const isActive = computed(() => {
   const { key } = props.channel;
-  if (!props.enabledFeatures || Object.keys(props.enabledFeatures).length === 0) {
+  if (
+    !props.enabledFeatures ||
+    Object.keys(props.enabledFeatures).length === 0
+  ) {
     return false;
   }
   if (key === 'website') {
