@@ -94,7 +94,10 @@ class Wapi::DeviceService
     uri = build_uri(path, query)
     http = build_http(uri)
     req = build_request(method, uri, body, device_id)
-    parse_response(http.request(req))
+    Rails.logger.info "[WAPI] #{method.upcase} #{uri} device_id=#{device_id} body=#{body&.to_json}"
+    response = http.request(req)
+    Rails.logger.info "[WAPI] Response #{response.code}: #{response.body&.truncate(500)}"
+    parse_response(response)
   end
 
   def build_uri(path, query)
