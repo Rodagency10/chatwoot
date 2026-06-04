@@ -190,14 +190,10 @@ RSpec.describe 'WAPI Inbox API', type: :request do
         expect(json['jid']).to eq('22890000000@s.whatsapp.net')
       end
 
-      it 'stores JID and creates account webhook' do
+      it 'stores JID and sets channel webhook_url' do
         api_channel.reload
         expect(api_channel.additional_attributes['wapi_jid']).to eq('22890000000@s.whatsapp.net')
-
-        webhook = account.webhooks.find_by(url: 'https://wapi.example.com/chatwoot/webhook')
-        expect(webhook).to be_present
-        expect(webhook.subscriptions).to eq(['message_created'])
-        expect(webhook.account_type?).to be true
+        expect(api_channel.webhook_url).to eq('https://wapi.example.com/chatwoot/webhook')
       end
     end
   end

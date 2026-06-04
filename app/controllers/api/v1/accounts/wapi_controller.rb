@@ -148,26 +148,15 @@ class Api::V1::Accounts::WapiController < Api::V1::Accounts::BaseController
   end
 
   def finalize_connection(jid)
-    create_wapi_webhook("#{wapi_base_url}/chatwoot/webhook")
-    @channel.update!(additional_attributes: @channel.additional_attributes.merge('wapi_jid' => jid))
+    @channel.update!(
+      webhook_url: "#{wapi_base_url}/chatwoot/webhook",
+      additional_attributes: @channel.additional_attributes.merge('wapi_jid' => jid)
+    )
   end
 
   def extract_phone_from_jid(jid)
     # JID format: 22890000000@s.whatsapp.net → +22890000000
     phone = jid.split('@').first
     "+#{phone}" if phone.present?
-  end
-
-  def create_wapi_webhook(webhook_url)
-    # Create an account webhook with only message_created subscription
-    # This matches the manual WAPI setup: Settings > Integrations > Webhooks
-    # Note: must be account_type because deliver_account_webhooks only dispatches account_type
-    existing = Current.account.webhooks.find_by(url: webhook_url)
-    return existing if existing.present?
-
-    Current.account.webhooks.create!(
-      url: webhook_url,
-      subscriptions: ['message_created']
-    )
   end
 end
