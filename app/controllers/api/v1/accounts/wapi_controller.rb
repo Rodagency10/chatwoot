@@ -141,7 +141,7 @@ class Api::V1::Accounts::WapiController < Api::V1::Accounts::BaseController
     device_service.save_chatwoot_config(
       device_id,
       chatwoot_url: ENV.fetch('FRONTEND_URL', request.base_url),
-      api_token: current_user.access_token,
+      api_token: current_user.access_token.token,
       account_id: Current.account.id,
       inbox_id: @inbox.id
     )
