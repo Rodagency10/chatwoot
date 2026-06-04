@@ -430,6 +430,28 @@
     "API": {
       "SUCCESS": "Captain settings updated successfully.",
       "ERROR": "Failed to update Captain settings. Please try again."
+    },
+    "AUTO_RESOLVE": {
+      "SECTION_TITLE": "Pending conversation auto-resolve",
+      "SECTION_DESCRIPTION": "Configure how Captain closes inactive pending conversations handled by the assistant.",
+      "TITLE": "Auto-resolve inactive conversations",
+      "DESCRIPTION": "Applies to conversations in pending status while Captain is active on the inbox.",
+      "MODE": {
+        "LABEL": "Resolution strategy",
+        "PLACEHOLDER": "Select strategy",
+        "EVALUATED": "AI evaluation (resolve or handoff)",
+        "LEGACY": "Time-based resolve",
+        "DISABLED": "Disabled"
+      },
+      "DURATION": {
+        "LABEL": "Inactivity duration",
+        "ERROR": "Duration must be at least 5 minutes."
+      },
+      "SAVE": "Save auto-resolve settings",
+      "API": {
+        "SUCCESS": "Captain auto-resolve settings updated successfully.",
+        "ERROR": "Failed to update Captain auto-resolve settings."
+      }
     }
   },
   "BILLING_SETTINGS": {

@@ -8,6 +8,7 @@ import { useAccount } from 'dashboard/composables/useAccount';
 
 import Button from 'dashboard/components-next/button/Button.vue';
 import Editor from 'dashboard/components-next/Editor/Editor.vue';
+import Switch from 'next/switch/Switch.vue';
 
 const props = defineProps({
   assistant: {
@@ -28,6 +29,7 @@ const isCaptainV2Enabled = computed(() =>
 const initialState = {
   handoffMessage: '',
   resolutionMessage: '',
+  sendResolutionMessage: true,
   instructions: '',
   temperature: 1,
 };
@@ -56,6 +58,10 @@ const updateStateFromAssistant = assistant => {
   const { config = {} } = assistant;
   state.handoffMessage = config.handoff_message;
   state.resolutionMessage = config.resolution_message;
+  state.sendResolutionMessage =
+    config.send_resolution_message === undefined
+      ? true
+      : Boolean(config.send_resolution_message);
   state.instructions = config.instructions;
   state.temperature = config.temperature || 1;
 };
@@ -80,6 +86,7 @@ const handleSystemMessagesUpdate = async () => {
       ...props.assistant.config,
       handoff_message: state.handoffMessage,
       resolution_message: state.resolutionMessage,
+      send_resolution_message: state.sendResolutionMessage,
       temperature: state.temperature || 1,
     },
   };
@@ -119,6 +126,18 @@ watch(
       :message-type="formErrors.resolutionMessage ? 'error' : 'info'"
       class="z-0"
     />
+
+    <div class="flex items-center justify-between gap-4">
+      <div class="flex flex-col gap-1">
+        <span class="text-sm font-medium text-n-slate-12">
+          {{ t('CAPTAIN.ASSISTANTS.FORM.SEND_RESOLUTION_MESSAGE.LABEL') }}
+        </span>
+        <span class="text-sm text-n-slate-11">
+          {{ t('CAPTAIN.ASSISTANTS.FORM.SEND_RESOLUTION_MESSAGE.DESCRIPTION') }}
+        </span>
+      </div>
+      <Switch v-model="state.sendResolutionMessage" />
+    </div>
 
     <Editor
       v-if="!isCaptainV2Enabled"

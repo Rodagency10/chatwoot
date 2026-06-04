@@ -14,6 +14,7 @@ import SectionLayout from '../account/components/SectionLayout.vue';
 import ModelSelector from './components/ModelSelector.vue';
 import FeatureToggle from './components/FeatureToggle.vue';
 import CaptainPaywall from 'next/captain/pageComponents/Paywall.vue';
+import CaptainAutoResolveSettings from './components/CaptainAutoResolveSettings.vue';
 
 const { t } = useI18n();
 const { captainEnabled } = useCaptain();
@@ -153,6 +154,14 @@ onMounted(() => {
               @change="handleModelChange"
             />
           </div>
+        </SectionLayout>
+
+        <SectionLayout
+          :title="t('CAPTAIN_SETTINGS.AUTO_RESOLVE.SECTION_TITLE')"
+          :description="t('CAPTAIN_SETTINGS.AUTO_RESOLVE.SECTION_DESCRIPTION')"
+          with-border
+        >
+          <CaptainAutoResolveSettings />
         </SectionLayout>
 
         <!-- Features Section -->

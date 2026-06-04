@@ -274,6 +274,29 @@ RSpec.describe Account do
         expect(account).to be_captain_auto_resolve_disabled
       end
 
+      it 'defaults captain_auto_resolve_after_minutes to 60' do
+        expect(account.captain_auto_resolve_after_minutes).to eq(60)
+      end
+
+      it 'gets and sets captain_auto_resolve_after_minutes' do
+        account.captain_auto_resolve_after_minutes = 120
+
+        expect(account.captain_auto_resolve_after_minutes).to eq(120)
+        expect(account.settings['captain_auto_resolve_after_minutes']).to eq(120)
+      end
+
+      it 'clamps captain_auto_resolve_after_minutes to the allowed range' do
+        account.captain_auto_resolve_after_minutes = 2
+
+        expect(account.captain_auto_resolve_after_minutes).to eq(5)
+      end
+
+      it 'is invalid when captain_auto_resolve_after_minutes is out of range' do
+        account.settings = { 'captain_auto_resolve_after_minutes' => 20_000 }
+
+        expect(account).not_to be_valid
+      end
+
       it 'handles nil values correctly' do
         account.auto_resolve_after = nil
         account.auto_resolve_message = nil

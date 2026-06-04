@@ -520,6 +520,10 @@
           "LABEL": "Resolution Message",
           "PLACEHOLDER": "Enter resolution message"
         },
+        "SEND_RESOLUTION_MESSAGE": {
+          "LABEL": "Send resolution message to customer",
+          "DESCRIPTION": "When enabled, customers receive the resolution message before the conversation is closed by auto-resolve."
+        },
         "INSTRUCTIONS": {
           "LABEL": "Instructions",
           "PLACEHOLDER": "Enter instructions for the assistant"

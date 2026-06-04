@@ -36,7 +36,7 @@ class Captain::InboxPendingConversationsResolutionJob < ApplicationJob
 
     resolvable_pending_conversations(inbox).each do |conversation|
       evaluation = evaluate_conversation(conversation, inbox)
-      next unless still_resolvable_after_evaluation?(conversation)
+      next unless still_resolvable_after_evaluation?(conversation, inbox)
 
       if evaluation[:complete]
         resolve_conversation(conversation, inbox, evaluation[:reason])
@@ -55,19 +55,19 @@ class Captain::InboxPendingConversationsResolutionJob < ApplicationJob
 
   def resolvable_pending_conversations(inbox)
     inbox.conversations.pending
-         .where('last_activity_at < ?', auto_resolve_cutoff_time)
+         .where('last_activity_at < ?', auto_resolve_cutoff_time(inbox.account))
          .limit(Limits::BULK_ACTIONS_LIMIT)
   end
 
-  def still_resolvable_after_evaluation?(conversation)
+  def still_resolvable_after_evaluation?(conversation, inbox)
     conversation.reload
-    conversation.pending? && conversation.last_activity_at < auto_resolve_cutoff_time
+    conversation.pending? && conversation.last_activity_at < auto_resolve_cutoff_time(inbox.account)
   rescue ActiveRecord::RecordNotFound
     false
   end
 
-  def auto_resolve_cutoff_time
-    Time.now.utc - 1.hour
+  def auto_resolve_cutoff_time(account)
+    Time.now.utc - account.captain_auto_resolve_inactivity_duration
   end
 
   def resolve_conversation(conversation, inbox, reason)
@@ -111,6 +111,8 @@ class Captain::InboxPendingConversationsResolutionJob < ApplicationJob
   end
 
   def create_resolution_message(conversation, inbox)
+    return unless send_resolution_message?(inbox)
+
     I18n.with_locale(inbox.account.locale) do
       resolution_message = inbox.captain_assistant.config['resolution_message']
       conversation.messages.create!(
@@ -121,6 +123,13 @@ class Captain::InboxPendingConversationsResolutionJob < ApplicationJob
         sender: inbox.captain_assistant
       )
     end
+  end
+
+  def send_resolution_message?(inbox)
+    assistant = inbox.captain_assistant
+    return true unless assistant.config.key?('send_resolution_message')
+
+    ActiveModel::Type::Boolean.new.cast(assistant.config['send_resolution_message'])
   end
 
   def create_handoff_message(conversation, inbox)

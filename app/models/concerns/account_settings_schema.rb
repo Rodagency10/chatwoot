@@ -12,6 +12,7 @@ module AccountSettingsSchema
         'auto_resolve_label': { 'type': %w[string null] },
         'keep_pending_on_bot_failure': { 'type': %w[boolean null] },
         'captain_auto_resolve_mode': { 'type': %w[string null], 'enum': ['evaluated', 'legacy', 'disabled', nil] },
+        'captain_auto_resolve_after_minutes': { 'type': %w[integer null], 'minimum': 5, 'maximum': 10_080 },
         'conversation_required_attributes': {
           'type': %w[array null],
           'items': { 'type': 'string' }

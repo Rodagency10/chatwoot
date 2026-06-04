@@ -18,6 +18,32 @@ RSpec.describe Captain::InboxPendingConversationsResolutionJob, type: :job do
       .to have_enqueued_job.on_queue('low')
   end
 
+  context 'when captain_auto_resolve_after_minutes is customized' do
+    before do
+      inbox.account.update!(captain_auto_resolve_after_minutes: 30)
+    end
+
+    let!(:inactive_pending_conversation) do
+      create(:conversation, inbox: inbox, last_activity_at: 45.minutes.ago, status: :pending)
+    end
+
+    let!(:recent_pending_conversation_custom) do
+      create(:conversation, inbox: inbox, last_activity_at: 15.minutes.ago, status: :pending)
+    end
+
+    it 'resolves conversations inactive beyond the configured duration' do
+      described_class.perform_now(inbox)
+
+      expect(inactive_pending_conversation.reload.status).to eq('resolved')
+    end
+
+    it 'does not resolve conversations within the configured duration' do
+      described_class.perform_now(inbox)
+
+      expect(recent_pending_conversation_custom.reload.status).to eq('pending')
+    end
+  end
+
   context 'when captain_tasks is disabled' do
     it 'resolves pending conversations inactive for over 1 hour' do
       described_class.perform_now(inbox)
@@ -43,6 +69,16 @@ RSpec.describe Captain::InboxPendingConversationsResolutionJob, type: :job do
       described_class.perform_now(inbox)
 
       expect(Captain::ConversationCompletionService).not_to have_received(:new)
+    end
+
+    it 'skips the public resolution message when send_resolution_message is disabled' do
+      captain_assistant.update!(config: { 'send_resolution_message' => false })
+      inbox.reload
+
+      described_class.perform_now(inbox)
+
+      expect(resolvable_pending_conversation.reload.status).to eq('resolved')
+      expect(resolvable_pending_conversation.messages.where(private: false).outgoing).to be_empty
     end
   end
 
@@ -137,6 +173,16 @@ RSpec.describe Captain::InboxPendingConversationsResolutionJob, type: :job do
 
       public_message = resolvable_pending_conversation.messages.where(private: false).outgoing.last
       expect(public_message.content).to eq(I18n.t('conversations.activity.auto_resolution_message'))
+    end
+
+    it 'skips the public resolution message when send_resolution_message is disabled' do
+      captain_assistant.update!(config: { 'send_resolution_message' => false })
+      inbox.reload
+
+      described_class.perform_now(inbox)
+
+      expect(resolvable_pending_conversation.reload.status).to eq('resolved')
+      expect(resolvable_pending_conversation.messages.where(private: false).outgoing).to be_empty
     end
 
     it 'adds the correct activity message after resolution' do
