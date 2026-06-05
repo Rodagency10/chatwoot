@@ -13,7 +13,7 @@ class Captain::Conversation::ResponseScheduler
     triggered_at = Time.current
     touch_last_incoming(triggered_at, wait_seconds)
 
-    schedule_token = rotate_schedule_token(wait_seconds) if response_batching_enabled?
+    schedule_token = rotate_schedule_token(wait_seconds)
 
     enqueue_response(wait_seconds, schedule_token: schedule_token, triggered_at: triggered_at)
   end
@@ -22,10 +22,6 @@ class Captain::Conversation::ResponseScheduler
 
   def compute_wait_seconds
     [@attachment_wait, @assistant.response_delay_seconds].max
-  end
-
-  def response_batching_enabled?
-    @assistant.response_batching_enabled?
   end
 
   def touch_last_incoming(timestamp, wait_seconds)

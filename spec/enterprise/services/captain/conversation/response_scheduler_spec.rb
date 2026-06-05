@@ -27,7 +27,7 @@ RSpec.describe Captain::Conversation::ResponseScheduler do
     end
 
     it 'enqueues a delayed job when response_delay_seconds is configured' do
-      assistant.update!(config: { 'response_delay_seconds' => 30, 'response_batching_enabled' => true })
+      assistant.update!(config: { 'response_delay_seconds' => 30 })
 
       freeze_time do
         expect do
@@ -54,7 +54,7 @@ RSpec.describe Captain::Conversation::ResponseScheduler do
     end
 
     it 'rotates the schedule token when batching is enabled' do
-      assistant.update!(config: { 'response_delay_seconds' => 30, 'response_batching_enabled' => true })
+      assistant.update!(config: { 'response_delay_seconds' => 30 })
       token_key = format(Redis::Alfred::CAPTAIN_RESPONSE_SCHEDULE_TOKEN, conversation_id: conversation.id)
 
       described_class.new(conversation: conversation, assistant: assistant).schedule
@@ -65,15 +65,6 @@ RSpec.describe Captain::Conversation::ResponseScheduler do
       end
 
       expect(Redis::Alfred.get(token_key)).not_to eq(first_token)
-    end
-
-    it 'does not rotate the schedule token when batching is disabled' do
-      assistant.update!(config: { 'response_delay_seconds' => 30, 'response_batching_enabled' => false })
-      token_key = format(Redis::Alfred::CAPTAIN_RESPONSE_SCHEDULE_TOKEN, conversation_id: conversation.id)
-
-      described_class.new(conversation: conversation, assistant: assistant).schedule
-
-      expect(Redis::Alfred.get(token_key)).to be_nil
     end
 
     it 'updates last incoming timestamp on each schedule' do

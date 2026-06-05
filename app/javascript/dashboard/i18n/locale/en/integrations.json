@@ -530,11 +530,7 @@
         },
         "RESPONSE_DELAY": {
           "LABEL": "Response delay (seconds)",
-          "DESCRIPTION": "Wait this long after the last customer message before Captain replies. Use 0 for an immediate response. Incoming messages during the wait are grouped into a single reply."
-        },
-        "RESPONSE_BATCHING": {
-          "LABEL": "Batch rapid messages",
-          "DESCRIPTION": "When enabled, a new customer message resets the delay timer so Captain replies once with full context."
+          "DESCRIPTION": "Wait this long after the last customer message before Captain replies. Use 0 for an immediate response. Each new message during the wait resets the timer and messages are grouped into a single reply."
         },
         "KEYWORD_ACTIVATION": {
           "LABEL": "Require keyword to activate Captain",

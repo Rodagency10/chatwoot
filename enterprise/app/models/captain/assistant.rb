@@ -37,7 +37,7 @@ class Captain::Assistant < ApplicationRecord
   has_many :scenarios, class_name: 'Captain::Scenario', dependent: :destroy_async
 
   store_accessor :config, :temperature, :feature_faq, :feature_memory, :feature_contact_attributes, :product_name,
-                 :send_handoff_message, :send_resolution_message, :response_delay_seconds, :response_batching_enabled
+                 :send_handoff_message, :send_resolution_message, :response_delay_seconds
 
   validates :name, presence: true
   validates :description, presence: true
@@ -62,12 +62,6 @@ class Captain::Assistant < ApplicationRecord
   def response_delay_seconds
     value = config['response_delay_seconds'].to_i
     value.clamp(0, 300)
-  end
-
-  def response_batching_enabled?
-    return true unless config.key?('response_batching_enabled')
-
-    ActiveModel::Type::Boolean.new.cast(config['response_batching_enabled'])
   end
 
   def keyword_activation_enabled?

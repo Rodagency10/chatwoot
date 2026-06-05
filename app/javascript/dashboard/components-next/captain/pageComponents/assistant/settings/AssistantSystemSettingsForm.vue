@@ -32,7 +32,6 @@ const initialState = {
   sendHandoffMessage: false,
   sendResolutionMessage: false,
   responseDelaySeconds: 0,
-  responseBatchingEnabled: true,
   keywordActivationEnabled: false,
   activationKeywords: '',
   activationLabel: 'keyword_match',
@@ -79,10 +78,6 @@ const updateStateFromAssistant = assistant => {
     'send_resolution_message'
   );
   state.responseDelaySeconds = Number(config.response_delay_seconds) || 0;
-  state.responseBatchingEnabled =
-    config.response_batching_enabled === undefined
-      ? true
-      : Boolean(config.response_batching_enabled);
   state.keywordActivationEnabled = configFlagFromAssistant(
     config,
     'keyword_activation_enabled'
@@ -128,7 +123,6 @@ const handleSystemMessagesUpdate = async () => {
         300,
         Math.max(0, Number(state.responseDelaySeconds) || 0)
       ),
-      response_batching_enabled: state.responseBatchingEnabled,
       keyword_activation_enabled: state.keywordActivationEnabled,
       activation_keywords: state.activationKeywords
         .split(/[\n,]/)
@@ -299,18 +293,6 @@ watch(
         <p class="text-sm text-n-slate-11">
           {{ t('CAPTAIN.ASSISTANTS.FORM.RESPONSE_DELAY.DESCRIPTION') }}
         </p>
-      </div>
-
-      <div class="flex items-center justify-between gap-4">
-        <div class="flex flex-col gap-1">
-          <span class="text-sm font-medium text-n-slate-12">
-            {{ t('CAPTAIN.ASSISTANTS.FORM.RESPONSE_BATCHING.LABEL') }}
-          </span>
-          <span class="text-sm text-n-slate-11">
-            {{ t('CAPTAIN.ASSISTANTS.FORM.RESPONSE_BATCHING.DESCRIPTION') }}
-          </span>
-        </div>
-        <Switch v-model="state.responseBatchingEnabled" />
       </div>
     </div>
 
