@@ -111,7 +111,7 @@ class Captain::InboxPendingConversationsResolutionJob < ApplicationJob
   end
 
   def create_resolution_message(conversation, inbox)
-    return unless send_resolution_message?(inbox)
+    return unless inbox.captain_assistant.send_resolution_message?
 
     I18n.with_locale(inbox.account.locale) do
       resolution_message = inbox.captain_assistant.config['resolution_message']
@@ -125,15 +125,11 @@ class Captain::InboxPendingConversationsResolutionJob < ApplicationJob
     end
   end
 
-  def send_resolution_message?(inbox)
-    assistant = inbox.captain_assistant
-    return true unless assistant.config.key?('send_resolution_message')
-
-    ActiveModel::Type::Boolean.new.cast(assistant.config['send_resolution_message'])
-  end
-
   def create_handoff_message(conversation, inbox)
-    handoff_message = inbox.captain_assistant.config['handoff_message']
+    assistant = inbox.captain_assistant
+    return unless assistant.send_handoff_message?
+
+    handoff_message = assistant.config['handoff_message']
     return if handoff_message.blank?
 
     conversation.messages.create!(

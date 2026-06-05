@@ -385,11 +385,11 @@
     "CONVERSATION_WORKFLOW": "Conversation Workflow"
   },
   "CAPTAIN_SETTINGS": {
-    "TITLE": "Captain Settings",
-    "DESCRIPTION": "Configure your AI models and features for Captain. Captain follows a credit based billing, you will be charged credits for every action Captain takes based on the model selected.",
-    "LOADING": "Loading Captain configuration...",
-    "LINK_TEXT": "Learn more about Captain Credits",
-    "NOT_ENABLED": "Captain is not enabled for your account. Please upgrade your plan to access Captain features.",
+    "TITLE": "Paramètres Captain",
+    "DESCRIPTION": "Configurez les modèles IA et les fonctionnalités de Captain. La facturation est basée sur des crédits : chaque action de Captain consomme des crédits selon le modèle sélectionné.",
+    "LOADING": "Chargement de la configuration Captain...",
+    "LINK_TEXT": "En savoir plus sur les crédits Captain",
+    "NOT_ENABLED": "Captain n'est pas activé pour votre compte. Passez à un plan supérieur pour accéder aux fonctionnalités Captain.",
     "MODEL_CONFIG": {
       "TITLE": "Model Configuration",
       "DESCRIPTION": "Select AI models for different features.",
@@ -428,8 +428,30 @@
       }
     },
     "API": {
-      "SUCCESS": "Captain settings updated successfully.",
-      "ERROR": "Failed to update Captain settings. Please try again."
+      "SUCCESS": "Paramètres Captain enregistrés.",
+      "ERROR": "Impossible d'enregistrer les paramètres Captain. Veuillez réessayer."
+    },
+    "AUTO_RESOLVE": {
+      "SECTION_TITLE": "Clôture automatique des conversations en attente",
+      "SECTION_DESCRIPTION": "Configurez la façon dont Captain traite les conversations en attente inactives gérées par l'assistant.",
+      "TITLE": "Clôture automatique des conversations inactives",
+      "DESCRIPTION": "S'applique aux conversations au statut « En attente » lorsque Captain est actif sur la boîte de réception.",
+      "MODE": {
+        "LABEL": "Stratégie de clôture",
+        "PLACEHOLDER": "Choisir une stratégie",
+        "EVALUATED": "Évaluation IA (clôture ou transfert)",
+        "LEGACY": "Clôture après délai",
+        "DISABLED": "Désactivé"
+      },
+      "DURATION": {
+        "LABEL": "Durée d'inactivité",
+        "ERROR": "La durée doit être d'au moins 5 minutes."
+      },
+      "SAVE": "Enregistrer",
+      "API": {
+        "SUCCESS": "Paramètres de clôture automatique enregistrés.",
+        "ERROR": "Impossible d'enregistrer les paramètres de clôture automatique."
+      }
     }
   },
   "BILLING_SETTINGS": {

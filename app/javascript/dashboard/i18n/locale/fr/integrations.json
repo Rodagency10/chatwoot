@@ -473,11 +473,11 @@
         "SUCCESS_MESSAGE": "The assistant has been successfully deleted",
         "ERROR_MESSAGE": "There was an error deleting the assistant, please try again."
       },
-      "FORM_DESCRIPTION": "Fill out the details below to name your assistant, describe its purpose, and specify the product it will support.",
+      "FORM_DESCRIPTION": "Renseignez les informations ci-dessous pour nommer votre assistant, décrire son rôle et le produit qu'il prend en charge.",
       "CREATE": {
-        "TITLE": "Create an assistant",
-        "SUCCESS_MESSAGE": "The assistant has been successfully created",
-        "ERROR_MESSAGE": "There was an error creating the assistant, please try again."
+        "TITLE": "Créer un assistant",
+        "SUCCESS_MESSAGE": "L'assistant a été créé avec succès",
+        "ERROR_MESSAGE": "Une erreur est survenue lors de la création de l'assistant, veuillez réessayer."
       },
       "FORM": {
         "UPDATE": "Mettre à jour",
@@ -494,8 +494,8 @@
           "ERROR": "Le nom est requis"
         },
         "TEMPERATURE": {
-          "LABEL": "Response Temperature",
-          "DESCRIPTION": "Adjust how creative or restrictive the assistant's responses should be. Lower values produce more focused and deterministic responses, while higher values allow for more creative and varied outputs."
+          "LABEL": "Température des réponses",
+          "DESCRIPTION": "Réglez le niveau de créativité des réponses de l'assistant. Une valeur basse produit des réponses plus précises et prévisibles ; une valeur haute permet des réponses plus variées."
         },
         "DESCRIPTION": {
           "LABEL": "Description",
@@ -519,6 +519,14 @@
           "LABEL": "Message de résolution",
           "PLACEHOLDER": "Entrez le message de résolution"
         },
+        "SEND_HANDOFF_MESSAGE": {
+          "LABEL": "Envoyer le message de transfert au client",
+          "DESCRIPTION": "Si activé, le client reçoit le message de transfert lorsque la conversation est passée à un agent humain. Si désactivé, aucun message n'est envoyé."
+        },
+        "SEND_RESOLUTION_MESSAGE": {
+          "LABEL": "Envoyer le message de résolution au client",
+          "DESCRIPTION": "Si activé, le client reçoit le message de résolution avant la clôture automatique de la conversation. Si désactivé, aucun message n'est envoyé."
+        },
         "INSTRUCTIONS": {
           "LABEL": "Instructions",
           "PLACEHOLDER": "Entrez les instructions pour l'assistant"
@@ -532,20 +540,20 @@
         }
       },
       "EDIT": {
-        "TITLE": "Update the assistant",
-        "SUCCESS_MESSAGE": "The assistant has been successfully updated",
-        "ERROR_MESSAGE": "There was an error updating the assistant, please try again.",
+        "TITLE": "Mettre à jour l'assistant",
+        "SUCCESS_MESSAGE": "L'assistant a été mis à jour avec succès",
+        "ERROR_MESSAGE": "Une erreur est survenue lors de la mise à jour de l'assistant, veuillez réessayer.",
         "NOT_FOUND": "Impossible de trouver l'assistant. Veuillez réessayer."
       },
       "SETTINGS": {
         "HEADER": "Paramètres",
         "BASIC_SETTINGS": {
-          "TITLE": "Basic settings",
-          "DESCRIPTION": "Customize what the assistant says when ending a conversation or transferring to a human."
+          "TITLE": "Paramètres de base",
+          "DESCRIPTION": "Personnalisez ce que l'assistant envoie lors d'un transfert vers un humain ou de la clôture d'une conversation."
         },
         "SYSTEM_SETTINGS": {
-          "TITLE": "System settings",
-          "DESCRIPTION": "Customize what the assistant says when ending a conversation or transferring to a human."
+          "TITLE": "Messages système",
+          "DESCRIPTION": "Activez l'envoi des messages de transfert et de résolution, puis définissez leur contenu."
         },
         "CONTROL_ITEMS": {
           "TITLE": "The Fun Stuff",

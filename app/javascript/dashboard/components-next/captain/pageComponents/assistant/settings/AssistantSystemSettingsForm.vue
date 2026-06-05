@@ -29,18 +29,21 @@ const isCaptainV2Enabled = computed(() =>
 const initialState = {
   handoffMessage: '',
   resolutionMessage: '',
-  sendResolutionMessage: true,
+  sendHandoffMessage: false,
+  sendResolutionMessage: false,
   instructions: '',
   temperature: 1,
 };
 
 const state = reactive({ ...initialState });
 
-const validationRules = {
-  handoffMessage: { minLength: minLength(1) },
-  resolutionMessage: { minLength: minLength(1) },
+const validationRules = computed(() => ({
+  handoffMessage: state.sendHandoffMessage ? { minLength: minLength(1) } : {},
+  resolutionMessage: state.sendResolutionMessage
+    ? { minLength: minLength(1) }
+    : {},
   instructions: { minLength: minLength(1) },
-};
+}));
 
 const v$ = useVuelidate(validationRules, state);
 
@@ -54,38 +57,52 @@ const formErrors = computed(() => ({
   instructions: getErrorMessage('instructions'),
 }));
 
+const configFlagFromAssistant = (config, key) =>
+  config[key] === undefined ? false : Boolean(config[key]);
+
 const updateStateFromAssistant = assistant => {
   const { config = {} } = assistant;
   state.handoffMessage = config.handoff_message;
   state.resolutionMessage = config.resolution_message;
-  state.sendResolutionMessage =
-    config.send_resolution_message === undefined
-      ? true
-      : Boolean(config.send_resolution_message);
+  state.sendHandoffMessage = configFlagFromAssistant(
+    config,
+    'send_handoff_message'
+  );
+  state.sendResolutionMessage = configFlagFromAssistant(
+    config,
+    'send_resolution_message'
+  );
   state.instructions = config.instructions;
   state.temperature = config.temperature || 1;
 };
 
 const handleSystemMessagesUpdate = async () => {
-  const validations = [
-    v$.value.handoffMessage.$validate(),
-    v$.value.resolutionMessage.$validate(),
-  ];
+  const validations = [];
+
+  if (state.sendHandoffMessage) {
+    validations.push(v$.value.handoffMessage.$validate());
+  }
+  if (state.sendResolutionMessage) {
+    validations.push(v$.value.resolutionMessage.$validate());
+  }
 
   if (!isCaptainV2Enabled.value) {
     validations.push(v$.value.instructions.$validate());
   }
 
-  const result = await Promise.all(validations).then(results =>
-    results.every(Boolean)
-  );
-  if (!result) return;
+  if (validations.length) {
+    const result = await Promise.all(validations).then(results =>
+      results.every(Boolean)
+    );
+    if (!result) return;
+  }
 
   const payload = {
     config: {
       ...props.assistant.config,
       handoff_message: state.handoffMessage,
       resolution_message: state.resolutionMessage,
+      send_handoff_message: state.sendHandoffMessage,
       send_resolution_message: state.sendResolutionMessage,
       temperature: state.temperature || 1,
     },
@@ -109,34 +126,56 @@ watch(
 
 <template>
   <div class="flex flex-col gap-6">
-    <Editor
-      v-model="state.handoffMessage"
-      :label="t('CAPTAIN.ASSISTANTS.FORM.HANDOFF_MESSAGE.LABEL')"
-      :placeholder="t('CAPTAIN.ASSISTANTS.FORM.HANDOFF_MESSAGE.PLACEHOLDER')"
-      :message="formErrors.handoffMessage"
-      :message-type="formErrors.handoffMessage ? 'error' : 'info'"
-      class="z-0"
-    />
-
-    <Editor
-      v-model="state.resolutionMessage"
-      :label="t('CAPTAIN.ASSISTANTS.FORM.RESOLUTION_MESSAGE.LABEL')"
-      :placeholder="t('CAPTAIN.ASSISTANTS.FORM.RESOLUTION_MESSAGE.PLACEHOLDER')"
-      :message="formErrors.resolutionMessage"
-      :message-type="formErrors.resolutionMessage ? 'error' : 'info'"
-      class="z-0"
-    />
-
-    <div class="flex items-center justify-between gap-4">
-      <div class="flex flex-col gap-1">
-        <span class="text-sm font-medium text-n-slate-12">
-          {{ t('CAPTAIN.ASSISTANTS.FORM.SEND_RESOLUTION_MESSAGE.LABEL') }}
-        </span>
-        <span class="text-sm text-n-slate-11">
-          {{ t('CAPTAIN.ASSISTANTS.FORM.SEND_RESOLUTION_MESSAGE.DESCRIPTION') }}
-        </span>
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex flex-col gap-1">
+          <span class="text-sm font-medium text-n-slate-12">
+            {{ t('CAPTAIN.ASSISTANTS.FORM.SEND_HANDOFF_MESSAGE.LABEL') }}
+          </span>
+          <span class="text-sm text-n-slate-11">
+            {{ t('CAPTAIN.ASSISTANTS.FORM.SEND_HANDOFF_MESSAGE.DESCRIPTION') }}
+          </span>
+        </div>
+        <Switch v-model="state.sendHandoffMessage" />
       </div>
-      <Switch v-model="state.sendResolutionMessage" />
+
+      <Editor
+        v-if="state.sendHandoffMessage"
+        v-model="state.handoffMessage"
+        :label="t('CAPTAIN.ASSISTANTS.FORM.HANDOFF_MESSAGE.LABEL')"
+        :placeholder="t('CAPTAIN.ASSISTANTS.FORM.HANDOFF_MESSAGE.PLACEHOLDER')"
+        :message="formErrors.handoffMessage"
+        :message-type="formErrors.handoffMessage ? 'error' : 'info'"
+        class="z-0"
+      />
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex flex-col gap-1">
+          <span class="text-sm font-medium text-n-slate-12">
+            {{ t('CAPTAIN.ASSISTANTS.FORM.SEND_RESOLUTION_MESSAGE.LABEL') }}
+          </span>
+          <span class="text-sm text-n-slate-11">
+            {{
+              t('CAPTAIN.ASSISTANTS.FORM.SEND_RESOLUTION_MESSAGE.DESCRIPTION')
+            }}
+          </span>
+        </div>
+        <Switch v-model="state.sendResolutionMessage" />
+      </div>
+
+      <Editor
+        v-if="state.sendResolutionMessage"
+        v-model="state.resolutionMessage"
+        :label="t('CAPTAIN.ASSISTANTS.FORM.RESOLUTION_MESSAGE.LABEL')"
+        :placeholder="
+          t('CAPTAIN.ASSISTANTS.FORM.RESOLUTION_MESSAGE.PLACEHOLDER')
+        "
+        :message="formErrors.resolutionMessage"
+        :message-type="formErrors.resolutionMessage ? 'error' : 'info'"
+        class="z-0"
+      />
     </div>
 
     <Editor

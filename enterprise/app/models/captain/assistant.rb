@@ -37,7 +37,7 @@ class Captain::Assistant < ApplicationRecord
   has_many :scenarios, class_name: 'Captain::Scenario', dependent: :destroy_async
 
   store_accessor :config, :temperature, :feature_faq, :feature_memory, :feature_contact_attributes, :product_name,
-                 :send_resolution_message
+                 :send_handoff_message, :send_resolution_message
 
   validates :name, presence: true
   validates :description, presence: true
@@ -49,6 +49,14 @@ class Captain::Assistant < ApplicationRecord
 
   def available_name
     name
+  end
+
+  def send_handoff_message?
+    config_flag_enabled?('send_handoff_message')
+  end
+
+  def send_resolution_message?
+    config_flag_enabled?('send_resolution_message')
   end
 
   def available_agent_tools
@@ -87,6 +95,12 @@ class Captain::Assistant < ApplicationRecord
   end
 
   private
+
+  def config_flag_enabled?(key)
+    return false unless config.key?(key)
+
+    ActiveModel::Type::Boolean.new.cast(config[key])
+  end
 
   def agent_name
     name.parameterize(separator: '_')

@@ -520,6 +520,10 @@
           "LABEL": "Resolution Message",
           "PLACEHOLDER": "Enter resolution message"
         },
+        "SEND_HANDOFF_MESSAGE": {
+          "LABEL": "Send handoff message to customer",
+          "DESCRIPTION": "When enabled, customers receive the handoff message when the conversation is transferred to a human agent. When disabled, no message is sent."
+        },
         "SEND_RESOLUTION_MESSAGE": {
           "LABEL": "Send resolution message to customer",
           "DESCRIPTION": "When enabled, customers receive the resolution message before the conversation is closed by auto-resolve."

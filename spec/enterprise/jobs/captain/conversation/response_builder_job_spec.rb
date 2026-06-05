@@ -88,6 +88,7 @@ RSpec.describe Captain::Conversation::ResponseBuilderJob, type: :job do
         end
 
         it 'hands off without incrementing response usage when the classifier returns handoff' do
+          assistant.update!(config: { 'send_handoff_message' => true })
           allow(mock_action_classifier_service).to receive(:classify).and_return({
                                                                                    'action' => 'handoff',
                                                                                    'action_reason' => 'explicit_human_request',
@@ -102,6 +103,7 @@ RSpec.describe Captain::Conversation::ResponseBuilderJob, type: :job do
         end
 
         it 'skips the classifier when the legacy handoff token is returned' do
+          assistant.update!(config: { 'send_handoff_message' => true })
           allow(mock_llm_chat_service).to receive(:generate_response).and_return({ 'response' => 'conversation_handoff' })
           expect(Captain::Llm::AssistantActionClassifierService).not_to receive(:new)
 
@@ -207,6 +209,7 @@ RSpec.describe Captain::Conversation::ResponseBuilderJob, type: :job do
 
     context 'when captain_v2 handoff tool fires during agent execution' do
       before do
+        assistant.update!(config: { 'send_handoff_message' => true })
         allow(account).to receive(:feature_enabled?).and_return(false)
         allow(account).to receive(:feature_enabled?).with('captain_integration_v2').and_return(true)
       end
@@ -298,6 +301,7 @@ RSpec.describe Captain::Conversation::ResponseBuilderJob, type: :job do
       let(:agent) { create(:user, account: account, role: :agent) }
 
       before do
+        assistant.update!(config: { 'send_handoff_message' => true })
         allow(account).to receive(:feature_enabled?).and_return(false)
         allow(account).to receive(:feature_enabled?).with('captain_integration_v2').and_return(false)
         allow(mock_llm_chat_service).to receive(:generate_response).and_return({ 'response' => 'conversation_handoff' })
@@ -326,6 +330,16 @@ RSpec.describe Captain::Conversation::ResponseBuilderJob, type: :job do
         create(:message, conversation: conversation, message_type: :outgoing,
                          sender: agent, account: account, inbox: inbox)
         expect(conversation.reload.waiting_since).to be_nil
+      end
+
+      it 'skips the public handoff message when send_handoff_message is disabled' do
+        assistant.update!(config: { 'send_handoff_message' => false })
+
+        described_class.perform_now(conversation, assistant)
+
+        conversation.reload
+        expect(conversation.status).to eq('open')
+        expect(conversation.messages.outgoing.where(private: false).count).to eq(0)
       end
     end
 

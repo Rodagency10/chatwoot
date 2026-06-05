@@ -156,7 +156,12 @@ RSpec.describe Captain::InboxPendingConversationsResolutionJob, type: :job do
 
     it 'creates resolution message with configured content' do
       custom_message = 'This is a custom resolution message.'
-      captain_assistant.update!(config: { 'resolution_message' => custom_message })
+      captain_assistant.update!(
+        config: {
+          'resolution_message' => custom_message,
+          'send_resolution_message' => true
+        }
+      )
       inbox.reload
 
       described_class.perform_now(inbox)
@@ -166,7 +171,7 @@ RSpec.describe Captain::InboxPendingConversationsResolutionJob, type: :job do
     end
 
     it 'creates resolution message with default if not configured' do
-      captain_assistant.update!(config: {})
+      captain_assistant.update!(config: { 'send_resolution_message' => true })
       inbox.reload
 
       described_class.perform_now(inbox)
@@ -244,7 +249,12 @@ RSpec.describe Captain::InboxPendingConversationsResolutionJob, type: :job do
 
     it 'creates handoff message with configured content' do
       handoff_message = 'Connecting you to a human agent...'
-      captain_assistant.update!(config: { 'handoff_message' => handoff_message })
+      captain_assistant.update!(
+        config: {
+          'handoff_message' => handoff_message,
+          'send_handoff_message' => true
+        }
+      )
       inbox.reload
       allow(inbox.account).to receive(:feature_enabled?).and_call_original
       allow(inbox.account).to receive(:feature_enabled?).with('captain_tasks').and_return(true)
@@ -260,7 +270,12 @@ RSpec.describe Captain::InboxPendingConversationsResolutionJob, type: :job do
       handoff_message = 'Connecting you to a human agent...'
       original_waiting_since = 3.hours.ago
 
-      captain_assistant.update!(config: { 'handoff_message' => handoff_message })
+      captain_assistant.update!(
+        config: {
+          'handoff_message' => handoff_message,
+          'send_handoff_message' => true
+        }
+      )
       resolvable_pending_conversation.update!(waiting_since: original_waiting_since)
       allow(MessageTemplates::Template::OutOfOffice).to receive(:perform_if_applicable)
       inbox.reload
@@ -274,6 +289,22 @@ RSpec.describe Captain::InboxPendingConversationsResolutionJob, type: :job do
 
     it 'does not create handoff message if not configured' do
       captain_assistant.update!(config: {})
+      inbox.reload
+      allow(inbox.account).to receive(:feature_enabled?).and_call_original
+      allow(inbox.account).to receive(:feature_enabled?).with('captain_tasks').and_return(true)
+
+      expect do
+        described_class.perform_now(inbox)
+      end.not_to(change { resolvable_pending_conversation.messages.where(private: false).count })
+    end
+
+    it 'skips the public handoff message when send_handoff_message is disabled' do
+      captain_assistant.update!(
+        config: {
+          'handoff_message' => 'Connecting you to a human agent...',
+          'send_handoff_message' => false
+        }
+      )
       inbox.reload
       allow(inbox.account).to receive(:feature_enabled?).and_call_original
       allow(inbox.account).to receive(:feature_enabled?).with('captain_tasks').and_return(true)

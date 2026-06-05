@@ -151,6 +151,8 @@ class Captain::Conversation::ResponseBuilderJob < ApplicationJob
   end
 
   def create_handoff_message(preserve_waiting_since: false)
+    return unless @assistant.send_handoff_message?
+
     create_outgoing_message(
       @assistant.config['handoff_message'].presence || I18n.t('conversations.captain.handoff'),
       preserve_waiting_since: preserve_waiting_since
