@@ -3,6 +3,7 @@ module Enterprise::Concerns::Attachment
 
   included do
     after_create_commit :enqueue_audio_transcription
+    after_create_commit :enqueue_document_extraction
     # Broadcast the message update so the FE bubble picks up the new audio
     # attachment immediately. Without this, the FE has to wait until Whisper
     # finishes (or fall back to a page refresh) — and if Whisper returns blank,
@@ -19,6 +20,12 @@ module Enterprise::Concerns::Attachment
     # Attachment before attaching the blob. AudioTranscriptionJob retries
     # on ActiveStorage::FileNotFoundError to ride out that race.
     Messages::AudioTranscriptionJob.perform_later(id)
+  end
+
+  def enqueue_document_extraction
+    return unless file_type.to_sym == :file
+
+    Messages::DocumentExtractionJob.perform_later(id)
   end
 
   def broadcast_message_update_for_audio

@@ -88,14 +88,51 @@ RSpec.describe Captain::OpenAiMessageBuilderService do
     end
 
     context 'with other file types' do
-      before do
+      let(:file_attachment) do
         attachment = message.attachments.build(account_id: message.account_id, file_type: :file)
         attachment.save!
+        attachment
+      end
+
+      before do
+        allow(Messages::DocumentExtractionService).to receive(:new).with(file_attachment).and_return(
+          instance_double(Messages::DocumentExtractionService, perform: { success: false, error: 'Extraction failed' })
+        )
       end
 
       it 'includes generic attachment message' do
+        file_attachment
         result = service.send(:attachment_parts, attachments)
         expect(result).to include({ type: 'text', text: 'User has shared an attachment' })
+      end
+    end
+
+    context 'with extracted document attachments' do
+      let(:file_attachment) do
+        attachment = message.attachments.build(account_id: message.account_id, file_type: :file)
+        attachment.save!
+        attachment.file.attach(
+          io: StringIO.new('pdf'),
+          filename: 'invoice.pdf',
+          content_type: 'application/pdf'
+        )
+        attachment
+      end
+
+      before do
+        allow(Messages::DocumentExtractionService).to receive(:new).with(file_attachment).and_return(
+          instance_double(
+            Messages::DocumentExtractionService,
+            perform: { success: true, extracted_text: 'Total amount due: 120 EUR' }
+          )
+        )
+      end
+
+      it 'includes extracted document text' do
+        file_attachment
+        result = service.send(:attachment_parts, attachments)
+        expect(result).to include({ type: 'text', text: "[invoice.pdf]\nTotal amount due: 120 EUR" })
+        expect(result).not_to include({ type: 'text', text: 'User has shared an attachment' })
       end
     end
 
@@ -115,12 +152,23 @@ RSpec.describe Captain::OpenAiMessageBuilderService do
       let(:document_attachment) do
         attachment = message.attachments.build(account_id: message.account_id, file_type: :file)
         attachment.save!
+        attachment.file.attach(
+          io: StringIO.new('pdf'),
+          filename: 'quote.pdf',
+          content_type: 'application/pdf'
+        )
         attachment
       end
 
       before do
         allow(Messages::AudioTranscriptionService).to receive(:new).with(audio_attachment).and_return(
           instance_double(Messages::AudioTranscriptionService, perform: { success: true, transcriptions: 'Audio text' })
+        )
+        allow(Messages::DocumentExtractionService).to receive(:new).with(document_attachment).and_return(
+          instance_double(
+            Messages::DocumentExtractionService,
+            perform: { success: true, extracted_text: 'Quote reference 42' }
+          )
         )
       end
 
@@ -132,7 +180,7 @@ RSpec.describe Captain::OpenAiMessageBuilderService do
         result = service.send(:attachment_parts, attachments)
         expect(result).to include({ type: 'image_url', image_url: { url: 'https://example.com/image.jpg' } })
         expect(result).to include({ type: 'text', text: 'Audio text' })
-        expect(result).to include({ type: 'text', text: 'User has shared an attachment' })
+        expect(result).to include({ type: 'text', text: "[quote.pdf]\nQuote reference 42" })
       end
     end
   end

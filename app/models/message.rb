@@ -280,6 +280,13 @@ class Message < ApplicationRecord
                           .presence
     return "[Voice Message] #{audio_transcription}" if audio_transcription.present?
 
+    document_text = attachments
+                    .where(file_type: :file)
+                    .filter_map { |att| att.meta&.dig('extracted_text') }
+                    .join("\n\n")
+                    .presence
+    return "[Document] #{document_text}" if document_text.present?
+
     '[Attachment]' if attachments.any?
   end
 

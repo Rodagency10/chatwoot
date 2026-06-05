@@ -158,6 +158,9 @@ gem 'procore-sift'
 gem 'email_reply_trimmer'
 
 gem 'html2text'
+# Extract text from PDF and DOCX attachments for Captain
+gem 'pdf-reader'
+gem 'rubyzip'
 
 # to calculate working hours
 gem 'working_hours'

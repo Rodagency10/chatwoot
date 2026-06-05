@@ -34,7 +34,10 @@ class Messages::SearchDataPresenter < SimpleDelegator
 
   def attachment_data
     attachments.filter_map do |a|
-      { transcribed_text: a.meta&.dig('transcribed_text') }
+      {
+        transcribed_text: a.meta&.dig('transcribed_text'),
+        extracted_text: a.meta&.dig('extracted_text')
+      }
     end.presence
   end
 

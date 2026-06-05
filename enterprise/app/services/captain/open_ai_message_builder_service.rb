@@ -38,9 +38,12 @@ class Captain::OpenAiMessageBuilderService
     transcription = extract_audio_transcriptions(attachments)
     transcription_part = text_part(transcription) if transcription.present?
 
-    attachment_part = text_part('User has shared an attachment') if attachments.where.not(file_type: %i[image audio]).exists?
+    document_text = extract_document_text(attachments)
+    document_part = text_part(document_text) if document_text.present?
 
-    [image_content, transcription_part, attachment_part].flatten.compact
+    attachment_part = text_part('User has shared an attachment') if unhandled_attachments?(attachments, document_text)
+
+    [image_content, transcription_part, document_part, attachment_part].flatten.compact
   end
 
   def image_parts(image_attachments)
@@ -65,5 +68,29 @@ class Captain::OpenAiMessageBuilderService
       result = Messages::AudioTranscriptionService.new(attachment).perform
       result[:success] ? result[:transcriptions] : ''
     end.join
+  end
+
+  def extract_document_text(attachments)
+    file_attachments = attachments.where(file_type: :file)
+    return '' if file_attachments.blank?
+
+    file_attachments.filter_map do |attachment|
+      result = Messages::DocumentExtractionService.new(attachment).perform
+      next unless result[:success] && result[:extracted_text].present?
+
+      format_document_text(attachment, result[:extracted_text])
+    end.join("\n\n")
+  end
+
+  def format_document_text(attachment, extracted_text)
+    filename = attachment.file&.filename&.to_s.presence || 'document'
+    "[#{filename}]\n#{extracted_text}"
+  end
+
+  def unhandled_attachments?(attachments, document_text)
+    return true if attachments.where.not(file_type: %i[image audio file]).exists?
+    return false if document_text.present?
+
+    attachments.where(file_type: :file).exists?
   end
 end
