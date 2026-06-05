@@ -5,6 +5,7 @@ module Enterprise::MessageTemplates::HookExecutionService
     super
     return unless should_process_captain_response?
     return perform_handoff unless inbox.captain_active?
+    return unless captain_keyword_activation_allowed?
 
     schedule_captain_response
   end
@@ -28,6 +29,14 @@ module Enterprise::MessageTemplates::HookExecutionService
   end
 
   private
+
+  def captain_keyword_activation_allowed?
+    Captain::Conversation::KeywordActivationGate.new(
+      conversation: conversation,
+      assistant: conversation.inbox.captain_assistant,
+      message_content: message.content
+    ).evaluate == :allowed
+  end
 
   def schedule_captain_response
     attachment_wait = message.attachments.present? ? calculate_attachment_wait_time : 0

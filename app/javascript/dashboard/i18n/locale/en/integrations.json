@@ -536,6 +536,27 @@
           "LABEL": "Batch rapid messages",
           "DESCRIPTION": "When enabled, a new customer message resets the delay timer so Captain replies once with full context."
         },
+        "KEYWORD_ACTIVATION": {
+          "LABEL": "Require keyword to activate Captain",
+          "DESCRIPTION": "When enabled, Captain only responds after a matching keyword. The conversation label is added automatically and can be removed by agents to pause Captain."
+        },
+        "ACTIVATION_KEYWORDS": {
+          "LABEL": "Activation keywords",
+          "PLACEHOLDER": "catalogue, commande",
+          "DESCRIPTION": "Separate keywords with commas. Captain stays silent until one of them is received."
+        },
+        "ACTIVATION_LABEL": {
+          "LABEL": "Activation label",
+          "PLACEHOLDER": "keyword_match",
+          "DESCRIPTION": "Label applied when a keyword matches. Removing it pauses Captain on this conversation. Cleared automatically when the conversation is resolved."
+        },
+        "ACTIVATION_MATCH_MODE": {
+          "LABEL": "Keyword match mode",
+          "OPTIONS": {
+            "WORD": "Whole word",
+            "SUBSTRING": "Contains text"
+          }
+        },
         "INSTRUCTIONS": {
           "LABEL": "Instructions",
           "PLACEHOLDER": "Enter instructions for the assistant"
@@ -556,13 +577,20 @@
       },
       "SETTINGS": {
         "HEADER": "Settings",
+        "TABS": {
+          "GENERAL": "General",
+          "BEHAVIOR": "Behavior",
+          "ACCOUNT": "Account",
+          "CONTROLS": "Controls",
+          "DANGER": "Danger zone"
+        },
         "BASIC_SETTINGS": {
           "TITLE": "Basic settings",
-          "DESCRIPTION": "Customize what the assistant says when ending a conversation or transferring to a human."
+          "DESCRIPTION": "Name, description, product identity, and assistant capabilities."
         },
         "SYSTEM_SETTINGS": {
-          "TITLE": "System settings",
-          "DESCRIPTION": "Customize what the assistant says when ending a conversation or transferring to a human."
+          "TITLE": "Behavior & messages",
+          "DESCRIPTION": "Handoff and resolution messages, keyword activation, response timing, and model behavior."
         },
         "CONTROL_ITEMS": {
           "TITLE": "The Fun Stuff",

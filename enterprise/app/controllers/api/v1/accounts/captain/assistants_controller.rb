@@ -61,6 +61,7 @@ class Api::V1::Accounts::Captain::AssistantsController < Api::V1::Accounts::Base
                                                     :welcome_message, :handoff_message, :resolution_message,
                                                     :send_handoff_message, :send_resolution_message,
                                                     :response_delay_seconds, :response_batching_enabled,
+                                                    :keyword_activation_enabled, :activation_label, :activation_match_mode,
                                                     :instructions, :temperature
                                                   ])
 
@@ -68,6 +69,11 @@ class Api::V1::Accounts::Captain::AssistantsController < Api::V1::Accounts::Base
     permitted[:response_guidelines] = params[:assistant][:response_guidelines] if params[:assistant].key?(:response_guidelines)
 
     permitted[:guardrails] = params[:assistant][:guardrails] if params[:assistant].key?(:guardrails)
+
+    if params[:assistant].dig(:config)&.key?(:activation_keywords)
+      permitted[:config] ||= {}
+      permitted[:config][:activation_keywords] = Array(params[:assistant][:config][:activation_keywords]).map(&:to_s).map(&:strip).compact_blank
+    end
 
     permitted
   end

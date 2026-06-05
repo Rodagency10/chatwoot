@@ -70,6 +70,26 @@ class Captain::Assistant < ApplicationRecord
     ActiveModel::Type::Boolean.new.cast(config['response_batching_enabled'])
   end
 
+  def keyword_activation_enabled?
+    config_flag_enabled?('keyword_activation_enabled')
+  end
+
+  def activation_label
+    config['activation_label'].presence || Captain::Conversation::KeywordActivationGate::DEFAULT_ACTIVATION_LABEL
+  end
+
+  def activation_keywords
+    Array(config['activation_keywords']).map(&:to_s).map(&:strip).compact_blank
+  end
+
+  def activation_match_mode
+    config['activation_match_mode'].presence || 'word'
+  end
+
+  def activation_word_match_mode?
+    activation_match_mode != 'substring'
+  end
+
   def available_agent_tools
     tools = self.class.built_in_agent_tools.dup
 

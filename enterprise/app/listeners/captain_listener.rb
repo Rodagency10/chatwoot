@@ -5,6 +5,8 @@ class CaptainListener < BaseListener
     conversation = extract_conversation_and_account(event)[0]
     assistant = conversation.inbox.captain_assistant
 
+    Captain::Conversation::KeywordActivationGate.clear_activation_label!(conversation: conversation, assistant: assistant)
+
     return unless conversation.inbox.captain_active?
 
     Captain::Llm::ContactNotesService.new(assistant, conversation).generate_and_update_notes if assistant.config['feature_memory'].present?

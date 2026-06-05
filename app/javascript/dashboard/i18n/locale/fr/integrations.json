@@ -535,6 +535,27 @@
           "LABEL": "Regrouper les messages rapides",
           "DESCRIPTION": "Si activé, chaque nouveau message client relance le délai afin que Captain ne réponde qu'une fois avec tout le contexte."
         },
+        "KEYWORD_ACTIVATION": {
+          "LABEL": "Exiger un mot-clé pour activer Captain",
+          "DESCRIPTION": "Si activé, Captain ne répond qu'après réception d'un mot-clé correspondant. L'étiquette est ajoutée automatiquement et peut être retirée par un agent pour mettre Captain en pause."
+        },
+        "ACTIVATION_KEYWORDS": {
+          "LABEL": "Mots-clés d'activation",
+          "PLACEHOLDER": "catalogue, commande",
+          "DESCRIPTION": "Séparez les mots-clés par des virgules. Captain reste silencieux jusqu'à ce que l'un d'eux soit reçu."
+        },
+        "ACTIVATION_LABEL": {
+          "LABEL": "Étiquette d'activation",
+          "PLACEHOLDER": "keyword_match",
+          "DESCRIPTION": "Étiquette appliquée lorsqu'un mot-clé correspond. La retirer met Captain en pause sur cette conversation. Elle est supprimée automatiquement à la résolution."
+        },
+        "ACTIVATION_MATCH_MODE": {
+          "LABEL": "Mode de correspondance",
+          "OPTIONS": {
+            "WORD": "Mot entier",
+            "SUBSTRING": "Contient le texte"
+          }
+        },
         "INSTRUCTIONS": {
           "LABEL": "Instructions",
           "PLACEHOLDER": "Entrez les instructions pour l'assistant"

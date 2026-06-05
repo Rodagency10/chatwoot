@@ -8,15 +8,27 @@ import { useMapGetter } from 'dashboard/composables/store';
 import { FEATURE_FLAGS } from 'dashboard/featureFlags';
 import { useAccount } from 'dashboard/composables/useAccount';
 import Button from 'dashboard/components-next/button/Button.vue';
+import TabBar from 'dashboard/components-next/tabbar/TabBar.vue';
 import PageLayout from 'dashboard/components-next/captain/PageLayout.vue';
 import SettingsHeader from 'dashboard/components-next/captain/pageComponents/settings/SettingsHeader.vue';
 import AssistantBasicSettingsForm from 'dashboard/components-next/captain/pageComponents/assistant/settings/AssistantBasicSettingsForm.vue';
 import AssistantSystemSettingsForm from 'dashboard/components-next/captain/pageComponents/assistant/settings/AssistantSystemSettingsForm.vue';
 import AssistantControlItems from 'dashboard/components-next/captain/pageComponents/assistant/settings/AssistantControlItems.vue';
 import DeleteDialog from 'dashboard/components-next/captain/pageComponents/DeleteDialog.vue';
+import CaptainAutoResolveSettings from 'dashboard/routes/dashboard/settings/captain/components/CaptainAutoResolveSettings.vue';
+import { useAdmin } from 'dashboard/composables/useAdmin';
+
+const TAB_KEYS = {
+  GENERAL: 'general',
+  BEHAVIOR: 'behavior',
+  ACCOUNT: 'account',
+  CONTROLS: 'controls',
+  DANGER: 'danger',
+};
 
 const { t } = useI18n();
 const { isCloudFeatureEnabled } = useAccount();
+const { isAdmin } = useAdmin();
 
 const isCaptainV2Enabled = computed(() =>
   isCloudFeatureEnabled(FEATURE_FLAGS.CAPTAIN_V2)
@@ -26,6 +38,7 @@ const router = useRouter();
 const store = useStore();
 
 const deleteAssistantDialog = ref(null);
+const selectedTabKey = ref(TAB_KEYS.GENERAL);
 
 const uiFlags = useMapGetter('captainAssistants/getUIFlags');
 const assistants = useMapGetter('captainAssistants/getRecords');
@@ -34,6 +47,45 @@ const assistantId = computed(() => Number(route.params.assistantId));
 const assistant = computed(() =>
   store.getters['captainAssistants/getRecord'](assistantId.value)
 );
+
+const tabs = computed(() => {
+  const items = [
+    {
+      key: TAB_KEYS.GENERAL,
+      label: t('CAPTAIN.ASSISTANTS.SETTINGS.TABS.GENERAL'),
+    },
+    {
+      key: TAB_KEYS.BEHAVIOR,
+      label: t('CAPTAIN.ASSISTANTS.SETTINGS.TABS.BEHAVIOR'),
+    },
+  ];
+
+  if (isAdmin.value) {
+    items.push({
+      key: TAB_KEYS.ACCOUNT,
+      label: t('CAPTAIN.ASSISTANTS.SETTINGS.TABS.ACCOUNT'),
+    });
+  }
+
+  if (isCaptainV2Enabled.value) {
+    items.push({
+      key: TAB_KEYS.CONTROLS,
+      label: t('CAPTAIN.ASSISTANTS.SETTINGS.TABS.CONTROLS'),
+    });
+  }
+
+  items.push({
+    key: TAB_KEYS.DANGER,
+    label: t('CAPTAIN.ASSISTANTS.SETTINGS.TABS.DANGER'),
+  });
+
+  return items;
+});
+
+const selectedTabIndex = computed(() => {
+  const index = tabs.value.findIndex(tab => tab.key === selectedTabKey.value);
+  return index === -1 ? 0 : index;
+});
 
 const controlItems = computed(() => {
   return [
@@ -58,6 +110,10 @@ const controlItems = computed(() => {
   ];
 });
 
+const handleTabChange = tab => {
+  selectedTabKey.value = tab.key;
+};
+
 const handleSubmit = async updatedAssistant => {
   try {
     await store.dispatch('captainAssistants/update', {
@@ -77,13 +133,11 @@ const handleDelete = () => {
 };
 
 const handleDeleteSuccess = () => {
-  // Get remaining assistants after deletion
   const remainingAssistants = assistants.value.filter(
     a => a.id !== assistantId.value
   );
 
   if (remainingAssistants.length > 0) {
-    // Navigate to the first available assistant's settings
     const nextAssistant = remainingAssistants[0];
     router.push({
       name: 'captain_assistants_settings_index',
@@ -93,7 +147,6 @@ const handleDeleteSuccess = () => {
       },
     });
   } else {
-    // No assistants left, redirect to create assistant page
     router.push({
       name: 'captain_assistants_create_index',
       params: { accountId: route.params.accountId },
@@ -107,67 +160,65 @@ const handleDeleteSuccess = () => {
     :is-fetching="isFetching"
     :show-pagination-footer="false"
     :show-know-more="false"
-    :class="{
-      '[&>header>div]:max-w-[80rem] [&>main>div]:max-w-[80rem]':
-        isCaptainV2Enabled,
-    }"
+    class="[&>header>div]:max-w-[80rem] [&>main>div]:max-w-[80rem]"
   >
     <template #body>
-      <div
-        class="gap-6 lg:gap-16 pb-8"
-        :class="{ 'grid grid-cols-2': isCaptainV2Enabled }"
-      >
-        <div class="flex flex-col gap-6">
-          <div class="flex flex-col gap-6">
-            <SettingsHeader
-              :heading="t('CAPTAIN.ASSISTANTS.SETTINGS.BASIC_SETTINGS.TITLE')"
-              :description="
-                t('CAPTAIN.ASSISTANTS.SETTINGS.BASIC_SETTINGS.DESCRIPTION')
-              "
-            />
-            <AssistantBasicSettingsForm
-              :assistant="assistant"
-              @submit="handleSubmit"
-            />
-          </div>
-          <span class="h-px w-full bg-n-weak mt-2" />
-          <div class="flex flex-col gap-6">
-            <SettingsHeader
-              :heading="t('CAPTAIN.ASSISTANTS.SETTINGS.SYSTEM_SETTINGS.TITLE')"
-              :description="
-                t('CAPTAIN.ASSISTANTS.SETTINGS.SYSTEM_SETTINGS.DESCRIPTION')
-              "
-            />
-            <AssistantSystemSettingsForm
-              :assistant="assistant"
-              @submit="handleSubmit"
-            />
-          </div>
-          <span class="h-px w-full bg-n-weak mt-2" />
-          <div class="flex items-end justify-between w-full gap-4">
-            <div class="flex flex-col gap-2">
-              <h6 class="text-n-slate-12 text-base font-medium">
-                {{ t('CAPTAIN.ASSISTANTS.SETTINGS.DELETE.TITLE') }}
-              </h6>
-              <span class="text-n-slate-11 text-sm">
-                {{ t('CAPTAIN.ASSISTANTS.SETTINGS.DELETE.DESCRIPTION') }}
-              </span>
-            </div>
-            <div class="flex-shrink-0">
-              <Button
-                :label="
-                  t('CAPTAIN.ASSISTANTS.SETTINGS.DELETE.BUTTON_TEXT', {
-                    assistantName: assistant.name,
-                  })
-                "
-                color="ruby"
-                class="max-w-56 !w-fit"
-                @click="handleDelete"
-              />
-            </div>
-          </div>
+      <div class="flex flex-col gap-6 pb-8">
+        <TabBar
+          :tabs="tabs"
+          :initial-active-tab="selectedTabIndex"
+          @tab-changed="handleTabChange"
+        />
+
+        <div
+          v-if="selectedTabKey === TAB_KEYS.GENERAL"
+          class="flex flex-col gap-6"
+        >
+          <SettingsHeader
+            :heading="t('CAPTAIN.ASSISTANTS.SETTINGS.BASIC_SETTINGS.TITLE')"
+            :description="
+              t('CAPTAIN.ASSISTANTS.SETTINGS.BASIC_SETTINGS.DESCRIPTION')
+            "
+          />
+          <AssistantBasicSettingsForm
+            :assistant="assistant"
+            @submit="handleSubmit"
+          />
         </div>
-        <div v-if="isCaptainV2Enabled" class="flex flex-col gap-6">
+
+        <div
+          v-else-if="selectedTabKey === TAB_KEYS.BEHAVIOR"
+          class="flex flex-col gap-6"
+        >
+          <SettingsHeader
+            :heading="t('CAPTAIN.ASSISTANTS.SETTINGS.SYSTEM_SETTINGS.TITLE')"
+            :description="
+              t('CAPTAIN.ASSISTANTS.SETTINGS.SYSTEM_SETTINGS.DESCRIPTION')
+            "
+          />
+          <AssistantSystemSettingsForm
+            :assistant="assistant"
+            @submit="handleSubmit"
+          />
+        </div>
+
+        <div
+          v-else-if="selectedTabKey === TAB_KEYS.ACCOUNT && isAdmin"
+          class="flex flex-col gap-6"
+        >
+          <SettingsHeader
+            :heading="t('CAPTAIN_SETTINGS.AUTO_RESOLVE.SECTION_TITLE')"
+            :description="
+              t('CAPTAIN_SETTINGS.AUTO_RESOLVE.SECTION_DESCRIPTION')
+            "
+          />
+          <CaptainAutoResolveSettings />
+        </div>
+
+        <div
+          v-else-if="selectedTabKey === TAB_KEYS.CONTROLS && isCaptainV2Enabled"
+          class="flex flex-col gap-6"
+        >
           <SettingsHeader
             :heading="t('CAPTAIN.ASSISTANTS.SETTINGS.CONTROL_ITEMS.TITLE')"
             :description="
@@ -179,6 +230,32 @@ const handleDeleteSuccess = () => {
               v-for="item in controlItems"
               :key="item.name"
               :control-item="item"
+            />
+          </div>
+        </div>
+
+        <div
+          v-else-if="selectedTabKey === TAB_KEYS.DANGER"
+          class="flex items-end justify-between w-full gap-4"
+        >
+          <div class="flex flex-col gap-2">
+            <h6 class="text-n-slate-12 text-base font-medium">
+              {{ t('CAPTAIN.ASSISTANTS.SETTINGS.DELETE.TITLE') }}
+            </h6>
+            <span class="text-n-slate-11 text-sm">
+              {{ t('CAPTAIN.ASSISTANTS.SETTINGS.DELETE.DESCRIPTION') }}
+            </span>
+          </div>
+          <div class="flex-shrink-0">
+            <Button
+              :label="
+                t('CAPTAIN.ASSISTANTS.SETTINGS.DELETE.BUTTON_TEXT', {
+                  assistantName: assistant.name,
+                })
+              "
+              color="ruby"
+              class="max-w-56 !w-fit"
+              @click="handleDelete"
             />
           </div>
         </div>

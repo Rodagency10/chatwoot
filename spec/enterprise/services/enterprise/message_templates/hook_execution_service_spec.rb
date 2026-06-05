@@ -322,6 +322,40 @@ RSpec.describe MessageTemplates::HookExecutionService do
     end
   end
 
+  context 'when keyword activation is enabled' do
+    before do
+      assistant.update!(
+        config: {
+          'keyword_activation_enabled' => true,
+          'activation_keywords' => ['catalogue'],
+          'activation_label' => 'keyword_match'
+        }
+      )
+    end
+
+    it 'does not schedule captain response when the message does not match' do
+      expect(Captain::Conversation::ResponseScheduler).not_to receive(:new)
+
+      create(:message, conversation: conversation, message_type: :incoming, content: 'bonjour', account: account)
+    end
+
+    it 'schedules captain response when the message matches a keyword' do
+      expect(response_scheduler).to receive(:schedule)
+
+      create(:message, conversation: conversation, message_type: :incoming, content: 'catalogue', account: account)
+
+      expect(conversation.reload.label_list).to include('keyword_match')
+    end
+
+    it 'schedules captain response when the activation label is already present' do
+      conversation.add_labels('keyword_match')
+
+      expect(response_scheduler).to receive(:schedule)
+
+      create(:message, conversation: conversation, message_type: :incoming, content: 'bonjour', account: account)
+    end
+  end
+
   context 'when Captain quota is exceeded and handoff happens' do
     before do
       account.update!(

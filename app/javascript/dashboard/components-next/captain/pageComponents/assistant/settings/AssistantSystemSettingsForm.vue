@@ -33,6 +33,10 @@ const initialState = {
   sendResolutionMessage: false,
   responseDelaySeconds: 0,
   responseBatchingEnabled: true,
+  keywordActivationEnabled: false,
+  activationKeywords: '',
+  activationLabel: 'keyword_match',
+  activationMatchMode: 'word',
   instructions: '',
   temperature: 1,
 };
@@ -79,6 +83,15 @@ const updateStateFromAssistant = assistant => {
     config.response_batching_enabled === undefined
       ? true
       : Boolean(config.response_batching_enabled);
+  state.keywordActivationEnabled = configFlagFromAssistant(
+    config,
+    'keyword_activation_enabled'
+  );
+  state.activationKeywords = Array.isArray(config.activation_keywords)
+    ? config.activation_keywords.join(', ')
+    : '';
+  state.activationLabel = config.activation_label || 'keyword_match';
+  state.activationMatchMode = config.activation_match_mode || 'word';
   state.instructions = config.instructions;
   state.temperature = config.temperature || 1;
 };
@@ -116,6 +129,13 @@ const handleSystemMessagesUpdate = async () => {
         Math.max(0, Number(state.responseDelaySeconds) || 0)
       ),
       response_batching_enabled: state.responseBatchingEnabled,
+      keyword_activation_enabled: state.keywordActivationEnabled,
+      activation_keywords: state.activationKeywords
+        .split(/[\n,]/)
+        .map(keyword => keyword.trim())
+        .filter(Boolean),
+      activation_label: state.activationLabel.trim() || 'keyword_match',
+      activation_match_mode: state.activationMatchMode,
       temperature: state.temperature || 1,
     },
   };
@@ -188,6 +208,79 @@ watch(
         :message-type="formErrors.resolutionMessage ? 'error' : 'info'"
         class="z-0"
       />
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex flex-col gap-1">
+          <span class="text-sm font-medium text-n-slate-12">
+            {{ t('CAPTAIN.ASSISTANTS.FORM.KEYWORD_ACTIVATION.LABEL') }}
+          </span>
+          <span class="text-sm text-n-slate-11">
+            {{ t('CAPTAIN.ASSISTANTS.FORM.KEYWORD_ACTIVATION.DESCRIPTION') }}
+          </span>
+        </div>
+        <Switch v-model="state.keywordActivationEnabled" />
+      </div>
+
+      <template v-if="state.keywordActivationEnabled">
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-medium text-n-slate-12">
+            {{ t('CAPTAIN.ASSISTANTS.FORM.ACTIVATION_KEYWORDS.LABEL') }}
+          </label>
+          <textarea
+            v-model="state.activationKeywords"
+            rows="3"
+            class="w-full rounded-lg border border-n-weak bg-n-solid-2 px-3 py-2 text-sm text-n-slate-12"
+            :placeholder="
+              t('CAPTAIN.ASSISTANTS.FORM.ACTIVATION_KEYWORDS.PLACEHOLDER')
+            "
+          />
+          <p class="text-sm text-n-slate-11">
+            {{ t('CAPTAIN.ASSISTANTS.FORM.ACTIVATION_KEYWORDS.DESCRIPTION') }}
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-medium text-n-slate-12">
+            {{ t('CAPTAIN.ASSISTANTS.FORM.ACTIVATION_LABEL.LABEL') }}
+          </label>
+          <input
+            v-model="state.activationLabel"
+            type="text"
+            class="w-full max-w-xs rounded-lg border border-n-weak bg-n-solid-2 px-3 py-2 text-sm text-n-slate-12"
+            :placeholder="
+              t('CAPTAIN.ASSISTANTS.FORM.ACTIVATION_LABEL.PLACEHOLDER')
+            "
+          />
+          <p class="text-sm text-n-slate-11">
+            {{ t('CAPTAIN.ASSISTANTS.FORM.ACTIVATION_LABEL.DESCRIPTION') }}
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-medium text-n-slate-12">
+            {{ t('CAPTAIN.ASSISTANTS.FORM.ACTIVATION_MATCH_MODE.LABEL') }}
+          </label>
+          <select
+            v-model="state.activationMatchMode"
+            class="w-full max-w-xs rounded-lg border border-n-weak bg-n-solid-2 px-3 py-2 text-sm text-n-slate-12"
+          >
+            <option value="word">
+              {{
+                t('CAPTAIN.ASSISTANTS.FORM.ACTIVATION_MATCH_MODE.OPTIONS.WORD')
+              }}
+            </option>
+            <option value="substring">
+              {{
+                t(
+                  'CAPTAIN.ASSISTANTS.FORM.ACTIVATION_MATCH_MODE.OPTIONS.SUBSTRING'
+                )
+              }}
+            </option>
+          </select>
+        </div>
+      </template>
     </div>
 
     <div class="flex flex-col gap-4">

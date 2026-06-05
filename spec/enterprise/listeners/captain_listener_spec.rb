@@ -17,6 +17,25 @@ describe CaptainListener do
       create(:captain_inbox, captain_assistant: assistant, inbox: inbox)
     end
 
+    context 'when keyword activation label is present' do
+      before do
+        assistant.update!(
+          config: {
+            'keyword_activation_enabled' => true,
+            'activation_keywords' => ['catalogue'],
+            'activation_label' => 'keyword_match'
+          }
+        )
+        conversation.add_labels('keyword_match')
+      end
+
+      it 'removes the activation label when the conversation is resolved' do
+        listener.conversation_resolved(event)
+
+        expect(conversation.reload.label_list).not_to include('keyword_match')
+      end
+    end
+
     context 'when feature_memory is enabled' do
       before do
         assistant.config['feature_memory'] = true
