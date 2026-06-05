@@ -273,24 +273,36 @@ class Message < ApplicationRecord
   def content_for_llm
     return content if content.present?
 
-    audio_transcription = attachments
-                          .where(file_type: :audio)
-                          .filter_map { |att| att.meta&.dig('transcribed_text') }
-                          .join(' ')
-                          .presence
-    return "[Voice Message] #{audio_transcription}" if audio_transcription.present?
+    llm_attachment_fallback
+  end
 
-    document_text = attachments
-                    .where(file_type: :file)
-                    .filter_map { |att| att.meta&.dig('extracted_text') }
-                    .join("\n\n")
-                    .presence
+  private
+
+  def llm_attachment_fallback
+    transcription = llm_audio_transcription
+    return "[Voice Message] #{transcription}" if transcription.present?
+
+    document_text = llm_document_text
     return "[Document] #{document_text}" if document_text.present?
 
     '[Attachment]' if attachments.any?
   end
 
-  private
+  def llm_audio_transcription
+    attachments
+      .where(file_type: :audio)
+      .filter_map { |att| att.meta&.dig('transcribed_text') }
+      .join(' ')
+      .presence
+  end
+
+  def llm_document_text
+    attachments
+      .where(file_type: :file)
+      .filter_map { |att| att.meta&.dig('extracted_text') }
+      .join("\n\n")
+      .presence
+  end
 
   def prevent_message_flooding
     # Added this to cover the validation specs in messages

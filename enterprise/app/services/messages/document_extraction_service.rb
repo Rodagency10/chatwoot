@@ -36,25 +36,43 @@ class Messages::DocumentExtractionService
   end
 
   def perform
-    return { error: 'Extraction not available' } unless can_extract?
-    return { error: 'Message not found' } if message.blank?
-    return { error: 'Document too large' } if document_too_large?
-    return { error: 'File not attached' } unless attachment.file.attached?
+    validation_error = extraction_validation_error
+    return validation_error if validation_error
 
-    cached_text = attachment.meta&.[]('extracted_text')
-    return { success: true, extracted_text: cached_text } if cached_text.present?
+    cached_response = cached_extraction_response
+    return cached_response if cached_response
 
-    extracted_text = extract_document_text
-    return { error: 'Extraction failed' } if extracted_text.blank?
-
-    update_extraction(extracted_text)
-    { success: true, extracted_text: extracted_text }
+    extract_and_store
   rescue PDF::Reader::MalformedPDFError, PDF::Reader::UnsupportedFeatureError, Zip::Error => e
     Rails.logger.warn("Document extraction failed for attachment #{attachment.id}: #{e.message}")
     { error: 'Extraction failed' }
   end
 
   private
+
+  def extraction_validation_error
+    return { error: 'Extraction not available' } unless can_extract?
+    return { error: 'Message not found' } if message.blank?
+    return { error: 'Document too large' } if document_too_large?
+    return { error: 'File not attached' } unless attachment.file.attached?
+
+    nil
+  end
+
+  def cached_extraction_response
+    cached_text = attachment.meta&.[]('extracted_text')
+    return if cached_text.blank?
+
+    { success: true, extracted_text: cached_text }
+  end
+
+  def extract_and_store
+    extracted_text = extract_document_text
+    return { error: 'Extraction failed' } if extracted_text.blank?
+
+    update_extraction(extracted_text)
+    { success: true, extracted_text: extracted_text }
+  end
 
   def can_extract?
     account.feature_enabled?('captain_integration') && document_format.present?
@@ -175,7 +193,6 @@ class Messages::DocumentExtractionService
 
   def with_tempfile
     blob = attachment.file.blob
-    extension = file_extension.presence || 'bin'
     temp_dir = Rails.root.join('tmp/uploads/document-extractions')
     FileUtils.mkdir_p(temp_dir)
     temp_file_path = File.join(temp_dir, "#{blob.key}-#{blob.filename}")
@@ -199,5 +216,4 @@ class Messages::DocumentExtractionService
 
     message.reindex
   end
-
 end

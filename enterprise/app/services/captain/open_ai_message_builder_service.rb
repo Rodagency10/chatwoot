@@ -91,6 +91,6 @@ class Captain::OpenAiMessageBuilderService
     return true if attachments.where.not(file_type: %i[image audio file]).exists?
     return false if document_text.present?
 
-    attachments.where(file_type: :file).exists?
+    attachments.exists?(file_type: :file)
   end
 end
