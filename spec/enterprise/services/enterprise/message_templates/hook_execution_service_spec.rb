@@ -7,8 +7,11 @@ RSpec.describe MessageTemplates::HookExecutionService do
   let(:conversation) { create(:conversation, inbox: inbox, account: account, contact: contact, status: :pending) }
   let(:assistant) { create(:captain_assistant, account: account) }
 
+  let(:response_scheduler) { instance_double(Captain::Conversation::ResponseScheduler, schedule: true) }
+
   before do
     create(:captain_inbox, captain_assistant: assistant, inbox: inbox)
+    allow(Captain::Conversation::ResponseScheduler).to receive(:new).and_return(response_scheduler)
   end
 
   context 'when captain assistant is configured' do
@@ -22,7 +25,12 @@ RSpec.describe MessageTemplates::HookExecutionService do
       end
 
       it 'schedules captain response job for incoming messages on pending conversations' do
-        expect(Captain::Conversation::ResponseBuilderJob).to receive(:perform_later).with(conversation, assistant)
+        expect(Captain::Conversation::ResponseScheduler).to receive(:new).with(
+          conversation: conversation,
+          assistant: assistant,
+          attachment_wait: 0
+        ).and_return(response_scheduler)
+        expect(response_scheduler).to receive(:schedule)
 
         create(:message, conversation: conversation, message_type: :incoming, account: account)
       end
@@ -41,7 +49,7 @@ RSpec.describe MessageTemplates::HookExecutionService do
       end
 
       it 'schedules captain response job outside business hours (Captain always responds when configured)' do
-        expect(Captain::Conversation::ResponseBuilderJob).to receive(:perform_later).with(conversation, assistant)
+        expect(response_scheduler).to receive(:schedule)
 
         create(:message, conversation: conversation, message_type: :incoming, account: account)
       end
@@ -74,7 +82,7 @@ RSpec.describe MessageTemplates::HookExecutionService do
       end
 
       it 'schedules captain response job regardless of time' do
-        expect(Captain::Conversation::ResponseBuilderJob).to receive(:perform_later).with(conversation, assistant)
+        expect(response_scheduler).to receive(:schedule)
 
         create(:message, conversation: conversation, message_type: :incoming, account: account)
       end
@@ -108,7 +116,7 @@ RSpec.describe MessageTemplates::HookExecutionService do
     end
 
     it 'does not schedule captain response job' do
-      expect(Captain::Conversation::ResponseBuilderJob).not_to receive(:perform_later)
+      expect(Captain::Conversation::ResponseScheduler).not_to receive(:new)
 
       create(:message, conversation: conversation, message_type: :incoming, account: account)
     end
@@ -120,7 +128,7 @@ RSpec.describe MessageTemplates::HookExecutionService do
     end
 
     it 'does not schedule captain response job' do
-      expect(Captain::Conversation::ResponseBuilderJob).not_to receive(:perform_later)
+      expect(Captain::Conversation::ResponseScheduler).not_to receive(:new)
 
       create(:message, conversation: conversation, message_type: :incoming, account: account)
     end
@@ -128,7 +136,7 @@ RSpec.describe MessageTemplates::HookExecutionService do
 
   context 'when message is outgoing' do
     it 'does not schedule captain response job' do
-      expect(Captain::Conversation::ResponseBuilderJob).not_to receive(:perform_later)
+      expect(Captain::Conversation::ResponseScheduler).not_to receive(:new)
 
       create(:message, conversation: conversation, message_type: :outgoing, account: account)
     end
@@ -243,7 +251,12 @@ RSpec.describe MessageTemplates::HookExecutionService do
     let(:campaign_conversation) { create(:conversation, inbox: inbox, account: account, contact: contact, status: :pending, campaign: campaign) }
 
     it 'schedules captain response job for incoming messages on pending campaign conversations' do
-      expect(Captain::Conversation::ResponseBuilderJob).to receive(:perform_later).with(campaign_conversation, assistant)
+      expect(Captain::Conversation::ResponseScheduler).to receive(:new).with(
+        conversation: campaign_conversation,
+        assistant: assistant,
+        attachment_wait: 0
+      ).and_return(response_scheduler)
+      expect(response_scheduler).to receive(:schedule)
 
       create(:message, conversation: campaign_conversation, message_type: :incoming, account: account)
     end

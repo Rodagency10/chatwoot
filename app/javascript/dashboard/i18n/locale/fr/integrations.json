@@ -527,6 +527,14 @@
           "LABEL": "Envoyer le message de résolution au client",
           "DESCRIPTION": "Si activé, le client reçoit le message de résolution avant la clôture automatique de la conversation. Si désactivé, aucun message n'est envoyé."
         },
+        "RESPONSE_DELAY": {
+          "LABEL": "Délai de réponse (secondes)",
+          "DESCRIPTION": "Temps d'attente après le dernier message client avant que Captain réponde. Mettez 0 pour une réponse immédiate. Les messages reçus pendant l'attente sont regroupés en une seule réponse."
+        },
+        "RESPONSE_BATCHING": {
+          "LABEL": "Regrouper les messages rapides",
+          "DESCRIPTION": "Si activé, chaque nouveau message client relance le délai afin que Captain ne réponde qu'une fois avec tout le contexte."
+        },
         "INSTRUCTIONS": {
           "LABEL": "Instructions",
           "PLACEHOLDER": "Entrez les instructions pour l'assistant"

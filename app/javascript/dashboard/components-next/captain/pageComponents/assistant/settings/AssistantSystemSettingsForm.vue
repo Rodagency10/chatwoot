@@ -31,6 +31,8 @@ const initialState = {
   resolutionMessage: '',
   sendHandoffMessage: false,
   sendResolutionMessage: false,
+  responseDelaySeconds: 0,
+  responseBatchingEnabled: true,
   instructions: '',
   temperature: 1,
 };
@@ -72,6 +74,11 @@ const updateStateFromAssistant = assistant => {
     config,
     'send_resolution_message'
   );
+  state.responseDelaySeconds = Number(config.response_delay_seconds) || 0;
+  state.responseBatchingEnabled =
+    config.response_batching_enabled === undefined
+      ? true
+      : Boolean(config.response_batching_enabled);
   state.instructions = config.instructions;
   state.temperature = config.temperature || 1;
 };
@@ -104,6 +111,11 @@ const handleSystemMessagesUpdate = async () => {
       resolution_message: state.resolutionMessage,
       send_handoff_message: state.sendHandoffMessage,
       send_resolution_message: state.sendResolutionMessage,
+      response_delay_seconds: Math.min(
+        300,
+        Math.max(0, Number(state.responseDelaySeconds) || 0)
+      ),
+      response_batching_enabled: state.responseBatchingEnabled,
       temperature: state.temperature || 1,
     },
   };
@@ -176,6 +188,37 @@ watch(
         :message-type="formErrors.resolutionMessage ? 'error' : 'info'"
         class="z-0"
       />
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-2">
+        <label class="text-sm font-medium text-n-slate-12">
+          {{ t('CAPTAIN.ASSISTANTS.FORM.RESPONSE_DELAY.LABEL') }}
+        </label>
+        <input
+          v-model.number="state.responseDelaySeconds"
+          type="number"
+          min="0"
+          max="300"
+          step="1"
+          class="w-full max-w-xs rounded-lg border border-n-weak bg-n-solid-2 px-3 py-2 text-sm text-n-slate-12"
+        />
+        <p class="text-sm text-n-slate-11">
+          {{ t('CAPTAIN.ASSISTANTS.FORM.RESPONSE_DELAY.DESCRIPTION') }}
+        </p>
+      </div>
+
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex flex-col gap-1">
+          <span class="text-sm font-medium text-n-slate-12">
+            {{ t('CAPTAIN.ASSISTANTS.FORM.RESPONSE_BATCHING.LABEL') }}
+          </span>
+          <span class="text-sm text-n-slate-11">
+            {{ t('CAPTAIN.ASSISTANTS.FORM.RESPONSE_BATCHING.DESCRIPTION') }}
+          </span>
+        </div>
+        <Switch v-model="state.responseBatchingEnabled" />
+      </div>
     </div>
 
     <Editor

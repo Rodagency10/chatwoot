@@ -528,6 +528,14 @@
           "LABEL": "Send resolution message to customer",
           "DESCRIPTION": "When enabled, customers receive the resolution message before the conversation is closed by auto-resolve."
         },
+        "RESPONSE_DELAY": {
+          "LABEL": "Response delay (seconds)",
+          "DESCRIPTION": "Wait this long after the last customer message before Captain replies. Use 0 for an immediate response. Incoming messages during the wait are grouped into a single reply."
+        },
+        "RESPONSE_BATCHING": {
+          "LABEL": "Batch rapid messages",
+          "DESCRIPTION": "When enabled, a new customer message resets the delay timer so Captain replies once with full context."
+        },
         "INSTRUCTIONS": {
           "LABEL": "Instructions",
           "PLACEHOLDER": "Enter instructions for the assistant"

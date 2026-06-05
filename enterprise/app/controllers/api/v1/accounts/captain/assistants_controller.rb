@@ -60,6 +60,7 @@ class Api::V1::Accounts::Captain::AssistantsController < Api::V1::Accounts::Base
                                                     :feature_contact_attributes,
                                                     :welcome_message, :handoff_message, :resolution_message,
                                                     :send_handoff_message, :send_resolution_message,
+                                                    :response_delay_seconds, :response_batching_enabled,
                                                     :instructions, :temperature
                                                   ])
 
