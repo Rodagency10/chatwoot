@@ -54,28 +54,41 @@ class Api::V1::Accounts::Captain::AssistantsController < Api::V1::Accounts::Base
   end
 
   def assistant_params
-    permitted = params.require(:assistant).permit(:name, :description,
-                                                  config: [
-                                                    :product_name, :feature_faq, :feature_memory, :feature_citation,
-                                                    :feature_contact_attributes,
-                                                    :welcome_message, :handoff_message, :resolution_message,
-                                                    :send_handoff_message, :send_resolution_message,
-                                                    :response_delay_seconds, :response_batching_enabled,
-                                                    :keyword_activation_enabled, :activation_label, :activation_match_mode,
-                                                    :instructions, :temperature
-                                                  ])
-
-    # Handle array parameters separately to allow partial updates
-    permitted[:response_guidelines] = params[:assistant][:response_guidelines] if params[:assistant].key?(:response_guidelines)
-
-    permitted[:guardrails] = params[:assistant][:guardrails] if params[:assistant].key?(:guardrails)
-
-    if params[:assistant].dig(:config)&.key?(:activation_keywords)
-      permitted[:config] ||= {}
-      permitted[:config][:activation_keywords] = Array(params[:assistant][:config][:activation_keywords]).map(&:to_s).map(&:strip).compact_blank
-    end
-
+    permitted = params.require(:assistant).permit(:name, :description, config: permitted_assistant_config_keys)
+    merge_assistant_array_params!(permitted)
+    merge_activation_keywords!(permitted)
     permitted
+  end
+
+  def permitted_assistant_config_keys
+    [
+      :product_name, :feature_faq, :feature_memory, :feature_citation,
+      :feature_contact_attributes,
+      :welcome_message, :handoff_message, :resolution_message,
+      :send_handoff_message, :send_resolution_message,
+      :response_delay_seconds, :response_batching_enabled,
+      :keyword_activation_enabled, :activation_label, :activation_match_mode,
+      :instructions, :temperature
+    ]
+  end
+
+  def merge_assistant_array_params!(permitted)
+    assistant_payload = params[:assistant]
+
+    permitted[:response_guidelines] = assistant_payload[:response_guidelines] if assistant_payload.key?(:response_guidelines)
+    permitted[:guardrails] = assistant_payload[:guardrails] if assistant_payload.key?(:guardrails)
+  end
+
+  def merge_activation_keywords!(permitted)
+    config_payload = params[:assistant][:config]
+    return unless config_payload&.key?(:activation_keywords)
+
+    permitted[:config] ||= {}
+    permitted[:config][:activation_keywords] = normalize_activation_keywords(config_payload[:activation_keywords])
+  end
+
+  def normalize_activation_keywords(keywords)
+    Array(keywords).map(&:to_s).map(&:strip).compact_blank
   end
 
   def playground_params

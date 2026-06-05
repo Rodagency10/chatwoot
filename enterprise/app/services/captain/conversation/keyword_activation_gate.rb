@@ -1,5 +1,5 @@
 class Captain::Conversation::KeywordActivationGate
-  DEFAULT_ACTIVATION_LABEL = 'keyword_match'
+  DEFAULT_ACTIVATION_LABEL = 'keyword_match'.freeze
 
   def initialize(conversation:, assistant:, message_content:)
     @conversation = conversation
