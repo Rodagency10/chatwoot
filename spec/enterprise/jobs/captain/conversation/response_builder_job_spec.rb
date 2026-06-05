@@ -31,16 +31,16 @@ RSpec.describe Captain::Conversation::ResponseBuilderJob, type: :job do
       end
 
       context 'when the response schedule is stale' do
-        let(:token_key) { format(::Redis::Alfred::CAPTAIN_RESPONSE_SCHEDULE_TOKEN, conversation_id: conversation.id) }
-        let(:last_incoming_key) { format(::Redis::Alfred::CAPTAIN_LAST_INCOMING_AT, conversation_id: conversation.id) }
+        let(:token_key) { format(Redis::Alfred::CAPTAIN_RESPONSE_SCHEDULE_TOKEN, conversation_id: conversation.id) }
+        let(:last_incoming_key) { format(Redis::Alfred::CAPTAIN_LAST_INCOMING_AT, conversation_id: conversation.id) }
 
         after do
-          ::Redis::Alfred.delete(token_key)
-          ::Redis::Alfred.delete(last_incoming_key)
+          Redis::Alfred.delete(token_key)
+          Redis::Alfred.delete(last_incoming_key)
         end
 
         it 'skips processing when the schedule token was superseded' do
-          ::Redis::Alfred.setex(token_key, 'current-token', 60)
+          Redis::Alfred.setex(token_key, 'current-token', 60)
 
           expect(mock_llm_chat_service).not_to receive(:generate_response)
 
@@ -54,7 +54,7 @@ RSpec.describe Captain::Conversation::ResponseBuilderJob, type: :job do
 
         it 'skips processing when a newer incoming message arrived after scheduling' do
           triggered_at = 10.seconds.ago
-          ::Redis::Alfred.setex(last_incoming_key, Time.current.to_f.to_s, 60)
+          Redis::Alfred.setex(last_incoming_key, Time.current.to_f.to_s, 60)
 
           expect(mock_llm_chat_service).not_to receive(:generate_response)
 

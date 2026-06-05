@@ -55,40 +55,40 @@ RSpec.describe Captain::Conversation::ResponseScheduler do
 
     it 'rotates the schedule token when batching is enabled' do
       assistant.update!(config: { 'response_delay_seconds' => 30, 'response_batching_enabled' => true })
-      token_key = format(::Redis::Alfred::CAPTAIN_RESPONSE_SCHEDULE_TOKEN, conversation_id: conversation.id)
+      token_key = format(Redis::Alfred::CAPTAIN_RESPONSE_SCHEDULE_TOKEN, conversation_id: conversation.id)
 
       described_class.new(conversation: conversation, assistant: assistant).schedule
-      first_token = ::Redis::Alfred.get(token_key)
+      first_token = Redis::Alfred.get(token_key)
 
       travel 5.seconds do
         described_class.new(conversation: conversation, assistant: assistant).schedule
       end
 
-      expect(::Redis::Alfred.get(token_key)).not_to eq(first_token)
+      expect(Redis::Alfred.get(token_key)).not_to eq(first_token)
     end
 
     it 'does not rotate the schedule token when batching is disabled' do
       assistant.update!(config: { 'response_delay_seconds' => 30, 'response_batching_enabled' => false })
-      token_key = format(::Redis::Alfred::CAPTAIN_RESPONSE_SCHEDULE_TOKEN, conversation_id: conversation.id)
+      token_key = format(Redis::Alfred::CAPTAIN_RESPONSE_SCHEDULE_TOKEN, conversation_id: conversation.id)
 
       described_class.new(conversation: conversation, assistant: assistant).schedule
 
-      expect(::Redis::Alfred.get(token_key)).to be_nil
+      expect(Redis::Alfred.get(token_key)).to be_nil
     end
 
     it 'updates last incoming timestamp on each schedule' do
       assistant.update!(config: { 'response_delay_seconds' => 30 })
-      last_incoming_key = format(::Redis::Alfred::CAPTAIN_LAST_INCOMING_AT, conversation_id: conversation.id)
+      last_incoming_key = format(Redis::Alfred::CAPTAIN_LAST_INCOMING_AT, conversation_id: conversation.id)
 
       freeze_time do
         described_class.new(conversation: conversation, assistant: assistant).schedule
-        first_timestamp = ::Redis::Alfred.get(last_incoming_key).to_f
+        first_timestamp = Redis::Alfred.get(last_incoming_key).to_f
 
         travel 5.seconds do
           described_class.new(conversation: conversation, assistant: assistant).schedule
         end
 
-        expect(::Redis::Alfred.get(last_incoming_key).to_f).to be > first_timestamp
+        expect(Redis::Alfred.get(last_incoming_key).to_f).to be > first_timestamp
       end
     end
   end
@@ -99,9 +99,9 @@ RSpec.describe Captain::Conversation::ResponseScheduler do
   end
 
   def clear_schedule_keys
-    token_key = format(::Redis::Alfred::CAPTAIN_RESPONSE_SCHEDULE_TOKEN, conversation_id: conversation.id)
-    last_incoming_key = format(::Redis::Alfred::CAPTAIN_LAST_INCOMING_AT, conversation_id: conversation.id)
-    ::Redis::Alfred.delete(token_key)
-    ::Redis::Alfred.delete(last_incoming_key)
+    token_key = format(Redis::Alfred::CAPTAIN_RESPONSE_SCHEDULE_TOKEN, conversation_id: conversation.id)
+    last_incoming_key = format(Redis::Alfred::CAPTAIN_LAST_INCOMING_AT, conversation_id: conversation.id)
+    Redis::Alfred.delete(token_key)
+    Redis::Alfred.delete(last_incoming_key)
   end
 end

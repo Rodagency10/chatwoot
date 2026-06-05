@@ -1,4 +1,5 @@
 class Captain::Conversation::ResponseBuilderJob < ApplicationJob
+  include Captain::Conversation::ResponseScheduleGuard
   include Captain::Conversation::V1ActionClassifier
 
   MAX_MESSAGE_LENGTH = 10_000
@@ -217,28 +218,5 @@ class Captain::Conversation::ResponseBuilderJob < ApplicationJob
   def conversation_pending?
     status = Conversation.uncached { Conversation.where(id: @conversation.id).pick(:status) }
     status == 'pending' || status == Conversation.statuses[:pending]
-  end
-
-  def stale_response_schedule?(schedule_token, triggered_at)
-    return false if schedule_token.blank? && triggered_at.blank?
-
-    if schedule_token.present?
-      token_key = format(::Redis::Alfred::CAPTAIN_RESPONSE_SCHEDULE_TOKEN, conversation_id: @conversation.id)
-      return true if ::Redis::Alfred.get(token_key) != schedule_token
-    end
-
-    return false if triggered_at.blank?
-
-    last_incoming_key = format(::Redis::Alfred::CAPTAIN_LAST_INCOMING_AT, conversation_id: @conversation.id)
-    last_incoming = ::Redis::Alfred.get(last_incoming_key)&.to_f
-    return false unless last_incoming
-
-    normalize_triggered_at(triggered_at).to_f < last_incoming
-  end
-
-  def normalize_triggered_at(triggered_at)
-    return triggered_at.in_time_zone if triggered_at.is_a?(Time)
-
-    Time.zone.parse(triggered_at.to_s)
   end
 end
