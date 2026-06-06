@@ -78,7 +78,7 @@ describe Whatsapp::CallPermissionReplyService do
 
     described_class.new(inbox: inbox, params: reply_params(response: 'accept', context_id: other_request_wamid)).perform
 
-    # The reply pointed at other_open's request — it should be the cleared one, not `conversation`
+    # The reply pointed at other_open's request - it should be the cleared one, not `conversation`
     expect(other_open.reload.additional_attributes).not_to include('call_permission_request_message_id')
     expect(conversation.reload.additional_attributes).to include('call_permission_request_message_id')
     expect(ActionCable.server).to have_received(:broadcast).with(

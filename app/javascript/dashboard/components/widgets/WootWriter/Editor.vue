@@ -559,7 +559,7 @@ function toggleSignatureInEditor(signatureEnabled) {
     removeSignature();
   }
   // reloadState replaces editor state directly and bypasses dispatchTransaction,
-  // so v-model never hears about the signature change — sync it back explicitly.
+  // so v-model never hears about the signature change - sync it back explicitly.
   emitOnChange();
 }
 
@@ -757,7 +757,7 @@ function createEditorView() {
       blur: () => {
         if (props.disabled) return;
         typingIndicator.stop();
-        // PM keeps its selection on blur — clear the menu flags manually.
+        // PM keeps its selection on blur - clear the menu flags manually.
         isTextSelected.value = false;
         editorRoot.value?.classList.remove('has-selection');
         emit('blur');

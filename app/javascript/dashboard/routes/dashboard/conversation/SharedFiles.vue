@@ -173,7 +173,7 @@ const displayName = attachment =>
 const displaySize = attachment => {
   if (attachment.file_size) return formatBytes(attachment.file_size);
   if (attachment.extension) return attachment.extension.toUpperCase();
-  return '—';
+  return '-';
 };
 
 const displayTime = attachment => {

@@ -28,7 +28,7 @@ const pendingOutboundAnswers = new Map();
 const isInitiatingOutbound = ref(false);
 const isInitiatingOutboundReadonly = readonly(isInitiatingOutbound);
 // Inbound calls record from the moment the agent clicks accept (their click =
-// pickup). Outbound calls must wait — Meta's `connect` webhook (which lands
+// pickup). Outbound calls must wait - Meta's `connect` webhook (which lands
 // during ringing) negotiates remote tracks ~20s before the contact actually
 // answers, and we don't want pre-pickup audio in the recording. This flag is
 // flipped to true by armOutboundRecorder() when the ACCEPTED status arrives.
@@ -88,7 +88,7 @@ const waitForIceGatheringComplete = peer =>
 const setupRecorder = () => {
   if (!localStream || !remoteStream || mediaRecorder) return;
   // createMediaStreamSource on a stream with no audio tracks wires up to
-  // nothing — the recorded mix would be silence. Wait until ontrack fires.
+  // nothing - the recorded mix would be silence. Wait until ontrack fires.
   if (remoteStream.getAudioTracks().length === 0) return;
 
   audioContext = new AudioContext({ sampleRate: 48000 });
@@ -145,7 +145,7 @@ const buildPeerConnection = iceServers => {
   pc = new RTCPeerConnection(config);
   remoteStream = new MediaStream();
   pc.ontrack = event => {
-    // Reuse the same MediaStream object — the recorder's audioContext source
+    // Reuse the same MediaStream object - the recorder's audioContext source
     // taps it once, so reassigning would orphan the recorder.
     const tracks =
       event.streams && event.streams[0]
@@ -178,7 +178,7 @@ const stopRecorderAndUpload = async callId => {
   if (!recorderChunks.length || !callId) return;
 
   const blob = new Blob(recorderChunks, { type: recorderChunks[0].type });
-  // Best-effort — the controller's idempotency guard handles a retry.
+  // Best-effort - the controller's idempotency guard handles a retry.
   try {
     await WhatsappCallsAPI.uploadRecording(callId, blob);
   } catch (_) {
@@ -187,7 +187,7 @@ const stopRecorderAndUpload = async callId => {
 };
 
 // devise-token-auth requires access-token / client / uid headers on every
-// request — navigator.sendBeacon can't set custom headers, so we rehydrate
+// request - navigator.sendBeacon can't set custom headers, so we rehydrate
 // the auth payload from the cw_d_session_info cookie that the dashboard sets
 // at login. Used by the page-close terminate path below.
 const getDeviseAuthHeaders = () => {
@@ -215,7 +215,7 @@ const beaconTerminate = callId => {
   if (!headers) return;
   const url = `/api/v1/accounts/${accountId}/whatsapp_calls/${callId}/terminate`;
   // fetch+keepalive (instead of navigator.sendBeacon) so we can attach auth
-  // headers — without them devise-token-auth 401s and the call stays open on
+  // headers - without them devise-token-auth 401s and the call stays open on
   // Meta until its carrier-side timeout (~60s).
   try {
     fetch(url, {
@@ -278,11 +278,11 @@ export function useWhatsappCallSession() {
       }
     }
     if (!offer) {
-      throw new Error('Missing sdp_offer for accept — call may have ended.');
+      throw new Error('Missing sdp_offer for accept - call may have ended.');
     }
 
     // Release the mic + peer connection if anything between here and the accept
-    // round-trip fails — otherwise a rejected accept leaves the mic live and
+    // round-trip fails - otherwise a rejected accept leaves the mic live and
     // activeCallId set. Mirrors rejectIncomingCall's self-cleanup; rethrow so
     // the caller can surface the failure and skip marking the call active.
     try {
@@ -309,9 +309,9 @@ export function useWhatsappCallSession() {
   };
 
   const initiateOutboundCall = async conversationId => {
-    // Module-scoped lock + active-session guard so a second click — from the
+    // Module-scoped lock + active-session guard so a second click - from the
     // same composable instance OR a different one (header vs contact panel)
-    // OR while a call is already live — can't tear down the in-flight setup
+    // OR while a call is already live - can't tear down the in-flight setup
     // via prepareOutboundOffer's cleanup().
     if (isInitiatingOutbound.value)
       return { status: VOICE_CALL_OUTBOUND_INIT_STATUS.LOCKED };
@@ -341,7 +341,7 @@ export function useWhatsappCallSession() {
       }
       // No call id back: this is the permission-request branch. The mic +
       // PeerConnection allocated by prepareOutboundOffer aren't useful until
-      // the contact opts in and the agent retries — release them.
+      // the contact opts in and the agent retries - release them.
       cleanup();
       return response;
     } catch (e) {
@@ -363,7 +363,7 @@ export function useWhatsappCallSession() {
   };
 
   // callIdOverride is the call.id from the dashboard's calls store. Module
-  // `activeCallId` may be null after a prior accept attempt's cleanup() — but
+  // `activeCallId` may be null after a prior accept attempt's cleanup() - but
   // the call still exists on Meta and must still be terminated. Falling back
   // to the override means hangup is robust to a wiped local session.
   const endActiveCall = async (callIdOverride = null) => {
@@ -414,7 +414,7 @@ export const applyOutboundAnswer = async (callId, sdpAnswer) => {
 
 // Called by the cable handler when Meta delivers status=ACCEPTED for the
 // outbound call (real pickup). Flips the recorder gate and starts the
-// MediaRecorder. Idempotent — safe if ontrack hasn't fired yet (setupRecorder
+// MediaRecorder. Idempotent - safe if ontrack hasn't fired yet (setupRecorder
 // bails until the remote stream has audio tracks; ontrack will retry).
 export const armOutboundRecorder = () => {
   recorderArmed = true;
@@ -448,7 +448,7 @@ export const setWhatsappCallMuted = muted => {
 export const sendWhatsappTerminateBeacon = () => {
   // Always fire when there's a live callId. The beacon endpoint is idempotent,
   // so racing it with an in-flight Axios terminate (which unload may abort) is
-  // fine — Meta gets exactly one terminate either way, and we avoid leaving
+  // fine - Meta gets exactly one terminate either way, and we avoid leaving
   // the call ringing on Meta until its carrier-side timeout.
   if (!activeCallId) return;
   beaconTerminate(activeCallId);

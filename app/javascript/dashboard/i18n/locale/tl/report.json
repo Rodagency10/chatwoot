@@ -274,7 +274,7 @@
   },
   "INBOX_REPORTS": {
     "HEADER": "Buod ng Inbox",
-    "DESCRIPTION": "Mabilis na tingnan ang performance ng iyong inbox gamit ang mga pangunahing sukatan tulad ng mga pag-uusap, oras ng pagtugon, oras ng paglutas, at mga nalutas na kaso—lahat sa isang lugar. I-click ang pangalan ng inbox para sa karagdagang detalye.",
+    "DESCRIPTION": "Mabilis na tingnan ang performance ng iyong inbox gamit ang mga pangunahing sukatan tulad ng mga pag-uusap, oras ng pagtugon, oras ng paglutas, at mga nalutas na kaso-lahat sa isang lugar. I-click ang pangalan ng inbox para sa karagdagang detalye.",
     "LOADING_CHART": "Ikinakarga ang datos ng tsart...",
     "NO_ENOUGH_DATA": "Walang sapat na datos para makagawa ng ulat. Pakisubukang muli mamaya.",
     "DOWNLOAD_INBOX_REPORTS": "I-download ang mga ulat ng inbox",

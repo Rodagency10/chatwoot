@@ -36,7 +36,7 @@
         "COPY": "Copy secret to clipboard",
         "COPY_SUCCESS": "Secret copied to clipboard",
         "TOGGLE": "Toggle secret visibility",
-        "CREATED_DESC": "Your webhook has been created. Use the secret below to verify webhook signatures. Please copy it now — you can also find it later in the webhook edit form.",
+        "CREATED_DESC": "Your webhook has been created. Use the secret below to verify webhook signatures. Please copy it now - you can also find it later in the webhook edit form.",
         "DONE": "Done"
       },
       "COUNT": "{n} webhook | {n} webhooks",
@@ -553,11 +553,11 @@
           "OPTIONS": {
             "GUARDRAILS": {
               "TITLE": "מעקות בטיחות",
-              "DESCRIPTION": "Keeps things on track—only the kinds of questions you want your assistant to answer, nothing off-limits or off-topic."
+              "DESCRIPTION": "Keeps things on track-only the kinds of questions you want your assistant to answer, nothing off-limits or off-topic."
             },
             "RESPONSE_GUIDELINES": {
               "TITLE": "הנחיות תגובה",
-              "DESCRIPTION": "The vibe and structure of your assistant’s replies—clear and friendly? Short and snappy? Detailed and formal?"
+              "DESCRIPTION": "The vibe and structure of your assistant’s replies-clear and friendly? Short and snappy? Detailed and formal?"
             }
           }
         },
@@ -582,7 +582,7 @@
       },
       "GUARDRAILS": {
         "TITLE": "מעקות בטיחות",
-        "DESCRIPTION": "Keeps things on track—only the kinds of questions you want your assistant to answer, nothing off-limits or off-topic.",
+        "DESCRIPTION": "Keeps things on track-only the kinds of questions you want your assistant to answer, nothing off-limits or off-topic.",
         "BULK_ACTION": {
           "SELECTED": "{count} פריט נבחר | {count} פריטים נבחרו",
           "SELECT_ALL": "בחר הכל ({count})",
@@ -627,7 +627,7 @@
       },
       "RESPONSE_GUIDELINES": {
         "TITLE": "הנחיות תגובה",
-        "DESCRIPTION": "The vibe and structure of your assistant’s replies—clear and friendly? Short and snappy? Detailed and formal?",
+        "DESCRIPTION": "The vibe and structure of your assistant’s replies-clear and friendly? Short and snappy? Detailed and formal?",
         "BULK_ACTION": {
           "SELECTED": "{count} פריט נבחר | {count} פריטים נבחרו",
           "SELECT_ALL": "בחר הכל ({count})",
@@ -672,7 +672,7 @@
       },
       "SCENARIOS": {
         "TITLE": "תרחישים",
-        "DESCRIPTION": "Give your assistant some context—like “what to do when a user is stuck,” or “how to act during a refund request.”",
+        "DESCRIPTION": "Give your assistant some context-like “what to do when a user is stuck,” or “how to act during a refund request.”",
         "BULK_ACTION": {
           "SELECTED": "{count} פריט נבחר | {count} פריטים נבחרו",
           "SELECT_ALL": "בחר הכל ({count})",
@@ -1064,7 +1064,7 @@
         "CLEAR_SEARCH": "נקה מסננים פעילים",
         "FEATURE_SPOTLIGHT": {
           "TITLE": "שאלות נפוצות של קפטן",
-          "NOTE": "Captain FAQs detects common customer questions—whether missing from your knowledge base or frequently asked—and generates relevant FAQs to improve support. You can review each suggestion and decide whether to approve or reject it."
+          "NOTE": "Captain FAQs detects common customer questions-whether missing from your knowledge base or frequently asked-and generates relevant FAQs to improve support. You can review each suggestion and decide whether to approve or reject it."
         }
       }
     },

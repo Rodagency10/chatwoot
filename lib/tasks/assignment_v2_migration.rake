@@ -46,7 +46,7 @@ namespace :assignment_v2 do
 
       if inboxes_with_limit.empty?
         skipped += 1
-        puts "  [#{migrated + skipped + errored}/#{total}] Account #{account.id} — skipped (no inboxes with limit)"
+        puts "  [#{migrated + skipped + errored}/#{total}] Account #{account.id} - skipped (no inboxes with limit)"
         next
       end
 
@@ -69,10 +69,10 @@ namespace :assignment_v2 do
       end
 
       migrated += 1
-      puts "  [#{migrated + skipped + errored}/#{total}] Account #{account.id} — migrated"
+      puts "  [#{migrated + skipped + errored}/#{total}] Account #{account.id} - migrated"
     rescue StandardError => e
       errored += 1
-      puts "  [#{migrated + skipped + errored}/#{total}] Account #{account.id} — error: #{e.message}"
+      puts "  [#{migrated + skipped + errored}/#{total}] Account #{account.id} - error: #{e.message}"
     end
 
     puts "\nDone! Migrated: #{migrated}, Skipped: #{skipped}, Errored: #{errored}, Total: #{total}"

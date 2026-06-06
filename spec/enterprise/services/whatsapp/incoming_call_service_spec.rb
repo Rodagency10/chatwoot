@@ -48,7 +48,7 @@ describe Whatsapp::IncomingCallService do
                                       provider_call_id: provider_call_id)
       expect(call.meta['sdp_offer']).to eq(sdp_offer)
       # No agent is online, so the call falls back to the inbox's agents (and
-      # account admins) — never the whole-account stream.
+      # account admins) - never the whole-account stream.
       expect(ActionCable.server).to have_received(:broadcast).with(
         agent.pubsub_token,
         hash_including(event: 'voice_call.incoming', data: hash_including(sdp_offer: sdp_offer))

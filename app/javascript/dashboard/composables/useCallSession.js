@@ -28,7 +28,7 @@ const markDismissed = callSid => {
   if (callSid) dismissedCallSids.add(callSid);
 };
 
-// Globals attached once across all useCallSession() consumers — bubbles in a
+// Globals attached once across all useCallSession() consumers - bubbles in a
 // long thread call this composable many times, and a per-instance Timer +
 // window listener stack would multiply work.
 let globalsAttachedCount = 0;
@@ -82,7 +82,7 @@ const detachGlobalsOnLastUnmount = () => {
 };
 
 // Build the action surface used by both the root session composable and the
-// lighter useCallActions consumer. All state is module-scoped — the actions
+// lighter useCallActions consumer. All state is module-scoped - the actions
 // don't depend on per-instance refs, so they're cheap to call from anywhere.
 const buildCallActions = ({ callsStore, whatsappSession, t }) => {
   const findCall = callSid => callsStore.calls.find(c => c.callSid === callSid);
@@ -99,7 +99,7 @@ const buildCallActions = ({ callsStore, whatsappSession, t }) => {
     }
 
     // try/finally so a failed leaveConference (e.g. backend 5xx) still
-    // tears down the local Device and UI state — otherwise the call stays
+    // tears down the local Device and UI state - otherwise the call stays
     // visually active with the mic open.
     try {
       await VoiceAPI.leaveConference({ inboxId, conversationId, callSid });
@@ -114,7 +114,7 @@ const buildCallActions = ({ callsStore, whatsappSession, t }) => {
     if (globalIsJoining.value) return null;
 
     const call = findCall(callSid);
-    // Outbound *WhatsApp* calls have no separate join step — the offer was
+    // Outbound *WhatsApp* calls have no separate join step - the offer was
     // sent at initiate time and the answer is applied by the cable handler.
     // Routing through acceptIncomingCall here would call prepareInboundAnswer →
     // cleanup() and destroy the live outbound session. Outbound *Twilio*
@@ -167,7 +167,7 @@ const buildCallActions = ({ callsStore, whatsappSession, t }) => {
         callsStore.dismissCall(callSid);
       } else if (!isWhatsappCall(call)) {
         // Tear down the Twilio Device on any other join error so a retry
-        // starts from a clean state — joinClientCall can leave the device
+        // starts from a clean state - joinClientCall can leave the device
         // half-initialized after a network blip.
         TwilioVoiceClient.endClientCall();
       }
@@ -241,7 +241,7 @@ const buildReactiveSurface = callsStore => {
 };
 
 // Root-mount composable. Call once at the dashboard root (FloatingCallWidget
-// is the natural anchor — always mounted, lifetime spans the whole session).
+// is the natural anchor - always mounted, lifetime spans the whole session).
 // This is the only path that registers global window/Twilio listeners and
 // owns the duration Timer.
 export function useCallSession() {

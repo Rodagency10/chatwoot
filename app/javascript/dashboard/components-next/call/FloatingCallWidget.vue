@@ -29,7 +29,7 @@ const {
   formattedCallDuration,
 } = useCallSession();
 
-// Mute is currently WhatsApp-only — Twilio calls are mediated server-side and
+// Mute is currently WhatsApp-only - Twilio calls are mediated server-side and
 // don't expose a mic track on the browser side.
 const isMuted = ref(false);
 const isWhatsappActive = computed(
@@ -53,7 +53,7 @@ const mainCardState = computed(() => {
 });
 
 // Stacked cards are always non-active (ringing) calls, so reflect each call's
-// real direction. An outbound call must render as OUTGOING — otherwise it shows
+// real direction. An outbound call must render as OUTGOING - otherwise it shows
 // the incoming-only dismiss (✕) control and the agent could drop it locally
 // without terminating, leaving the customer ringing with no widget to end it.
 const stackedCardState = call =>
@@ -86,7 +86,7 @@ const countryCodeToFlag = code => {
 
 const getCallInfo = call => {
   const conversation = store.getters.getConversationById(call?.conversationId);
-  // Look up inbox from the call's own inboxId — the conversation can drop out
+  // Look up inbox from the call's own inboxId - the conversation can drop out
   // of the Vuex store when the user navigates between inbox views, so going
   // through `conversation.inbox_id` would lose the inbox name (and fall back
   // to the literal "Customer support" string).
@@ -197,9 +197,9 @@ watch(
 // call is active (we joined), every inbound call cleared, or the widget tears
 // down. The watcher only fires on the boolean transitioning, so additional
 // ringing calls arriving while one is already ringing don't restart the audio
-// — they silently stack into the UI without producing a fresh ring.
+// - they silently stack into the UI without producing a fresh ring.
 // Browser autoplay may reject the first play() if the tab has no prior
-// user gesture; that's fine — the visual widget still surfaces the call.
+// user gesture; that's fine - the visual widget still surfaces the call.
 const ringtone = new Audio(RINGTONE_URL);
 ringtone.loop = true;
 ringtone.volume = 1;

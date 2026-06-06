@@ -36,7 +36,7 @@
         "COPY": "Copiar segredo para a área de transferência",
         "COPY_SUCCESS": "Segredo copiado para a área de transferência",
         "TOGGLE": "Alternar visibilidade do segredo",
-        "CREATED_DESC": "Seu webhook foi criado. Use o segredo abaixo para verificar as assinaturas do webhook. Copie-o agora — você também poderá encontrá-lo posteriormente no formulário de edição do webhook.",
+        "CREATED_DESC": "Seu webhook foi criado. Use o segredo abaixo para verificar as assinaturas do webhook. Copie-o agora - você também poderá encontrá-lo posteriormente no formulário de edição do webhook.",
         "DONE": "Concluído"
       },
       "COUNT": "{n} webhook | {n} webhooks",
@@ -553,11 +553,11 @@
           "OPTIONS": {
             "GUARDRAILS": {
               "TITLE": "Proteções",
-              "DESCRIPTION": "Mantém as coisas no caminho — apenas os tipos de perguntas que você quer que seu assistente responda, nada fora de limites ou fora do tópico."
+              "DESCRIPTION": "Mantém as coisas no caminho - apenas os tipos de perguntas que você quer que seu assistente responda, nada fora de limites ou fora do tópico."
             },
             "RESPONSE_GUIDELINES": {
               "TITLE": "Diretrizes de resposta",
-              "DESCRIPTION": "O jeito e a estrutura das respostas do seu assistente — tranquilo e amigável? Curto e ágil? Detalhado e formal?"
+              "DESCRIPTION": "O jeito e a estrutura das respostas do seu assistente - tranquilo e amigável? Curto e ágil? Detalhado e formal?"
             }
           }
         },
@@ -582,7 +582,7 @@
       },
       "GUARDRAILS": {
         "TITLE": "Proteções",
-        "DESCRIPTION": "Mantém as coisas no caminho — apenas os tipos de perguntas que você quer que seu assistente responda, nada fora de limites ou fora do tópico.",
+        "DESCRIPTION": "Mantém as coisas no caminho - apenas os tipos de perguntas que você quer que seu assistente responda, nada fora de limites ou fora do tópico.",
         "BULK_ACTION": {
           "SELECTED": "{count} item selecionado | {count} itens selecionados",
           "SELECT_ALL": "Selecionar todos ({count})",
@@ -627,7 +627,7 @@
       },
       "RESPONSE_GUIDELINES": {
         "TITLE": "Diretrizes de Resposta",
-        "DESCRIPTION": "O jeito e a estrutura das respostas do seu assistente — tranquilo e amigável? Curto e ágil? Detalhado e formal?",
+        "DESCRIPTION": "O jeito e a estrutura das respostas do seu assistente - tranquilo e amigável? Curto e ágil? Detalhado e formal?",
         "BULK_ACTION": {
           "SELECTED": "{count} item selecionado | {count} itens selecionados",
           "SELECT_ALL": "Selecionar todos ({count})",
@@ -672,7 +672,7 @@
       },
       "SCENARIOS": {
         "TITLE": "Cenários",
-        "DESCRIPTION": "Dê algum contexto ao seu assistente — como \"o que fazer quando um usuário estiver com problemas\", ou \"como agir durante uma solicitação de reembolso\".",
+        "DESCRIPTION": "Dê algum contexto ao seu assistente - como \"o que fazer quando um usuário estiver com problemas\", ou \"como agir durante uma solicitação de reembolso\".",
         "BULK_ACTION": {
           "SELECTED": "{count} item selecionado | {count} itens selecionados",
           "SELECT_ALL": "Selecionar todos ({count})",
@@ -1064,7 +1064,7 @@
         "CLEAR_SEARCH": "Limpar filtros ativos",
         "FEATURE_SPOTLIGHT": {
           "TITLE": "FAQ do Capitão",
-          "NOTE": "As FAQs do Capitão identificam as perguntas mais comuns dos clientes — tanto as que ainda não existem na sua base de conhecimento quanto as mais recorrentes — e gera FAQs relevantes para melhorar o atendimento. Você pode revisar cada sugestão e decidir se aprova ou rejeita."
+          "NOTE": "As FAQs do Capitão identificam as perguntas mais comuns dos clientes - tanto as que ainda não existem na sua base de conhecimento quanto as mais recorrentes - e gera FAQs relevantes para melhorar o atendimento. Você pode revisar cada sugestão e decidir se aprova ou rejeita."
         }
       }
     },

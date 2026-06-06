@@ -274,7 +274,7 @@
   },
   "INBOX_REPORTS": {
     "HEADER": "Prezentare generală a inboxului",
-    "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases—all in one place. Click an inbox name for more details.",
+    "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases-all in one place. Click an inbox name for more details.",
     "LOADING_CHART": "Încărcare date grafic...",
     "NO_ENOUGH_DATA": "Nu am primit suficiente date pentru a genera raportul. Vă rugăm să încercați din nou mai târziu.",
     "DOWNLOAD_INBOX_REPORTS": "Descărcarea rapoartelor inbox",

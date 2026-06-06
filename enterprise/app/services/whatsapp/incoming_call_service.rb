@@ -19,7 +19,7 @@ class Whatsapp::IncomingCallService
   end
 
   # Meta's `connect` event for outbound calls fires when the WebRTC tunnel is
-  # up — empirically ~20s before the contact actually answers. The real pickup
+  # up - empirically ~20s before the contact actually answers. The real pickup
   # is reported as a separate webhook with status=ACCEPTED, and is what
   # `terminate.start_time` aligns to. Treat ACCEPTED as the pickup transition.
   def handle_status(payload)
@@ -54,7 +54,7 @@ class Whatsapp::IncomingCallService
     if call.nil?
       # Only an `offer` payload is a real inbound caller. An `answer` with no
       # local row means Meta beat our outbound `Call.create!` (tiny window
-      # between initiate API response and DB insert) — do not mint an inbound
+      # between initiate API response and DB insert) - do not mint an inbound
       # row for it; the next status webhook (or a retry) will find it.
       return create_inbound_call(payload) if inbound_offer?(payload)
 
@@ -116,7 +116,7 @@ class Whatsapp::IncomingCallService
   def handle_terminate(payload)
     call = Call.whatsapp.find_by(provider_call_id: payload[:id])
     if call.nil?
-      # No row yet means either an out-of-order terminate (rare in practice — Meta
+      # No row yet means either an out-of-order terminate (rare in practice - Meta
       # delivery is FIFO) or, more dangerously, an outbound terminate landing in
       # the window between the controller's Meta API call and Call.create!.
       # Materialising as inbound here would collide with the unique

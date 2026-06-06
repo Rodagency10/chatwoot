@@ -69,7 +69,7 @@ class Captain::MediaAsset < ApplicationRecord
   def append_image_label(caption, image)
     return caption unless image.present? && image.label.present? && !image.is_primary?
 
-    "#{caption} — #{image.label}"
+    "#{caption} - #{image.label}"
   end
 
   def find_image_by_label(image_label)

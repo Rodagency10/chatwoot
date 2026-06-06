@@ -274,7 +274,7 @@
   },
   "INBOX_REPORTS": {
     "HEADER": "ഇൻബോക്സ് അവലോകനം",
-    "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases—all in one place. Click an inbox name for more details.",
+    "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases-all in one place. Click an inbox name for more details.",
     "LOADING_CHART": "ചാർട്ട് ഡാറ്റ ലോഡു ചെയ്യുകയാണ്...",
     "NO_ENOUGH_DATA": "റിപ്പോർട്ട് സൃഷ്ടിക്കുന്നതിന് ആവശ്യമായ ഡാറ്റ ഞങ്ങൾക്ക് ലഭിച്ചിട്ടില്ല, ദയവായി പിന്നീട് വീണ്ടും ശ്രമിക്കുക.",
     "DOWNLOAD_INBOX_REPORTS": "ഇൻബോക്സ് റിപ്പോർട്ടുകൾ ഡൗൺലോഡ് ചെയ്യുക",

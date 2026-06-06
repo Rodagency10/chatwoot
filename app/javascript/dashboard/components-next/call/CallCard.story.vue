@@ -36,7 +36,7 @@ const noLocationCallInfo = {
   avatar: '',
 };
 
-// Truncation regression check — both contact name and location should ellipsize.
+// Truncation regression check - both contact name and location should ellipsize.
 const longCallInfo = {
   contactName: 'Aleksandra Konstantinopolskaya',
   phoneNumber: '+49 30 911890',

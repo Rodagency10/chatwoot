@@ -36,7 +36,7 @@
         "COPY": "Copy secret to clipboard",
         "COPY_SUCCESS": "Secret copied to clipboard",
         "TOGGLE": "Toggle secret visibility",
-        "CREATED_DESC": "Your webhook has been created. Use the secret below to verify webhook signatures. Please copy it now — you can also find it later in the webhook edit form.",
+        "CREATED_DESC": "Your webhook has been created. Use the secret below to verify webhook signatures. Please copy it now - you can also find it later in the webhook edit form.",
         "DONE": "Done"
       },
       "COUNT": "{n} webhook | {n} webhooks",
@@ -553,11 +553,11 @@
           "OPTIONS": {
             "GUARDRAILS": {
               "TITLE": "گارڈریل",
-              "DESCRIPTION": "چیزوں کو راستے پر رکھتا ہے—صرف وہی قسم کے سوالات جو آپ چاہتے ہیں کہ آپ کا اسسٹنٹ جواب دے، کوئی غیر متعلقہ یا موضوع سے ہٹ کر نہیں۔"
+              "DESCRIPTION": "چیزوں کو راستے پر رکھتا ہے-صرف وہی قسم کے سوالات جو آپ چاہتے ہیں کہ آپ کا اسسٹنٹ جواب دے، کوئی غیر متعلقہ یا موضوع سے ہٹ کر نہیں۔"
             },
             "RESPONSE_GUIDELINES": {
               "TITLE": "جواب کی رہنما اصول",
-              "DESCRIPTION": "آپ کے معاون کے جوابات کا انداز اور ساخت—صاف اور دوستانہ؟ مختصر اور جامع؟ تفصیلی اور رسمی؟"
+              "DESCRIPTION": "آپ کے معاون کے جوابات کا انداز اور ساخت-صاف اور دوستانہ؟ مختصر اور جامع؟ تفصیلی اور رسمی؟"
             }
           }
         },
@@ -582,7 +582,7 @@
       },
       "GUARDRAILS": {
         "TITLE": "محفوظ حدود",
-        "DESCRIPTION": "چیزوں کو درست راستے پر رکھتا ہے—صرف وہی سوالات جن کے جوابات آپ اپنے معاون سے چاہتے ہیں، کوئی ممنوع یا غیر متعلقہ بات نہیں۔",
+        "DESCRIPTION": "چیزوں کو درست راستے پر رکھتا ہے-صرف وہی سوالات جن کے جوابات آپ اپنے معاون سے چاہتے ہیں، کوئی ممنوع یا غیر متعلقہ بات نہیں۔",
         "BULK_ACTION": {
           "SELECTED": "{count} آئٹم منتخب | {count} آئٹمز منتخب",
           "SELECT_ALL": "تمام منتخب کریں ({count})",
@@ -627,7 +627,7 @@
       },
       "RESPONSE_GUIDELINES": {
         "TITLE": "جواب کی رہنما اصول",
-        "DESCRIPTION": "آپ کے معاون کے جوابات کا انداز اور ساخت—صاف اور دوستانہ؟ مختصر اور جامع؟ تفصیلی اور رسمی؟",
+        "DESCRIPTION": "آپ کے معاون کے جوابات کا انداز اور ساخت-صاف اور دوستانہ؟ مختصر اور جامع؟ تفصیلی اور رسمی؟",
         "BULK_ACTION": {
           "SELECTED": "{count} آئٹم منتخب | {count} آئٹمز منتخب",
           "SELECT_ALL": "تمام منتخب کریں ({count})",
@@ -672,7 +672,7 @@
       },
       "SCENARIOS": {
         "TITLE": "مناظر",
-        "DESCRIPTION": "اپنے معاون کو کچھ سیاق و سباق دیں—جیسے “جب صارف پھنس جائے تو کیا کرنا ہے”، یا “ریفنڈ کی درخواست کے دوران کیسے عمل کرنا ہے۔”",
+        "DESCRIPTION": "اپنے معاون کو کچھ سیاق و سباق دیں-جیسے “جب صارف پھنس جائے تو کیا کرنا ہے”، یا “ریفنڈ کی درخواست کے دوران کیسے عمل کرنا ہے۔”",
         "BULK_ACTION": {
           "SELECTED": "{count} آئٹم منتخب | {count} آئٹمز منتخب",
           "SELECT_ALL": "تمام منتخب کریں ({count})",
@@ -1064,7 +1064,7 @@
         "CLEAR_SEARCH": "Clear active filters",
         "FEATURE_SPOTLIGHT": {
           "TITLE": "کپٹن FAQ",
-          "NOTE": "کپٹن FAQs عام صارف کے سوالات کا پتہ لگاتا ہے—چاہے وہ آپ کے نالج بیس میں موجود نہ ہوں یا بار بار پوچھے جاتے ہوں—اور متعلقہ FAQs تیار کرتا ہے تاکہ سپورٹ بہتر ہو سکے۔ آپ ہر تجویز کا جائزہ لے سکتے ہیں اور فیصلہ کر سکتے ہیں کہ اسے منظور کرنا ہے یا مسترد۔"
+          "NOTE": "کپٹن FAQs عام صارف کے سوالات کا پتہ لگاتا ہے-چاہے وہ آپ کے نالج بیس میں موجود نہ ہوں یا بار بار پوچھے جاتے ہوں-اور متعلقہ FAQs تیار کرتا ہے تاکہ سپورٹ بہتر ہو سکے۔ آپ ہر تجویز کا جائزہ لے سکتے ہیں اور فیصلہ کر سکتے ہیں کہ اسے منظور کرنا ہے یا مسترد۔"
         }
       }
     },

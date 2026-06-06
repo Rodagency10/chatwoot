@@ -2,7 +2,7 @@
  * Parses natural language text into a future date.
  *
  * Flow: clean the input → try each matcher in order → return the first future date.
- * The MATCHERS order matters — see the comment above the array.
+ * The MATCHERS order matters - see the comment above the array.
  */
 
 import {
@@ -382,7 +382,7 @@ const matchNextPattern = (text, now) => {
     return applyTimeOrDefault(base, nextMonthMatch[2]);
   }
 
-  // "next monday morning", "next friday midnight" — weekday + time-of-day
+  // "next monday morning", "next friday midnight" - weekday + time-of-day
   const nextTodMatch = text.match(NEXT_WEEKDAY_TOD_RE);
   if (nextTodMatch) {
     const date = nextWeekdayInNextWeek(WEEKDAY_MAP[nextTodMatch[1]], now);
@@ -391,7 +391,7 @@ const matchNextPattern = (text, now) => {
     return applyTimeToDate(date, hours, minutes);
   }
 
-  // "monday of next week", "next week monday", "next friday" — all with optional time
+  // "monday of next week", "next week monday", "next friday" - all with optional time
   const weekdayMatch = text.match(NEXT_WEEKDAY_RE);
   if (weekdayMatch) {
     const dayName = weekdayMatch[1] || weekdayMatch[2] || weekdayMatch[3];
@@ -432,7 +432,7 @@ const matchWeekday = (text, now) => {
     return applyTimeToDate(target, now.getHours(), now.getMinutes());
   }
 
-  // "monday morning 6", "friday evening 7" — weekday + tod + bare number
+  // "monday morning 6", "friday evening 7" - weekday + tod + bare number
   const todTimeMatch = text.match(WEEKDAY_TOD_TIME_RE);
   if (todTimeMatch) {
     const dayIndex = WEEKDAY_MAP[todTimeMatch[1]];
@@ -773,7 +773,7 @@ const matchSpecial = (text, now) => {
 
 // ─── Main Parser ────────────────────────────────────────────────────────────
 
-// Order matters — first match wins. Common patterns go first.
+// Order matters - first match wins. Common patterns go first.
 // Do not reorder without running the spec.
 const MATCHERS = [
   matchDuration, //    "in 2 hours", "half day", "3h30m"

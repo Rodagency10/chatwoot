@@ -203,7 +203,7 @@ const normalizeWebsiteUrl = raw => {
 
 const handleSubmit = async () => {
   // Block submit while enrichment is still running so users can't bypass
-  // the form with empty values — the controller would otherwise clear
+  // the form with empty values - the controller would otherwise clear
   // onboarding_step and persist incomplete data.
   if (isEnriching.value) return;
 
@@ -218,7 +218,7 @@ const handleSubmit = async () => {
   }
 
   // Detect which enrichable fields the user actually edited *before*
-  // normalizing — otherwise an untouched auto-filled domain
+  // normalizing - otherwise an untouched auto-filled domain
   // (acme.com -> https://acme.com) compares unequal against the raw snapshot
   // and gets falsely reported as changed, skewing onboarding telemetry.
   const init = initialValues.value;

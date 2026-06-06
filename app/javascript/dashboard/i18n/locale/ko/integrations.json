@@ -36,7 +36,7 @@
         "COPY": "시크릿을 클립보드에 복사",
         "COPY_SUCCESS": "시크릿이 클립보드에 복사되었습니다",
         "TOGGLE": "시크릿 표시 전환",
-        "CREATED_DESC": "Your webhook has been created. Use the secret below to verify webhook signatures. Please copy it now — you can also find it later in the webhook edit form.",
+        "CREATED_DESC": "Your webhook has been created. Use the secret below to verify webhook signatures. Please copy it now - you can also find it later in the webhook edit form.",
         "DONE": "Done"
       },
       "COUNT": "{n}개의 웹훅 | {n}개의 웹훅",

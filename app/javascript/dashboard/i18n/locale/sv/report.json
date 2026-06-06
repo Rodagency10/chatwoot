@@ -274,7 +274,7 @@
   },
   "INBOX_REPORTS": {
     "HEADER": "Inbox Overview",
-    "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases—all in one place. Click an inbox name for more details.",
+    "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases-all in one place. Click an inbox name for more details.",
     "LOADING_CHART": "Laddar diagramdata...",
     "NO_ENOUGH_DATA": "Vi har inte fått tillräckligt många datapunkter för att generera en rapport, försök igen senare.",
     "DOWNLOAD_INBOX_REPORTS": "Download inbox reports",

@@ -18,7 +18,7 @@ class Webhooks::WhatsappEventsJob < MutexApplicationJob
 
     # Album uploads arrive as separate concurrent webhooks. Serialize per (inbox, contact)
     # so the first webhook creates the conversation and the rest append to it.
-    # 30s TTL covers the attachment download + transaction — the default 1s expires
+    # 30s TTL covers the attachment download + transaction - the default 1s expires
     # mid-processing and lets a concurrent webhook re-acquire before the first commit.
     key = format(::Redis::Alfred::WHATSAPP_MESSAGE_MUTEX, inbox_id: channel.inbox.id, sender_id: sender_id)
     with_lock(key, 30.seconds) do
@@ -87,7 +87,7 @@ class Webhooks::WhatsappEventsJob < MutexApplicationJob
 
   private
 
-  # Echo payloads reverse the fields — `from` is the business number and `to` is the contact.
+  # Echo payloads reverse the fields - `from` is the business number and `to` is the contact.
   # Returns nil for status-only webhooks so they bypass the lock.
   def contact_sender_id(params)
     value = params.dig(:entry, 0, :changes, 0, :value) || params

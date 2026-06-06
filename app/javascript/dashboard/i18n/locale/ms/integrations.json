@@ -36,7 +36,7 @@
         "COPY": "Salin rahsia ke papan klip",
         "COPY_SUCCESS": "Rahsia disalin ke papan klip",
         "TOGGLE": "Togol keterlihatan rahsia",
-        "CREATED_DESC": "Webhook anda telah dibuat. Gunakan rahsia di bawah untuk mengesahkan tandatangan webhook. Sila salin sekarang — anda juga boleh menemuinya kemudian dalam borang suntingan webhook.",
+        "CREATED_DESC": "Webhook anda telah dibuat. Gunakan rahsia di bawah untuk mengesahkan tandatangan webhook. Sila salin sekarang - anda juga boleh menemuinya kemudian dalam borang suntingan webhook.",
         "DONE": "Selesai"
       },
       "COUNT": "{n} webhook | {n} webhooks",
@@ -553,11 +553,11 @@
           "OPTIONS": {
             "GUARDRAILS": {
               "TITLE": "Panduan keselamatan",
-              "DESCRIPTION": "Menjaga agar semuanya berjalan lancar—hanya jenis soalan yang anda mahu pembantu anda jawab, tiada yang terlarang atau di luar topik."
+              "DESCRIPTION": "Menjaga agar semuanya berjalan lancar-hanya jenis soalan yang anda mahu pembantu anda jawab, tiada yang terlarang atau di luar topik."
             },
             "RESPONSE_GUIDELINES": {
               "TITLE": "Garis panduan respons",
-              "DESCRIPTION": "Gaya dan struktur balasan pembantu anda—jelas dan mesra? Pendek dan padat? Terperinci dan formal?"
+              "DESCRIPTION": "Gaya dan struktur balasan pembantu anda-jelas dan mesra? Pendek dan padat? Terperinci dan formal?"
             }
           }
         },
@@ -582,7 +582,7 @@
       },
       "GUARDRAILS": {
         "TITLE": "Panduan Keselamatan",
-        "DESCRIPTION": "Memastikan semuanya berjalan lancar—hanya jenis soalan yang anda mahu pembantu anda jawab, tiada yang terlarang atau di luar topik.",
+        "DESCRIPTION": "Memastikan semuanya berjalan lancar-hanya jenis soalan yang anda mahu pembantu anda jawab, tiada yang terlarang atau di luar topik.",
         "BULK_ACTION": {
           "SELECTED": "{count} item selected | {count} items selected",
           "SELECT_ALL": "Pilih semua ({count})",
@@ -627,7 +627,7 @@
       },
       "RESPONSE_GUIDELINES": {
         "TITLE": "Garis Panduan Respons",
-        "DESCRIPTION": "Suasana dan struktur balasan pembantu anda—jelas dan mesra? Pendek dan padat? Terperinci dan formal?",
+        "DESCRIPTION": "Suasana dan struktur balasan pembantu anda-jelas dan mesra? Pendek dan padat? Terperinci dan formal?",
         "BULK_ACTION": {
           "SELECTED": "{count} item selected | {count} items selected",
           "SELECT_ALL": "Pilih semua ({count})",
@@ -672,7 +672,7 @@
       },
       "SCENARIOS": {
         "TITLE": "Senario",
-        "DESCRIPTION": "Berikan pembantu anda sedikit konteks—seperti “apa yang perlu dilakukan apabila pengguna tersekat,” atau “cara bertindak semasa permintaan bayaran balik.”",
+        "DESCRIPTION": "Berikan pembantu anda sedikit konteks-seperti “apa yang perlu dilakukan apabila pengguna tersekat,” atau “cara bertindak semasa permintaan bayaran balik.”",
         "BULK_ACTION": {
           "SELECTED": "{count} item selected | {count} items selected",
           "SELECT_ALL": "Pilih semua ({count})",
@@ -1064,7 +1064,7 @@
         "CLEAR_SEARCH": "Kosongkan penapis aktif",
         "FEATURE_SPOTLIGHT": {
           "TITLE": "Captain FAQ",
-          "NOTE": "Soalan Lazim Captain mengesan soalan pelanggan yang biasa—sama ada yang tiada dalam pangkalan pengetahuan anda atau sering ditanya—dan menghasilkan Soalan Lazim yang berkaitan untuk meningkatkan sokongan. Anda boleh menyemak setiap cadangan dan memutuskan sama ada untuk meluluskan atau menolaknya."
+          "NOTE": "Soalan Lazim Captain mengesan soalan pelanggan yang biasa-sama ada yang tiada dalam pangkalan pengetahuan anda atau sering ditanya-dan menghasilkan Soalan Lazim yang berkaitan untuk meningkatkan sokongan. Anda boleh menyemak setiap cadangan dan memutuskan sama ada untuk meluluskan atau menolaknya."
         }
       }
     },

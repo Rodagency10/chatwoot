@@ -76,7 +76,7 @@ const startWhatsappCall = async () => {
     // Composable returns LOCKED when init is already in flight or a call is
     // active; soft no-op so a parallel click doesn't trigger a banner.
     if (response?.status === VOICE_CALL_OUTBOUND_INIT_STATUS.LOCKED) return;
-    // Permission template path returns no call id — show banner, no widget yet.
+    // Permission template path returns no call id - show banner, no widget yet.
     if (!response?.id) {
       const status = response?.status;
       const messageKey =

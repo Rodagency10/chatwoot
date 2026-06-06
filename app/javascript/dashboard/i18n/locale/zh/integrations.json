@@ -36,7 +36,7 @@
         "COPY": "Copy secret to clipboard",
         "COPY_SUCCESS": "Secret copied to clipboard",
         "TOGGLE": "Toggle secret visibility",
-        "CREATED_DESC": "Your webhook has been created. Use the secret below to verify webhook signatures. Please copy it now — you can also find it later in the webhook edit form.",
+        "CREATED_DESC": "Your webhook has been created. Use the secret below to verify webhook signatures. Please copy it now - you can also find it later in the webhook edit form.",
         "DONE": "Done"
       },
       "COUNT": "{n} webhook | {n} webhooks",
@@ -552,11 +552,11 @@
           "OPTIONS": {
             "GUARDRAILS": {
               "TITLE": "Guardrails",
-              "DESCRIPTION": "Keeps things on track—only the kinds of questions you want your assistant to answer, nothing off-limits or off-topic."
+              "DESCRIPTION": "Keeps things on track-only the kinds of questions you want your assistant to answer, nothing off-limits or off-topic."
             },
             "RESPONSE_GUIDELINES": {
               "TITLE": "Response guidelines",
-              "DESCRIPTION": "The vibe and structure of your assistant’s replies—clear and friendly? Short and snappy? Detailed and formal?"
+              "DESCRIPTION": "The vibe and structure of your assistant’s replies-clear and friendly? Short and snappy? Detailed and formal?"
             }
           }
         },
@@ -581,7 +581,7 @@
       },
       "GUARDRAILS": {
         "TITLE": "Guardrails",
-        "DESCRIPTION": "Keeps things on track—only the kinds of questions you want your assistant to answer, nothing off-limits or off-topic.",
+        "DESCRIPTION": "Keeps things on track-only the kinds of questions you want your assistant to answer, nothing off-limits or off-topic.",
         "BULK_ACTION": {
           "SELECTED": "{count} item selected | {count} items selected",
           "SELECT_ALL": "全选 ({count})",
@@ -626,7 +626,7 @@
       },
       "RESPONSE_GUIDELINES": {
         "TITLE": "Response Guidelines",
-        "DESCRIPTION": "The vibe and structure of your assistant’s replies—clear and friendly? Short and snappy? Detailed and formal?",
+        "DESCRIPTION": "The vibe and structure of your assistant’s replies-clear and friendly? Short and snappy? Detailed and formal?",
         "BULK_ACTION": {
           "SELECTED": "{count} item selected | {count} items selected",
           "SELECT_ALL": "全选 ({count})",
@@ -671,7 +671,7 @@
       },
       "SCENARIOS": {
         "TITLE": "Scenarios",
-        "DESCRIPTION": "Give your assistant some context—like “what to do when a user is stuck,” or “how to act during a refund request.”",
+        "DESCRIPTION": "Give your assistant some context-like “what to do when a user is stuck,” or “how to act during a refund request.”",
         "BULK_ACTION": {
           "SELECTED": "{count} item selected | {count} items selected",
           "SELECT_ALL": "全选 ({count})",
@@ -982,7 +982,7 @@
         "CLEAR_SEARCH": "Clear active filters",
         "FEATURE_SPOTLIGHT": {
           "TITLE": "Captain 常见问题",
-          "NOTE": "Captain FAQs 检测常见的客户问题——无论是知识库中缺失的问题还是经常被问到的问题——并生成相关的常见问题以改善支持。您可以查看每个建议，并决定是否批准或拒绝它。"
+          "NOTE": "Captain FAQs 检测常见的客户问题--无论是知识库中缺失的问题还是经常被问到的问题--并生成相关的常见问题以改善支持。您可以查看每个建议，并决定是否批准或拒绝它。"
         }
       }
     },

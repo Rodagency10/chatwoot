@@ -605,7 +605,7 @@ describe('#mutations', () => {
       expect(newRef).not.toBe(originalRef);
       expect(newRef.dataFetched).toBeUndefined();
 
-      // 3. SET_CHAT_DATA_FETCHED finds by ID — works on the current store object
+      // 3. SET_CHAT_DATA_FETCHED finds by ID - works on the current store object
       mutations[types.SET_CHAT_DATA_FETCHED](state, 1);
       expect(state.allConversations[0].dataFetched).toBe(true);
 

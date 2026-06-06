@@ -132,7 +132,7 @@ watch(
     }
 
     // When parent provides new dateRange (e.g., from URL params)
-    // Skip if navigating with arrows — offset controls dates in that case
+    // Skip if navigating with arrows - offset controls dates in that case
     if (newDateRange?.[0] && newDateRange?.[1] && monthOffset.value === 0) {
       selectedStartDate.value = startOfDay(newDateRange[0]);
       selectedEndDate.value = endOfDay(newDateRange[1]);

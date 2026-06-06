@@ -24,7 +24,7 @@ defineProps({
 
 const emit = defineEmits(['upgrade']);
 
-// Cloud agents land on this modal too, but billing is admin-only — they need
+// Cloud agents land on this modal too, but billing is admin-only - they need
 // the escalation message instead of a button they cannot use. Mirrors the
 // pattern in UpgradePage.vue.
 const { isAdmin } = useAdmin();

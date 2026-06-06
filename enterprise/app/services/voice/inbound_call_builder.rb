@@ -43,7 +43,7 @@ class Voice::InboundCallBuilder
         .find_by(provider: provider, provider_call_id: call_sid)
   end
 
-  # Always look up by (inbox, source_id) first — that pair has a UNIQUE index, so
+  # Always look up by (inbox, source_id) first - that pair has a UNIQUE index, so
   # creating with a colliding source_id under a different contact would raise
   # RecordNotUnique. Reuse the existing ContactInbox (and its contact) when found.
   # A concurrent message webhook for the same wa_id can win the (inbox_id, source_id)

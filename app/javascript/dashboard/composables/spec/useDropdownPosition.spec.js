@@ -1,7 +1,7 @@
 import { ref } from 'vue';
 import { useDropdownPosition } from 'dashboard/composables/useDropdownPosition';
 
-// Mock @vueuse/core — return reactive refs we can control per test
+// Mock @vueuse/core - return reactive refs we can control per test
 const mockBounding = () => ({
   top: ref(0),
   bottom: ref(0),

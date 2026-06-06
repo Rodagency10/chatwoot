@@ -395,7 +395,7 @@ export default {
       return false;
     },
     onBlur() {
-      // ProseMirror keeps its selection on blur — clear the menu flag manually.
+      // ProseMirror keeps its selection on blur - clear the menu flag manually.
       this.isTextSelected = false;
       this.$refs.editor?.classList.remove('has-selection');
       this.$emit('blur');

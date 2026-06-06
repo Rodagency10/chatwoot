@@ -274,7 +274,7 @@
   },
   "INBOX_REPORTS": {
     "HEADER": "Përmbledhje e Inbox-it",
-    "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases—all in one place. Click an inbox name for more details.",
+    "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases-all in one place. Click an inbox name for more details.",
     "LOADING_CHART": "Po ngarkohen të dhënat e grafikut...",
     "NO_ENOUGH_DATA": "Nuk kemi mjaft të dhëna për të krijuar raportin. Ju lutem provoni më vonë.",
     "DOWNLOAD_INBOX_REPORTS": "Shkarko raportet e inbox-it",

@@ -3,7 +3,7 @@ class Messages::AudioTranscriptionService< Llm::LegacyBaseOpenAiService
 
   TRANSCRIPTION_MODEL = 'gpt-4o-mini-transcribe'.freeze
   # OpenAI's transcription endpoint hard limit is 25 MB *decimal* (25_000_000), not
-  # binary (25.megabytes = 26_214_400) — using the binary form leaks the 25.0–26.2 MB
+  # binary (25.megabytes = 26_214_400) - using the binary form leaks the 25.0–26.2 MB
   # range to the API as 413s. Long audio (~70+ min Opus) keeps the attachment but skips
   # transcription.
   TRANSCRIPTION_BYTE_LIMIT = 25_000_000
@@ -77,7 +77,7 @@ class Messages::AudioTranscriptionService< Llm::LegacyBaseOpenAiService
 
     File.open(temp_file_path, 'rb') do |file|
       # temperature: 0.0 minimises hallucinations on silence / near-silent
-      # audio; non-zero values trigger spiraling repeats — well-documented
+      # audio; non-zero values trigger spiraling repeats - well-documented
       # behaviour across OpenAI transcription models.
       response = @client.audio.transcribe(
         parameters: {

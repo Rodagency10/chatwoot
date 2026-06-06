@@ -240,7 +240,7 @@ const buildReplacementPairsUncached = (translations, locale) => {
 
   try {
     const wdFmt = new Intl.DateTimeFormat(locale, { weekday: 'long' });
-    // Jan 1, 2024 is a Monday — aligns with EN_WEEKDAYS_LIST[0]='monday'
+    // Jan 1, 2024 is a Monday - aligns with EN_WEEKDAYS_LIST[0]='monday'
     EN_WEEKDAYS_LIST.forEach((en, i) => {
       addPair(wdFmt.format(new Date(2024, 0, i + 1)), en);
     });

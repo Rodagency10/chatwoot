@@ -94,7 +94,7 @@ export const useCallsStore = defineStore('calls', {
 
       // Tear down each active call via its own provider so a WhatsApp call
       // gets cleanupWhatsappSession() (closes pc, stops recorder/mic) instead
-      // of the Twilio-only endClientCall() — otherwise mic stays open.
+      // of the Twilio-only endClientCall() - otherwise mic stays open.
       callsToRemove.filter(call => call.isActive).forEach(teardownByProvider);
 
       this.calls = this.calls.filter(

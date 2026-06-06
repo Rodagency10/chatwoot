@@ -36,7 +36,7 @@
         "COPY": "Kopiraj tajnu u međuspremnik",
         "COPY_SUCCESS": "Tajna je kopirana u međuspremnik",
         "TOGGLE": "Prebaci vidljivost tajne",
-        "CREATED_DESC": "Your webhook has been created. Use the secret below to verify webhook signatures. Please copy it now — you can also find it later in the webhook edit form.",
+        "CREATED_DESC": "Your webhook has been created. Use the secret below to verify webhook signatures. Please copy it now - you can also find it later in the webhook edit form.",
         "DONE": "Gotovo"
       },
       "COUNT": "{n} webhook | {n} webhooks",
@@ -553,11 +553,11 @@
           "OPTIONS": {
             "GUARDRAILS": {
               "TITLE": "Ograničenja",
-              "DESCRIPTION": "Drži stvari na pravom putu—samo vrste pitanja na koja želite da vaš asistent odgovara, ništa zabranjeno ili izvan teme."
+              "DESCRIPTION": "Drži stvari na pravom putu-samo vrste pitanja na koja želite da vaš asistent odgovara, ništa zabranjeno ili izvan teme."
             },
             "RESPONSE_GUIDELINES": {
               "TITLE": "Smjernice za odgovore",
-              "DESCRIPTION": "Ton i struktura odgovora vašeg asistenta—jasni i prijateljski? Kratki i sažeti? Detaljni i formalni?"
+              "DESCRIPTION": "Ton i struktura odgovora vašeg asistenta-jasni i prijateljski? Kratki i sažeti? Detaljni i formalni?"
             }
           }
         },
@@ -582,7 +582,7 @@
       },
       "GUARDRAILS": {
         "TITLE": "Ograničenja",
-        "DESCRIPTION": "Drži stvari na pravom putu—samo vrste pitanja na koja želite da vaš asistent odgovara, ništa zabranjeno ili izvan teme.",
+        "DESCRIPTION": "Drži stvari na pravom putu-samo vrste pitanja na koja želite da vaš asistent odgovara, ništa zabranjeno ili izvan teme.",
         "BULK_ACTION": {
           "SELECTED": "{count} stavka odabrana | {count} stavki odabrano",
           "SELECT_ALL": "Odaberi sve ({count})",
@@ -627,7 +627,7 @@
       },
       "RESPONSE_GUIDELINES": {
         "TITLE": "Smjernice za odgovore",
-        "DESCRIPTION": "Ton i struktura odgovora vašeg asistenta—jasni i prijateljski? Kratki i sažeti? Detaljni i formalni?",
+        "DESCRIPTION": "Ton i struktura odgovora vašeg asistenta-jasni i prijateljski? Kratki i sažeti? Detaljni i formalni?",
         "BULK_ACTION": {
           "SELECTED": "{count} stavka odabrana | {count} stavki odabrano",
           "SELECT_ALL": "Odaberi sve ({count})",
@@ -672,7 +672,7 @@
       },
       "SCENARIOS": {
         "TITLE": "Scenariji",
-        "DESCRIPTION": "Dajte svom asistentu kontekst — poput „što učiniti kada je korisnik zapetljan“ ili „kako postupati tijekom zahtjeva za povrat novca“.",
+        "DESCRIPTION": "Dajte svom asistentu kontekst - poput „što učiniti kada je korisnik zapetljan“ ili „kako postupati tijekom zahtjeva za povrat novca“.",
         "BULK_ACTION": {
           "SELECTED": "{count} stavka odabrana | {count} stavki odabrano",
           "SELECT_ALL": "Odaberi sve ({count})",
@@ -1064,7 +1064,7 @@
         "CLEAR_SEARCH": "Očisti aktivne filtre",
         "FEATURE_SPOTLIGHT": {
           "TITLE": "Captain FAQ",
-          "NOTE": "Captain FAQs detects common customer questions—whether missing from your knowledge base or frequently asked—and generates relevant FAQs to improve support. You can review each suggestion and decide whether to approve or reject it."
+          "NOTE": "Captain FAQs detects common customer questions-whether missing from your knowledge base or frequently asked-and generates relevant FAQs to improve support. You can review each suggestion and decide whether to approve or reject it."
         }
       }
     },

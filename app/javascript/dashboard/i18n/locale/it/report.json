@@ -274,7 +274,7 @@
   },
   "INBOX_REPORTS": {
     "HEADER": "Panoramica Inbox",
-    "DESCRIPTION": "Visualizza rapidamente le performance della tua inbox con metriche chiave come conversazioni, tempi di risposta, tempi di risoluzione e casi risolti — tutto in un unico posto. Fai clic su una inbox per maggiori dettagli.",
+    "DESCRIPTION": "Visualizza rapidamente le performance della tua inbox con metriche chiave come conversazioni, tempi di risposta, tempi di risoluzione e casi risolti - tutto in un unico posto. Fai clic su una inbox per maggiori dettagli.",
     "LOADING_CHART": "Caricamento dati grafici...",
     "NO_ENOUGH_DATA": "Non ci sono abbastanza dati per generare il report, riprova più tardi.",
     "DOWNLOAD_INBOX_REPORTS": "Scarica report Inbox",

@@ -4,7 +4,7 @@ class Voice::CallStatus::Manager
   def process_status_update(status, duration: nil, timestamp: nil)
     return unless Call::STATUSES.include?(status)
     return if call.status == status
-    # Don't overwrite a terminal status — Twilio's late `completed` events would
+    # Don't overwrite a terminal status - Twilio's late `completed` events would
     # otherwise clobber an agent-rejection reason.
     return if Call::TERMINAL_STATUSES.include?(call.status)
 

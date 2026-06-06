@@ -122,7 +122,7 @@
       "EMPTY_LIST": "Nenhum resultado encontrado"
     },
     "PAGINATION": {
-      "RESULTS": "Exibindo {start} — {end} de {total} resultados",
+      "RESULTS": "Exibindo {start} - {end} de {total} resultados",
       "PER_PAGE_TEMPLATE": "{size} / página"
     }
   },
@@ -274,7 +274,7 @@
   },
   "INBOX_REPORTS": {
     "HEADER": "Visualizar Caixa de Entrada",
-    "DESCRIPTION": "Veja rapidamente o desempenho da caixa de entrada com métricas-chave como conversas, tempos de resposta, tempos de resolução, e casos resolvidos — tudo em um só lugar. Clique na caixa de entrada para mais detalhes",
+    "DESCRIPTION": "Veja rapidamente o desempenho da caixa de entrada com métricas-chave como conversas, tempos de resposta, tempos de resolução, e casos resolvidos - tudo em um só lugar. Clique na caixa de entrada para mais detalhes",
     "LOADING_CHART": "Carregando dados do gráfico...",
     "NO_ENOUGH_DATA": "Não existem dados suficientes para gerar o relatório. Tente novamente mais tarde.",
     "DOWNLOAD_INBOX_REPORTS": "Baixar relatórios de entrada",

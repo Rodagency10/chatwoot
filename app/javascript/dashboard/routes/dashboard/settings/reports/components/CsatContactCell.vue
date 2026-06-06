@@ -31,7 +31,7 @@ defineProps({
     />
     <div class="flex flex-col gap-0.5">
       <span class="text-sm text-n-slate-12 font-medium capitalize">
-        {{ contact?.name || '—' }}
+        {{ contact?.name || '-' }}
       </span>
       <div
         class="flex items-center gap-1 text-xs text-n-slate-10 whitespace-nowrap"

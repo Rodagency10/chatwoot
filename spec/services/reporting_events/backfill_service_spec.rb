@@ -139,7 +139,7 @@ describe ReportingEvents::BackfillService do
       let(:conversation_c) { create(:conversation, account: account, inbox: second_inbox, assignee: second_user) }
 
       before do
-        # Two events for the same conversation — should count as 1
+        # Two events for the same conversation - should count as 1
         create_backfill_event(name: 'conversation_bot_handoff', value: 0, value_in_business_hours: 0, user: user,
                               inbox: inbox, conversation: conversation, created_at: Time.utc(2026, 2, 11, 14))
         create_backfill_event(name: 'conversation_bot_handoff', value: 0, value_in_business_hours: 0, user: user,

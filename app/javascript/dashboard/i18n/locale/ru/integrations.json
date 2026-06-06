@@ -36,7 +36,7 @@
         "COPY": "Copy secret to clipboard",
         "COPY_SUCCESS": "Secret copied to clipboard",
         "TOGGLE": "Toggle secret visibility",
-        "CREATED_DESC": "Your webhook has been created. Use the secret below to verify webhook signatures. Please copy it now — you can also find it later in the webhook edit form.",
+        "CREATED_DESC": "Your webhook has been created. Use the secret below to verify webhook signatures. Please copy it now - you can also find it later in the webhook edit form.",
         "DONE": "Done"
       },
       "COUNT": "{n} webhook | {n} webhooks",
@@ -553,7 +553,7 @@
           "OPTIONS": {
             "GUARDRAILS": {
               "TITLE": "Ограждения",
-              "DESCRIPTION": "Сохраняет вещи в нужном контексте — только те вопросы, которые вы хотите, чтобы ваш ассистент отвечал, ничего запрещённого или не по теме."
+              "DESCRIPTION": "Сохраняет вещи в нужном контексте - только те вопросы, которые вы хотите, чтобы ваш ассистент отвечал, ничего запрещённого или не по теме."
             },
             "RESPONSE_GUIDELINES": {
               "TITLE": "Рекомендации по ответу",
@@ -582,7 +582,7 @@
       },
       "GUARDRAILS": {
         "TITLE": "Ограждения",
-        "DESCRIPTION": "Сохраняет вещи в нужном контексте — только те вопросы, которые вы хотите, чтобы ваш ассистент отвечал, ничего запрещённого или не по теме.",
+        "DESCRIPTION": "Сохраняет вещи в нужном контексте - только те вопросы, которые вы хотите, чтобы ваш ассистент отвечал, ничего запрещённого или не по теме.",
         "BULK_ACTION": {
           "SELECTED": "{count} элемент выбран | {count} элементов выбрано",
           "SELECT_ALL": "Выбрать все ({count})",
@@ -1064,7 +1064,7 @@
         "CLEAR_SEARCH": "Clear active filters",
         "FEATURE_SPOTLIGHT": {
           "TITLE": "Captain FAQ",
-          "NOTE": "Captain FAQs detects common customer questions—whether missing from your knowledge base or frequently asked—and generates relevant FAQs to improve support. You can review each suggestion and decide whether to approve or reject it."
+          "NOTE": "Captain FAQs detects common customer questions-whether missing from your knowledge base or frequently asked-and generates relevant FAQs to improve support. You can review each suggestion and decide whether to approve or reject it."
         }
       }
     },

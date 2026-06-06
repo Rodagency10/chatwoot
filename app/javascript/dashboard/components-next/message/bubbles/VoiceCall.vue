@@ -121,7 +121,7 @@ const durationSeconds = computed(() => {
 const formattedDuration = computed(() => formatDuration(durationSeconds.value));
 
 // Agent who handled the call (initiator on outbound, answerer on inbound), taken
-// strictly from the persisted accept fields — never the conversation's current
+// strictly from the persisted accept fields - never the conversation's current
 // assignee, which would mis-attribute a historical call after a reassignment.
 const handlerName = computed(() => {
   if (call.value?.acceptedByAgentName) return call.value.acceptedByAgentName;
@@ -186,7 +186,7 @@ const iconName = computed(() => {
     : 'i-ph-phone-incoming-bold';
 });
 
-// Subtle icon container — matches the design's tonal swatch over the bubble bg.
+// Subtle icon container - matches the design's tonal swatch over the bubble bg.
 // Status drives the accent: teal for live, ruby for missed, neutral otherwise.
 const iconContainerClass = computed(() => {
   if (status.value === VOICE_CALL_STATUS.IN_PROGRESS) {
@@ -262,7 +262,7 @@ const handleCallBack = async () => {
         conversationId.value
       );
       if (response?.status === VOICE_CALL_OUTBOUND_INIT_STATUS.LOCKED) return;
-      // Permission template path returns no call id — show banner, no widget yet.
+      // Permission template path returns no call id - show banner, no widget yet.
       if (!response?.id) {
         useAlert(
           response?.status ===

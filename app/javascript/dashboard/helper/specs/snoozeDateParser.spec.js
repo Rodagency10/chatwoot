@@ -218,7 +218,7 @@ describe('regression: ambiguous numeric dates', () => {
     expect(result.date.getDate()).toEqual(5);
   });
 
-  it('"13/05/2025" disambiguates — 13 must be day', () => {
+  it('"13/05/2025" disambiguates - 13 must be day', () => {
     const result = parseDateFromText('13/05/2025', now);
     expect(result).not.toBeNull();
     expect(result.date.getMonth()).toEqual(4);
@@ -1511,7 +1511,7 @@ describe('decimal duration parsing (only .5 allowed)', () => {
 
 // ─── Multilingual / Localized Input Regressions ─────────────────────────────
 
-describe('generateDateSuggestions — localized input regressions', () => {
+describe('generateDateSuggestions - localized input regressions', () => {
   const arTranslations = {
     UNITS: {
       MINUTE: 'دقيقة',
@@ -1664,7 +1664,7 @@ describe('generateDateSuggestions — localized input regressions', () => {
     });
   });
 
-  describe('P1: MERIDIEM vs TIME_OF_DAY — "tomorrow morning" must parse in locales where AM = morning', () => {
+  describe('P1: MERIDIEM vs TIME_OF_DAY - "tomorrow morning" must parse in locales where AM = morning', () => {
     it('Arabic "غداً صباحاً" (tomorrow morning) parses correctly', () => {
       const results = generateDateSuggestions('غداً صباحاً', now, {
         translations: arTranslations,

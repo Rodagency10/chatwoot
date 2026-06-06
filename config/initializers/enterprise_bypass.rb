@@ -24,6 +24,6 @@ Rails.application.config.after_initialize do
       end
     end
   rescue StandardError
-    # DB not available yet (CI, docker build, db:create, db:schema:load, etc.) — skip silently
+    # DB not available yet (CI, docker build, db:create, db:schema:load, etc.) - skip silently
   end
 end

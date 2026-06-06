@@ -36,7 +36,7 @@
         "COPY": "Kopjo sekretin në kujtesën e përkohshme",
         "COPY_SUCCESS": "Sekreti u kopjua në kujtesën e përkohshme",
         "TOGGLE": "Ndrysho dukshmërinë e sekretit",
-        "CREATED_DESC": "Webhook juaj është krijuar. Përdorni sekretin më poshtë për të verifikuar nënshkrimet e webhook-ut. Ju lutemi kopjoni tani — mund ta gjeni edhe më vonë në formularin e redaktimit të webhook-ut.",
+        "CREATED_DESC": "Webhook juaj është krijuar. Përdorni sekretin më poshtë për të verifikuar nënshkrimet e webhook-ut. Ju lutemi kopjoni tani - mund ta gjeni edhe më vonë në formularin e redaktimit të webhook-ut.",
         "DONE": "U krye"
       },
       "COUNT": "{n} webhook | {n} webhooks",
@@ -553,11 +553,11 @@
           "OPTIONS": {
             "GUARDRAILS": {
               "TITLE": "Kufij mbrojtës",
-              "DESCRIPTION": "Mban gjërat në rrugën e duhur—vetëm llojet e pyetjeve që dëshiron që asistenti yt t’i përgjigjet, asgjë jashtë kufijve ose jashtë temës."
+              "DESCRIPTION": "Mban gjërat në rrugën e duhur-vetëm llojet e pyetjeve që dëshiron që asistenti yt t’i përgjigjet, asgjë jashtë kufijve ose jashtë temës."
             },
             "RESPONSE_GUIDELINES": {
               "TITLE": "Udhëzime përgjigjeje",
-              "DESCRIPTION": "Stili dhe struktura e përgjigjeve të asistentit tënd—të qarta dhe miqësore? Të shkurtra dhe të gjalla? Të detajuara dhe formale?"
+              "DESCRIPTION": "Stili dhe struktura e përgjigjeve të asistentit tënd-të qarta dhe miqësore? Të shkurtra dhe të gjalla? Të detajuara dhe formale?"
             }
           }
         },
@@ -582,7 +582,7 @@
       },
       "GUARDRAILS": {
         "TITLE": "Kufizime",
-        "DESCRIPTION": "I mban gjërat në vijë—vetëm llojet e pyetjeve që dëshironi që asistenti juaj t’u përgjigjet, asgjë e ndaluar apo jashtë teme.",
+        "DESCRIPTION": "I mban gjërat në vijë-vetëm llojet e pyetjeve që dëshironi që asistenti juaj t’u përgjigjet, asgjë e ndaluar apo jashtë teme.",
         "BULK_ACTION": {
           "SELECTED": "{count} artikull i zgjedhur | {count} artikuj të zgjedhur",
           "SELECT_ALL": "Zgjidh të gjitha ({count})",
@@ -627,7 +627,7 @@
       },
       "RESPONSE_GUIDELINES": {
         "TITLE": "Udhëzimet e përgjigjes",
-        "DESCRIPTION": "Stili dhe struktura e përgjigjeve të asistentit tuaj—të qarta dhe miqësore? Të shkurtra dhe koncize? Të detajuara dhe formale?",
+        "DESCRIPTION": "Stili dhe struktura e përgjigjeve të asistentit tuaj-të qarta dhe miqësore? Të shkurtra dhe koncize? Të detajuara dhe formale?",
         "BULK_ACTION": {
           "SELECTED": "{count, plural, one {{count} element i përzgjedhur} other {{count} elemente të përzgjedhura}}",
           "SELECT_ALL": "Zgjidh të gjitha ({count})",
@@ -672,7 +672,7 @@
       },
       "SCENARIOS": {
         "TITLE": "Skenarë",
-        "DESCRIPTION": "Jepini asistentit pak kontekst—si p.sh. “çfarë të bëjë kur një përdorues ngec” ose “si të veprojë gjatë një kërkese për rimbursim”.",
+        "DESCRIPTION": "Jepini asistentit pak kontekst-si p.sh. “çfarë të bëjë kur një përdorues ngec” ose “si të veprojë gjatë një kërkese për rimbursim”.",
         "BULK_ACTION": {
           "SELECTED": "{count, plural, one {{count} element i përzgjedhur} other {{count} elemente të përzgjedhura}}",
           "SELECT_ALL": "Zgjidh të gjitha ({count})",
@@ -1064,7 +1064,7 @@
         "CLEAR_SEARCH": "Pastro filtrat aktivë",
         "FEATURE_SPOTLIGHT": {
           "TITLE": "Pyetjet e Shpeshta Captain",
-          "NOTE": "Pyetjet e Shpeshta Captain zbulojnë pyetjet e zakonshme të klientëve—qoftë ato që mungojnë në bazën tuaj të njohurive ose që kërkohen shpesh—dhe gjenerojnë Pyetje të Shpeshta relevante për të përmirësuar mbështetjen. Ju mund të rishikoni çdo sugjerim dhe të vendosni nëse do ta miratoni apo refuzoni."
+          "NOTE": "Pyetjet e Shpeshta Captain zbulojnë pyetjet e zakonshme të klientëve-qoftë ato që mungojnë në bazën tuaj të njohurive ose që kërkohen shpesh-dhe gjenerojnë Pyetje të Shpeshta relevante për të përmirësuar mbështetjen. Ju mund të rishikoni çdo sugjerim dhe të vendosni nëse do ta miratoni apo refuzoni."
         }
       }
     },

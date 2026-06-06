@@ -85,7 +85,7 @@ const whatsappCallSession = useWhatsappCallSession();
 
 // Find the most recent open conversation for this contact in the picked inbox.
 // WhatsApp /initiate is conversation-scoped (unlike Twilio's contact-scoped path).
-// Pass inboxId so the BE applies the filter before the 20-row cap — without it,
+// Pass inboxId so the BE applies the filter before the 20-row cap - without it,
 // contacts whose latest WhatsApp conversation falls outside the 20 most recent
 // across all inboxes would be treated as having no conversation.
 const findWhatsappConversationId = async inboxId => {
@@ -130,7 +130,7 @@ const startWhatsappCall = async (inboxId, conversationIdHint) => {
     return;
   }
 
-  // Stay non-active until the connect cable event arrives — flipping to active
+  // Stay non-active until the connect cable event arrives - flipping to active
   // here would start the duration timer before the contact picks up.
   callsStore.addCall({
     callSid: response.call_id,

@@ -26,7 +26,7 @@ module Enterprise::Webhooks::WhatsappEventsJob
   # Per-call_id mutex so connect/status/terminate for the same call serialize
   # across batches. Meta delivers two payload shapes under field=calls:
   #   - value.calls[]    → event-based (connect, terminate)
-  #   - value.statuses[] → status-based (RINGING, ACCEPTED) — the real pickup
+  #   - value.statuses[] → status-based (RINGING, ACCEPTED) - the real pickup
   #     signal for outbound; without this, only `connect` (tunnel-up) is seen
   #     and timer/recorder kick off before the contact actually answers.
   def handle_call_events(channel, params)

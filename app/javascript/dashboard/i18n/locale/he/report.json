@@ -274,7 +274,7 @@
   },
   "INBOX_REPORTS": {
     "HEADER": "סקירה כללית של תיבת הדואר הנכנס",
-    "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases—all in one place. Click an inbox name for more details.",
+    "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases-all in one place. Click an inbox name for more details.",
     "LOADING_CHART": "טוען נתוני תרשים...",
     "NO_ENOUGH_DATA": "לא קיבלנו מספיק נקודות נתונים כדי להפיק דוח, אנא נסה שוב מאוחר יותר.",
     "DOWNLOAD_INBOX_REPORTS": "הורד דוחות תיבת דואר נכנס",

@@ -153,7 +153,7 @@ class Captain::BaseTaskService
   # whose calls run on the operator's key (e.g. internal/onboarding tasks)
   # should override this to return false. When false, the wrapper neither
   # blocks the call on an exhausted captain_responses quota nor decrements
-  # it on success — the call participates in the quota system in neither
+  # it on success - the call participates in the quota system in neither
   # direction.
   def counts_toward_usage?
     true

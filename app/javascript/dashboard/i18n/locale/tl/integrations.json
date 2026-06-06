@@ -36,7 +36,7 @@
         "COPY": "Copy secret to clipboard",
         "COPY_SUCCESS": "Secret copied to clipboard",
         "TOGGLE": "Toggle secret visibility",
-        "CREATED_DESC": "Nagawa na ang iyong webhook. Gamitin ang secret sa ibaba upang beripikahin ang mga webhook signature. Pakikopya ito ngayon — maaari mo rin itong makita sa susunod sa form ng pag-edit ng webhook.",
+        "CREATED_DESC": "Nagawa na ang iyong webhook. Gamitin ang secret sa ibaba upang beripikahin ang mga webhook signature. Pakikopya ito ngayon - maaari mo rin itong makita sa susunod sa form ng pag-edit ng webhook.",
         "DONE": "Tapos na"
       },
       "COUNT": "{n} webhook | {n} webhooks",
@@ -553,11 +553,11 @@
           "OPTIONS": {
             "GUARDRAILS": {
               "TITLE": "Mga Pananggalang",
-              "DESCRIPTION": "Pinananatiling nasa tamang landas—tanging mga uri ng tanong na gusto mong sagutin ng assistant mo, walang labas sa limitasyon o off-topic."
+              "DESCRIPTION": "Pinananatiling nasa tamang landas-tanging mga uri ng tanong na gusto mong sagutin ng assistant mo, walang labas sa limitasyon o off-topic."
             },
             "RESPONSE_GUIDELINES": {
               "TITLE": "Mga patnubay sa tugon",
-              "DESCRIPTION": "Ang tono at estruktura ng mga sagot ng iyong katulong—malinaw at magiliw? Maikli at matalim? Detalyado at pormal?"
+              "DESCRIPTION": "Ang tono at estruktura ng mga sagot ng iyong katulong-malinaw at magiliw? Maikli at matalim? Detalyado at pormal?"
             }
           }
         },
@@ -582,7 +582,7 @@
       },
       "GUARDRAILS": {
         "TITLE": "Mga Pananggalang",
-        "DESCRIPTION": "Pinananatiling nasa tamang landas—tanging mga uri ng tanong na gusto mong sagutin ng assistant mo, walang labas sa limitasyon o off-topic.",
+        "DESCRIPTION": "Pinananatiling nasa tamang landas-tanging mga uri ng tanong na gusto mong sagutin ng assistant mo, walang labas sa limitasyon o off-topic.",
         "BULK_ACTION": {
           "SELECTED": "{count} item selected | {count} items selected",
           "SELECT_ALL": "Piliin lahat ({count})",
@@ -627,7 +627,7 @@
       },
       "RESPONSE_GUIDELINES": {
         "TITLE": "Mga Patnubay sa Tugon",
-        "DESCRIPTION": "Ang tono at estruktura ng mga sagot ng iyong katulong—malinaw at magiliw? Maikli at matalim? Detalyado at pormal?",
+        "DESCRIPTION": "Ang tono at estruktura ng mga sagot ng iyong katulong-malinaw at magiliw? Maikli at matalim? Detalyado at pormal?",
         "BULK_ACTION": {
           "SELECTED": "{count} item selected | {count} items selected",
           "SELECT_ALL": "Piliin lahat ({count})",
@@ -672,7 +672,7 @@
       },
       "SCENARIOS": {
         "TITLE": "Scenarios",
-        "DESCRIPTION": "Bigyan ang assistant ng konteksto—tulad ng “ano ang gagawin kapag na-stuck ang user,” o “paano kumilos sa panahon ng kahilingan sa refund.”",
+        "DESCRIPTION": "Bigyan ang assistant ng konteksto-tulad ng “ano ang gagawin kapag na-stuck ang user,” o “paano kumilos sa panahon ng kahilingan sa refund.”",
         "BULK_ACTION": {
           "SELECTED": "{count} item selected | {count} items selected",
           "SELECT_ALL": "Piliin lahat ({count})",
@@ -1064,7 +1064,7 @@
         "CLEAR_SEARCH": "Clear active filters",
         "FEATURE_SPOTLIGHT": {
           "TITLE": "Captain FAQ",
-          "NOTE": "Natutukoy ng Captain FAQs ang mga karaniwang tanong ng customer—kung wala man sa iyong knowledge base o madalas itanong—at lumilikha ng mga kaugnay na FAQs upang mapabuti ang suporta. Maaari mong suriin ang bawat mungkahi at magpasya kung aaprubahan o tatanggihan ito."
+          "NOTE": "Natutukoy ng Captain FAQs ang mga karaniwang tanong ng customer-kung wala man sa iyong knowledge base o madalas itanong-at lumilikha ng mga kaugnay na FAQs upang mapabuti ang suporta. Maaari mong suriin ang bawat mungkahi at magpasya kung aaprubahan o tatanggihan ito."
         }
       }
     },

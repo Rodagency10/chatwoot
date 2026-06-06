@@ -52,11 +52,11 @@ class Captain::Conversation::ResponseBuilderJob < ApplicationJob
 
   def process_response
     # Check V2 before V1: error_response can set both signals at once when HandoffTool
-    # fired before the runner errored. V2 must win — running V1 on top would duplicate
+    # fired before the runner errored. V2 must win - running V1 on top would duplicate
     # OOO and re-dispatch the bot_handoff event.
     if v2_handoff_tool_fired?
       if conversation_pending?
-        # HandoffTool flipped the flag without committing — its perform returned a
+        # HandoffTool flipped the flag without committing - its perform returned a
         # failure string (e.g. "Conversation not found") before bot_handoff! ran. Fall
         # back to a full V1 handoff so the customer still ends up with a human.
         process_v1_handoff
@@ -66,7 +66,7 @@ class Captain::Conversation::ResponseBuilderJob < ApplicationJob
         process_v2_handoff
       end
     elsif v1_handoff_requested?
-      # V1 only signals via the response string — no state has been touched yet. If
+      # V1 only signals via the response string - no state has been touched yet. If
       # the conversation isn't pending anymore, a human took over mid-run; bail out
       # rather than posting a stale handoff message on top of their reply.
       return unless conversation_pending?
@@ -145,7 +145,7 @@ class Captain::Conversation::ResponseBuilderJob < ApplicationJob
   end
 
   def send_out_of_office_message_if_applicable
-    # Campaign conversations should never receive OOO templates — the campaign itself
+    # Campaign conversations should never receive OOO templates - the campaign itself
     # serves as the initial outreach, and OOO would be confusing in that context.
     return if @conversation.campaign.present?
 

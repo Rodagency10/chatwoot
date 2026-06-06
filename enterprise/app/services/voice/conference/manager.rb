@@ -58,7 +58,7 @@ class Voice::Conference::Manager
   end
 
   # Parses agent user_id from participant_label. Only returns an id when the
-  # label's embedded account id matches the call's account — protects against
+  # label's embedded account id matches the call's account - protects against
   # a spoofed/cross-account label attaching a foreign user to the call.
   def extract_user_id
     match = participant_label.to_s.match(AGENT_LABEL_PATTERN)

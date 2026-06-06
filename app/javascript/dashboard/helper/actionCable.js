@@ -313,7 +313,7 @@ class ActionCableConnector extends BaseActionCableConnector {
     }
   };
 
-  // Real pickup signal — Meta sends status=ACCEPTED on the call when the
+  // Real pickup signal - Meta sends status=ACCEPTED on the call when the
   // contact answers. Flip active (timer starts) and arm the recorder.
   // eslint-disable-next-line class-methods-use-this
   onVoiceCallOutboundAccepted = data => {
@@ -329,10 +329,10 @@ class ActionCableConnector extends BaseActionCableConnector {
     if (data?.provider !== VOICE_CALL_PROVIDERS.WHATSAPP) return;
     // The store entry should always be removed for this account-wide broadcast,
     // but the WebRTC/recorder teardown must only run for the call this tab owns
-    // — otherwise an unrelated agent's call ending would stop this tab's
+    // - otherwise an unrelated agent's call ending would stop this tab's
     // recorder and upload its chunks against the wrong call id.
     if (isLocalWhatsappCall(data.id)) {
-      // Await upload before removeCall — the store's sync teardown would otherwise
+      // Await upload before removeCall - the store's sync teardown would otherwise
       // wipe the recorder chunks before they reach the server.
       try {
         await handleWhatsappRemoteEnd(data.id);

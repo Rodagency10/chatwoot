@@ -36,7 +36,7 @@
         "COPY": "複製密鑰至剪貼簿",
         "COPY_SUCCESS": "密鑰已複製至剪貼簿",
         "TOGGLE": "切換密鑰顯示",
-        "CREATED_DESC": "您的 webhook 已建立。請使用以下密鑰來驗證 webhook 簽章。請立即複製——您也可以稍後在 webhook 編輯表單中找到它。",
+        "CREATED_DESC": "您的 webhook 已建立。請使用以下密鑰來驗證 webhook 簽章。請立即複製--您也可以稍後在 webhook 編輯表單中找到它。",
         "DONE": "完成"
       },
       "COUNT": "{n} 個 webhook",
@@ -553,11 +553,11 @@
           "OPTIONS": {
             "GUARDRAILS": {
               "TITLE": "防護機制",
-              "DESCRIPTION": "確保回應保持正軌——僅回答您希望助理回答的問題類型，排除不當或離題的內容。"
+              "DESCRIPTION": "確保回應保持正軌--僅回答您希望助理回答的問題類型，排除不當或離題的內容。"
             },
             "RESPONSE_GUIDELINES": {
               "TITLE": "回應準則",
-              "DESCRIPTION": "助理回覆的風格與結構——清楚友善？簡短精煉？詳細正式？"
+              "DESCRIPTION": "助理回覆的風格與結構--清楚友善？簡短精煉？詳細正式？"
             }
           }
         },
@@ -582,7 +582,7 @@
       },
       "GUARDRAILS": {
         "TITLE": "防護機制",
-        "DESCRIPTION": "確保回應保持正軌——僅回答您希望助理回答的問題類型，排除不當或離題的內容。",
+        "DESCRIPTION": "確保回應保持正軌--僅回答您希望助理回答的問題類型，排除不當或離題的內容。",
         "BULK_ACTION": {
           "SELECTED": "已選擇 {count} 個項目",
           "SELECT_ALL": "全選（{count}）",
@@ -627,7 +627,7 @@
       },
       "RESPONSE_GUIDELINES": {
         "TITLE": "回應準則",
-        "DESCRIPTION": "助理回覆的風格與結構——清楚友善？簡短精煉？詳細正式？",
+        "DESCRIPTION": "助理回覆的風格與結構--清楚友善？簡短精煉？詳細正式？",
         "BULK_ACTION": {
           "SELECTED": "已選擇 {count} 個項目",
           "SELECT_ALL": "全選（{count}）",
@@ -672,7 +672,7 @@
       },
       "SCENARIOS": {
         "TITLE": "情境",
-        "DESCRIPTION": "為助理提供一些情境——例如「當使用者遇到困難時該怎麼做」或「如何處理退款請求」。",
+        "DESCRIPTION": "為助理提供一些情境--例如「當使用者遇到困難時該怎麼做」或「如何處理退款請求」。",
         "BULK_ACTION": {
           "SELECTED": "已選擇 {count} 個項目",
           "SELECT_ALL": "全選（{count}）",
@@ -1064,7 +1064,7 @@
         "CLEAR_SEARCH": "清除篩選條件",
         "FEATURE_SPOTLIGHT": {
           "TITLE": "Captain 常見問答",
-          "NOTE": "Captain 常見問答會偵測常見的客戶問題——無論是知識庫中缺少的還是經常被問到的——並生成相關的常見問答以改善支援服務。您可以檢視每個建議並決定是否核准或拒絕。"
+          "NOTE": "Captain 常見問答會偵測常見的客戶問題--無論是知識庫中缺少的還是經常被問到的--並生成相關的常見問答以改善支援服務。您可以檢視每個建議並決定是否核准或拒絕。"
         }
       }
     },

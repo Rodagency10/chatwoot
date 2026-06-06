@@ -168,7 +168,7 @@ export const TIME_OF_DAY_MAP = {
   'end of the day': { hours: 17, minutes: 0 },
 };
 
-/** Allowed hour range per label — used to pick am or pm when not specified. */
+/** Allowed hour range per label - used to pick am or pm when not specified. */
 export const TOD_HOUR_RANGE = {
   morning: [4, 12],
   noon: [11, 13],

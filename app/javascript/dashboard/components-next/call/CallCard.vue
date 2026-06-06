@@ -123,7 +123,7 @@ const channelIcon = computed(() => {
             {{ statusLabel }}
           </span>
           <!-- Dismiss: removes the notification from the UI without declining.
-               Incoming only — outgoing/ongoing calls are ended via the call
+               Incoming only - outgoing/ongoing calls are ended via the call
                controls, not silently dismissed. -->
           <NextButton
             v-if="isIncoming"

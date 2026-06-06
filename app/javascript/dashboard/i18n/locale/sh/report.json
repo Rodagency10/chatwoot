@@ -274,7 +274,7 @@
   },
   "INBOX_REPORTS": {
     "HEADER": "Pregled prijemnog sandučeta",
-    "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases—all in one place. Click an inbox name for more details.",
+    "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases-all in one place. Click an inbox name for more details.",
     "LOADING_CHART": "Učitavanje podataka grafikona...",
     "NO_ENOUGH_DATA": "Nema dovoljno podataka za izveštaj. Pokušajte kasnije.",
     "DOWNLOAD_INBOX_REPORTS": "Preuzmi izveštaje sandučeta",

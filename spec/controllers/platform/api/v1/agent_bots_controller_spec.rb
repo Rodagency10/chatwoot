@@ -43,7 +43,7 @@ RSpec.describe 'Platform Agent Bot API', type: :request do
       it 'returns 200 and skips orphaned permissibles when an agent bot has been deleted' do
         create(:platform_app_permissible, platform_app: platform_app, permissible: agent_bot)
         # Use delete (not destroy!) to bypass dependent: :destroy callbacks so the
-        # permissible row survives — exactly the orphan scenario described in the issue.
+        # permissible row survives - exactly the orphan scenario described in the issue.
         agent_bot.delete
 
         get '/platform/api/v1/agent_bots',

@@ -36,7 +36,7 @@
         "COPY": "Copy secret to clipboard",
         "COPY_SUCCESS": "Secret copied to clipboard",
         "TOGGLE": "Toggle secret visibility",
-        "CREATED_DESC": "Webhookunuz yaradıldı. Webhook imzalarını təsdiqləmək üçün aşağıdakı sirri istifadə edin. Zəhmət olmasa, indi kopyalayın — onu daha sonra webhook redaktə formasında da tapa bilərsiniz.",
+        "CREATED_DESC": "Webhookunuz yaradıldı. Webhook imzalarını təsdiqləmək üçün aşağıdakı sirri istifadə edin. Zəhmət olmasa, indi kopyalayın - onu daha sonra webhook redaktə formasında da tapa bilərsiniz.",
         "DONE": "Hazır"
       },
       "COUNT": "{n} webhook | {n} webhooks",
@@ -553,11 +553,11 @@
           "OPTIONS": {
             "GUARDRAILS": {
               "TITLE": "Məhdudiyyətlər",
-              "DESCRIPTION": "Hər şeyin nəzarətdə qalmasını təmin edir—assistentinizin yalnız istədiyiniz suallara cavab verməsini təmin edir, mövzudan kənar və ya icazəsiz heç nə yoxdur."
+              "DESCRIPTION": "Hər şeyin nəzarətdə qalmasını təmin edir-assistentinizin yalnız istədiyiniz suallara cavab verməsini təmin edir, mövzudan kənar və ya icazəsiz heç nə yoxdur."
             },
             "RESPONSE_GUIDELINES": {
               "TITLE": "Cavab qaydaları",
-              "DESCRIPTION": "Assistentinizin cavablarının tərzi və quruluşu—aydın və dostcasına? Qısa və yığcam? Ətraflı və rəsmi?"
+              "DESCRIPTION": "Assistentinizin cavablarının tərzi və quruluşu-aydın və dostcasına? Qısa və yığcam? Ətraflı və rəsmi?"
             }
           }
         },
@@ -582,7 +582,7 @@
       },
       "GUARDRAILS": {
         "TITLE": "Məhdudiyyətlər",
-        "DESCRIPTION": "Hər şeyin nəzarətdə qalmasını təmin edir—assistentinizin yalnız istədiyiniz suallara cavab verməsini təmin edir, mövzudan kənar və ya icazəsiz heç nə yoxdur.",
+        "DESCRIPTION": "Hər şeyin nəzarətdə qalmasını təmin edir-assistentinizin yalnız istədiyiniz suallara cavab verməsini təmin edir, mövzudan kənar və ya icazəsiz heç nə yoxdur.",
         "BULK_ACTION": {
           "SELECTED": "{count} element seçildi | {count} element seçildi",
           "SELECT_ALL": "Hamısını seç ({count})",
@@ -627,7 +627,7 @@
       },
       "RESPONSE_GUIDELINES": {
         "TITLE": "Cavab qaydaları",
-        "DESCRIPTION": "Assistentinizin cavablarının tərzi və quruluşu—aydın və dostcasına? Qısa və yığcam? Ətraflı və rəsmi?",
+        "DESCRIPTION": "Assistentinizin cavablarının tərzi və quruluşu-aydın və dostcasına? Qısa və yığcam? Ətraflı və rəsmi?",
         "BULK_ACTION": {
           "SELECTED": "{count} element seçildi | {count} element seçildi",
           "SELECT_ALL": "Hamısını seç ({count})",
@@ -672,7 +672,7 @@
       },
       "SCENARIOS": {
         "TITLE": "Ssenarilər",
-        "DESCRIPTION": "Assistentinizə bir az kontekst verin—məsələn, “istifadəçi ilişibsə nə etməli”, ya da “geri qaytarma sorğusu zamanı necə davranmalı.”",
+        "DESCRIPTION": "Assistentinizə bir az kontekst verin-məsələn, “istifadəçi ilişibsə nə etməli”, ya da “geri qaytarma sorğusu zamanı necə davranmalı.”",
         "BULK_ACTION": {
           "SELECTED": "{count} element seçildi | {count} element seçildi",
           "SELECT_ALL": "Hamısını seç ({count})",

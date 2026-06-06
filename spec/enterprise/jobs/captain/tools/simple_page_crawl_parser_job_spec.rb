@@ -133,7 +133,7 @@ RSpec.describe Captain::Tools::SimplePageCrawlParserJob, type: :job do
         # `discard_on PermanentCrawlError` swallows the error in `perform_now`
         # under normal conditions, but Zeitwerk reloading in CI can break the
         # rescue_handlers chain so the error escapes. The behavioural contract
-        # we care about — no retries, correct document state — holds either
+        # we care about - no retries, correct document state - holds either
         # way, so tolerate both.
         def run_job
           described_class.perform_now(assistant_id: assistant.id, page_link: page_link)

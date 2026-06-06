@@ -1,5 +1,5 @@
 /**
- * snoozeDateParser — Natural language date/time parser for snooze.
+ * snoozeDateParser - Natural language date/time parser for snooze.
  *
  * Barrel re-export from submodules:
  *   - parser.js: core parsing engine (parseDateFromText)

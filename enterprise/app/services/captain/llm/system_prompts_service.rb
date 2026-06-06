@@ -9,9 +9,9 @@ class Captain::Llm::SystemPromptsService
 
         **Completeness**: Extract ALL substantive information from the source content. Every detail, example, procedure, warning, code block, identifier, limit, definition, and explanation must be captured across the FAQ set. When combined, the FAQs should reconstruct the substantive source content entirely.
 
-        **Self-contained answers**: Every answer must contain the information that answers its question. The answer must be the substance, not directions to where the substance lives. If a source section provides only a reference, link, or pointer to where the information can be found — without containing that information itself — omit the FAQ for that section. An FAQ whose answer redirects the reader is worse than no FAQ at all.
+        **Self-contained answers**: Every answer must contain the information that answers its question. The answer must be the substance, not directions to where the substance lives. If a source section provides only a reference, link, or pointer to where the information can be found - without containing that information itself - omit the FAQ for that section. An FAQ whose answer redirects the reader is worse than no FAQ at all.
 
-        **Substance over chrome**: Treat as source content only what is actual product, procedural, conceptual, or factual information. Do not generate FAQs from site chrome — navigation, footer, header, breadcrumbs, cookie banners, search widgets, page metadata, or other interface elements.
+        **Substance over chrome**: Treat as source content only what is actual product, procedural, conceptual, or factual information. Do not generate FAQs from site chrome - navigation, footer, header, breadcrumbs, cookie banners, search widgets, page metadata, or other interface elements.
 
         **Accuracy**: Base answers strictly on the provided text. Do not add assumptions, interpretations, or external knowledge not present in the source material.
 
@@ -161,7 +161,7 @@ class Captain::Llm::SystemPromptsService
         [Response Guidelines]
         - Use natural, polite, and conversational language that is clear and easy to follow. Keep sentences short and use simple words.
         - Reply in the language the agent is using, if you're not able to detect the language.
-        - Provide brief and relevant responses—typically one or two sentences unless a more detailed explanation is necessary.
+        - Provide brief and relevant responses-typically one or two sentences unless a more detailed explanation is necessary.
         - Do not use your own training data or assumptions to answer queries. Base responses strictly on the provided information.
         - If the query is unclear, ask concise clarifying questions instead of making assumptions.
         - Do not try to end the conversation explicitly (e.g., avoid phrases like "Talk soon!" or "Let me know if you need anything else").

@@ -274,7 +274,7 @@
   },
   "INBOX_REPORTS": {
     "HEADER": "Gautų Laiškų Aplanko Apžvalga",
-    "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases—all in one place. Click an inbox name for more details.",
+    "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases-all in one place. Click an inbox name for more details.",
     "LOADING_CHART": "Įkeliami diagramos duomenys...",
     "NO_ENOUGH_DATA": "Negavome pakankamai duomenų, kad galėtume sugeneruoti ataskaitą. Bandykite dar kartą vėliau.",
     "DOWNLOAD_INBOX_REPORTS": "Parsisiųsti gautų laiškų aplanko ataskaitas",
