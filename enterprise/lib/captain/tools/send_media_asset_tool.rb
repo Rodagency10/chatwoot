@@ -18,8 +18,8 @@ class Captain::Tools::SendMediaAssetTool < Captain::Tools::BasePublicTool
 
     log_tool_usage('send_media_asset', { conversation_id: conversation.id, asset_id: asset.id })
 
-    Captain::Messages::OutgoingAttachmentService.new(assistant: @assistant, conversation: conversation)
-                                              .send_from_blob(blob: asset.image.blob, caption: final_caption)
+    service = Captain::Messages::OutgoingAttachmentService.new(assistant: @assistant, conversation: conversation)
+    service.send_from_blob(blob: asset.image.blob, caption: final_caption)
     "Image sent successfully: #{asset.name}"
   rescue Captain::Messages::OutgoingAttachmentService::Error => e
     "Failed to send image: #{e.message}"

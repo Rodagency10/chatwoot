@@ -13,7 +13,7 @@ FactoryBot.define do
       next if media_asset.image.attached?
 
       media_asset.image.attach(
-        io: Rails.root.join('public/assets/images/dashboard/captain/logo.svg').open,
+        io: Rails.public_path.join('assets/images/dashboard/captain/logo.svg').open,
         filename: 'product.png',
         content_type: 'image/svg+xml'
       )

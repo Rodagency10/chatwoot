@@ -2,7 +2,7 @@ class Captain::Messages::OutgoingAttachmentService
   class Error < StandardError; end
 
   MAX_ATTACHMENT_BYTES = 10_000_000
-  IMAGE_CONTENT_TYPE_PREFIX = 'image/'
+  IMAGE_CONTENT_TYPE_PREFIX = 'image/'.freeze
 
   pattr_initialize [:assistant!, :conversation!]
 

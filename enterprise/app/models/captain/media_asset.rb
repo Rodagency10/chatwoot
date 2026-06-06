@@ -27,7 +27,7 @@ class Captain::MediaAsset < ApplicationRecord
   def price_formatted
     return nil if price_cents.blank?
 
-    format('%.2f %s', price_cents / 100.0, currency)
+    format('%<amount>.2f %<currency>s', amount: price_cents / 100.0, currency: currency)
   end
 
   def build_caption(assistant)

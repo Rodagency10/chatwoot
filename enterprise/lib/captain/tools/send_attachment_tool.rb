@@ -10,8 +10,8 @@ class Captain::Tools::SendAttachmentTool < Captain::Tools::BasePublicTool
 
     log_tool_usage('send_attachment', { conversation_id: conversation.id, image_url: image_url })
 
-    Captain::Messages::OutgoingAttachmentService.new(assistant: @assistant, conversation: conversation)
-                                              .send_from_url(image_url: image_url, caption: caption)
+    service = Captain::Messages::OutgoingAttachmentService.new(assistant: @assistant, conversation: conversation)
+    service.send_from_url(image_url: image_url, caption: caption)
     'Image sent successfully'
   rescue Captain::Messages::OutgoingAttachmentService::Error, Captain::UrlSafetyValidator::Error, SafeFetch::Error => e
     "Failed to send image: #{e.message}"

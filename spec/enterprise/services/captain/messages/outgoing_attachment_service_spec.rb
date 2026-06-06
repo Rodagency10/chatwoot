@@ -11,7 +11,7 @@ RSpec.describe Captain::Messages::OutgoingAttachmentService, type: :service do
     let(:image_url) { 'https://example.com/product.svg' }
     let(:blob) do
       ActiveStorage::Blob.create_and_upload!(
-        io: Rails.root.join('public/assets/images/dashboard/captain/logo.svg').open,
+        io: Rails.public_path.join('assets/images/dashboard/captain/logo.svg').open,
         filename: 'product.svg',
         content_type: 'image/svg+xml'
       )
@@ -42,7 +42,7 @@ RSpec.describe Captain::Messages::OutgoingAttachmentService, type: :service do
   describe '#send_from_blob' do
     let(:blob) do
       ActiveStorage::Blob.create_and_upload!(
-        io: Rails.root.join('public/assets/images/dashboard/captain/logo.svg').open,
+        io: Rails.public_path.join('assets/images/dashboard/captain/logo.svg').open,
         filename: 'product.svg',
         content_type: 'image/svg+xml'
       )

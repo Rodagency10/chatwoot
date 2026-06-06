@@ -19,7 +19,9 @@ const fileInputRef = ref(null);
 const state = reactive({
   name: props.asset?.name || '',
   sku: props.asset?.sku || '',
-  price: props.asset?.priceCents ? (props.asset.priceCents / 100).toString() : '',
+  price: props.asset?.priceCents
+    ? (props.asset.priceCents / 100).toString()
+    : '',
   currency: props.asset?.currency || 'EUR',
   description: props.asset?.description || '',
   tags: props.asset?.tags?.join(', ') || '',
