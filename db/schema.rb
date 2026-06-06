@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_06_03_102500) do
+ActiveRecord::Schema[7.1].define(version: 2026_06_04_120000) do
   # These extensions should be enabled to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -397,6 +397,25 @@ ActiveRecord::Schema[7.1].define(version: 2026_06_03_102500) do
     t.index ["captain_assistant_id", "inbox_id"], name: "index_captain_inboxes_on_captain_assistant_id_and_inbox_id", unique: true
     t.index ["captain_assistant_id"], name: "index_captain_inboxes_on_captain_assistant_id"
     t.index ["inbox_id"], name: "index_captain_inboxes_on_inbox_id"
+  end
+
+  create_table "captain_media_assets", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "assistant_id", null: false
+    t.string "name", null: false
+    t.string "sku"
+    t.integer "price_cents"
+    t.string "currency", default: "EUR", null: false
+    t.text "description"
+    t.jsonb "tags", default: [], null: false
+    t.boolean "active", default: true, null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_captain_media_assets_on_account_id"
+    t.index ["assistant_id", "active"], name: "index_captain_media_assets_on_assistant_id_and_active"
+    t.index ["assistant_id"], name: "index_captain_media_assets_on_assistant_id"
+    t.index ["tags"], name: "index_captain_media_assets_on_tags", using: :gin
   end
 
   create_table "captain_scenarios", force: :cascade do |t|
@@ -1324,6 +1343,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_06_03_102500) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "captain_media_assets", "accounts"
+  add_foreign_key "captain_media_assets", "captain_assistants", column: "assistant_id"
   add_foreign_key "inboxes", "portals"
   create_trigger("accounts_after_insert_row_tr", :generated => true, :compatibility => 1).
       on("accounts").
