@@ -4,6 +4,8 @@ import { useI18n } from 'vue-i18n';
 import { useAlert } from 'dashboard/composables';
 import SettingsFieldSection from 'dashboard/components-next/Settings/SettingsFieldSection.vue';
 import NextButton from 'dashboard/components-next/button/Button.vue';
+import Dialog from 'dashboard/components-next/dialog/Dialog.vue';
+import WapiConnectionFlow from './WapiConnectionFlow.vue';
 import wapiChannel from 'dashboard/api/channel/wapiChannel';
 
 const props = defineProps({
@@ -18,53 +20,64 @@ const I18N = 'INBOX_MGMT.WAPI_SETTINGS';
 const { t } = useI18n();
 
 const deviceInfo = ref(null);
-const isReconnecting = ref(false);
 const isLoggingOut = ref(false);
+const isLoadingDeviceInfo = ref(true);
+const showLoginFlow = ref(false);
+const logoutDialogRef = ref(null);
+const connectionFlowRef = ref(null);
 const pollingInterval = ref(null);
 
 const isWapiInbox = computed(() => {
   return !!props.inbox.additional_attributes?.wapi_device_id;
 });
 
+const isConnected = computed(() => deviceInfo.value?.is_connected === true);
+
 const statusLabel = computed(() => {
   if (!deviceInfo.value) return t(`${I18N}.STATUS_UNKNOWN`);
-  return deviceInfo.value.is_connected
+  return isConnected.value
     ? t(`${I18N}.STATUS_CONNECTED`)
     : t(`${I18N}.STATUS_DISCONNECTED`);
 });
 
 const statusClass = computed(() => {
   if (!deviceInfo.value) return 'text-n-slate-11';
-  return deviceInfo.value.is_connected ? 'text-n-teal-11' : 'text-n-ruby-11';
+  return isConnected.value ? 'text-n-teal-11' : 'text-n-ruby-11';
 });
+
+const canReconnect = computed(
+  () => !isLoadingDeviceInfo.value && deviceInfo.value && !isConnected.value
+);
+
+const canLogout = computed(
+  () => !isLoadingDeviceInfo.value && deviceInfo.value && isConnected.value
+);
 
 const fetchDeviceInfo = async () => {
   if (!isWapiInbox.value) return;
+
+  isLoadingDeviceInfo.value = true;
   try {
     const response = await wapiChannel.getDeviceInfo(props.inbox.id);
     deviceInfo.value = response.data;
   } catch {
-    // Silently fail for polling
-  }
-};
-
-const handleReconnect = async () => {
-  isReconnecting.value = true;
-  try {
-    await wapiChannel.reconnect(props.inbox.id);
-    useAlert(t(`${I18N}.RECONNECT_SUCCESS`));
-    await fetchDeviceInfo();
-  } catch (error) {
-    useAlert(error.response?.data?.error || t(`${I18N}.RECONNECT_ERROR`));
+    deviceInfo.value = null;
   } finally {
-    isReconnecting.value = false;
+    isLoadingDeviceInfo.value = false;
   }
 };
 
-const handleLogout = async () => {
+const openLogoutDialog = () => {
+  logoutDialogRef.value?.open();
+};
+
+const handleLogoutConfirm = async () => {
+  logoutDialogRef.value?.close();
   isLoggingOut.value = true;
   try {
     await wapiChannel.logout(props.inbox.id);
+    showLoginFlow.value = false;
+    connectionFlowRef.value?.stopPolling();
     useAlert(t(`${I18N}.LOGOUT_SUCCESS`));
     await fetchDeviceInfo();
   } catch (error) {
@@ -74,6 +87,17 @@ const handleLogout = async () => {
   }
 };
 
+const handleReconnectClick = () => {
+  showLoginFlow.value = true;
+};
+
+const handleReconnected = async () => {
+  showLoginFlow.value = false;
+  connectionFlowRef.value?.stopPolling();
+  useAlert(t(`${I18N}.CONNECTED_SUCCESS`));
+  await fetchDeviceInfo();
+};
+
 onMounted(() => {
   fetchDeviceInfo();
   pollingInterval.value = setInterval(fetchDeviceInfo, 30000);
@@ -81,6 +105,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (pollingInterval.value) clearInterval(pollingInterval.value);
+  connectionFlowRef.value?.stopPolling();
 });
 </script>
 
@@ -103,7 +128,7 @@ onUnmounted(() => {
           </span>
         </div>
         <div
-          v-if="deviceInfo.phone_number"
+          v-if="isConnected && deviceInfo.phone_number"
           class="flex items-center justify-between"
         >
           <span class="text-sm font-medium text-n-slate-11">
@@ -113,7 +138,10 @@ onUnmounted(() => {
             {{ deviceInfo.phone_number }}
           </span>
         </div>
-        <div v-if="deviceInfo.jid" class="flex items-center justify-between">
+        <div
+          v-if="isConnected && deviceInfo.jid"
+          class="flex items-center justify-between"
+        >
           <span class="text-sm font-medium text-n-slate-11">
             {{ $t(`${I18N}.JID`) }}
           </span>
@@ -130,7 +158,7 @@ onUnmounted(() => {
           </span>
         </div>
       </div>
-      <div v-else class="text-sm text-n-slate-11">
+      <div v-else-if="isLoadingDeviceInfo" class="text-sm text-n-slate-11">
         {{ $t(`${I18N}.LOADING`) }}
       </div>
     </SettingsFieldSection>
@@ -142,16 +170,39 @@ onUnmounted(() => {
       <div class="flex gap-3">
         <NextButton
           :label="$t(`${I18N}.RECONNECT_BUTTON`)"
-          :is-loading="isReconnecting"
-          @click="handleReconnect"
+          :disabled="!canReconnect"
+          @click="handleReconnectClick"
         />
         <NextButton
           :label="$t(`${I18N}.LOGOUT_BUTTON`)"
           :is-loading="isLoggingOut"
-          color-scheme="alert"
-          @click="handleLogout"
+          :disabled="!canLogout"
+          color="ruby"
+          @click="openLogoutDialog"
         />
       </div>
     </SettingsFieldSection>
+
+    <SettingsFieldSection
+      v-if="showLoginFlow"
+      :label="$t(`${I18N}.RELOGIN_TITLE`)"
+      :help-text="$t(`${I18N}.RELOGIN_DESC`)"
+    >
+      <WapiConnectionFlow
+        ref="connectionFlowRef"
+        :inbox-id="inbox.id"
+        connect-error-key="INBOX_MGMT.WAPI_SETTINGS.RECONNECT_ERROR"
+        @connected="handleReconnected"
+      />
+    </SettingsFieldSection>
+
+    <Dialog
+      ref="logoutDialogRef"
+      type="alert"
+      :title="$t(`${I18N}.LOGOUT_CONFIRM_TITLE`)"
+      :description="$t(`${I18N}.LOGOUT_CONFIRM_DESCRIPTION`)"
+      :confirm-button-label="$t(`${I18N}.LOGOUT_CONFIRM_BUTTON`)"
+      @confirm="handleLogoutConfirm"
+    />
   </div>
 </template>

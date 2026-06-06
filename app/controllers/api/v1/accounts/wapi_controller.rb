@@ -26,7 +26,7 @@ class Api::V1::Accounts::WapiController < Api::V1::Accounts::BaseController
 
   # GET /api/v1/accounts/:account_id/wapi/qr
   def qr
-    result = device_service.get_qr(device_id)
+    result = with_device_recovery { device_service.get_qr(device_id) }
     render json: {
       success: true,
       qr: result.dig('results', 'qr_link'),
@@ -41,7 +41,7 @@ class Api::V1::Accounts::WapiController < Api::V1::Accounts::BaseController
     phone = params[:phone]
     render json: { error: 'Phone number is required' }, status: :unprocessable_entity and return if phone.blank?
 
-    result = device_service.login_with_code(device_id, phone)
+    result = with_device_recovery { device_service.login_with_code(device_id, phone) }
     render json: { success: true, pair_code: result.dig('results', 'pair_code') }
   rescue CustomExceptions::WapiError => e
     render json: { error: e.message }, status: :unprocessable_entity
@@ -71,19 +71,16 @@ class Api::V1::Accounts::WapiController < Api::V1::Accounts::BaseController
 
   # GET /api/v1/accounts/:account_id/wapi/device_info
   def device_info
-    status_result = device_service.check_status(device_id)
-    wapi_status = status_result['results'] || {}
-    connected = wapi_status['is_connected'] && wapi_status['is_logged_in']
+    connected = device_connected?
 
     render json: {
       success: true,
       device_id: device_id,
       jid: @channel.additional_attributes['wapi_jid'],
       phone_number: extract_phone_from_jid(@channel.additional_attributes['wapi_jid']),
-      is_connected: connected
+      is_connected: connected,
+      needs_login: !connected
     }
-  rescue CustomExceptions::WapiError => e
-    render json: { error: e.message }, status: :unprocessable_entity
   end
 
   # POST /api/v1/accounts/:account_id/wapi/reconnect
@@ -158,5 +155,28 @@ class Api::V1::Accounts::WapiController < Api::V1::Accounts::BaseController
     # JID format: 22890000000@s.whatsapp.net → +22890000000
     phone = jid.split('@').first
     "+#{phone}" if phone.present?
+  end
+
+  def device_connected?
+    status_result = device_service.check_status(device_id)
+    wapi_status = status_result['results'] || {}
+    wapi_status['is_connected'] && wapi_status['is_logged_in']
+  rescue CustomExceptions::WapiError
+    false
+  end
+
+  def with_device_recovery
+    yield
+  rescue CustomExceptions::WapiError => e
+    raise unless Wapi::DeviceService.recoverable_session_error?(e.message)
+
+    recreate_device!
+    yield
+  end
+
+  def recreate_device!
+    device_service.create_device(device_id)
+  rescue CustomExceptions::WapiError => e
+    raise unless Wapi::DeviceService.device_already_exists_error?(e.message)
   end
 end

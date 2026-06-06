@@ -337,6 +337,8 @@
         "SCAN_QR_HELP": "Open WhatsApp on your phone → Settings → Linked Devices → Link a Device, then scan the QR code below.",
         "QR_ALT": "WhatsApp QR Code",
         "WAITING_FOR_QR": "Waiting for QR code...",
+        "QR_EXPIRES_IN": "New code in {seconds}s",
+        "QR_REFRESHING": "Refreshing QR code...",
         "USE_PAIR_CODE": "Use pairing code instead",
         "PAIR_CODE_TITLE": "Pair with Phone Number",
         "PAIR_CODE_HELP": "Open WhatsApp on your phone → Settings → Linked Devices → Link a Device → Link with phone number instead. Then enter the code shown below.",
@@ -1247,7 +1249,13 @@
       "RECONNECT_SUCCESS": "WhatsApp device reconnected successfully.",
       "RECONNECT_ERROR": "Failed to reconnect device.",
       "LOGOUT_SUCCESS": "WhatsApp device logged out successfully.",
-      "LOGOUT_ERROR": "Failed to logout device."
+      "LOGOUT_ERROR": "Failed to logout device.",
+      "LOGOUT_CONFIRM_TITLE": "Disconnect WhatsApp device?",
+      "LOGOUT_CONFIRM_DESCRIPTION": "This will end the WhatsApp session for this inbox. You can reconnect later using a new QR code or pairing code.",
+      "LOGOUT_CONFIRM_BUTTON": "Yes, disconnect",
+      "RELOGIN_TITLE": "Reconnect WhatsApp",
+      "RELOGIN_DESC": "Scan the QR code or use a pairing code to link WhatsApp again.",
+      "CONNECTED_SUCCESS": "WhatsApp connected successfully."
     }
   }
 }

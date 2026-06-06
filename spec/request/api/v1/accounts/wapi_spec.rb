@@ -76,6 +76,48 @@ RSpec.describe 'WAPI Inbox API', type: :request do
     end
   end
 
+  describe 'GET /api/v1/accounts/{account.id}/wapi/device_info' do
+    around do |example|
+      with_modified_env WAPI_BASE_URL: 'https://wapi.example.com', WAPI_BASIC_AUTH: 'dXNlcjpwYXNz' do
+        example.run
+      end
+    end
+
+    context 'when authenticated' do
+      it 'returns disconnected state when WAPI status fails' do
+        device_service = instance_double(Wapi::DeviceService)
+        allow(Wapi::DeviceService).to receive(:new).and_return(device_service)
+        allow(device_service).to receive(:check_status)
+          .and_raise(CustomExceptions::WapiError, 'device cw-inbox-5 is not logged in (session deleted)')
+
+        get "/api/v1/accounts/#{account.id}/wapi/device_info",
+            params: { inbox_id: inbox.id },
+            headers: administrator.create_new_auth_token
+
+        expect(response).to have_http_status(:success)
+        json = response.parsed_body
+        expect(json['is_connected']).to be false
+        expect(json['needs_login']).to be true
+        expect(json['device_id']).to eq('test-device-uuid')
+      end
+
+      it 'returns connected state when WAPI status succeeds' do
+        device_service = instance_double(Wapi::DeviceService)
+        allow(Wapi::DeviceService).to receive(:new).and_return(device_service)
+        allow(device_service).to receive(:check_status)
+          .and_return({ 'code' => 'SUCCESS', 'results' => { 'is_connected' => true, 'is_logged_in' => true } })
+
+        get "/api/v1/accounts/#{account.id}/wapi/device_info",
+            params: { inbox_id: inbox.id },
+            headers: administrator.create_new_auth_token
+
+        expect(response).to have_http_status(:success)
+        expect(response.parsed_body['is_connected']).to be true
+        expect(response.parsed_body['needs_login']).to be false
+      end
+    end
+  end
+
   describe 'GET /api/v1/accounts/{account.id}/wapi/qr' do
     around do |example|
       with_modified_env WAPI_BASE_URL: 'https://wapi.example.com', WAPI_BASIC_AUTH: 'dXNlcjpwYXNz' do
@@ -96,6 +138,26 @@ RSpec.describe 'WAPI Inbox API', type: :request do
 
         expect(response).to have_http_status(:success)
         expect(response.parsed_body['qr']).to eq('https://wapi.example.com/qr.png')
+      end
+
+      it 'recreates device and retries when session was deleted' do
+        device_service = instance_double(Wapi::DeviceService)
+        allow(Wapi::DeviceService).to receive(:new).and_return(device_service)
+        allow(device_service).to receive(:create_device).and_return({ 'code' => 'SUCCESS' })
+        allow(device_service).to receive(:get_qr).and_raise(
+          CustomExceptions::WapiError, 'device cw-inbox-5 is not logged in (session deleted)'
+        ).and_return(
+          { 'code' => 'SUCCESS', 'results' => { 'qr_link' => 'https://wapi.example.com/qr-new.png', 'qr_duration' => 30 } }
+        )
+
+        get "/api/v1/accounts/#{account.id}/wapi/qr",
+            params: { inbox_id: inbox.id },
+            headers: administrator.create_new_auth_token
+
+        expect(response).to have_http_status(:success)
+        expect(response.parsed_body['qr']).to eq('https://wapi.example.com/qr-new.png')
+        expect(device_service).to have_received(:create_device).with('test-device-uuid')
+        expect(device_service).to have_received(:get_qr).twice
       end
     end
   end

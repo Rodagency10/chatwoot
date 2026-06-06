@@ -40,6 +40,18 @@ class Wapi::DeviceService
     request(:get, '/app/logout', nil, device_id: device_id)
   end
 
+  def self.recoverable_session_error?(message)
+    normalized = message.to_s.downcase
+    normalized.include?('session deleted') ||
+      normalized.include?('not logged in') ||
+      normalized.include?('device is not logged in')
+  end
+
+  def self.device_already_exists_error?(message)
+    normalized = message.to_s.downcase
+    normalized.include?('already exists') || normalized.include?('already registered')
+  end
+
   # GET /devices/:device_id
   def get_device(device_id)
     request(:get, "/devices/#{CGI.escape(device_id)}")

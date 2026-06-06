@@ -545,6 +545,8 @@
         "SCAN_QR_HELP": "Ouvrez WhatsApp sur votre téléphone → Paramètres → Appareils connectés → Connecter un appareil, puis scannez le QR code ci-dessous.",
         "QR_ALT": "QR Code WhatsApp",
         "WAITING_FOR_QR": "En attente du QR code...",
+        "QR_EXPIRES_IN": "Nouveau code dans {seconds} s",
+        "QR_REFRESHING": "Actualisation du QR code...",
         "USE_PAIR_CODE": "Utiliser le code de jumelage à la place",
         "PAIR_CODE_TITLE": "Jumeler avec le numéro de téléphone",
         "PAIR_CODE_HELP": "Ouvrez WhatsApp sur votre téléphone → Paramètres → Appareils connectés → Connecter un appareil → Associer avec un numéro de téléphone. Entrez ensuite le code affiché ci-dessous.",
@@ -1214,7 +1216,13 @@
       "RECONNECT_SUCCESS": "Appareil WhatsApp reconnecté avec succès.",
       "RECONNECT_ERROR": "Échec de la reconnexion de l'appareil.",
       "LOGOUT_SUCCESS": "Appareil WhatsApp déconnecté avec succès.",
-      "LOGOUT_ERROR": "Échec de la déconnexion de l'appareil."
+      "LOGOUT_ERROR": "Échec de la déconnexion de l'appareil.",
+      "LOGOUT_CONFIRM_TITLE": "Déconnecter l'appareil WhatsApp ?",
+      "LOGOUT_CONFIRM_DESCRIPTION": "Cela mettra fin à la session WhatsApp de cette boîte de réception. Vous pourrez vous reconnecter plus tard avec un nouveau QR code ou un code de jumelage.",
+      "LOGOUT_CONFIRM_BUTTON": "Oui, déconnecter",
+      "RELOGIN_TITLE": "Reconnecter WhatsApp",
+      "RELOGIN_DESC": "Scannez le QR code ou utilisez un code de jumelage pour lier WhatsApp à nouveau.",
+      "CONNECTED_SUCCESS": "WhatsApp connecté avec succès."
     }
   }
 }
