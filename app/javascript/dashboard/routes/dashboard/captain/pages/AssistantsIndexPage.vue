@@ -55,6 +55,7 @@ const routeToLastActiveAssistant = () => {
   const isAValidRoute = [
     'captain_assistants_responses_index', // Faq page
     'captain_assistants_documents_index', // Document page
+    'captain_assistants_media_catalog_index', // Media catalog page
     'captain_assistants_scenarios_index', // Scenario page
     'captain_assistants_playground_index', // Playground page
     'captain_assistants_inboxes_index', // Inboxes page

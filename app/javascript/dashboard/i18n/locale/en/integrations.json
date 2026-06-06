@@ -776,6 +776,50 @@
         }
       }
     },
+    "MEDIA_CATALOG": {
+      "HEADER": "Media catalog",
+      "ADD_NEW": "Add product image",
+      "SEARCH_PLACEHOLDER": "Search by name, tag, or SKU...",
+      "EMPTY_STATE": {
+        "TITLE": "No product images yet",
+        "DESCRIPTION": "Upload product photos with names, prices, and tags so Captain can send them in WhatsApp conversations."
+      },
+      "CARD": {
+        "EDIT": "Edit",
+        "DELETE": "Delete",
+        "NO_IMAGE": "No image",
+        "INACTIVE": "Inactive"
+      },
+      "FORM": {
+        "CREATE_TITLE": "Add product image",
+        "EDIT_TITLE": "Edit product image",
+        "NAME": "Name",
+        "NAME_PLACEHOLDER": "Gold wedding band — model A",
+        "PRICE": "Price",
+        "PRICE_PLACEHOLDER": "890.00",
+        "CURRENCY": "Currency",
+        "SKU": "SKU",
+        "SKU_PLACEHOLDER": "RING-18K-A",
+        "TAGS": "Tags",
+        "TAGS_PLACEHOLDER": "gold, wedding, ring",
+        "DESCRIPTION": "Description for Captain",
+        "DESCRIPTION_PLACEHOLDER": "18k gold band, classic finish, sizes 48–62",
+        "IMAGE": "Image",
+        "ACTIVE": "Active"
+      },
+      "CREATE": {
+        "SUCCESS": "Product image added to the catalog",
+        "ERROR": "Could not add the product image, please try again."
+      },
+      "UPDATE": {
+        "SUCCESS": "Product image updated",
+        "ERROR": "Could not update the product image, please try again."
+      },
+      "DELETE": {
+        "SUCCESS": "Product image deleted",
+        "ERROR": "Could not delete the product image, please try again."
+      }
+    },
     "DOCUMENTS": {
       "HEADER": "Documents",
       "ADD_NEW": "Create a new document",

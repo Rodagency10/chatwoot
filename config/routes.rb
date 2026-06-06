@@ -81,6 +81,7 @@ Rails.application.routes.draw do
             resources :documents, only: [:index, :show, :create, :destroy] do
               post :sync, on: :member
             end
+            resources :media_assets, only: [:index, :show, :create, :update, :destroy]
             resource :tasks, only: [], controller: 'tasks' do
               post :rewrite
               post :summarize

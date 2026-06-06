@@ -39,3 +39,18 @@
   title: 'Handoff to Human'
   description: 'Hand off the conversation to a human agent'
   icon: 'user-switch'
+
+- id: send_attachment
+  title: 'Send Image'
+  description: 'Send an image attachment to the customer from a secure HTTPS URL'
+  icon: 'image'
+
+- id: search_media_catalog
+  title: 'Search Media Catalog'
+  description: 'Search product images in the assistant media catalog'
+  icon: 'search'
+
+- id: send_media_asset
+  title: 'Send Catalog Image'
+  description: 'Send a product image from the media catalog to the customer'
+  icon: 'image'

@@ -51,6 +51,7 @@ import userNotificationSettings from './modules/userNotificationSettings';
 import webhooks from './modules/webhooks';
 import captainAssistants from './captain/assistant';
 import captainDocuments from './captain/document';
+import captainMediaAssets from './captain/mediaAsset';
 import captainResponses from './captain/response';
 import captainInboxes from './captain/inboxes';
 import captainBulkActions from './captain/bulkActions';
@@ -115,6 +116,7 @@ export default createStore({
     webhooks,
     captainAssistants,
     captainDocuments,
+    captainMediaAssets,
     captainResponses,
     captainInboxes,
     captainBulkActions,

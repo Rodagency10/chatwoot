@@ -13,6 +13,7 @@ import AssistantGuardrailsIndex from './assistants/guardrails/Index.vue';
 import AssistantGuidelinesIndex from './assistants/guidelines/Index.vue';
 import AssistantScenariosIndex from './assistants/scenarios/Index.vue';
 import DocumentsIndex from './documents/Index.vue';
+import MediaCatalogIndex from './mediaCatalog/Index.vue';
 import ResponsesIndex from './responses/Index.vue';
 import ResponsesPendingIndex from './responses/Pending.vue';
 import CustomToolsIndex from './tools/Index.vue';
@@ -46,6 +47,12 @@ const assistantRoutes = [
     path: frontendURL('accounts/:accountId/captain/:assistantId/documents'),
     component: DocumentsIndex,
     name: 'captain_assistants_documents_index',
+    meta,
+  },
+  {
+    path: frontendURL('accounts/:accountId/captain/:assistantId/media-catalog'),
+    component: MediaCatalogIndex,
+    name: 'captain_assistants_media_catalog_index',
     meta,
   },
   {

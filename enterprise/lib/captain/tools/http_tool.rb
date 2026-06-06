@@ -24,17 +24,6 @@ class Captain::Tools::HttpTool < Agents::Tool
 
   private
 
-  PRIVATE_IP_RANGES = [
-    IPAddr.new('127.0.0.0/8'),    # IPv4 Loopback
-    IPAddr.new('10.0.0.0/8'),     # IPv4 Private network
-    IPAddr.new('172.16.0.0/12'),  # IPv4 Private network
-    IPAddr.new('192.168.0.0/16'), # IPv4 Private network
-    IPAddr.new('169.254.0.0/16'), # IPv4 Link-local
-    IPAddr.new('::1'),            # IPv6 Loopback
-    IPAddr.new('fc00::/7'),       # IPv6 Unique local addresses
-    IPAddr.new('fe80::/10')       # IPv6 Link-local
-  ].freeze
-
   # Limit response size to prevent memory exhaustion and match LLM token limits
   # 1MB of text ≈ 250K tokens, which exceeds most LLM context windows
   MAX_RESPONSE_SIZE = 1.megabyte
@@ -42,8 +31,7 @@ class Captain::Tools::HttpTool < Agents::Tool
   def execute_http_request(url, body, tool_context)
     uri = URI.parse(url)
 
-    # Check if resolved IP is private
-    check_private_ip!(uri.host)
+    Captain::UrlSafetyValidator.validate_hostname!(uri.host)
 
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = uri.scheme == 'https'
@@ -62,14 +50,6 @@ class Captain::Tools::HttpTool < Agents::Tool
     validate_response!(response)
 
     response
-  end
-
-  def check_private_ip!(hostname)
-    ip_address = IPAddr.new(Resolv.getaddress(hostname))
-
-    raise 'Request blocked: hostname resolves to private IP address' if PRIVATE_IP_RANGES.any? { |range| range.include?(ip_address) }
-  rescue Resolv::ResolvError, SocketError => e
-    raise "DNS resolution failed: #{e.message}"
   end
 
   def validate_response!(response)

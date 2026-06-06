@@ -407,6 +407,14 @@ const menuItems = computed(() => {
           }),
         },
         {
+          name: 'MediaCatalog',
+          label: t('SIDEBAR.CAPTAIN_MEDIA_CATALOG'),
+          activeOn: ['captain_assistants_media_catalog_index'],
+          to: accountScopedRoute('captain_assistants_index', {
+            navigationPath: 'captain_assistants_media_catalog_index',
+          }),
+        },
+        {
           name: 'Scenarios',
           label: t('SIDEBAR.CAPTAIN_SCENARIOS'),
           activeOn: ['captain_assistants_scenarios_index'],
