@@ -30,17 +30,8 @@ class Captain::MediaAsset < ApplicationRecord
   end
 
   def build_caption(assistant, image: nil)
-    template = assistant.config['media_catalog_caption_template'].presence || '{name}'
-    include_price = assistant.config['media_catalog_include_price_in_caption'] != false
-
-    caption = template.gsub('{name}', name.to_s)
-    caption = caption.gsub('{price}', price_formatted.to_s) if include_price && price_formatted.present?
-    caption = caption.gsub('{sku}', sku.to_s) if sku.present?
-
-    if image.present? && image.label.present? && !image.is_primary?
-      caption = "#{caption} — #{image.label}"
-    end
-
+    caption = render_caption_template(assistant)
+    caption = append_image_label(caption, image)
     caption.squish.presence || name
   end
 
@@ -54,17 +45,40 @@ class Captain::MediaAsset < ApplicationRecord
 
   def image_for_send(image_index: nil, image_label: nil)
     return primary_image if image_index.blank? && image_label.blank?
+    return find_image_by_label(image_label) if image_label.present?
 
-    if image_label.present?
-      normalized = image_label.to_s.downcase.strip
-      images.ordered.find { |img| img.label.to_s.downcase == normalized } ||
-        images.ordered.find { |img| img.display_label.downcase == normalized }
-    elsif image_index.present?
-      images.ordered[image_index.to_i - 1]
-    end
+    find_image_by_index(image_index)
   end
 
   def image_count
     images.count
+  end
+
+  private
+
+  def render_caption_template(assistant)
+    template = assistant.config['media_catalog_caption_template'].presence || '{name}'
+    include_price = assistant.config['media_catalog_include_price_in_caption'] != false
+
+    caption = template.gsub('{name}', name.to_s)
+    caption = caption.gsub('{price}', price_formatted.to_s) if include_price && price_formatted.present?
+    caption = caption.gsub('{sku}', sku.to_s) if sku.present?
+    caption
+  end
+
+  def append_image_label(caption, image)
+    return caption unless image.present? && image.label.present? && !image.is_primary?
+
+    "#{caption} — #{image.label}"
+  end
+
+  def find_image_by_label(image_label)
+    normalized = image_label.to_s.downcase.strip
+    images.ordered.find { |img| img.label.to_s.downcase == normalized } ||
+      images.ordered.find { |img| img.display_label.downcase == normalized }
+  end
+
+  def find_image_by_index(image_index)
+    images.ordered[image_index.to_i - 1]
   end
 end

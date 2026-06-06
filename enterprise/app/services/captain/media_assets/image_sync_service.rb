@@ -29,21 +29,25 @@ class Captain::MediaAssets::ImageSyncService
     labels = Array(params[:image_labels])
 
     files.each_with_index do |uploaded_file, index|
-      raise Captain::MediaAssets::ImageSyncService::Error, 'Image limit reached' if media_asset.images.count >= MAX_IMAGES
-
-      validate_upload!(uploaded_file)
-
-      image = media_asset.images.create!(
-        position: next_position + index,
-        label: labels[index].presence,
-        is_primary: media_asset.images.none? && index.zero?
-      )
-      image.file.attach(uploaded_file)
+      attach_single_image(uploaded_file, index, next_position, labels)
     end
   end
 
+  def attach_single_image(uploaded_file, index, next_position, labels)
+    raise Captain::MediaAssets::ImageSyncService::Error, 'Image limit reached' if media_asset.images.count >= MAX_IMAGES
+
+    validate_upload!(uploaded_file)
+
+    image = media_asset.images.create!(
+      position: next_position + index,
+      label: labels[index].presence,
+      is_primary: media_asset.images.none? && index.zero?
+    )
+    image.file.attach(uploaded_file)
+  end
+
   def remove_images
-    ids = Array(params[:removed_image_ids]).map(&:to_i).compact
+    ids = Array(params[:removed_image_ids]).filter_map(&:to_i)
     return if ids.blank?
 
     media_asset.images.where(id: ids).find_each(&:destroy)
