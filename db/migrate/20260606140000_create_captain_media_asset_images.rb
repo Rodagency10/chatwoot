@@ -1,4 +1,7 @@
 class CreateCaptainMediaAssetImages < ActiveRecord::Migration[7.1]
+  LEGACY_RECORD_TYPE = 'Captain::MediaAsset'
+  IMAGE_RECORD_TYPE = 'Captain::MediaAssetImage'
+
   def up
     create_table :captain_media_asset_images do |t|
       t.references :media_asset, null: false, foreign_key: { to_table: :captain_media_assets }, index: true
@@ -20,27 +23,35 @@ class CreateCaptainMediaAssetImages < ActiveRecord::Migration[7.1]
   private
 
   def migrate_legacy_single_images
-    media_asset_model = Class.new(ApplicationRecord) do
-      self.table_name = 'captain_media_assets'
-      has_one_attached :image
-    end
+    return unless active_storage_ready?
 
-    image_model = Class.new(ApplicationRecord) do
-      self.table_name = 'captain_media_asset_images'
-      has_one_attached :file
+    legacy_attachments.find_each do |attachment|
+      image_id = insert_image_record(attachment.record_id)
+      move_attachment_to_image(attachment.id, image_id)
     end
+  end
 
-    media_asset_model.find_each do |asset|
-      next unless asset.image.attached?
+  def active_storage_ready?
+    table_exists?(:active_storage_attachments) && table_exists?(:captain_media_assets)
+  end
 
-      image_record = image_model.create!(
-        media_asset_id: asset.id,
-        position: 0,
-        label: 'primary',
-        is_primary: true
-      )
-      image_record.file.attach(asset.image.blob)
-      asset.image.purge
-    end
+  def legacy_attachments
+    ActiveStorage::Attachment.where(record_type: LEGACY_RECORD_TYPE, name: 'image')
+  end
+
+  def insert_image_record(media_asset_id)
+    connection.select_value(<<~SQL.squish)
+      INSERT INTO captain_media_asset_images (media_asset_id, position, label, is_primary, created_at, updated_at)
+      VALUES (#{connection.quote(media_asset_id)}, 0, 'primary', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+      RETURNING id
+    SQL
+  end
+
+  def move_attachment_to_image(attachment_id, image_id)
+    ActiveStorage::Attachment.where(id: attachment_id).update_all( # rubocop:disable Rails/SkipsModelValidations
+      record_type: IMAGE_RECORD_TYPE,
+      record_id: image_id,
+      name: 'file'
+    )
   end
 end
