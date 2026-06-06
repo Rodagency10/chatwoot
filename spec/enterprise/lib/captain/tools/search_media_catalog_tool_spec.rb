@@ -17,6 +17,7 @@ RSpec.describe Captain::Tools::SearchMediaCatalogTool, type: :model do
       result = tool.perform(Struct.new(:state).new({}), query: 'gold wedding')
       expect(result).to include("ID: #{matching_asset.id}")
       expect(result).to include('Gold wedding band')
+      expect(result).to include('Images: 1')
       expect(result).not_to include('Silver chain')
     end
 

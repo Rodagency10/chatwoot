@@ -4,13 +4,13 @@ import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useMapGetter, useStore } from 'dashboard/composables/store';
 import { usePolicy } from 'dashboard/composables/usePolicy';
-import { useAlert } from 'dashboard/composables';
 import { debounce } from '@chatwoot/utils';
 
 import PageLayout from 'dashboard/components-next/captain/PageLayout.vue';
 import Input from 'dashboard/components-next/input/Input.vue';
 import MediaAssetCard from 'dashboard/components-next/captain/assistant/MediaAssetCard.vue';
 import CreateMediaAssetDialog from 'dashboard/components-next/captain/pageComponents/mediaAsset/CreateMediaAssetDialog.vue';
+import DeleteDialog from 'dashboard/components-next/captain/pageComponents/DeleteDialog.vue';
 
 const route = useRoute();
 const store = useStore();
@@ -24,7 +24,9 @@ const mediaAssetsMeta = useMapGetter('captainMediaAssets/getMeta');
 const searchQuery = ref('');
 const showFormDialog = ref(false);
 const editingAsset = ref(null);
+const selectedAsset = ref(null);
 const formDialogRef = ref(null);
+const deleteDialogRef = ref(null);
 
 const selectedAssistantId = computed(() => Number(route.params.assistantId));
 const isFetching = computed(() => uiFlags.value.fetchingList);
@@ -70,14 +72,14 @@ const handleFormSuccess = () => {
   fetchMediaAssets(mediaAssetsMeta.value?.page || 1);
 };
 
-const handleDelete = async id => {
-  try {
-    await store.dispatch('captainMediaAssets/delete', id);
-    useAlert(t('CAPTAIN.MEDIA_CATALOG.DELETE.SUCCESS'));
-    await fetchMediaAssets(mediaAssetsMeta.value?.page || 1);
-  } catch {
-    useAlert(t('CAPTAIN.MEDIA_CATALOG.DELETE.ERROR'));
-  }
+const openDeleteDialog = id => {
+  selectedAsset.value = mediaAssets.value.find(asset => asset.id === id) || null;
+  nextTick(() => deleteDialogRef.value?.dialogRef?.open());
+};
+
+const handleDeleteSuccess = async () => {
+  selectedAsset.value = null;
+  await fetchMediaAssets(mediaAssetsMeta.value?.page || 1);
 };
 </script>
 
@@ -120,13 +122,14 @@ const handleDelete = async id => {
         :id="asset.id"
         :key="asset.id"
         :name="asset.name"
-        :thumb-url="asset.thumbUrl"
-        :price-formatted="asset.priceFormatted"
+        :thumb-url="asset.thumb_url"
+        :price-formatted="asset.price_formatted"
         :tags="asset.tags"
         :active="asset.active"
+        :image-count="asset.image_count"
         :can-manage="canManage"
         @edit="openEditDialog"
-        @delete="handleDelete"
+        @delete="openDeleteDialog"
       />
     </div>
 
@@ -137,6 +140,15 @@ const handleDelete = async id => {
       :asset="editingAsset"
       @close="closeFormDialog"
       @success="handleFormSuccess"
+    />
+
+    <DeleteDialog
+      v-if="selectedAsset"
+      ref="deleteDialogRef"
+      :entity="selectedAsset"
+      type="MediaAssets"
+      translation-key="MEDIA_CATALOG"
+      @delete-success="handleDeleteSuccess"
     />
   </PageLayout>
 </template>

@@ -8,6 +8,7 @@ class Captain::Tools::SearchMediaCatalogTool < Captain::Tools::BasePublicTool
     assets = account_scoped(Captain::MediaAsset)
              .for_assistant(@assistant.id)
              .active
+             .includes(images: { file_attachment: :blob })
              .search(query)
              .ordered
              .limit(10)
@@ -30,6 +31,21 @@ class Captain::Tools::SearchMediaCatalogTool < Captain::Tools::BasePublicTool
     parts << "Price: #{asset.price_formatted}" if asset.price_formatted.present?
     parts << "Tags: #{asset.tag_list.join(', ')}" if asset.tag_list.any?
     parts << "Description: #{asset.description}" if asset.description.present?
+    parts << format_images(asset)
     parts.join(' | ')
+  end
+
+  def format_images(asset)
+    images = asset.images.ordered
+    return 'Images: 0' if images.blank?
+
+    primary = asset.primary_image
+    labels = images.map do |image|
+      label = image.label.presence || "view_#{image.position + 1}"
+      primary_marker = image.id == primary&.id ? ' (primary)' : ''
+      "#{image.position + 1}:#{label}#{primary_marker}"
+    end
+
+    "Images: #{images.size} [#{labels.join(', ')}] — send primary by default; use image_index or image_label for a specific view; send_all only on explicit customer request"
   end
 end

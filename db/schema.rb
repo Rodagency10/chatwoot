@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_06_04_120000) do
+ActiveRecord::Schema[7.1].define(version: 2026_06_06_140000) do
   # These extensions should be enabled to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -416,6 +416,17 @@ ActiveRecord::Schema[7.1].define(version: 2026_06_04_120000) do
     t.index ["assistant_id", "active"], name: "index_captain_media_assets_on_assistant_id_and_active"
     t.index ["assistant_id"], name: "index_captain_media_assets_on_assistant_id"
     t.index ["tags"], name: "index_captain_media_assets_on_tags", using: :gin
+  end
+
+  create_table "captain_media_asset_images", force: :cascade do |t|
+    t.bigint "media_asset_id", null: false
+    t.integer "position", default: 0, null: false
+    t.string "label"
+    t.boolean "is_primary", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["media_asset_id", "position"], name: "index_captain_media_asset_images_on_asset_and_position"
+    t.index ["media_asset_id"], name: "index_captain_media_asset_images_on_media_asset_id"
   end
 
   create_table "captain_scenarios", force: :cascade do |t|
@@ -1345,6 +1356,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_06_04_120000) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "captain_media_assets", "accounts"
   add_foreign_key "captain_media_assets", "captain_assistants", column: "assistant_id"
+  add_foreign_key "captain_media_asset_images", "captain_media_assets", column: "media_asset_id"
   add_foreign_key "inboxes", "portals"
   create_trigger("accounts_after_insert_row_tr", :generated => true, :compatibility => 1).
       on("accounts").

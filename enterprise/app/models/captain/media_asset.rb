@@ -3,11 +3,10 @@ class Captain::MediaAsset < ApplicationRecord
 
   belongs_to :account
   belongs_to :assistant, class_name: 'Captain::Assistant'
-  has_one_attached :image
+  has_many :images, class_name: 'Captain::MediaAssetImage', dependent: :destroy, inverse_of: :media_asset
 
   validates :name, presence: true
   validates :currency, presence: true
-  validate :validate_image_attachment, if: -> { image.attached? }
 
   scope :active, -> { where(active: true) }
   scope :ordered, -> { order(position: :asc, created_at: :desc) }
@@ -30,13 +29,18 @@ class Captain::MediaAsset < ApplicationRecord
     format('%<amount>.2f %<currency>s', amount: price_cents / 100.0, currency: currency)
   end
 
-  def build_caption(assistant)
+  def build_caption(assistant, image: nil)
     template = assistant.config['media_catalog_caption_template'].presence || '{name}'
     include_price = assistant.config['media_catalog_include_price_in_caption'] != false
 
     caption = template.gsub('{name}', name.to_s)
     caption = caption.gsub('{price}', price_formatted.to_s) if include_price && price_formatted.present?
     caption = caption.gsub('{sku}', sku.to_s) if sku.present?
+
+    if image.present? && image.label.present? && !image.is_primary?
+      caption = "#{caption} — #{image.label}"
+    end
+
     caption.squish.presence || name
   end
 
@@ -44,11 +48,23 @@ class Captain::MediaAsset < ApplicationRecord
     Array(tags).map(&:to_s)
   end
 
-  private
+  def primary_image
+    images.find_by(is_primary: true) || images.ordered.first
+  end
 
-  def validate_image_attachment
-    return if image.blob.content_type.to_s.start_with?('image/')
+  def image_for_send(image_index: nil, image_label: nil)
+    return primary_image if image_index.blank? && image_label.blank?
 
-    errors.add(:image, 'must be an image file')
+    if image_label.present?
+      normalized = image_label.to_s.downcase.strip
+      images.ordered.find { |img| img.label.to_s.downcase == normalized } ||
+        images.ordered.find { |img| img.display_label.downcase == normalized }
+    elsif image_index.present?
+      images.ordered[image_index.to_i - 1]
+    end
+  end
+
+  def image_count
+    images.count
   end
 end

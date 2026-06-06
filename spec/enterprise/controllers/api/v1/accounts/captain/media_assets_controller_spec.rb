@@ -14,7 +14,10 @@ RSpec.describe Api::V1::Accounts::Captain::MediaAssetsController, type: :request
           as: :json
 
       expect(response).to have_http_status(:success)
-      expect(response.parsed_body['payload'].first['name']).to eq(media_asset.name)
+      payload = response.parsed_body['payload'].first
+      expect(payload['name']).to eq(media_asset.name)
+      expect(payload['image_count']).to eq(1)
+      expect(payload['images'].first['is_primary']).to be(true)
     end
   end
 

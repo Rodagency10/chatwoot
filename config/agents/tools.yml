@@ -52,5 +52,5 @@
 
 - id: send_media_asset
   title: 'Send Catalog Image'
-  description: 'Send a product image from the media catalog to the customer'
+  description: 'Send a product image from the media catalog; supports primary, specific view, or full gallery on request'
   icon: 'image'

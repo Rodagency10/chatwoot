@@ -14,10 +14,19 @@ json.active resource.active
 json.position resource.position
 json.created_at resource.created_at.to_i
 json.updated_at resource.updated_at.to_i
+json.image_count resource.image_count
+json.primary_image_id resource.primary_image&.id
 
-if resource.image.attached?
-  json.image_url url_for(resource.image)
-  json.thumb_url url_for(resource.image)
+json.images do
+  json.array! resource.images.ordered do |image|
+    json.partial! 'api/v1/models/captain/media_asset_image', formats: [:json], resource: image
+  end
+end
+
+primary_image = resource.primary_image
+if primary_image&.file&.attached?
+  json.image_url url_for(primary_image.file)
+  json.thumb_url url_for(primary_image.file)
 else
   json.image_url nil
   json.thumb_url nil

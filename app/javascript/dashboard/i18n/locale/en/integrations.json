@@ -778,46 +778,75 @@
     },
     "MEDIA_CATALOG": {
       "HEADER": "Media catalog",
-      "ADD_NEW": "Add product image",
+      "ADD_NEW": "Add product",
       "SEARCH_PLACEHOLDER": "Search by name, tag, or SKU...",
       "EMPTY_STATE": {
-        "TITLE": "No product images yet",
+        "TITLE": "No products yet",
         "DESCRIPTION": "Upload product photos with names, prices, and tags so Captain can send them in WhatsApp conversations."
       },
       "CARD": {
         "EDIT": "Edit",
         "DELETE": "Delete",
         "NO_IMAGE": "No image",
-        "INACTIVE": "Inactive"
+        "INACTIVE": "Inactive",
+        "IMAGE_COUNT": "{count} images"
       },
       "FORM": {
-        "CREATE_TITLE": "Add product image",
-        "EDIT_TITLE": "Edit product image",
-        "NAME": "Name",
-        "NAME_PLACEHOLDER": "Gold wedding band — model A",
-        "PRICE": "Price",
-        "PRICE_PLACEHOLDER": "890.00",
-        "CURRENCY": "Currency",
-        "SKU": "SKU",
-        "SKU_PLACEHOLDER": "RING-18K-A",
-        "TAGS": "Tags",
-        "TAGS_PLACEHOLDER": "gold, wedding, ring",
-        "DESCRIPTION": "Description for Captain",
-        "DESCRIPTION_PLACEHOLDER": "18k gold band, classic finish, sizes 48–62",
-        "IMAGE": "Image",
+        "CREATE_TITLE": "Add product",
+        "EDIT_TITLE": "Edit product",
+        "NAME": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "Gold wedding band — model A",
+          "ERROR": "Product name is required"
+        },
+        "PRICE": {
+          "LABEL": "Price",
+          "PLACEHOLDER": "890.00"
+        },
+        "CURRENCY": {
+          "LABEL": "Currency"
+        },
+        "SKU": {
+          "LABEL": "SKU",
+          "PLACEHOLDER": "RING-18K-A"
+        },
+        "TAGS": {
+          "LABEL": "Tags",
+          "PLACEHOLDER": "gold, wedding, ring"
+        },
+        "DESCRIPTION": {
+          "LABEL": "Description for Captain",
+          "PLACEHOLDER": "18k gold band, classic finish, sizes 48–62"
+        },
+        "IMAGE": {
+          "LABEL": "Product images",
+          "CHOOSE": "Add images",
+          "HELP": "Upload up to 10 images. The primary image is sent first by Captain.",
+          "COUNT": "{count}/{max} images",
+          "ERROR": "At least one image is required",
+          "INVALID_TYPE": "Only image files are allowed",
+          "TOO_LARGE": "Each image must be 10 MB or smaller",
+          "LIMIT": "You can upload up to {count} images per product",
+          "PRIMARY": "Primary",
+          "SET_PRIMARY": "Set as primary",
+          "LABEL_PLACEHOLDER": "Label (e.g. front, back)"
+        },
         "ACTIVE": "Active"
       },
       "CREATE": {
-        "SUCCESS": "Product image added to the catalog",
-        "ERROR": "Could not add the product image, please try again."
+        "SUCCESS": "Product added to the catalog",
+        "ERROR": "Could not add the product, please try again."
       },
       "UPDATE": {
-        "SUCCESS": "Product image updated",
-        "ERROR": "Could not update the product image, please try again."
+        "SUCCESS": "Product updated",
+        "ERROR": "Could not update the product, please try again."
       },
       "DELETE": {
-        "SUCCESS": "Product image deleted",
-        "ERROR": "Could not delete the product image, please try again."
+        "TITLE": "Delete product?",
+        "DESCRIPTION": "Are you sure you want to delete this product and all of its images? This action cannot be undone.",
+        "CONFIRM": "Yes, delete",
+        "SUCCESS_MESSAGE": "Product deleted successfully",
+        "ERROR_MESSAGE": "Could not delete the product, please try again."
       }
     },
     "DOCUMENTS": {
