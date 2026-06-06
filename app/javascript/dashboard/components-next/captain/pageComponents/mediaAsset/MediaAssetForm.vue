@@ -12,15 +12,13 @@ import Switch from 'dashboard/components-next/switch/Switch.vue';
 import Button from 'dashboard/components-next/button/Button.vue';
 import ComboBox from 'dashboard/components-next/combobox/ComboBox.vue';
 
-const MAX_IMAGES = 10;
-const MAX_FILE_BYTES = 10 * 1024 * 1024;
-
 const props = defineProps({
   assistantId: { type: Number, required: true },
   asset: { type: Object, default: null },
 });
-
 const emit = defineEmits(['submit', 'cancel']);
+const MAX_IMAGES = 10;
+const MAX_FILE_BYTES = 10 * 1024 * 1024;
 
 const { t } = useI18n();
 const fileInputRef = ref(null);
@@ -82,9 +80,7 @@ const validationRules = {
 const v$ = useVuelidate(validationRules, state);
 
 const formErrors = computed(() => ({
-  name: v$.value.name.$error
-    ? t('CAPTAIN.MEDIA_CATALOG.FORM.NAME.ERROR')
-    : '',
+  name: v$.value.name.$error ? t('CAPTAIN.MEDIA_CATALOG.FORM.NAME.ERROR') : '',
   images: showImageError.value
     ? t('CAPTAIN.MEDIA_CATALOG.FORM.IMAGE.ERROR')
     : '',
@@ -146,7 +142,9 @@ const handleFileChange = event => {
   if (!files.length) return;
 
   if (totalImageCount.value + files.length > MAX_IMAGES) {
-    useAlert(t('CAPTAIN.MEDIA_CATALOG.FORM.IMAGE.LIMIT', { count: MAX_IMAGES }));
+    useAlert(
+      t('CAPTAIN.MEDIA_CATALOG.FORM.IMAGE.LIMIT', { count: MAX_IMAGES })
+    );
     return;
   }
 
@@ -310,7 +308,12 @@ const handleSubmit = async () => {
           {{ t('CAPTAIN.MEDIA_CATALOG.FORM.IMAGE.LABEL') }}
         </span>
         <span class="text-xs text-n-slate-11">
-          {{ t('CAPTAIN.MEDIA_CATALOG.FORM.IMAGE.COUNT', { count: totalImageCount, max: MAX_IMAGES }) }}
+          {{
+            t('CAPTAIN.MEDIA_CATALOG.FORM.IMAGE.COUNT', {
+              count: totalImageCount,
+              max: MAX_IMAGES,
+            })
+          }}
         </span>
       </div>
 
@@ -380,7 +383,9 @@ const handleSubmit = async () => {
 
           <Input
             :model-value="item.label"
-            :placeholder="t('CAPTAIN.MEDIA_CATALOG.FORM.IMAGE.LABEL_PLACEHOLDER')"
+            :placeholder="
+              t('CAPTAIN.MEDIA_CATALOG.FORM.IMAGE.LABEL_PLACEHOLDER')
+            "
             @update:model-value="
               item.isExisting
                 ? updateExistingLabel(item.id, $event)
