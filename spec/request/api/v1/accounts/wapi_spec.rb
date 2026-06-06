@@ -144,11 +144,14 @@ RSpec.describe 'WAPI Inbox API', type: :request do
         device_service = instance_double(Wapi::DeviceService)
         allow(Wapi::DeviceService).to receive(:new).and_return(device_service)
         allow(device_service).to receive(:create_device).and_return({ 'code' => 'SUCCESS' })
-        allow(device_service).to receive(:get_qr).and_raise(
-          CustomExceptions::WapiError, 'device cw-inbox-5 is not logged in (session deleted)'
-        ).and_return(
+
+        qr_call_count = 0
+        allow(device_service).to receive(:get_qr) do
+          qr_call_count += 1
+          raise CustomExceptions::WapiError, 'device cw-inbox-5 is not logged in (session deleted)' if qr_call_count == 1
+
           { 'code' => 'SUCCESS', 'results' => { 'qr_link' => 'https://wapi.example.com/qr-new.png', 'qr_duration' => 30 } }
-        )
+        end
 
         get "/api/v1/accounts/#{account.id}/wapi/qr",
             params: { inbox_id: inbox.id },
