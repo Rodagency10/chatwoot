@@ -220,7 +220,9 @@ watch(
           <label class="text-sm font-medium text-n-slate-12">
             {{ t('CAPTAIN.ASSISTANTS.FORM.ACTIVATION_KEYWORDS.LABEL') }}
           </label>
-          <div class="rounded-xl border border-n-weak px-3 py-2">
+          <div
+            class="min-h-10 rounded-lg bg-n-alpha-black2 px-3 py-2 outline outline-1 outline-offset-[-1px] outline-n-weak transition-all duration-500 hover:outline-n-slate-6 focus-within:outline-n-brand"
+          >
             <TagInput
               v-model="state.activationKeywords"
               :placeholder="
