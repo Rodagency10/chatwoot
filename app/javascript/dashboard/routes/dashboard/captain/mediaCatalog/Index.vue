@@ -73,7 +73,8 @@ const handleFormSuccess = () => {
 };
 
 const openDeleteDialog = id => {
-  selectedAsset.value = mediaAssets.value.find(asset => asset.id === id) || null;
+  selectedAsset.value =
+    mediaAssets.value.find(asset => asset.id === id) || null;
   nextTick(() => deleteDialogRef.value?.dialogRef?.open());
 };
 

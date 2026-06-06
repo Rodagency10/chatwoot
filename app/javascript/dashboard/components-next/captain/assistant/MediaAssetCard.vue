@@ -45,7 +45,9 @@ const handleAction = ({ action }) => {
 <template>
   <CardLayout>
     <div class="flex flex-col gap-3">
-      <div class="relative flex h-40 items-center justify-center overflow-hidden rounded-lg bg-n-alpha-1">
+      <div
+        class="relative flex h-40 items-center justify-center overflow-hidden rounded-lg bg-n-alpha-1"
+      >
         <img
           v-if="thumbUrl"
           :src="thumbUrl"
@@ -60,7 +62,9 @@ const handleAction = ({ action }) => {
           v-if="imageCount > 1"
           class="absolute top-2 left-2 rounded-md bg-n-solid-3 px-2 py-0.5 text-xs text-n-slate-11"
         >
-          {{ t('CAPTAIN.MEDIA_CATALOG.CARD.IMAGE_COUNT', { count: imageCount }) }}
+          {{
+            t('CAPTAIN.MEDIA_CATALOG.CARD.IMAGE_COUNT', { count: imageCount })
+          }}
         </span>
 
         <span

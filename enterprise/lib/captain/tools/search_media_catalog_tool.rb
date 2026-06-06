@@ -46,6 +46,8 @@ class Captain::Tools::SearchMediaCatalogTool < Captain::Tools::BasePublicTool
       "#{image.position + 1}:#{label}#{primary_marker}"
     end
 
-    "Images: #{images.size} [#{labels.join(', ')}] — send primary by default; use image_index or image_label for a specific view; send_all only on explicit customer request"
+    hint = 'send primary by default; use image_index or image_label for a specific view; ' \
+           'send_all only on explicit customer request'
+    "Images: #{images.size} [#{labels.join(', ')}] — #{hint}"
   end
 end
