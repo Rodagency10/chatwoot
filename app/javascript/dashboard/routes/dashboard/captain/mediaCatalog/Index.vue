@@ -16,7 +16,6 @@ const route = useRoute();
 const store = useStore();
 const { t } = useI18n();
 const { checkPermissions } = usePolicy();
-const { showAlert } = useAlert();
 
 const uiFlags = useMapGetter('captainMediaAssets/getUIFlags');
 const mediaAssets = useMapGetter('captainMediaAssets/getRecords');
@@ -74,10 +73,10 @@ const handleFormSuccess = () => {
 const handleDelete = async id => {
   try {
     await store.dispatch('captainMediaAssets/delete', id);
-    showAlert({ message: t('CAPTAIN.MEDIA_CATALOG.DELETE.SUCCESS') });
+    useAlert(t('CAPTAIN.MEDIA_CATALOG.DELETE.SUCCESS'));
     await fetchMediaAssets(mediaAssetsMeta.value?.page || 1);
   } catch {
-    showAlert({ message: t('CAPTAIN.MEDIA_CATALOG.DELETE.ERROR') });
+    useAlert(t('CAPTAIN.MEDIA_CATALOG.DELETE.ERROR'));
   }
 };
 </script>

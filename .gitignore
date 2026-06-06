@@ -107,3 +107,6 @@ Procfile.worktree
 
 .opencode
 local_docs
+vendor
+vendor/
+vendor/bundle/
