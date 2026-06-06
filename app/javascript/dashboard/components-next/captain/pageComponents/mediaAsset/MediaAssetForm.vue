@@ -11,6 +11,7 @@ import TextArea from 'dashboard/components-next/textarea/TextArea.vue';
 import Switch from 'dashboard/components-next/switch/Switch.vue';
 import Button from 'dashboard/components-next/button/Button.vue';
 import ComboBox from 'dashboard/components-next/combobox/ComboBox.vue';
+import TagInput from 'dashboard/components-next/taginput/TagInput.vue';
 
 const props = defineProps({
   assistantId: { type: Number, required: true },
@@ -35,7 +36,7 @@ const state = reactive({
     : '',
   currency: props.asset?.currency || 'EUR',
   description: props.asset?.description || '',
-  tags: props.asset?.tags?.join(', ') || '',
+  tags: [...(props.asset?.tags || [])],
   active: props.asset?.active ?? true,
   existingImages: (props.asset?.images || []).map(image => ({ ...image })),
   pendingImages: [],
@@ -118,7 +119,7 @@ watch(
     state.price = asset.price_cents ? (asset.price_cents / 100).toString() : '';
     state.currency = asset.currency || 'EUR';
     state.description = asset.description || '';
-    state.tags = asset.tags?.join(', ') || '';
+    state.tags = [...(asset.tags || [])];
     state.active = asset.active ?? true;
     state.existingImages = (asset.images || []).map(image => ({ ...image }));
     state.pendingImages = [];
@@ -216,7 +217,6 @@ const prepareFormData = () => {
   }
 
   state.tags
-    .split(',')
     .map(tag => tag.trim())
     .filter(Boolean)
     .forEach(tag => formData.append('media_asset[tags][]', tag));
@@ -290,11 +290,18 @@ const handleSubmit = async () => {
       :placeholder="t('CAPTAIN.MEDIA_CATALOG.FORM.SKU.PLACEHOLDER')"
     />
 
-    <Input
-      v-model="state.tags"
-      :label="t('CAPTAIN.MEDIA_CATALOG.FORM.TAGS.LABEL')"
-      :placeholder="t('CAPTAIN.MEDIA_CATALOG.FORM.TAGS.PLACEHOLDER')"
-    />
+    <div class="flex flex-col gap-1">
+      <label class="mb-0.5 text-sm font-medium text-n-slate-12">
+        {{ t('CAPTAIN.MEDIA_CATALOG.FORM.TAGS.LABEL') }}
+      </label>
+      <div class="rounded-xl border border-n-weak px-3 py-2">
+        <TagInput
+          v-model="state.tags"
+          :placeholder="t('CAPTAIN.MEDIA_CATALOG.FORM.TAGS.PLACEHOLDER')"
+          allow-create
+        />
+      </div>
+    </div>
 
     <TextArea
       v-model="state.description"

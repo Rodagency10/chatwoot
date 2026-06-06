@@ -538,8 +538,8 @@
         },
         "ACTIVATION_KEYWORDS": {
           "LABEL": "Activation keywords",
-          "PLACEHOLDER": "catalogue, commande",
-          "DESCRIPTION": "Separate keywords with commas. Captain stays silent until one of them is received."
+          "PLACEHOLDER": "Add a keyword and press Enter",
+          "DESCRIPTION": "Captain stays silent until one of these keywords is received."
         },
         "ACTIVATION_LABEL": {
           "LABEL": "Activation label",
@@ -812,7 +812,7 @@
         },
         "TAGS": {
           "LABEL": "Tags",
-          "PLACEHOLDER": "gold, wedding, ring"
+          "PLACEHOLDER": "Add a tag and press Enter"
         },
         "DESCRIPTION": {
           "LABEL": "Description for Captain",

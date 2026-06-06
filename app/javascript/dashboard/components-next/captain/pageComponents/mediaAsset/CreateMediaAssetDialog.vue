@@ -59,6 +59,8 @@ defineExpose({ dialogRef });
     :show-confirm-button="false"
     :show-cancel-button="false"
     width="2xl"
+    position="top"
+    overflow-y-auto
     @close="emit('close')"
   >
     <MediaAssetForm
@@ -67,5 +69,6 @@ defineExpose({ dialogRef });
       @submit="handleSubmit"
       @cancel="dialogRef?.close()"
     />
+    <template #footer />
   </Dialog>
 </template>

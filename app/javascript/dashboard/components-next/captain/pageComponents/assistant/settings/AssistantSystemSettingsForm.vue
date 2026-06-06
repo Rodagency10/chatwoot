@@ -8,6 +8,7 @@ import { useAccount } from 'dashboard/composables/useAccount';
 
 import Button from 'dashboard/components-next/button/Button.vue';
 import Editor from 'dashboard/components-next/Editor/Editor.vue';
+import TagInput from 'dashboard/components-next/taginput/TagInput.vue';
 import Switch from 'next/switch/Switch.vue';
 
 const props = defineProps({
@@ -33,7 +34,7 @@ const initialState = {
   sendResolutionMessage: false,
   responseDelaySeconds: 0,
   keywordActivationEnabled: false,
-  activationKeywords: '',
+  activationKeywords: [],
   activationLabel: 'keyword_match',
   activationMatchMode: 'word',
   instructions: '',
@@ -82,9 +83,7 @@ const updateStateFromAssistant = assistant => {
     config,
     'keyword_activation_enabled'
   );
-  state.activationKeywords = Array.isArray(config.activation_keywords)
-    ? config.activation_keywords.join(', ')
-    : '';
+  state.activationKeywords = [...(config.activation_keywords || [])];
   state.activationLabel = config.activation_label || 'keyword_match';
   state.activationMatchMode = config.activation_match_mode || 'word';
   state.instructions = config.instructions;
@@ -125,7 +124,6 @@ const handleSystemMessagesUpdate = async () => {
       ),
       keyword_activation_enabled: state.keywordActivationEnabled,
       activation_keywords: state.activationKeywords
-        .split(/[\n,]/)
         .map(keyword => keyword.trim())
         .filter(Boolean),
       activation_label: state.activationLabel.trim() || 'keyword_match',
@@ -222,14 +220,15 @@ watch(
           <label class="text-sm font-medium text-n-slate-12">
             {{ t('CAPTAIN.ASSISTANTS.FORM.ACTIVATION_KEYWORDS.LABEL') }}
           </label>
-          <textarea
-            v-model="state.activationKeywords"
-            rows="3"
-            class="w-full rounded-lg border border-n-weak bg-n-solid-2 px-3 py-2 text-sm text-n-slate-12"
-            :placeholder="
-              t('CAPTAIN.ASSISTANTS.FORM.ACTIVATION_KEYWORDS.PLACEHOLDER')
-            "
-          />
+          <div class="rounded-xl border border-n-weak px-3 py-2">
+            <TagInput
+              v-model="state.activationKeywords"
+              :placeholder="
+                t('CAPTAIN.ASSISTANTS.FORM.ACTIVATION_KEYWORDS.PLACEHOLDER')
+              "
+              allow-create
+            />
+          </div>
           <p class="text-sm text-n-slate-11">
             {{ t('CAPTAIN.ASSISTANTS.FORM.ACTIVATION_KEYWORDS.DESCRIPTION') }}
           </p>

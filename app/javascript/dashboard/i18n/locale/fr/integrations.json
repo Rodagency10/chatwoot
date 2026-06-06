@@ -772,6 +772,79 @@
         }
       }
     },
+    "MEDIA_CATALOG": {
+      "HEADER": "Catalogue produits",
+      "ADD_NEW": "Ajouter un produit",
+      "SEARCH_PLACEHOLDER": "Rechercher par nom, étiquette ou SKU...",
+      "EMPTY_STATE": {
+        "TITLE": "Aucun produit pour le moment",
+        "DESCRIPTION": "Ajoutez des photos de produits avec noms, prix et étiquettes pour que Captain puisse les envoyer dans les conversations WhatsApp."
+      },
+      "CARD": {
+        "EDIT": "Modifier",
+        "DELETE": "Supprimer",
+        "NO_IMAGE": "Aucune image",
+        "INACTIVE": "Inactif",
+        "IMAGE_COUNT": "{count} images"
+      },
+      "FORM": {
+        "CREATE_TITLE": "Ajouter un produit",
+        "EDIT_TITLE": "Modifier le produit",
+        "NAME": {
+          "LABEL": "Nom",
+          "PLACEHOLDER": "Alliance de mariage en or — modèle A",
+          "ERROR": "Le nom du produit est requis"
+        },
+        "PRICE": {
+          "LABEL": "Prix",
+          "PLACEHOLDER": "890.00"
+        },
+        "CURRENCY": {
+          "LABEL": "Devise"
+        },
+        "SKU": {
+          "LABEL": "SKU",
+          "PLACEHOLDER": "RING-18K-A"
+        },
+        "TAGS": {
+          "LABEL": "Étiquettes",
+          "PLACEHOLDER": "Ajoutez une étiquette et appuyez sur Entrée"
+        },
+        "DESCRIPTION": {
+          "LABEL": "Description pour Captain",
+          "PLACEHOLDER": "Alliance en or 18 carats, finition classique, tailles 48–62"
+        },
+        "IMAGE": {
+          "LABEL": "Images du produit",
+          "CHOOSE": "Ajouter des images",
+          "HELP": "Ajoutez jusqu'à 10 images. L'image principale est envoyée en premier par Captain.",
+          "COUNT": "{count}/{max} images",
+          "ERROR": "Au moins une image est requise",
+          "INVALID_TYPE": "Seuls les fichiers image sont autorisés",
+          "TOO_LARGE": "Chaque image doit faire 10 Mo ou moins",
+          "LIMIT": "Vous pouvez ajouter jusqu'à {count} images par produit",
+          "PRIMARY": "Principale",
+          "SET_PRIMARY": "Définir comme principale",
+          "LABEL_PLACEHOLDER": "Libellé (ex. face, dos)"
+        },
+        "ACTIVE": "Actif"
+      },
+      "CREATE": {
+        "SUCCESS": "Produit ajouté au catalogue",
+        "ERROR": "Impossible d'ajouter le produit, veuillez réessayer."
+      },
+      "UPDATE": {
+        "SUCCESS": "Produit mis à jour",
+        "ERROR": "Impossible de mettre à jour le produit, veuillez réessayer."
+      },
+      "DELETE": {
+        "TITLE": "Supprimer le produit ?",
+        "DESCRIPTION": "Êtes-vous sûr de vouloir supprimer ce produit et toutes ses images ? Cette action est irréversible.",
+        "CONFIRM": "Oui, supprimer",
+        "SUCCESS_MESSAGE": "Produit supprimé avec succès",
+        "ERROR_MESSAGE": "Impossible de supprimer le produit, veuillez réessayer."
+      }
+    },
     "DOCUMENTS": {
       "HEADER": "Documents",
       "ADD_NEW": "Create a new document",
