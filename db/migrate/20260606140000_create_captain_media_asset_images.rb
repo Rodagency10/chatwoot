@@ -1,6 +1,6 @@
 class CreateCaptainMediaAssetImages < ActiveRecord::Migration[7.1]
-  LEGACY_RECORD_TYPE = 'Captain::MediaAsset'
-  IMAGE_RECORD_TYPE = 'Captain::MediaAssetImage'
+  LEGACY_RECORD_TYPE = 'Captain::MediaAsset'.freeze
+  IMAGE_RECORD_TYPE = 'Captain::MediaAssetImage'.freeze
 
   def up
     create_table :captain_media_asset_images do |t|
