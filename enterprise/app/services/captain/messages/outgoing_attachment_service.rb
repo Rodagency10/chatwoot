@@ -42,7 +42,7 @@ class Captain::Messages::OutgoingAttachmentService
   end
 
   def create_message_with_attachment(blob:, caption:)
-    message = conversation.messages.create!(
+    message = conversation.messages.build(
       message_type: :outgoing,
       account_id: conversation.account_id,
       inbox_id: conversation.inbox_id,
@@ -50,12 +50,13 @@ class Captain::Messages::OutgoingAttachmentService
       content: caption
     )
 
-    message.attachments.create!(
+    message.attachments.build(
       account_id: conversation.account_id,
       file_type: :image,
       file: blob
     )
 
+    message.save!
     message
   end
 end

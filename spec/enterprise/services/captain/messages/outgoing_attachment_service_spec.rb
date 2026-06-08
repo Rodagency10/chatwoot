@@ -52,5 +52,17 @@ RSpec.describe Captain::Messages::OutgoingAttachmentService, type: :service do
       message = service.send_from_blob(blob: blob, caption: 'Catalog item')
       expect(message.attachments.first.file.attached?).to be(true)
     end
+
+    it 'persists attachments before message_created is dispatched' do
+      dispatched_message = nil
+      allow(Rails.configuration.dispatcher).to receive(:dispatch) do |event, _time, data|
+        dispatched_message = data[:message] if event == MESSAGE_CREATED
+      end
+
+      service.send_from_blob(blob: blob, caption: 'Catalog item')
+
+      expect(dispatched_message.attachments).to be_present
+      expect(dispatched_message.attachments.first.file_type).to eq('image')
+    end
   end
 end

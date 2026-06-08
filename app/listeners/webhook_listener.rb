@@ -28,8 +28,10 @@ class WebhookListener < BaseListener
 
     return unless message.webhook_sendable?
 
-    payload = message.webhook_data.merge(event: __method__.to_s)
-    deliver_webhook_payloads(payload, inbox)
+    event_name = __method__.to_s
+    payload = message.webhook_data.merge(event: event_name)
+    deliver_account_webhooks(payload, inbox.account)
+    deliver_api_inbox_webhooks(payload, inbox, message: message, event: event_name)
   end
 
   def message_updated(event)
@@ -117,12 +119,26 @@ class WebhookListener < BaseListener
     end
   end
 
-  def deliver_api_inbox_webhooks(payload, inbox)
+  def deliver_api_inbox_webhooks(payload, inbox, message: nil, event: nil)
     return unless inbox.channel_type == 'Channel::Api'
     return if inbox.channel.webhook_url.blank?
 
-    WebhookJob.perform_later(inbox.channel.webhook_url, payload, :api_inbox_webhook,
-                             secret: inbox.channel.secret, delivery_id: SecureRandom.uuid)
+    delivery_id = SecureRandom.uuid
+    webhook_args = {
+      secret: inbox.channel.secret,
+      delivery_id: delivery_id
+    }
+
+    if message&.attachments&.any?
+      # Mirror SendReplyJob: allow Active Storage to finish attaching files before WAPI consumes URLs.
+      WebhookJob.set(wait: 2.seconds).perform_later(
+        inbox.channel.webhook_url, nil, :api_inbox_webhook,
+        **webhook_args, message_id: message.id, event: event
+      )
+      return
+    end
+
+    WebhookJob.perform_later(inbox.channel.webhook_url, payload, :api_inbox_webhook, **webhook_args)
   end
 
   def deliver_webhook_payloads(payload, inbox)

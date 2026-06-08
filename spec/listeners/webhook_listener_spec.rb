@@ -64,6 +64,30 @@ describe WebhookListener do
         listener.message_created(api_event)
       end
 
+      it 'delays api inbox webhook when message has attachments' do
+        channel_api = create(:channel_api, account: account)
+        api_inbox = channel_api.inbox
+        api_conversation = create(:conversation, account: account, inbox: api_inbox, assignee: user)
+        api_message = create(
+          :message,
+          :with_attachment,
+          message_type: 'outgoing',
+          account: account,
+          inbox: api_inbox,
+          conversation: api_conversation
+        )
+        api_event = Events::Base.new(event_name, Time.zone.now, message: api_message)
+
+        expect(WebhookJob).to receive(:set).with(wait: 2.seconds).and_return(WebhookJob)
+        expect(WebhookJob).to receive(:perform_later).with(
+          channel_api.webhook_url, nil, :api_inbox_webhook,
+          secret: channel_api.secret, delivery_id: instance_of(String),
+          message_id: api_message.id, event: 'message_created'
+        ).once
+
+        listener.message_created(api_event)
+      end
+
       it 'does not trigger webhook if webhook_url is not present' do
         channel_api = create(:channel_api, webhook_url: nil, account: account)
         api_inbox = channel_api.inbox
