@@ -36,11 +36,14 @@ RSpec.describe WebhookJob do
     let!(:message) { create(:message, :with_attachment, account: account, inbox: inbox, conversation: conversation) }
 
     it 'rebuilds payload from the message' do
-      expected_payload = message.webhook_data.merge(event: 'message_created')
+      expect(Webhooks::Trigger).to receive(:execute) do |_url, actual_payload, type, secret:, delivery_id:|
+        expected_payload = Message.find(message.id).webhook_data.merge(event: 'message_created')
 
-      expect(Webhooks::Trigger).to receive(:execute).with(
-        url, expected_payload, webhook_type, secret: nil, delivery_id: nil
-      )
+        expect(actual_payload).to eq(expected_payload)
+        expect(type).to eq(webhook_type)
+        expect(secret).to be_nil
+        expect(delivery_id).to be_nil
+      end
 
       described_class.perform_now(url, nil, webhook_type, message_id: message.id, event: 'message_created')
     end
