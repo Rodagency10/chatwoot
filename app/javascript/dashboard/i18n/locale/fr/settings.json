@@ -327,7 +327,7 @@
     "AUDIT_LOGS": "Journaux d'audit",
     "INBOXES": "Boîtes de réception",
     "NOTIFICATIONS": "Notifications",
-    "CANNED_RESPONSES": "Réponses standardisées",
+    "CANNED_RESPONSES": "Réponses prédéfinies",
     "INTEGRATIONS": "Intégrations",
     "PROFILE_SETTINGS": "Paramètres de profil",
     "ACCOUNT_SETTINGS": "Paramètres du compte",
@@ -761,7 +761,7 @@
         },
         "DESCRIPTION": {
           "LABEL": "Description :",
-          "PLACEHOLDER": "Description du produit"
+          "PLACEHOLDER": "Description de la politique"
         },
         "STATUS": {
           "LABEL": "État:",

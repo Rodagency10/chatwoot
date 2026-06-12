@@ -587,26 +587,26 @@
     "SATURDAY": "Samedi"
   },
   "SLA_REPORTS": {
-    "HEADER": "SLA Reports",
-    "NO_RECORDS": "SLA applied conversations are not available.",
-    "LOADING": "Loading SLA data...",
-    "DOWNLOAD_SLA_REPORTS": "Download SLA reports",
-    "DOWNLOAD_FAILED": "Failed to download SLA Reports",
+    "HEADER": "SLA Rapports",
+    "NO_RECORDS": "Les conversations SLA appliquées ne sont pas disponibles.",
+    "LOADING": "Chargement des données SLA...",
+    "DOWNLOAD_SLA_REPORTS": "Télécharger les rapports SLA",
+    "DOWNLOAD_FAILED": "Impossible de télécharger les rapports SLA",
     "DROPDOWN": {
       "ADD_FIlTER": "Ajouter un filtre",
-      "CLEAR_ALL": "Clear all",
-      "CLEAR_FILTER": "Clear filter",
+      "CLEAR_ALL": "Tout effacer",
+      "CLEAR_FILTER": "Effacer le filtre",
       "EMPTY_LIST": "Aucun résultat trouvé",
-      "NO_FILTER": "No filters available",
-      "SEARCH": "Search filter",
+      "NO_FILTER": "Aucun filtre disponible",
+      "SEARCH": "Rechercher un filtre",
       "INPUT_PLACEHOLDER": {
-        "SLA": "SLA name",
+        "SLA": "Nom de la SLA",
         "AGENTS": "Nom de l'agent",
         "INBOXES": "Nom de la boîte de réception",
         "LABELS": "Nom de l'étiquette",
         "TEAMS": "Nom de l'équipe"
       },
-      "SLA": "SLA Policy",
+      "SLA": "SLA Politique",
       "INBOXES": "Boîte de réception",
       "AGENTS": "Agent",
       "LABELS": "Étiquettes",
@@ -615,25 +615,25 @@
     "WITH": "with",
     "METRICS": {
       "HIT_RATE": {
-        "LABEL": "Hit Rate",
-        "TOOLTIP": "Percentage of SLAs created were completed successfully"
+        "LABEL": "Taux de succès",
+        "TOOLTIP": "Pourcentage de SLAs créées qui ont été complétées avec succès"
       },
       "NO_OF_MISSES": {
-        "LABEL": "Number of Misses",
-        "TOOLTIP": "Total SLA misses in a certain period"
+        "LABEL": "Nombre de manqués",
+        "TOOLTIP": "Total des manqués SLA dans une certaine période"
       },
       "NO_OF_CONVERSATIONS": {
-        "LABEL": "Number of Conversations",
-        "TOOLTIP": "Total number of conversations with SLA"
+        "LABEL": "Nombre de conversations",
+        "TOOLTIP": "Total des conversations avec SLA"
       }
     },
     "TABLE": {
       "HEADER": {
-        "POLICY": "Policy",
-        "CONVERSATION": "Conversation",
+        "POLICY": "Politique",
+        "CONVERSATION": "Conversation {count}",
         "AGENT": "Agent"
       },
-      "VIEW_DETAILS": "View Details"
+      "VIEW_DETAILS": "Voir les détails"
     }
   },
   "SUMMARY_REPORTS": {
@@ -641,9 +641,9 @@
     "AGENT": "Agent",
     "TEAM": "Équipes",
     "LABEL": "Étiquettes",
-    "AVG_RESOLUTION_TIME": "Avg. Resolution Time",
-    "AVG_FIRST_RESPONSE_TIME": "Avg. First Response Time",
-    "AVG_REPLY_TIME": "Avg. Customer Waiting Time",
+    "AVG_RESOLUTION_TIME": "Temps de résolution moyen",
+    "AVG_FIRST_RESPONSE_TIME": "Temps de réponse moyen",
+    "AVG_REPLY_TIME": "Temps d'attente moyen",
     "RESOLUTION_COUNT": "Nombre de résolutions",
     "CONVERSATIONS": "Nbre de conversations"
   }
