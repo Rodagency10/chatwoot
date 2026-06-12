@@ -10,7 +10,7 @@
     "PASSWORD_UPDATE_SUCCESS": "Votre mot de passe a été modifié avec succès",
     "AFTER_EMAIL_CHANGED": "Votre profil a été mis à jour avec succès, veuillez vous reconnecter car vos identifiants de connexion ont été modifiés",
     "FORM": {
-      "PICTURE": "Profile Picture",
+      "PICTURE": "Photo de profil",
       "AVATAR": "Image de profil",
       "ERROR": "Veuillez corriger les erreurs du formulaire",
       "REMOVE_IMAGE": "Supprimer",
@@ -37,27 +37,27 @@
       },
       "INTERFACE_SECTION": {
         "TITLE": "Interface",
-        "NOTE": "Customize the look and feel of your Chatwoot dashboard.",
+        "NOTE": "Personnalisez l'apparence de votre tableau de bord Chatwoot.",
         "FONT_SIZE": {
-          "TITLE": "Font size",
-          "NOTE": "Adjust the text size across the dashboard based on your preference.",
-          "UPDATE_SUCCESS": "Your font settings have been updated successfully",
-          "UPDATE_ERROR": "There is an error while updating the font settings, please try again",
+          "TITLE": "Taille de la police",
+          "NOTE": "Ajustez la taille du texte dans le tableau de bord selon vos préférences.",
+          "UPDATE_SUCCESS": "Vos paramètres de police ont été mis à jour avec succès",
+          "UPDATE_ERROR": "Une erreur s'est produite lors de la mise à jour des paramètres de police, veuillez réessayer",
           "OPTIONS": {
-            "SMALLER": "Smaller",
-            "SMALL": "Small",
+            "SMALLER": "Plus petit",
+            "SMALL": "Petit",
             "DEFAULT": "Par défaut",
-            "LARGE": "Large",
-            "LARGER": "Larger",
-            "EXTRA_LARGE": "Extra Large"
+            "LARGE": "Grand",
+            "LARGER": "Plus grand",
+            "EXTRA_LARGE": "Très grand"
           }
         },
         "LANGUAGE": {
-          "TITLE": "Preferred Language",
-          "NOTE": "Choose the language you want to use.",
-          "UPDATE_SUCCESS": "Your Language settings have been updated successfully",
-          "UPDATE_ERROR": "There is an error while updating the language settings, please try again",
-          "USE_ACCOUNT_DEFAULT": "Use account default"
+          "TITLE": "Langue préférée",
+          "NOTE": "Choisissez la langue que vous souhaitez utiliser.",
+          "UPDATE_SUCCESS": "Vos paramètres de langue ont été mis à jour avec succès",
+          "UPDATE_ERROR": "Une erreur s'est produite lors de la mise à jour des paramètres de langue, veuillez réessayer",
+          "USE_ACCOUNT_DEFAULT": "Utiliser la langue du compte"
         }
       },
       "MESSAGE_SIGNATURE_SECTION": {
@@ -69,7 +69,7 @@
         "IMAGE_UPLOAD_ERROR": "Impossible de télécharger l'image! Réessayez",
         "IMAGE_UPLOAD_SUCCESS": "L'image a été ajoutée avec succès. Veuillez cliquer sur Enregistrer pour enregistrer la signature",
         "IMAGE_UPLOAD_SIZE_ERROR": "La taille de l'image doit être inférieure à {size}Mo",
-        "INLINE_IMAGE_WARNING": "Pasted inline images were removed. Please use the image upload button to add images to your signature."
+        "INLINE_IMAGE_WARNING": "Les images collées ont été supprimées. Veuillez utiliser le bouton d'importation d'image pour ajouter des images à votre signature."
       },
       "MESSAGE_SIGNATURE": {
         "LABEL": "Signature du message",
@@ -82,44 +82,44 @@
         "BTN_TEXT": "Modifier le mot de passe"
       },
       "SECURITY_SECTION": {
-        "TITLE": "Security",
-        "NOTE": "Manage additional security features for your account.",
-        "MFA_BUTTON": "Manage Two-Factor Authentication"
+        "TITLE": "Sécurité",
+        "NOTE": "Gérez les fonctionnalités de sécurité supplémentaires pour votre compte.",
+        "MFA_BUTTON": "Gérer l'authentification à deux facteurs"
       },
       "ACCESS_TOKEN": {
         "TITLE": "Jeton d'accès",
         "NOTE": "Ce jeton peut être utilisé si vous construisez une intégration basée sur l'API",
         "COPY": "Copier",
-        "RESET": "Reset",
-        "CONFIRM_RESET": "Are you sure?",
-        "CONFIRM_HINT": "Click again to confirm",
+        "RESET": "Réinitialiser",
+        "CONFIRM_RESET": "Êtes-vous sûr ?",
+        "CONFIRM_HINT": "Cliquez à nouveau pour confirmer",
         "RESET_SUCCESS": "Jeton d'accès régénéré avec succès",
         "RESET_ERROR": "Impossible de régénérer le jeton d'accès. Veuillez réessayer"
       },
       "AUDIO_NOTIFICATIONS_SECTION": {
-        "TITLE": "Audio Alerts",
-        "NOTE": "Enable audio alerts in dashboard for new messages and conversations.",
-        "PLAY": "Play sound",
+        "TITLE": "Alertes sonores",
+        "NOTE": "Activez les alertes sonores dans le tableau de bord pour les nouveaux messages et conversations.",
+        "PLAY": "Jouer le son",
         "ALERT_TYPES": {
           "NONE": "Aucun",
-          "MINE": "Assigned",
+          "MINE": "Assigné",
           "ALL": "Tous",
-          "ASSIGNED": "My assigned conversations",
-          "UNASSIGNED": "Unassigned conversations",
-          "NOTME": "Open conversations assigned to others"
+          "ASSIGNED": "Mes conversations assignées",
+          "UNASSIGNED": "Conversations non assignées",
+          "NOTME": "Conversations ouvertes assignées à d'autres"
         },
         "ALERT_COMBINATIONS": {
-          "NONE": "You haven't selected any options, you won't receive any audio alerts.",
-          "ASSIGNED": "You'll receive alerts for conversations assigned to you.",
-          "UNASSIGNED": "You'll receive alerts for any unassigned conversations.",
-          "NOTME": "You'll receive alerts for conversations assigned to others.",
-          "ASSIGNED+UNASSIGNED": "You'll receive alerts for your assigned conversations and any unattended ones.",
-          "ASSIGNED+NOTME": "You'll receive alerts for conversations assigned to you and to others, but not for unassigned ones.",
-          "NOTME+UNASSIGNED": "You'll receive alerts for unattended conversations and those assigned to others.",
-          "ASSIGNED+NOTME+UNASSIGNED": "You'll receive alerts for all conversations."
+          "NONE": "Vous n'avez sélectionné aucune option, vous ne recevrez aucune alerte sonore.",
+          "ASSIGNED": "Vous recevrez des alertes pour les conversations qui vous sont assignées.",
+          "UNASSIGNED": "Vous recevrez des alertes pour toutes les conversations non assignées.",
+          "NOTME": "Vous recevrez des alertes pour les conversations assignées à d'autres.",
+          "ASSIGNED+UNASSIGNED": "Vous recevrez des alertes pour vos conversations assignées et toutes celles sans surveillance.",
+          "ASSIGNED+NOTME": "Vous recevrez des alertes pour les conversations assignées à vous et à d'autres, mais pas pour les conversations non assignées.",
+          "NOTME+UNASSIGNED": "Vous recevrez des alertes pour les conversations sans surveillance et celles assignées à d'autres.",
+          "ASSIGNED+NOTME+UNASSIGNED": "Vous recevrez des alertes pour toutes les conversations."
         },
         "ALERT_TYPE": {
-          "TITLE": "Alert events for conversations",
+          "TITLE": "Événements d'alerte pour les conversations",
           "NONE": "Aucun",
           "ASSIGNED": "Conversations assignées",
           "ALL_CONVERSATIONS": "Toutes les conversations"
@@ -132,7 +132,7 @@
           "CONDITION_ONE": "Envoyer des alertes audio seulement si la fenêtre du navigateur n'est pas active",
           "CONDITION_TWO": "Envoyer des alertes toutes les 30s jusqu'à ce que toutes les conversations assignées soient lues"
         },
-        "SOUND_PERMISSION_ERROR": "Autoplay is disabled in your browser. To hear alerts automatically, enable sound permission in your browser settings or interact with the page.",
+        "SOUND_PERMISSION_ERROR": "La lecture automatique est désactivée dans votre navigateur. Pour entendre les alertes automatiquement, activez les autorisations sonores dans les paramètres de votre navigateur ou interagissez avec la page.",
         "READ_MORE": "En savoir plus"
       },
       "EMAIL_NOTIFICATIONS_SECTION": {
@@ -143,26 +143,26 @@
         "CONVERSATION_MENTION": "Envoyer des notifications par courriel lorsque vous êtes mentionné dans une conversation",
         "ASSIGNED_CONVERSATION_NEW_MESSAGE": "Envoyer des notifications par courriel lorsqu'un nouveau message est créé dans une conversation assignée",
         "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "Envoyer des notifications par courriel lorsqu'un nouveau message est créé dans une conversation assignée",
-        "SLA_MISSED_FIRST_RESPONSE": "Send email notifications when a conversation misses first response SLA",
-        "SLA_MISSED_NEXT_RESPONSE": "Send email notifications when a conversation misses next response SLA",
-        "SLA_MISSED_RESOLUTION": "Send email notifications when a conversation misses resolution SLA"
+        "SLA_MISSED_FIRST_RESPONSE": "Envoyer des notifications par e-mail lorsqu'une conversation manque le SLA de première réponse",
+        "SLA_MISSED_NEXT_RESPONSE": "Envoyer des notifications par e-mail lorsqu'une conversation manque le SLA de prochaine réponse",
+        "SLA_MISSED_RESOLUTION": "Envoyer des notifications par e-mail lorsqu'une conversation manque le SLA de résolution"
       },
       "NOTIFICATIONS": {
-        "TITLE": "Notification preferences",
-        "TYPE_TITLE": "Notification type",
+        "TITLE": "Préférences de notification",
+        "TYPE_TITLE": "Type de notification",
         "EMAIL": "Courriel",
         "PUSH": "Notifications push",
         "TYPES": {
-          "CONVERSATION_CREATED": "A new conversation is created",
-          "CONVERSATION_ASSIGNED": "A conversation is assigned to you",
-          "CONVERSATION_MENTION": "You are mentioned in a conversation",
-          "ASSIGNED_CONVERSATION_NEW_MESSAGE": "A new message is created in an assigned conversation",
-          "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "A new message is created in a participating conversation",
-          "SLA_MISSED_FIRST_RESPONSE": "A conversation misses first response SLA",
-          "SLA_MISSED_NEXT_RESPONSE": "A conversation misses next response SLA",
-          "SLA_MISSED_RESOLUTION": "A conversation misses resolution SLA"
+          "CONVERSATION_CREATED": "Une nouvelle conversation est créée",
+          "CONVERSATION_ASSIGNED": "Une conversation vous est assignée",
+          "CONVERSATION_MENTION": "Vous êtes mentionné(e) dans une conversation",
+          "ASSIGNED_CONVERSATION_NEW_MESSAGE": "Un nouveau message est créé dans une conversation assignée",
+          "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "Un nouveau message est créé dans une conversation à laquelle vous participez",
+          "SLA_MISSED_FIRST_RESPONSE": "Une conversation manque le SLA de première réponse",
+          "SLA_MISSED_NEXT_RESPONSE": "Une conversation manque le SLA de prochaine réponse",
+          "SLA_MISSED_RESOLUTION": "Une conversation manque le SLA de résolution"
         },
-        "BROWSER_PERMISSION": "Enable push notifications for your browser so you’re able to receive them"
+        "BROWSER_PERMISSION": "Activez les notifications push dans votre navigateur pour pouvoir les recevoir"
       },
       "API": {
         "UPDATE_SUCCESS": "Vos préférences de notifications ont été mises à jour avec succès",
@@ -178,9 +178,9 @@
         "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "Envoyer des notifications par courriel lorsqu'un nouveau message est créé dans une conversation assignée",
         "HAS_ENABLED_PUSH": "Vous avez activé les notifications pour ce navigateur.",
         "REQUEST_PUSH": "Activer les notifications push",
-        "SLA_MISSED_FIRST_RESPONSE": "Send push notifications when a conversation misses first response SLA",
-        "SLA_MISSED_NEXT_RESPONSE": "Send push notifications when a conversation misses next response SLA",
-        "SLA_MISSED_RESOLUTION": "Send push notifications when a conversation misses resolution SLA"
+        "SLA_MISSED_FIRST_RESPONSE": "Envoyer des notifications push lorsqu'une conversation manque le SLA de première réponse",
+        "SLA_MISSED_NEXT_RESPONSE": "Envoyer des notifications push lorsqu'une conversation manque le SLA de prochaine réponse",
+        "SLA_MISSED_RESOLUTION": "Envoyer des notifications push lorsqu'une conversation manque le SLA de résolution"
       },
       "PROFILE_IMAGE": {
         "LABEL": "Image de profil"
@@ -204,7 +204,7 @@
         },
         "SET_AVAILABILITY_SUCCESS": "La disponibilité a bien été définie",
         "SET_AVAILABILITY_ERROR": "Impossible de définir la disponibilité, veuillez réessayer",
-        "IMPERSONATING_ERROR": "Cannot change availability while impersonating a user"
+        "IMPERSONATING_ERROR": "Impossible de modifier la disponibilité lors de l'usurpation d'identité d'un utilisateur"
       },
       "EMAIL": {
         "LABEL": "Votre adresse de courriel",
@@ -230,35 +230,35 @@
   },
   "SIDEBAR_ITEMS": {
     "CHANGE_AVAILABILITY_STATUS": "Modifier",
-    "CHANGE_ACCOUNTS": "Switch account",
-    "SWITCH_ACCOUNT": "Switch account",
-    "CONTACT_SUPPORT": "Contact support",
+    "CHANGE_ACCOUNTS": "Changer de compte",
+    "SWITCH_ACCOUNT": "Changer de compte",
+    "CONTACT_SUPPORT": "Contacter le support",
     "SELECTOR_SUBTITLE": "Sélectionnez un compte dans la liste suivante",
-    "PROFILE_SETTINGS": "Profile settings",
-    "YEAR_IN_REVIEW": "Year in Review",
-    "KEYBOARD_SHORTCUTS": "Keyboard shortcuts",
-    "APPEARANCE": "Change appearance",
-    "SUPER_ADMIN_CONSOLE": "SuperAdmin console",
-    "DOCS": "Read documentation",
-    "CHANGELOG": "Changelog",
-    "LOGOUT": "Log out"
+    "PROFILE_SETTINGS": "Paramètres du profil",
+    "YEAR_IN_REVIEW": "Bilan annuel",
+    "KEYBOARD_SHORTCUTS": "Raccourcis clavier",
+    "APPEARANCE": "Modifier l'apparence",
+    "SUPER_ADMIN_CONSOLE": "Console SuperAdmin",
+    "DOCS": "Lire la documentation",
+    "CHANGELOG": "Journal des modifications",
+    "LOGOUT": "Se déconnecter"
   },
   "APP_GLOBAL": {
     "TRIAL_MESSAGE": "jours d'essai restants.",
     "TRAIL_BUTTON": "Acheter Maintenant",
     "DELETED_USER": "Utilisateur supprimé",
-    "EMAIL_VERIFICATION_PENDING": "It seems that you haven't verified your email address yet. Please check your inbox for the verification email.",
-    "RESEND_VERIFICATION_MAIL": "Resend verification email",
-    "EMAIL_VERIFICATION_SENT": "Verification email has been sent. Please check your inbox.",
+    "EMAIL_VERIFICATION_PENDING": "Il semble que vous n'ayez pas encore vérifié votre adresse e-mail. Veuillez vérifier votre boîte de réception pour trouver l'e-mail de vérification.",
+    "RESEND_VERIFICATION_MAIL": "Renvoyer l'e-mail de vérification",
+    "EMAIL_VERIFICATION_SENT": "L'e-mail de vérification a été envoyé. Veuillez vérifier votre boîte de réception.",
     "ACCOUNT_SUSPENDED": {
       "TITLE": "Compte Suspendu",
       "MESSAGE": "Votre compte est suspendu. Veuillez contacter le support pour plus d'informations."
     },
     "NO_ACCOUNTS": {
-      "TITLE": "No account found",
-      "MESSAGE_CLOUD": "You are not part of any accounts right now. If you think this is a mistake, please reach out to our support team.",
-      "MESSAGE_SELF_HOSTED": "You are not part of any accounts right now. Please reach out to your administrator.",
-      "LOGOUT": "Log out"
+      "TITLE": "Aucun compte trouvé",
+      "MESSAGE_CLOUD": "Vous ne faites partie d'aucun compte pour le moment. Si vous pensez qu'il s'agit d'une erreur, veuillez contacter notre équipe de support.",
+      "MESSAGE_SELF_HOSTED": "Vous ne faites partie d'aucun compte pour le moment. Veuillez contacter votre administrateur.",
+      "LOGOUT": "Se déconnecter"
     }
   },
   "COMPONENTS": {
@@ -284,8 +284,8 @@
       "SUBMIT": "Envoyer"
     },
     "MEDIA": {
-      "IMAGE_UNAVAILABLE": "This image is no longer available.",
-      "LOADING_FAILED": "Loading failed"
+      "IMAGE_UNAVAILABLE": "Cette image n'est plus disponible.",
+      "LOADING_FAILED": "Échec du chargement"
     }
   },
   "CONFIRM_EMAIL": "Vérification...",
@@ -295,12 +295,12 @@
     }
   },
   "SIDEBAR": {
-    "NO_ITEMS": "No items",
+    "NO_ITEMS": "Aucun élément",
     "CURRENTLY_VIEWING_ACCOUNT": "En cours de visualisation:",
     "SWITCH": "Commuter",
-    "INBOX_VIEW": "Inbox View",
+    "INBOX_VIEW": "Vue des boîtes de réception",
     "CONVERSATIONS": "Conversations",
-    "INBOX": "My Inbox",
+    "INBOX": "Ma boîte de réception",
     "ALL_CONVERSATIONS": "Toutes les conversations",
     "MENTIONED_CONVERSATIONS": "Mentions",
     "PARTICIPATING_CONVERSATIONS": "Conversations assignées",
@@ -309,15 +309,15 @@
     "SETTINGS": "Paramètres",
     "CONTACTS": "Contacts",
     "ACTIVE": "Actif",
-    "COMPANIES": "Companies",
-    "ALL_COMPANIES": "All Companies",
+    "COMPANIES": "Entreprises",
+    "ALL_COMPANIES": "Toutes les entreprises",
     "CAPTAIN": "Captain",
     "CAPTAIN_ASSISTANTS": "Assistants",
     "CAPTAIN_DOCUMENTS": "Documents",
     "CAPTAIN_MEDIA_CATALOG": "Catalogue produits",
-    "CAPTAIN_RESPONSES": "FAQs",
+    "CAPTAIN_RESPONSES": "FAQ",
     "CAPTAIN_TOOLS": "Outils",
-    "CAPTAIN_SCENARIOS": "Scenarios",
+    "CAPTAIN_SCENARIOS": "Scénarios",
     "CAPTAIN_PLAYGROUND": "Terrain de jeu",
     "CAPTAIN_INBOXES": "Boîtes de réception",
     "CAPTAIN_SETTINGS": "Paramètres",
@@ -347,9 +347,9 @@
     "NEW_INBOX": "Nouvelle boîte de réception",
     "REPORTS_CONVERSATION": "Conversations",
     "CSAT": "CSAT",
-    "LIVE_CHAT": "Live Chat",
+    "LIVE_CHAT": "Chat en direct",
     "SMS": "SMS",
-    "WHATSAPP": "WhatsApp",
+    "WHATSAPP": "Whatsapp",
     "CAMPAIGNS": "Campagnes",
     "ONGOING": "En cours",
     "ONE_OFF": "Isolées",
@@ -359,14 +359,14 @@
     "REPORTS_LABEL": "Étiquettes",
     "REPORTS_INBOX": "Boîte de réception",
     "REPORTS_TEAM": "Équipes",
-    "AGENT_ASSIGNMENT": "Agent Assignment",
+    "AGENT_ASSIGNMENT": "Attribution des agents",
     "SET_AVAILABILITY_TITLE": "Se définir comme",
     "SET_YOUR_AVAILABILITY": "Définissez votre disponibilité",
     "SLA": "SLA",
-    "CUSTOM_ROLES": "Custom Roles",
+    "CUSTOM_ROLES": "Rôles personnalisés",
     "BETA": "Bêta",
     "REPORTS_OVERVIEW": "Vue d'ensemble",
-    "REAUTHORIZE": "Your inbox connection has expired, please reconnect\n to continue receiving and sending messages",
+    "REAUTHORIZE": "Votre connexion à la boîte de réception a expiré, veuillez vous reconnecter\n pour continuer à recevoir et envoyer des messages",
     "HELP_CENTER": {
       "TITLE": "Centre d'aide",
       "ARTICLES": "Articles",
@@ -378,12 +378,12 @@
     "SET_AUTO_OFFLINE": {
       "TEXT": "Passer hors-ligne automatiquement",
       "INFO_TEXT": "Laissez le système vous passer automatiquement hors ligne lorsque vous n'utilisez pas l'application ou le tableau de bord.",
-      "INFO_SHORT": "Automatically mark offline when you aren't using the app."
+      "INFO_SHORT": "Marquer automatiquement comme hors ligne lorsque vous n'utilisez pas l'application."
     },
     "DOCS": "Lire la documentation",
-    "SECURITY": "Security",
+    "SECURITY": "Sécurité",
     "CAPTAIN_AI": "Captain",
-    "CONVERSATION_WORKFLOW": "Conversation Workflow"
+    "CONVERSATION_WORKFLOW": "Flux de conversation"
   },
   "CAPTAIN_SETTINGS": {
     "TITLE": "Paramètres Captain",
@@ -392,40 +392,40 @@
     "LINK_TEXT": "En savoir plus sur les crédits Captain",
     "NOT_ENABLED": "Captain n'est pas activé pour votre compte. Passez à un plan supérieur pour accéder aux fonctionnalités Captain.",
     "MODEL_CONFIG": {
-      "TITLE": "Model Configuration",
-      "DESCRIPTION": "Select AI models for different features.",
-      "SELECT_MODEL": "Select model",
-      "CREDITS_PER_MESSAGE": "{credits} credit/message",
-      "COMING_SOON": "Coming soon",
+      "TITLE": "Configuration du modèle",
+      "DESCRIPTION": "Sélectionnez des modèles d'IA pour différentes fonctionnalités.",
+      "SELECT_MODEL": "Sélectionner un modèle",
+      "CREDITS_PER_MESSAGE": "{credits} crédit/message",
+      "COMING_SOON": "Bientôt disponible",
       "EDITOR": {
-        "TITLE": "Editor Features",
-        "DESCRIPTION": "Powers smart compose, grammar corrections, tone adjustments, and content enhancement in your message editor."
+        "TITLE": "Fonctionnalités de l'éditeur",
+        "DESCRIPTION": "Alimente la composition intelligente, les corrections grammaticales, les ajustements de ton et l'amélioration du contenu dans votre éditeur de messages."
       },
       "ASSISTANT": {
         "TITLE": "Assistant",
-        "DESCRIPTION": "Handles automated responses, conversation summaries, and intelligent reply suggestions for customer interactions."
+        "DESCRIPTION": "Gère les réponses automatiques, les résumés de conversations et les suggestions de réponses intelligentes pour les interactions clients."
       },
       "COPILOT": {
-        "TITLE": "Co-pilot",
-        "DESCRIPTION": "Provides real-time contextual suggestions, knowledge base recommendations, and proactive insights during conversations."
+        "TITLE": "Co-pilote",
+        "DESCRIPTION": "Fournit des suggestions contextuelles en temps réel, des recommandations de base de connaissances et des informations proactives lors des conversations."
       }
     },
     "FEATURES": {
       "TITLE": "Fonctionnalités",
-      "DESCRIPTION": "Enable or disable AI-powered features.",
+      "DESCRIPTION": "Activez ou désactivez les fonctionnalités basées sur l'IA.",
       "AUDIO_TRANSCRIPTION": {
-        "TITLE": "Audio Transcription",
-        "DESCRIPTION": "Automatically convert voice messages and call recordings into searchable text transcripts."
+        "TITLE": "Transcription audio",
+        "DESCRIPTION": "Convertissez automatiquement les messages vocaux et les enregistrements d'appels en transcriptions texte consultables."
       },
       "HELP_CENTER_SEARCH": {
-        "TITLE": "Help Center Search Indexing",
-        "DESCRIPTION": "Use AI for context aware search inside your help center articles."
+        "TITLE": "Indexation de la recherche du centre d'aide",
+        "DESCRIPTION": "Utilisez l'IA pour une recherche contextuelle dans les articles de votre centre d'aide."
       },
       "LABEL_SUGGESTION": {
-        "TITLE": "Label Suggestion",
-        "DESCRIPTION": "Automatically suggest relevant labels and tags for conversations based on content analysis and context.",
-        "MODEL_TITLE": "Label Suggestion Model",
-        "MODEL_DESCRIPTION": "Select the AI model to use for analyzing conversations and suggesting appropriate labels"
+        "TITLE": "Suggestion de libellés",
+        "DESCRIPTION": "Suggérez automatiquement des libellés et étiquettes pertinents pour les conversations en fonction de l'analyse du contenu et du contexte.",
+        "MODEL_TITLE": "Modèle de suggestion de libellés",
+        "MODEL_DESCRIPTION": "Sélectionnez le modèle d'IA à utiliser pour analyser les conversations et suggérer des libellés appropriés"
       }
     },
     "API": {
@@ -457,14 +457,14 @@
   },
   "BILLING_SETTINGS": {
     "TITLE": "Facturation",
-    "DESCRIPTION": "Manage your subscription here, upgrade your plan and get more for your team.",
+    "DESCRIPTION": "Gérez votre abonnement ici, passez à un forfait supérieur et obtenez plus pour votre équipe.",
     "CURRENT_PLAN": {
       "TITLE": "Abonnement actuel",
       "PLAN_NOTE": "Vous êtes actuellement abonné à l'offre **{plan}** avec **{quantity}** licences",
-      "SEAT_COUNT": "Number of seats",
-      "RENEWS_ON": "Renews on"
+      "SEAT_COUNT": "Nombre de sièges",
+      "RENEWS_ON": "Renouvellement le"
     },
-    "VIEW_PRICING": "View Pricing",
+    "VIEW_PRICING": "Voir les tarifs",
     "MANAGE_SUBSCRIPTION": {
       "TITLE": "Gérer votre abonnement",
       "DESCRIPTION": "Visualisez vos factures précédentes, modifiez vos coordonnées de facturation ou annulez votre abonnement.",
@@ -472,11 +472,11 @@
     },
     "CAPTAIN": {
       "TITLE": "Captain",
-      "DESCRIPTION": "Manage usage and credits for Captain AI.",
-      "BUTTON_TXT": "Buy more credits",
+      "DESCRIPTION": "Gérez l'utilisation et les crédits pour Captain AI.",
+      "BUTTON_TXT": "Acheter plus de crédits",
       "DOCUMENTS": "Documents",
       "RESPONSES": "Responses",
-      "UPGRADE": "Captain is not available on the free plan, upgrade now to get access to assistants, copilot and more.",
+      "UPGRADE": "Captain n'est pas disponible sur le forfait gratuit, passez à la version supérieure maintenant pour accéder aux assistants, au Copilot et plus encore.",
       "REFRESH_CREDITS": "Actualiser"
     },
     "CHAT_WITH_US": {
@@ -486,133 +486,133 @@
     },
     "NO_BILLING_USER": "Votre compte de facturation est en cours de configuration. Veuillez actualiser la page et réessayer.",
     "TOPUP": {
-      "BUY_CREDITS": "Buy more credits",
-      "MODAL_TITLE": "Buy AI Credits",
-      "MODAL_DESCRIPTION": "Purchase additional credits for Captain AI.",
-      "CREDITS": "CREDITS",
-      "ONE_TIME": "one-time",
-      "POPULAR": "Most Popular",
-      "NOTE_TITLE": "Note:",
-      "NOTE_DESCRIPTION": "Credits are added immediately and expire in 6 months. An active subscription is required to use credits. Purchased credits are consumed after your monthly plan credits.",
+      "BUY_CREDITS": "Acheter plus de crédits",
+      "MODAL_TITLE": "Acheter des crédits IA",
+      "MODAL_DESCRIPTION": "Achetez des crédits supplémentaires pour Captain AI.",
+      "CREDITS": "CRÉDITS",
+      "ONE_TIME": "unique",
+      "POPULAR": "Le plus populaire",
+      "NOTE_TITLE": "Remarque :",
+      "NOTE_DESCRIPTION": "Les crédits sont ajoutés immédiatement et expirent dans 6 mois. Un abonnement actif est requis pour utiliser les crédits. Les crédits achetés sont consommés après les crédits de votre forfait mensuel.",
       "CANCEL": "Annuler",
-      "PURCHASE": "Purchase Credits",
-      "LOADING": "Loading options...",
-      "FETCH_ERROR": "Failed to load credit options. Please try again.",
-      "PURCHASE_ERROR": "Failed to process purchase. Please try again.",
-      "PURCHASE_SUCCESS": "Successfully added {credits} credits to your account",
+      "PURCHASE": "Acheter des crédits",
+      "LOADING": "Chargement des options...",
+      "FETCH_ERROR": "Échec du chargement des options de crédit. Veuillez réessayer.",
+      "PURCHASE_ERROR": "Échec du traitement de l'achat. Veuillez réessayer.",
+      "PURCHASE_SUCCESS": "{credits} crédits ont été ajoutés avec succès à votre compte",
       "CONFIRM": {
-        "TITLE": "Confirm Purchase",
-        "DESCRIPTION": "You are about to purchase {credits} credits for {amount}.",
-        "INSTANT_DEDUCTION_NOTE": "Your saved card will be charged immediately upon confirmation.",
+        "TITLE": "Confirmer l'achat",
+        "DESCRIPTION": "Vous êtes sur le point d'acheter {credits} crédits pour {amount}.",
+        "INSTANT_DEDUCTION_NOTE": "Votre carte enregistrée sera débitée immédiatement à la confirmation.",
         "GO_BACK": "Retour",
-        "CONFIRM_PURCHASE": "Confirm Purchase"
+        "CONFIRM_PURCHASE": "Confirmer l'achat"
       }
     }
   },
   "SECURITY_SETTINGS": {
-    "TITLE": "Security",
-    "DESCRIPTION": "Manage your account security settings.",
-    "LINK_TEXT": "Learn more about SAML SSO",
-    "SAML_DISABLED_MESSAGE": "SAML SSO is currently disabled. Please contact your administrator to enable this feature.",
+    "TITLE": "Sécurité",
+    "DESCRIPTION": "Gérez les paramètres de sécurité de votre compte.",
+    "LINK_TEXT": "En savoir plus sur SAML SSO",
+    "SAML_DISABLED_MESSAGE": "SAML SSO est actuellement désactivé. Veuillez contacter votre administrateur pour activer cette fonctionnalité.",
     "SAML": {
       "TITLE": "SAML SSO",
-      "NOTE": "Configure SAML single sign-on for your account. Users will authenticate through your identity provider instead of using email/password.",
+      "NOTE": "Configurez l'authentification unique SAML pour votre compte. Les utilisateurs s'authentifieront via votre fournisseur d'identité au lieu d'utiliser leur e-mail/mot de passe.",
       "ACS_URL": {
         "LABEL": "ACS URL",
-        "TOOLTIP": "Assertion Consumer Service URL - Configure this URL in your IdP as the destination for SAML responses"
+        "TOOLTIP": "URL du service consommateur d'assertions — Configurez cette URL dans votre IdP comme destination pour les réponses SAML"
       },
       "SSO_URL": {
-        "LABEL": "SSO URL",
-        "HELP": "The URL where SAML authentication requests will be sent",
+        "LABEL": "URL SSO",
+        "HELP": "L'URL vers laquelle les demandes d'authentification SAML seront envoyées",
         "PLACEHOLDER": "https://your-idp.com/saml/sso"
       },
       "CERTIFICATE": {
-        "LABEL": "Signing certificate in PEM format",
-        "HELP": "The public certificate from your identity provider used to verify SAML responses",
+        "LABEL": "Certificat de signature au format PEM",
+        "HELP": "Le certificat public de votre fournisseur d'identité utilisé pour vérifier les réponses SAML",
         "PLACEHOLDER": "-----BEGIN CERTIFICATE-----\nMIIC..."
       },
       "FINGERPRINT": {
-        "LABEL": "Fingerprint",
-        "TOOLTIP": "SHA-1 fingerprint of the certificate - Use this to verify the certificate in your IdP configuration"
+        "LABEL": "Empreinte",
+        "TOOLTIP": "Empreinte SHA-1 du certificat — Utilisez-la pour vérifier le certificat dans la configuration de votre IdP"
       },
       "COPY_SUCCESS": "Code copié dans le presse-papier avec succès",
       "SP_ENTITY_ID": {
-        "LABEL": "SP Entity ID",
-        "HELP": "Unique identifier for this application as a service provider (auto-generated).",
-        "TOOLTIP": "Unique identifier for Chatwoot as the Service Provider - Configure this in your IdP settings"
+        "LABEL": "ID d'entité SP",
+        "HELP": "Identifiant unique de cette application en tant que fournisseur de service (généré automatiquement).",
+        "TOOLTIP": "Identifiant unique de Chatwoot en tant que fournisseur de service — Configurez-le dans les paramètres de votre IdP"
       },
       "IDP_ENTITY_ID": {
-        "LABEL": "Identity Provider Entity ID",
-        "HELP": "Unique identifier for your identity provider (usually found in IdP configuration)",
+        "LABEL": "ID d'entité du fournisseur d'identité",
+        "HELP": "Identifiant unique de votre fournisseur d'identité (généralement trouvé dans la configuration IdP)",
         "PLACEHOLDER": "https://your-idp.com/saml"
       },
-      "UPDATE_BUTTON": "Update SAML Settings",
+      "UPDATE_BUTTON": "Mettre à jour les paramètres SAML",
       "API": {
-        "SUCCESS": "SAML settings updated successfully",
-        "ERROR": "Failed to update SAML settings",
-        "ERROR_LOADING": "Failed to load SAML settings",
-        "DISABLED": "SAML settings disabled successfully"
+        "SUCCESS": "Paramètres SAML mis à jour avec succès",
+        "ERROR": "Échec de la mise à jour des paramètres SAML",
+        "ERROR_LOADING": "Échec du chargement des paramètres SAML",
+        "DISABLED": "Paramètres SAML désactivés avec succès"
       },
       "VALIDATION": {
-        "REQUIRED_FIELDS": "SSO URL, Identity Provider Entity ID, and Certificate are required fields",
-        "SSO_URL_ERROR": "Please enter a valid SSO URL",
-        "CERTIFICATE_ERROR": "Certificate is required",
-        "IDP_ENTITY_ID_ERROR": "Identity Provider Entity ID is required"
+        "REQUIRED_FIELDS": "L'URL SSO, l'ID d'entité du fournisseur d'identité et le certificat sont des champs obligatoires",
+        "SSO_URL_ERROR": "Veuillez saisir une URL SSO valide",
+        "CERTIFICATE_ERROR": "Le certificat est obligatoire",
+        "IDP_ENTITY_ID_ERROR": "L'ID d'entité du fournisseur d'identité est obligatoire"
       },
       "ENTERPRISE_PAYWALL": {
-        "AVAILABLE_ON": "The SAML SSO feature is only available in the Enterprise plans.",
-        "UPGRADE_PROMPT": "Upgrade to an Enterprise plan to access SAML single sign-on and other advanced security features.",
-        "ASK_ADMIN": "Please reach out to your administrator for the upgrade."
+        "AVAILABLE_ON": "La fonctionnalité SAML SSO est uniquement disponible dans les forfaits Enterprise.",
+        "UPGRADE_PROMPT": "Passez à un forfait Enterprise pour accéder à l'authentification unique SAML et à d'autres fonctionnalités de sécurité avancées.",
+        "ASK_ADMIN": "Veuillez contacter votre administrateur pour la mise à niveau."
       },
       "PAYWALL": {
-        "TITLE": "Upgrade to enable SAML SSO",
-        "AVAILABLE_ON": "The SAML SSO feature is only available in the Enterprise plans.",
-        "UPGRADE_PROMPT": "Upgrade your plan to get access to SAML single sign-on and other advanced features.",
-        "UPGRADE_NOW": "Upgrade now",
-        "CANCEL_ANYTIME": "You can change or cancel your plan anytime"
+        "TITLE": "Passez à la version supérieure pour activer SAML SSO",
+        "AVAILABLE_ON": "La fonctionnalité SAML SSO est uniquement disponible dans les forfaits Enterprise.",
+        "UPGRADE_PROMPT": "Passez à un forfait supérieur pour accéder à l'authentification unique SAML et à d'autres fonctionnalités avancées.",
+        "UPGRADE_NOW": "Passer à la version supérieure",
+        "CANCEL_ANYTIME": "Vous pouvez modifier ou annuler votre forfait à tout moment"
       },
       "ATTRIBUTE_MAPPING": {
-        "TITLE": "SAML Attribute Setup",
-        "DESCRIPTION": "The following attribute mappings must be configured in your identity provider"
+        "TITLE": "Configuration des attributs SAML",
+        "DESCRIPTION": "Les correspondances d'attributs suivantes doivent être configurées dans votre fournisseur d'identité"
       },
       "INFO_SECTION": {
-        "TITLE": "Service Provider Information",
-        "TOOLTIP": "Copy these values and configure them in your Identity Provider to establish the SAML connection"
+        "TITLE": "Informations du fournisseur de service",
+        "TOOLTIP": "Copiez ces valeurs et configurez-les dans votre fournisseur d'identité pour établir la connexion SAML"
       }
     }
   },
   "CONVERSATION_WORKFLOW": {
     "INDEX": {
       "HEADER": {
-        "TITLE": "Conversation Workflows",
-        "DESCRIPTION": "Configure rules and required fields for conversation resolution."
+        "TITLE": "Flux de travail des conversations",
+        "DESCRIPTION": "Configurez des règles et des champs obligatoires pour la résolution des conversations."
       }
     },
     "REQUIRED_ATTRIBUTES": {
-      "TITLE": "Attributes required on resolution",
-      "DESCRIPTION": "When resolving a conversation, agents will be prompted to fill these attributes if they haven't yet.",
-      "NO_ATTRIBUTES": "No attributes added yet",
+      "TITLE": "Attributs requis à la résolution",
+      "DESCRIPTION": "Lors de la résolution d'une conversation, les agents seront invités à remplir ces attributs s'ils ne l'ont pas encore fait.",
+      "NO_ATTRIBUTES": "Aucun attribut ajouté pour l'instant",
       "ADD": {
-        "TITLE": "Add Attributes",
+        "TITLE": "Ajouter des attributs",
         "SEARCH_PLACEHOLDER": "Rechercher des attributs"
       },
       "SAVE": {
-        "SUCCESS": "Required attributes updated",
-        "ERROR": "Could not update required attributes, please try again"
+        "SUCCESS": "Attributs requis mis à jour",
+        "ERROR": "Impossible de mettre à jour les attributs requis, veuillez réessayer"
       },
       "MODAL": {
         "TITLE": "Reprendre la conversation",
-        "DESCRIPTION": "Please fill in the following custom attributes before resolving this conversation",
+        "DESCRIPTION": "Veuillez remplir les attributs personnalisés suivants avant de résoudre cette conversation",
         "ACTIONS": {
           "RESOLVE": "Reprendre la conversation",
           "CANCEL": "Annuler"
         },
         "PLACEHOLDERS": {
-          "TEXT": "Write a note...",
-          "NUMBER": "Enter a number",
-          "LINK": "Add a link",
-          "DATE": "Pick a date",
-          "LIST": "Select an option"
+          "TEXT": "Écrire une note...",
+          "NUMBER": "Saisir un nombre",
+          "LINK": "Ajouter un lien",
+          "DATE": "Choisir une date",
+          "LIST": "Sélectionner une option"
         },
         "CHECKBOX": {
           "YES": "Oui",
@@ -620,16 +620,16 @@
         }
       },
       "PAYWALL": {
-        "TITLE": "Upgrade to use required attributes",
-        "AVAILABLE_ON": "The required conversation attributes feature is available on the Business and Enterprise plans.",
-        "UPGRADE_PROMPT": "Upgrade your plan to prompt agents to fill required attributes before conversation resolution.",
-        "UPGRADE_NOW": "Upgrade now",
-        "CANCEL_ANYTIME": "You can change or cancel your plan anytime"
+        "TITLE": "Passez à la version supérieure pour utiliser les attributs requis",
+        "AVAILABLE_ON": "La fonctionnalité d'attributs de conversation requis est disponible sur les forfaits Business et Enterprise.",
+        "UPGRADE_PROMPT": "Passez à un forfait supérieur pour inviter les agents à remplir les attributs requis avant la résolution des conversations.",
+        "UPGRADE_NOW": "Passer à la version supérieure",
+        "CANCEL_ANYTIME": "Vous pouvez modifier ou annuler votre forfait à tout moment"
       },
       "ENTERPRISE_PAYWALL": {
-        "AVAILABLE_ON": "The required conversation attributes feature is available on the paid plans.",
-        "UPGRADE_PROMPT": "Upgrade to a paid plan to enforce required attributes before conversation resolution.",
-        "ASK_ADMIN": "Please reach out to your administrator for the upgrade."
+        "AVAILABLE_ON": "La fonctionnalité d'attributs de conversation requis est disponible sur les forfaits payants.",
+        "UPGRADE_PROMPT": "Passez à un forfait payant pour imposer des attributs requis avant la résolution des conversations.",
+        "ASK_ADMIN": "Veuillez contacter votre administrateur pour la mise à niveau."
       }
     }
   },
@@ -674,271 +674,271 @@
     "INDEX": {
       "HEADER": {
         "TITLE": "Agent assignment",
-        "DESCRIPTION": "Define policies to effectively manage workload and route conversations based on the needs of inboxes and agents. Learn more here"
+        "DESCRIPTION": "Définissez des politiques pour gérer efficacement la charge de travail et acheminer les conversations selon les besoins des boîtes de réception et des agents. En savoir plus ici"
       },
       "ASSIGNMENT_POLICY": {
-        "TITLE": "Assignment policy",
-        "DESCRIPTION": "Manage how conversations get assigned in inboxes.",
+        "TITLE": "Politique d'attribution",
+        "DESCRIPTION": "Gérer la façon dont les conversations sont attribuées dans les boîtes de réception.",
         "FEATURES": [
-          "Assign by conversations evenly or by available capacity",
-          "Add fair distribution rules to avoid overloading any agent",
-          "Add inboxes to a policy - one policy per inbox"
+          "Assigner les conversations uniformément ou en fonction de la capacité disponible",
+          "Ajouter des règles de distribution équitable pour éviter de surcharger un agent",
+          "Ajouter des boîtes de réception à une politique - une politique par boîte de réception"
         ]
       },
       "AGENT_CAPACITY_POLICY": {
-        "TITLE": "Agent capacity policy",
-        "DESCRIPTION": "Manage workload for agents.",
+        "TITLE": "Politique de capacité d'agent",
+        "DESCRIPTION": "Gérer la charge de travail des agents.",
         "FEATURES": [
-          "Define maximum conversations per inbox",
-          "Create exceptions based on labels and time",
-          "Add agents to a policy - one policy per agent"
+          "Définir le nombre maximum de conversations par boîte de réception",
+          "Créer des exceptions basées sur les étiquettes et le temps",
+          "Ajouter des agents à une politique - une politique par agent"
         ]
       }
     },
     "AGENT_ASSIGNMENT_POLICY": {
       "INDEX": {
         "HEADER": {
-          "TITLE": "Assignment policy",
-          "CREATE_POLICY": "New policy"
+          "TITLE": "Politique d'attribution",
+          "CREATE_POLICY": "Nouvelle politique"
         },
         "CARD": {
-          "ORDER": "Order",
+          "ORDER": "Ordre",
           "PRIORITY": "Priorité",
           "ACTIVE": "Actif",
           "INACTIVE": "Inactive",
-          "POPOVER": "Added inboxes",
+          "POPOVER": "Boîtes de réception ajoutées",
           "EDIT": "Modifier"
         },
-        "NO_RECORDS_FOUND": "No assignment policies found"
+        "NO_RECORDS_FOUND": "Aucune politique d'attribution trouvée"
       },
       "CREATE": {
         "HEADER": {
-          "TITLE": "Create assignment policy"
+          "TITLE": "Créer une politique d'attribution"
         },
-        "CREATE_BUTTON": "Create policy",
+        "CREATE_BUTTON": "Créer une politique",
         "API": {
-          "SUCCESS_MESSAGE": "Assignment policy created successfully",
-          "ERROR_MESSAGE": "Failed to create assignment policy",
-          "INBOX_LINKED": "Inbox has been linked to the policy"
+          "SUCCESS_MESSAGE": "Politique d'attribution créée avec succès",
+          "ERROR_MESSAGE": "Échec de la création de la politique d'attribution",
+          "INBOX_LINKED": "La boîte de réception a été liée à la politique"
         }
       },
       "EDIT": {
         "HEADER": {
-          "TITLE": "Edit assignment policy"
+          "TITLE": "Modifier la politique d'attribution"
         },
-        "EDIT_BUTTON": "Update policy",
+        "EDIT_BUTTON": "Mettre à jour la politique",
         "CONFIRM_ADD_INBOX_DIALOG": {
-          "TITLE": "Add inbox",
-          "DESCRIPTION": "{inboxName} inbox is already linked to another policy. Are you sure you want to link it to this policy? It will be unlinked from the other policy.",
-          "CONFIRM_BUTTON_LABEL": "Continue",
+          "TITLE": "Ajouter une boîte de réception",
+          "DESCRIPTION": "La boîte de réception {inboxName} est déjà liée à une autre politique. Êtes-vous sûr(e) de vouloir la lier à cette politique ? Elle sera dissociée de l'autre politique.",
+          "CONFIRM_BUTTON_LABEL": "Continuer",
           "CANCEL_BUTTON_LABEL": "Annuler"
         },
         "INBOX_LINK_PROMPT": {
-          "TITLE": "Link inbox to policy",
-          "DESCRIPTION": "Would you like to link this inbox to the assignment policy?",
-          "LINK_BUTTON": "Link inbox",
-          "CANCEL_BUTTON": "Skip"
+          "TITLE": "Lier la boîte de réception à la politique",
+          "DESCRIPTION": "Souhaitez-vous lier cette boîte de réception à la politique d'attribution ?",
+          "LINK_BUTTON": "Lier la boîte de réception",
+          "CANCEL_BUTTON": "Ignorer"
         },
         "API": {
-          "SUCCESS_MESSAGE": "Assignment policy updated successfully",
-          "ERROR_MESSAGE": "Failed to update assignment policy"
+          "SUCCESS_MESSAGE": "Politique d'attribution mise à jour avec succès",
+          "ERROR_MESSAGE": "Échec de la mise à jour de la politique d'attribution"
         },
         "INBOX_API": {
           "ADD": {
-            "SUCCESS_MESSAGE": "Inbox added to policy successfully",
-            "ERROR_MESSAGE": "Failed to add inbox to policy"
+            "SUCCESS_MESSAGE": "Boîte de réception ajoutée à la politique avec succès",
+            "ERROR_MESSAGE": "Échec de l'ajout de la boîte de réception à la politique"
           },
           "REMOVE": {
-            "SUCCESS_MESSAGE": "Inbox removed from policy successfully",
-            "ERROR_MESSAGE": "Failed to remove inbox from policy"
+            "SUCCESS_MESSAGE": "Boîte de réception supprimée de la politique avec succès",
+            "ERROR_MESSAGE": "Échec de la suppression de la boîte de réception de la politique"
           }
         }
       },
       "FORM": {
         "NAME": {
-          "LABEL": "Policy name:",
-          "PLACEHOLDER": "Enter policy name"
+          "LABEL": "Nom de la politique :",
+          "PLACEHOLDER": "Saisir le nom de la politique"
         },
         "DESCRIPTION": {
-          "LABEL": "Description:",
-          "PLACEHOLDER": "Enter description"
+          "LABEL": "Description :",
+          "PLACEHOLDER": "Description du produit"
         },
         "STATUS": {
           "LABEL": "État:",
-          "PLACEHOLDER": "Select status",
-          "ACTIVE": "Policy is active",
-          "INACTIVE": "Policy is inactive"
+          "PLACEHOLDER": "Sélectionner le statut",
+          "ACTIVE": "La politique est active",
+          "INACTIVE": "La politique est inactive"
         },
         "ASSIGNMENT_ORDER": {
-          "LABEL": "Assignment order",
+          "LABEL": "Ordre d'attribution",
           "ROUND_ROBIN": {
-            "LABEL": "Round robin",
-            "DESCRIPTION": "Assign conversations evenly among agents."
+            "LABEL": "Tour à tour",
+            "DESCRIPTION": "Attribuer les conversations uniformément entre les agents."
           },
           "BALANCED": {
-            "LABEL": "Balanced",
-            "DESCRIPTION": "Assign conversations based on available capacity.",
-            "PREMIUM_MESSAGE": "Upgrade to access balanced assignment and agent capacity management.",
+            "LABEL": "Équilibré",
+            "DESCRIPTION": "Attribuer les conversations en fonction de la capacité disponible.",
+            "PREMIUM_MESSAGE": "Passez à la version supérieure pour accéder à l'attribution équilibrée et à la gestion de la capacité des agents.",
             "PREMIUM_BADGE": "Premium"
           }
         },
         "ASSIGNMENT_PRIORITY": {
-          "LABEL": "Assignment priority",
+          "LABEL": "Priorité d'attribution",
           "EARLIEST_CREATED": {
-            "LABEL": "Earliest created",
-            "DESCRIPTION": "The conversation that was created first gets assigned first."
+            "LABEL": "Créée en premier",
+            "DESCRIPTION": "La conversation créée en premier est assignée en premier."
           },
           "LONGEST_WAITING": {
-            "LABEL": "Longest waiting",
-            "DESCRIPTION": "The conversation waiting the longest gets assigned first."
+            "LABEL": "Attente la plus longue",
+            "DESCRIPTION": "La conversation qui attend le plus longtemps est assignée en premier."
           }
         },
         "FAIR_DISTRIBUTION": {
-          "LABEL": "Fair distribution policy",
-          "DESCRIPTION": "Set the maximum number of conversations that can be assigned per agent within a time window to avoid overloading any one agent. This required field defaults to 100 conversations per hour.",
-          "INPUT_MAX": "Assign max",
-          "DURATION": "Conversations per agent in every"
+          "LABEL": "Politique de distribution équitable",
+          "DESCRIPTION": "Définissez le nombre maximum de conversations pouvant être assignées par agent dans une fenêtre de temps pour éviter de surcharger un agent. Ce champ obligatoire est défini par défaut à 100 conversations par heure.",
+          "INPUT_MAX": "Attribuer max",
+          "DURATION": "Conversations par agent toutes les"
         },
         "INBOXES": {
-          "LABEL": "Added inboxes",
-          "DESCRIPTION": "Add inboxes for which this policy will be applicable.",
-          "ADD_BUTTON": "Add inbox",
+          "LABEL": "Boîtes de réception ajoutées",
+          "DESCRIPTION": "Ajoutez les boîtes de réception auxquelles cette politique s'appliquera.",
+          "ADD_BUTTON": "Ajouter une boîte de réception",
           "DROPDOWN": {
-            "SEARCH_PLACEHOLDER": "Search and select inboxes to add",
+            "SEARCH_PLACEHOLDER": "Rechercher et sélectionner des boîtes de réception à ajouter",
             "ADD_BUTTON": "Ajouter"
           },
-          "EMPTY_STATE": "No inboxes added to this policy, add an inbox to get started",
+          "EMPTY_STATE": "Aucune boîte de réception ajoutée à cette politique, ajoutez-en une pour commencer",
           "API": {
-            "SUCCESS_MESSAGE": "Inbox successfully added to policy",
-            "ERROR_MESSAGE": "Failed to add inbox to policy"
+            "SUCCESS_MESSAGE": "Boîte de réception ajoutée à la politique avec succès",
+            "ERROR_MESSAGE": "Échec de l'ajout de la boîte de réception à la politique"
           }
         }
       },
       "DELETE_POLICY": {
-        "SUCCESS_MESSAGE": "Assignment policy deleted successfully",
-        "ERROR_MESSAGE": "Failed to delete assignment policy"
+        "SUCCESS_MESSAGE": "Politique d'attribution supprimée avec succès",
+        "ERROR_MESSAGE": "Échec de la suppression de la politique d'attribution"
       }
     },
     "AGENT_CAPACITY_POLICY": {
       "INDEX": {
         "HEADER": {
-          "TITLE": "Agent capacity",
-          "CREATE_POLICY": "New policy"
+          "TITLE": "Capacité d'agent",
+          "CREATE_POLICY": "Nouvelle politique"
         },
         "CARD": {
-          "POPOVER": "Added agents",
+          "POPOVER": "Agents ajoutés",
           "EDIT": "Modifier"
         },
-        "NO_RECORDS_FOUND": "No agent capacity policies found"
+        "NO_RECORDS_FOUND": "Aucune politique de capacité d'agent trouvée"
       },
       "CREATE": {
         "HEADER": {
-          "TITLE": "Create agent capacity policy"
+          "TITLE": "Créer une politique de capacité d'agent"
         },
-        "CREATE_BUTTON": "Create policy",
+        "CREATE_BUTTON": "Créer une politique",
         "API": {
-          "SUCCESS_MESSAGE": "Agent capacity policy created successfully",
-          "ERROR_MESSAGE": "Failed to create agent capacity policy"
+          "SUCCESS_MESSAGE": "Politique de capacité d'agent créée avec succès",
+          "ERROR_MESSAGE": "Échec de la création de la politique de capacité d'agent"
         }
       },
       "EDIT": {
         "HEADER": {
-          "TITLE": "Edit agent capacity policy"
+          "TITLE": "Modifier la politique de capacité d'agent"
         },
-        "EDIT_BUTTON": "Update policy",
+        "EDIT_BUTTON": "Mettre à jour la politique",
         "CONFIRM_ADD_AGENT_DIALOG": {
-          "TITLE": "Add agent",
-          "DESCRIPTION": "{agentName} is already linked to another policy. Are you sure you want to link it to this policy? It will be unlinked from the other policy.",
-          "CONFIRM_BUTTON_LABEL": "Continue",
+          "TITLE": "Ajouter un agent",
+          "DESCRIPTION": "{agentName} est déjà lié(e) à une autre politique. Êtes-vous sûr(e) de vouloir le/la lier à cette politique ? Il/elle sera dissocié(e) de l'autre politique.",
+          "CONFIRM_BUTTON_LABEL": "Continuer",
           "CANCEL_BUTTON_LABEL": "Annuler"
         },
         "API": {
-          "SUCCESS_MESSAGE": "Agent capacity policy updated successfully",
-          "ERROR_MESSAGE": "Failed to update agent capacity policy"
+          "SUCCESS_MESSAGE": "Politique de capacité d'agent mise à jour avec succès",
+          "ERROR_MESSAGE": "Échec de la mise à jour de la politique de capacité d'agent"
         },
         "AGENT_API": {
           "ADD": {
-            "SUCCESS_MESSAGE": "Agent added to policy successfully",
-            "ERROR_MESSAGE": "Failed to add agent to policy"
+            "SUCCESS_MESSAGE": "Agent ajouté à la politique avec succès",
+            "ERROR_MESSAGE": "Échec de l'ajout de l'agent à la politique"
           },
           "REMOVE": {
-            "SUCCESS_MESSAGE": "Agent removed from policy successfully",
-            "ERROR_MESSAGE": "Failed to remove agent from policy"
+            "SUCCESS_MESSAGE": "Agent supprimé de la politique avec succès",
+            "ERROR_MESSAGE": "Échec de la suppression de l'agent de la politique"
           }
         },
         "INBOX_LIMIT_API": {
           "ADD": {
-            "SUCCESS_MESSAGE": "Inbox limit added successfully",
-            "ERROR_MESSAGE": "Failed to add inbox limit"
+            "SUCCESS_MESSAGE": "Limite de boîte de réception ajoutée avec succès",
+            "ERROR_MESSAGE": "Échec de l'ajout de la limite de boîte de réception"
           },
           "UPDATE": {
-            "SUCCESS_MESSAGE": "Inbox limit updated successfully",
-            "ERROR_MESSAGE": "Failed to update inbox limit"
+            "SUCCESS_MESSAGE": "Limite de boîte de réception mise à jour avec succès",
+            "ERROR_MESSAGE": "Échec de la mise à jour de la limite de boîte de réception"
           },
           "DELETE": {
-            "SUCCESS_MESSAGE": "Inbox limit deleted successfully",
-            "ERROR_MESSAGE": "Failed to delete inbox limit"
+            "SUCCESS_MESSAGE": "Limite de boîte de réception supprimée avec succès",
+            "ERROR_MESSAGE": "Échec de la suppression de la limite de boîte de réception"
           }
         }
       },
       "FORM": {
         "NAME": {
-          "LABEL": "Policy name:",
-          "PLACEHOLDER": "Enter policy name"
+          "LABEL": "Nom de la politique :",
+          "PLACEHOLDER": "Saisir le nom de la politique"
         },
         "DESCRIPTION": {
-          "LABEL": "Description:",
-          "PLACEHOLDER": "Enter description"
+          "LABEL": "Description :",
+          "PLACEHOLDER": "Description du produit"
         },
         "INBOX_CAPACITY_LIMIT": {
-          "LABEL": "Inbox capacity limits",
-          "ADD_BUTTON": "Add inbox",
+          "LABEL": "Limites de capacité des boîtes de réception",
+          "ADD_BUTTON": "Ajouter une boîte de réception",
           "FIELD": {
-            "SELECT_INBOX": "Select inbox",
-            "MAX_CONVERSATIONS": "Max conversations",
-            "SET_LIMIT": "Set limit"
+            "SELECT_INBOX": "Sélectionner une boîte de réception",
+            "MAX_CONVERSATIONS": "Maximum de conversations",
+            "SET_LIMIT": "Définir la limite"
           },
-          "EMPTY_STATE": "No inbox limit set"
+          "EMPTY_STATE": "Aucune limite de boîte de réception définie"
         },
         "EXCLUSION_RULES": {
-          "LABEL": "Exclusion rules",
-          "DESCRIPTION": "Conversations that satisfy the following conditions would not count towards agent capacity",
+          "LABEL": "Règles d'exclusion",
+          "DESCRIPTION": "Les conversations satisfaisant les conditions suivantes ne seront pas comptabilisées dans la capacité d'agent",
           "TAGS": {
-            "LABEL": "Exclude conversations tagged with specific labels",
-            "ADD_TAG": "add tag",
+            "LABEL": "Exclure les conversations étiquetées avec des libellés spécifiques",
+            "ADD_TAG": "ajouter une étiquette",
             "DROPDOWN": {
-              "SEARCH_PLACEHOLDER": "Search and select tags to add"
+              "SEARCH_PLACEHOLDER": "Rechercher et sélectionner des étiquettes à ajouter"
             },
-            "EMPTY_STATE": "No tags added to this policy."
+            "EMPTY_STATE": "Aucune étiquette ajoutée à cette politique."
           },
           "DURATION": {
-            "LABEL": "Exclude conversations older than a specified duration",
-            "PLACEHOLDER": "Set time"
+            "LABEL": "Exclure les conversations plus anciennes qu'une durée spécifiée",
+            "PLACEHOLDER": "Définir la durée"
           }
         },
         "USERS": {
-          "LABEL": "Assigned agents",
-          "DESCRIPTION": "Add agents for which this policy will be applicable.",
-          "ADD_BUTTON": "Add agent",
+          "LABEL": "Agents assignés",
+          "DESCRIPTION": "Ajoutez les agents auxquels cette politique s'appliquera.",
+          "ADD_BUTTON": "Ajouter un agent",
           "DROPDOWN": {
-            "SEARCH_PLACEHOLDER": "Search and select agents to add",
+            "SEARCH_PLACEHOLDER": "Rechercher et sélectionner des agents à ajouter",
             "ADD_BUTTON": "Ajouter"
           },
-          "EMPTY_STATE": "No agents added",
+          "EMPTY_STATE": "Aucun agent ajouté",
           "API": {
-            "SUCCESS_MESSAGE": "Agent successfully added to policy",
-            "ERROR_MESSAGE": "Failed to add agent to policy"
+            "SUCCESS_MESSAGE": "Agent ajouté à la politique avec succès",
+            "ERROR_MESSAGE": "Échec de l'ajout de l'agent à la politique"
           }
         }
       },
       "DELETE_POLICY": {
-        "SUCCESS_MESSAGE": "Agent capacity policy deleted successfully",
-        "ERROR_MESSAGE": "Failed to delete agent capacity policy"
+        "SUCCESS_MESSAGE": "Politique de capacité d'agent supprimée avec succès",
+        "ERROR_MESSAGE": "Échec de la suppression de la politique de capacité d'agent"
       }
     },
     "DELETE_POLICY": {
-      "TITLE": "Delete policy",
-      "DESCRIPTION": "Are you sure you want to delete this policy? This action cannot be undone.",
+      "TITLE": "Supprimer la politique",
+      "DESCRIPTION": "Êtes-vous sûr(e) de vouloir supprimer cette politique ? Cette action est irréversible.",
       "CONFIRM_BUTTON_LABEL": "Supprimer",
       "CANCEL_BUTTON_LABEL": "Annuler"
     }

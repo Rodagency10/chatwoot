@@ -3,16 +3,16 @@
     "HEADER": "Étiquettes",
     "HEADER_BTN_TXT": "Ajouter une étiquette",
     "LOADING": "Récupération des étiquettes",
-    "DESCRIPTION": "Labels help you categorize and prioritize conversations and leads. You can assign a label to a conversation or contact using the side panel.",
-    "LEARN_MORE": "Learn more about labels",
-    "COUNT": "{n} label | {n} labels",
+    "DESCRIPTION": "Les étiquettes vous permettent de catégoriser et de prioriser les conversations et les leads. Vous pouvez assigner une étiquette à une conversation ou un contact en utilisant le panneau latéral.",
+    "LEARN_MORE": "En savoir plus sur les étiquettes",
+    "COUNT": "{n} étiquette | {n} étiquettes",
     "SEARCH_PLACEHOLDER": "Rechercher des étiquettes...",
-    "NO_RESULTS": "No labels found matching your search",
+    "NO_RESULTS": "Aucune étiquette trouvée correspondant à votre recherche",
     "SEARCH_404": "Il n'y a aucun élément correspondant à cette requête",
     "LIST": {
       "404": "Il n'y a aucune étiquette disponible dans ce compte.",
       "TITLE": "Gérer les étiquettes",
-      "DESC": "Les étiquettes vous permettent de grouper les conversations ensemble.",
+      "DESC": "Les étiquettes vous permettent de catégoriser et de prioriser les conversations et les leads.",
       "TABLE_HEADER": {
         "NAME": "Nom",
         "DESCRIPTION": "Description",
@@ -25,7 +25,7 @@
         "LABEL": "Nom de l'étiquette",
         "PLACEHOLDER": "Nom de l'étiquette",
         "REQUIRED_ERROR": "Le nom de l'étiquette est requis",
-        "MINIMUM_LENGTH_ERROR": "Longueur minimale de 2 requise",
+        "MINIMUM_LENGTH_ERROR": "La longueur minimale est de 2 caractères",
         "VALID_ERROR": "Seuls les caractères alphabétiques, les chiffres, les traits d'union et les tirets bas sont autorisés"
       },
       "DESCRIPTION": {
@@ -45,17 +45,17 @@
     },
     "SUGGESTIONS": {
       "TOOLTIP": {
-        "SINGLE_SUGGESTION": "Ajouter un libellé à la conversation",
-        "MULTIPLE_SUGGESTION": "Sélectionner ce libellé",
-        "DESELECT": "Désélectionner ce libellé",
+        "SINGLE_SUGGESTION": "Ajouter une étiquette à la conversation",
+        "MULTIPLE_SUGGESTION": "Sélectionner cette étiquette",
+        "DESELECT": "Désélectionner cette étiquette",
         "DISMISS": "Rejeter la suggestion"
       },
-      "POWERED_BY": "Chatwoot IA",
+      "POWERED_BY": "Wazzify IA",
       "DISMISS": "Rejeter",
-      "ADD_SELECTED_LABELS": "Ajouter les libellés sélectionnés",
-      "ADD_SELECTED_LABEL": "Ajouter le libellé sélectionné",
-      "ADD_ALL_LABELS": "Ajouter tous les libellés",
-      "SUGGESTED_LABELS": "Suggested labels"
+      "ADD_SELECTED_LABELS": "Ajouter les étiquettes sélectionnées",
+      "ADD_SELECTED_LABEL": "Ajouter l'étiquette sélectionnée",
+      "ADD_ALL_LABELS": "Ajouter toutes les étiquettes",
+      "SUGGESTED_LABELS": "Étiquettes suggérées"
     },
     "ADD": {
       "TITLE": "Ajouter une étiquette",

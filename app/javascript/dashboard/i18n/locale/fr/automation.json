@@ -6,8 +6,8 @@
     "COUNT": "{n} automation | {n} automations",
     "HEADER_BTN_TXT": "Create Automation",
     "LOADING": "Récupération des règles d'automatisation",
-    "SEARCH_PLACEHOLDER": "Search automation rules...",
-    "NO_RESULTS": "No automation rules found matching your search",
+    "SEARCH_PLACEHOLDER": "Chercher une règle d'automatisation...",
+    "NO_RESULTS": "Aucune règle d'automatisation trouvée correspondant à votre recherche",
     "ADD": {
       "TITLE": "Ajouter une règle d'automatisation",
       "SUBMIT": "Créer",
@@ -43,13 +43,13 @@
       }
     },
     "LIST": {
+      "404": "Aucune règle d'automatisation trouvée",
       "TABLE_HEADER": {
         "NAME": "Nom",
         "ACTIVE": "Actif",
         "CREATED_ON": "Créé le",
         "ACTIONS": "Actions"
-      },
-      "404": "Aucune règle d'automatisation trouvée"
+      }
     },
     "DELETE": {
       "TITLE": "Supprimer la règle d'automatisation",
@@ -121,16 +121,16 @@
       "LABEL_UPLOAD_FAILED": "Échec de l'envoi"
     },
     "ERRORS": {
-      "ATTRIBUTE_KEY_REQUIRED": "Attribute key is required",
-      "FILTER_OPERATOR_REQUIRED": "Filter operator is required",
+      "ATTRIBUTE_KEY_REQUIRED": "La clé de l'attribut est requise",
+      "FILTER_OPERATOR_REQUIRED": "L'opérateur de filtre est requis",
       "VALUE_REQUIRED": "La valeur est requise",
-      "VALUE_MUST_BE_BETWEEN_1_AND_998": "Value must be between 1 and 998",
-      "ACTION_PARAMETERS_REQUIRED": "Action parameters are required",
-      "ATLEAST_ONE_CONDITION_REQUIRED": "At least one condition is required",
-      "ATLEAST_ONE_ACTION_REQUIRED": "At least one action is required"
+      "VALUE_MUST_BE_BETWEEN_1_AND_998": "La valeur doit être comprise entre 1 et 998",
+      "ACTION_PARAMETERS_REQUIRED": "Les paramètres de l'action sont requis",
+      "ATLEAST_ONE_CONDITION_REQUIRED": "Au moins une condition est requise",
+      "ATLEAST_ONE_ACTION_REQUIRED": "Au moins une action est requise"
     },
     "NONE_OPTION": "Aucun",
-    "LAST_RESPONDING_AGENT": "Last Responding Agent",
+    "LAST_RESPONDING_AGENT": "Dernier agent à avoir répondu",
     "EVENTS": {
       "CONVERSATION_CREATED": "Conversation créée",
       "CONVERSATION_UPDATED": "Conversation mise à jour",
@@ -184,7 +184,7 @@
       "COUNTRY_NAME": "Pays",
       "COMPANY_NAME": "Société",
       "REFERER_LINK": "Lien de référence",
-      "ASSIGNEE_NAME": "Assignee",
+      "ASSIGNEE_NAME": "Responsable",
       "TEAM_NAME": "Équipes",
       "PRIORITY": "Priorité",
       "LABELS": "Étiquettes"

@@ -1,14 +1,14 @@
 {
   "MACROS": {
     "HEADER": "Macros",
-    "DESCRIPTION": "A macro is a set of saved actions that help customer service agents easily complete tasks. The agents can define a set of actions like tagging a conversation with a label, sending an email transcript, updating a custom attribute, etc., and they can run these actions in a single click.",
-    "LEARN_MORE": "Learn more about macros",
+    "DESCRIPTION": "Une macro est un ensemble d'actions enregistrées qui aident les agents de service à accomplir des tâches facilement. Les agents peuvent définir un ensemble d'actions comme affecter une étiquette à une conversation, envoyer une transcription par e-mail, mettre à jour un attribut personnalisé, etc., et ils peuvent exécuter ces actions en un seul clic.",
+    "LEARN_MORE": "En savoir plus sur les macros",
     "COUNT": "{n} macro | {n} macros",
     "HEADER_BTN_TXT": "Ajouter une macro",
     "HEADER_BTN_TXT_SAVE": "Enregistrer une macro",
     "LOADING": "Récupération des macros",
-    "SEARCH_PLACEHOLDER": "Search macros...",
-    "NO_RESULTS": "No macros found matching your search",
+    "SEARCH_PLACEHOLDER": "Rechercher des macros...",
+    "NO_RESULTS": "Aucune macro trouvée correspondant à votre recherche",
     "ERROR": "Une erreur s'est produite. Veuillez réessayer",
     "ORDER_INFO": "Les macros s'exécuteront dans l'ordre où vous ajoutez vos actions. Vous pouvez les réorganiser en les glissant par la poignée à côté de chaque nœud.",
     "ADD": {
@@ -28,14 +28,14 @@
       }
     },
     "LIST": {
+      "404": "Aucune macro trouvée",
       "TABLE_HEADER": {
         "NAME": "Nom",
         "CREATED BY": "Créé par",
         "LAST_UPDATED_BY": "Dernière mise à jour par",
         "VISIBILITY": "Visibilité",
         "ACTIONS": "Actions"
-      },
-      "404": "Aucune macro trouvée"
+      }
     },
     "DELETE": {
       "TOOLTIP": "Supprimer la macro",
@@ -50,7 +50,7 @@
       }
     },
     "VIEW": {
-      "TOOLTIP": "View macro"
+      "TOOLTIP": "Voir la macro"
     },
     "EDIT": {
       "TOOLTIP": "Modifier la macro",
@@ -70,8 +70,8 @@
         "GLOBAL": {
           "LABEL": "Publique",
           "DESCRIPTION": "Cette macro est visible pour tous les agents de ce compte.",
-          "CREATE_DISABLED_DESCRIPTION": "Only administrators can create public macros.",
-          "EDIT_DISABLED_DESCRIPTION": "Only administrators can edit public macros."
+          "CREATE_DISABLED_DESCRIPTION": "Seuls les administrateurs peuvent créer des macros publiques.",
+          "EDIT_DISABLED_DESCRIPTION": "Seuls les administrateurs peuvent modifier des macros publiques."
         },
         "PERSONAL": {
           "LABEL": "Privé",
@@ -88,10 +88,10 @@
       "ATTRIBUTE_KEY_REQUIRED": "Attribute key is required",
       "FILTER_OPERATOR_REQUIRED": "Filter operator is required",
       "VALUE_REQUIRED": "La valeur est requise",
-      "VALUE_MUST_BE_BETWEEN_1_AND_998": "Value must be between 1 and 998",
-      "ACTION_PARAMETERS_REQUIRED": "Action parameters are required",
-      "ATLEAST_ONE_CONDITION_REQUIRED": "At least one condition is required",
-      "ATLEAST_ONE_ACTION_REQUIRED": "At least one action is required"
+      "VALUE_MUST_BE_BETWEEN_1_AND_998": "La valeur doit être entre 1 et 998",
+      "ACTION_PARAMETERS_REQUIRED": "Les paramètres de l'action sont requis",
+      "ATLEAST_ONE_CONDITION_REQUIRED": "Au moins une condition est requise",
+      "ATLEAST_ONE_ACTION_REQUIRED": "Au moins une action est requise"
     },
     "ACTIONS": {
       "ASSIGN_TEAM": "Attribuer une équipe",

@@ -46,10 +46,10 @@
       },
       "AUTO_RESOLVE": {
         "TITLE": "Résolution automatique des conversations",
-        "NOTE": "This configuration would allow you to automatically resolve the conversation after a certain period of inactivity.",
+        "NOTE": "Cette configuration vous permettra de résoudre automatiquement la conversation après une certaine période d'inactivité.",
         "DURATION": {
-          "LABEL": "Inactivity duration",
-          "HELP": "Time period of inactivity after which conversation is auto-resolved",
+          "LABEL": "Durée d'inactivité",
+          "HELP": "Période d'inactivité après laquelle la conversation est automatiquement résolue",
           "PLACEHOLDER": "30",
           "ERROR": "La durée de résolution automatique doit être comprise entre 10 minutes et 999 jours",
           "API": {
@@ -58,19 +58,19 @@
           }
         },
         "MESSAGE": {
-          "LABEL": "Custom auto-resolution message",
+          "LABEL": "Message de résolution automatique personnalisé",
           "PLACEHOLDER": "La conversation a été marquée comme résolue par le système en raison de 15 jours d'inactivité",
-          "HELP": "Message sent to the customer after conversation is auto-resolved"
+          "HELP": "Message envoyé au client après que la conversation ait été automatiquement résolue"
         },
-        "PREFERENCES": "Preferences",
+        "PREFERENCES": "Préférences",
         "LABEL": {
-          "LABEL": "Add label after auto-resolution",
-          "PLACEHOLDER": "Select a label"
+          "LABEL": "Ajouter une étiquette après la résolution automatique",
+          "PLACEHOLDER": "Sélectionner une étiquette"
         },
         "IGNORE_WAITING": {
-          "LABEL": "Skip conversations waiting for agent’s reply"
+          "LABEL": "Ignorer les conversations en attente de la réponse de l'agent"
         },
-        "UPDATE_BUTTON": "Save Changes"
+        "UPDATE_BUTTON": "Enregistrer les modifications"
       },
       "NAME": {
         "LABEL": "Nom du compte",
@@ -94,14 +94,14 @@
       },
       "AUTO_RESOLVE_IGNORE_WAITING": {
         "LABEL": "Exclure les conversations non prises en charge",
-        "HELP": "When enabled, the system will skip resolving conversations that are still waiting for an agent's reply."
+        "HELP": "Lorsqu'il est activé, le système passera à la résolution des conversations qui sont encore en attente de la réponse de l'agent."
       },
       "AUDIO_TRANSCRIPTION": {
-        "TITLE": "Transcribe Audio Messages",
-        "NOTE": "Automatically transcribe audio messages in conversations. Generate a text transcript whenever an audio message is sent or received, and display it alongside the message.",
+        "TITLE": "Transcrire les messages audio",
+        "NOTE": "Transcrire automatiquement les messages audio dans les conversations. Générer un résumé texte chaque fois qu'un message audio est envoyé ou reçu, et l'afficher côte à côte avec le message.",
         "API": {
-          "SUCCESS": "Audio transcription setting updated successfully",
-          "ERROR": "Failed to update audio transcription setting"
+          "SUCCESS": "Paramètres de transcription audio mis à jour avec succès",
+          "ERROR": "Échec de la mise à jour des paramètres de transcription audio"
         }
       },
       "AUTO_RESOLVE_DURATION": {
@@ -134,7 +134,7 @@
     "MULTISELECT": {
       "ENTER_TO_SELECT": "Appuyer sur Entrée pour sélectionner",
       "ENTER_TO_REMOVE": "Appuyer sur Entrée pour supprimer",
-      "NO_OPTIONS": "List is empty",
+      "NO_OPTIONS": "Liste vide",
       "SELECT_ONE": "Sélectionnez un",
       "SELECT": "Sélectionner"
     }
@@ -150,13 +150,13 @@
       "EMPTY_MESSAGE": "Vous n’avez pas de notifications non lues"
     },
     "LIST": {
-      "LOADING_MESSAGE": "Chargement des notifications...",
       "404": "Aucune notification",
+      "LOADING_MESSAGE": "Chargement des notifications...",
       "TABLE_HEADER": [
         "Nom",
         "Numéro de téléphone",
         "Conversations",
-        "Dernièrement contacté"
+        "Dernier contact"
       ]
     },
     "TYPE_LABEL": {
@@ -165,16 +165,16 @@
       "assigned_conversation_new_message": "Nouveau message",
       "participating_conversation_new_message": "Nouveau message",
       "conversation_mention": "Mention",
-      "sla_missed_first_response": "SLA Missed",
-      "sla_missed_next_response": "SLA Missed",
-      "sla_missed_resolution": "SLA Missed"
+      "sla_missed_first_response": "SLA Manqué",
+      "sla_missed_next_response": "SLA Manqué",
+      "sla_missed_resolution": "SLA Manqué"
     }
   },
   "NETWORK": {
     "NOTIFICATION": {
       "OFFLINE": "Hors ligne",
-      "RECONNECTING": "Reconnecting...",
-      "RECONNECT_SUCCESS": "Reconnected"
+      "RECONNECTING": "Reconnexion...",
+      "RECONNECT_SUCCESS": "Reconnecté"
     },
     "BUTTON": {
       "REFRESH": "Actualiser"
@@ -187,7 +187,7 @@
       "GENERAL": "Général",
       "REPORTS": "Rapports",
       "CONVERSATION": "Conversation",
-      "BULK_ACTIONS": "Bulk Actions",
+      "BULK_ACTIONS": "Actions en masse",
       "CHANGE_ASSIGNEE": "Changer de responsable",
       "CHANGE_PRIORITY": "Modifier la priorité",
       "CHANGE_TEAM": "Changer d’équipe",
